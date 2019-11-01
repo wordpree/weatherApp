@@ -1,28 +1,18 @@
 import React, { useState } from "react";
+import NavLists from "./NavLists";
 import {
   AppBar,
   Drawer,
   Fab,
   Toolbar,
-  Button,
   IconButton,
-  Typography,
   List,
   ListItem,
-  ListItemText,
   ListItemIcon,
   Divider
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import {
-  Plus,
-  CloseBox,
-  Home,
-  ReorderHorizontal,
-  Camera,
-  Airballoon,
-  Newspaper
-} from "mdi-material-ui";
+import { Plus, CloseBox, ReorderHorizontal } from "mdi-material-ui";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,19 +53,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function Header() {
   const classes = useStyles();
-  const iconLabels = ["Forecast", "Travel", "Photos", "News"];
-  const iconLists = [Home, Airballoon, Camera, Newspaper];
-  const nav = (labels: string[]) =>
-    iconLists.map((Icon, index) => (
-      <Button key={index} className={classes.iconsBtn}>
-        <Icon classes={{ root: classes.icon }} />
-        <Typography variant="h6" className={classes.typo}>
-          {labels[index]}
-        </Typography>
-      </Button>
-    ));
   const [right, setRight] = useState(false);
-  const toggleClose = (open: boolean) => (
+  const toggleDrawer = (open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent
   ) => {
     if (
@@ -87,53 +66,42 @@ function Header() {
     }
     setRight(open);
   };
-  const mobileLists = (labels: string[]) => (
+
+  const mobileLists = (
     <div className={classes.mobileLists}>
       <List>
-        <ListItem button style={{ padding: "1rem" }}>
-          <ListItemIcon onClick={toggleClose(false)}>
-            <CloseBox />
+        <ListItem button>
+          <ListItemIcon>
+            <CloseBox onClick={toggleDrawer(false)} />
           </ListItemIcon>
         </ListItem>
         <Divider style={{ backgroundColor: "#2D3047" }} />
-        {iconLists.map((Icon, index) => (
-          <React.Fragment key={index}>
-            <ListItem button>
-              <ListItemIcon>
-                <Icon />
-              </ListItemIcon>
-              <ListItemText
-                primary={labels[index]}
-                style={{ color: "#2D3047" }}
-              />
-            </ListItem>
-            {index === 3 ? null : (
-              <Divider style={{ backgroundColor: "#2D3047" }} />
-            )}
-          </React.Fragment>
-        ))}
       </List>
+      <NavLists />
     </div>
   );
 
   const renderMobile = (
     <Toolbar className={classes.mobileNav}>
-      <IconButton aria-label="more menu" onClick={toggleClose(true)}>
+      <IconButton aria-label="more menu" onClick={toggleDrawer(true)}>
         <ReorderHorizontal classes={{ root: classes.icon }} />
       </IconButton>
       <Drawer
         anchor="right"
         open={right}
         classes={{ paper: classes.mDrawer }}
-        onClose={toggleClose(false)}
+        onClose={toggleDrawer(false)}
       >
-        {mobileLists(iconLabels)}
+        {mobileLists}
       </Drawer>
     </Toolbar>
   );
+
   return (
     <AppBar classes={{ root: classes.appbar }}>
-      <Toolbar className={classes.desktopNav}>{nav(iconLabels)}</Toolbar>
+      <Toolbar className={classes.desktopNav}>
+        <NavLists styles={{ display: "flex", flexGrow: 1 }} />
+      </Toolbar>
       {renderMobile}
     </AppBar>
   );

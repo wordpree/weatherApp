@@ -1,5 +1,5 @@
 import React from "react";
-
+import Header from "../components/Header";
 export default function News() {
-  return <div>news</div>;
+  return <Header />;
 }

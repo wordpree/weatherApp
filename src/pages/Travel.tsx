@@ -1,5 +1,6 @@
 import React from "react";
+import Header from "../components/Header";
 
 export default function Travel() {
-  return <div>travel</div>;
+  return <Header />;
 }

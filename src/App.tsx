@@ -1,9 +1,6 @@
 import React from "react";
 import CssBaseLine from "@material-ui/core/CssBaseline";
-import Home from "./pages/Home";
-import News from "./pages/News";
-import Photos from "./pages/Photos";
-import Travel from "./pages/Travel";
+import { Home, News, Photos, Travel } from "./pages";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App() {
   return (
@@ -20,7 +17,7 @@ function App() {
           <Route path="/photos">
             <Photos />
           </Route>
-          <Route path="travel">
+          <Route path="/travel">
             <Travel />
           </Route>
         </Switch>
