@@ -1,5 +1,13 @@
 import React from "react";
 import Header from "../components/Header";
-export default function Home() {
-  return <Header />;
-}
+import Search from "../components/Search";
+const Home = () => {
+  return (
+    <>
+      <Header />
+      <Search />
+    </>
+  );
+};
+
+export default Home;

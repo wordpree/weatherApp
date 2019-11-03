@@ -8,8 +8,11 @@ interface INavListsProps {
     display: string;
     flexGrow: number;
   };
+  mobile?: boolean;
+  desktop?: boolean;
 }
-const NavLists = ({ styles }: INavListsProps) => {
+
+const NavLists = ({ styles, mobile }: INavListsProps) => {
   const iconLists = [
     { Icon: Home, label: "Forecast", to: "/" },
     { Icon: Airballoon, label: "Travel", to: "/travel" },
@@ -19,7 +22,13 @@ const NavLists = ({ styles }: INavListsProps) => {
   return (
     <List style={styles}>
       {iconLists.map(({ Icon, label, to }) => (
-        <NavList icon={<Icon />} key={label} label={label} to={to} />
+        <NavList
+          icon={<Icon style={{ color: mobile ? "#233138" : "#C0D7BB" }} />}
+          key={label}
+          label={label}
+          to={to}
+          mobile={mobile}
+        />
       ))}
     </List>
   );

@@ -11,8 +11,10 @@ interface INavProps {
   icon: React.ReactElement;
   label?: string;
   to?: string;
+  mobile?: boolean | undefined;
 }
-const NavList = ({ to, ...props }: INavProps) => {
+
+const NavList = ({ to, mobile, ...props }: INavProps) => {
   //ref type need fixed later
   const routeLink = React.forwardRef<LinkProps, any>((props, ref) => (
     <Link to={to} {...props} ref={ref} />
@@ -21,9 +23,12 @@ const NavList = ({ to, ...props }: INavProps) => {
     <>
       <ListItem button component={routeLink} to={to}>
         <ListItemIcon>{props.icon}</ListItemIcon>
-        <ListItemText primary={props.label} style={{ color: "#2D3047" }} />
+        <ListItemText
+          primary={props.label}
+          style={{ color: mobile ? "#233138" : "#C0D7BB" }}
+        />
       </ListItem>
-      <Divider />
+      <Divider style={{ color: "#233138" }} />
     </>
   );
 };

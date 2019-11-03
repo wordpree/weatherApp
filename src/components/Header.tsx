@@ -17,10 +17,10 @@ import { Plus, CloseBox, ReorderHorizontal } from "mdi-material-ui";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appbar: {
-      backgroundColor: "#43AA8B"
+      backgroundColor: "#233138"
     },
     mDrawer: {
-      backgroundColor: "#E0A458"
+      backgroundColor: "#85BDA6"
     },
     mobileNav: {
       display: "flex",
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "80vw"
     },
     icon: {
-      color: "#F6E7CB"
+      color: "#BEDCFE"
     },
     desktopNav: {
       display: "none",
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function Header() {
+const Header = () => {
   const classes = useStyles();
   const [right, setRight] = useState(false);
   const toggleDrawer = (open: boolean) => (
@@ -77,7 +77,7 @@ function Header() {
         </ListItem>
         <Divider style={{ backgroundColor: "#2D3047" }} />
       </List>
-      <NavLists />
+      <NavLists mobile />
     </div>
   );
 
@@ -98,13 +98,13 @@ function Header() {
   );
 
   return (
-    <AppBar classes={{ root: classes.appbar }}>
+    <AppBar classes={{ root: classes.appbar }} position="static">
       <Toolbar className={classes.desktopNav}>
-        <NavLists styles={{ display: "flex", flexGrow: 1 }} />
+        <NavLists styles={{ display: "flex", flexGrow: 1 }} desktop />
       </Toolbar>
       {renderMobile}
     </AppBar>
   );
-}
+};
 
 export default Header;
