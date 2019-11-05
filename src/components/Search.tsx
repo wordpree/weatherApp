@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 import { InputBase, Paper, IconButton, Container } from "@material-ui/core";
 import { Magnify } from "mdi-material-ui";
 import { makeStyles, createStyles } from "@material-ui/styles";
-import weatherApiCall from "../util/weatherApiCall";
 
 const useStyles = makeStyles(
   createStyles({
@@ -18,23 +17,31 @@ const useStyles = makeStyles(
     iconButton: { padding: 4 }
   })
 );
-const Search = () => {
+
+type Dispatch<A> = (value: A) => void;
+type SetStateAction<S> = S | ((prevState: S) => S);
+
+interface ISearchProps {
+  setLocation: Dispatch<SetStateAction<string>>;
+}
+
+const Search = ({ setLocation }: ISearchProps) => {
   const classes = useStyles();
-  const [location, setLocation] = useState("Brisbane, Australia");
+  const [inputValue, setInputValue] = useState("Brisbane, Australia");
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLocation(event.target.value);
+    setInputValue(event.target.value);
   };
   useEffect(() => {
     function handleEnter(event: KeyboardEvent) {
       if (event.keyCode === 13) {
-        weatherApiCall(location);
+        setLocation(inputValue);
       }
     }
     window.addEventListener("keydown", handleEnter);
     return () => {
       window.removeEventListener("keydown", handleEnter);
     };
-  }, [location]);
+  }, [inputValue, setLocation]);
 
   return (
     <section className={classes.search}>
@@ -44,7 +51,7 @@ const Search = () => {
             placeholder="City, Country"
             fullWidth
             onChange={handleInput}
-            value={location}
+            value={inputValue}
           />
           <IconButton className={classes.iconButton} aria-label="search">
             <Magnify />

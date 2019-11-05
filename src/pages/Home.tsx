@@ -1,12 +1,15 @@
-import React from "react";
-import Header from "../components/Header";
-import Search from "../components/Search";
+import React, { useState } from "react";
+import { Header, Search, Display } from "../components";
+import { WeatherApiDataProvider } from "../util/weatherApiCall";
+
 const Home = () => {
+  const [location, setLocation] = useState("Brisbane, Australia");
   return (
-    <>
+    <WeatherApiDataProvider location={location}>
       <Header />
-      <Search />
-    </>
+      <Search setLocation={setLocation} />
+      <Display />
+    </WeatherApiDataProvider>
   );
 };
 
