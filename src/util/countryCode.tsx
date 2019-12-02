@@ -250,11 +250,20 @@ const countryCodes: ICtyCodes = {
 };
 
 const countryCode = (lookup: string) => {
-  const lookupArr: string[] = lookup.split(",");
-  const code = Object.keys(countryCodes).find(
-    key => countryCodes[key].toLowerCase() === lookupArr[1].trim().toLowerCase()
-  );
-  return code ? lookupArr[0] + "," + code : lookupArr[0];
+  let country: string | undefined = "";
+  let query: string | null = null;
+
+  if (lookup.length !== 0) {
+    const location: string[] = lookup.split(",");
+    country = Object.keys(countryCodes).find(
+      key =>
+        countryCodes[key].toLowerCase() === location[1].trim().toLowerCase()
+    );
+    query = location[0] + "," + country;
+  } else {
+    query = null;
+  }
+  return query;
 };
 
 export default countryCode;

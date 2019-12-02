@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { useState, useEffect } from "react";
 import { InputBase, Paper, IconButton, Container } from "@material-ui/core";
 import { Magnify } from "mdi-material-ui";
 import { makeStyles, createStyles } from "@material-ui/styles";
