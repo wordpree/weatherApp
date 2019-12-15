@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Header, Search, Forecasts } from "../components";
-import { WeatherApiDataProvider } from "../util/weatherApiCall";
+import { WeatherApiDataProvider } from "../util/apiCall";
 import { makeStyles } from "@material-ui/styles";
 import langdingImage from "../assets/unsplash.jpg";
 const useStyles = makeStyles({

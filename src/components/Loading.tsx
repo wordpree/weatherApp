@@ -1,7 +1,14 @@
 import React from "react";
+import { LinearProgress } from "@material-ui/core";
 
-const Loading = () => {
-  return <div>Loading...</div>;
+type LdProps = {
+  value: number;
 };
+
+const Loading = (props: LdProps) => (
+  <div>
+    <LinearProgress value={props.value} style={{ marginTop: "4rem" }} />
+  </div>
+);
 
 export default Loading;

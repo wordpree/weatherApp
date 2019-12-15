@@ -1,7 +1,7 @@
 import React from "react";
 import Loading from "./Loading";
 import { dataFormat, degreeToDir, localTime } from "../util/utils";
-import { useWeatherContextValue } from "../util/weatherApiCall";
+import { useWeatherContextValue } from "../util/apiCall";
 
 import {
   Container,
@@ -103,7 +103,7 @@ const Forecasts = () => {
     ));
 
   return loading ? (
-    <Loading />
+    <Loading value={100} />
   ) : (
     <section style={{ marginTop: "3rem" }}>
       <Container>

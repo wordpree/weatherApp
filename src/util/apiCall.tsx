@@ -5,7 +5,9 @@ type WacProps = {
   children: ReactNode;
   location: string;
 };
-
+type newsProps = {
+  children: ReactNode;
+};
 type T = {
   id: number;
   main: string;
@@ -14,6 +16,16 @@ type T = {
 };
 type obj = {
   [key: string]: number;
+};
+export type K = {
+  name: string;
+  author: string;
+  title: string;
+  description: string;
+  url: string;
+  publishedAt: string;
+  urlToImage: string;
+  content: string;
 };
 interface IWData {
   main: obj;
@@ -25,7 +37,12 @@ interface IWData {
   coord: obj;
   loading: boolean;
 }
-const initState: IWData = {
+interface INData {
+  loading: boolean;
+  status: string;
+  articles: Array<K>;
+}
+const weatherInit: IWData = {
   main: {},
   sys: {},
   name: "",
@@ -35,13 +52,19 @@ const initState: IWData = {
   coord: {},
   loading: true
 };
-const weatherContext = React.createContext(initState);
+const newsInit: INData = {
+  loading: true,
+  status: "error",
+  articles: []
+};
+const weatherContext = React.createContext(weatherInit);
+const newsContext = React.createContext(newsInit);
 
 export const WeatherApiDataProvider = ({ children, location }: WacProps) => {
   const API_KEY = "00194910deb21b1edc80422332e0c1ec";
   const FETCH_URI = "https://api.openweathermap.org/";
   const PATH = "data/2.5/weather";
-  const [forecasts, setForecasts] = useState(initState);
+  const [forecasts, setForecasts] = useState(weatherInit);
   const query = countryCode(location);
 
   useEffect(() => {
@@ -62,7 +85,7 @@ export const WeatherApiDataProvider = ({ children, location }: WacProps) => {
             coord: data.coord,
             loading: false
           })
-        : setForecasts(initState);
+        : setForecasts(weatherInit);
     }
     handleDataFetch().catch(e => alert(e));
   }, [query]);
@@ -74,3 +97,39 @@ export const WeatherApiDataProvider = ({ children, location }: WacProps) => {
   );
 };
 export const useWeatherContextValue = () => useContext(weatherContext);
+
+export const NewsApiDataProvider = (props: newsProps) => {
+  const URI = "https://newsapi.org";
+  const PARTH = "/v2/top-headlines";
+  const QUERY = "country=au&category=entertainment";
+  const API_KEY = "6352c20ad9204ab181b8a82ac99d0299";
+  const [newsData, setNewsData] = useState(newsInit);
+
+  useEffect(() => {
+    async function newsApiCall() {
+      try {
+        const response = await fetch(
+          `${URI}${PARTH}?${QUERY}&apikey=${API_KEY}`
+        );
+        const data = await response.json();
+        if (data.status === "ok") {
+          setNewsData({
+            loading: false,
+            status: data.status,
+            articles: data.articles
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    newsApiCall();
+  }, []);
+
+  return (
+    <newsContext.Provider value={newsData}>
+      {props.children}
+    </newsContext.Provider>
+  );
+};
+export const useNewsContextValue = () => useContext(newsContext);
