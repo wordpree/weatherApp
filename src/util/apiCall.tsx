@@ -1,5 +1,6 @@
 import React, { useContext, ReactNode, useState, useEffect } from "react";
 import countryCode from "./countryCode";
+import uuidv4 from "uuid/v4";
 
 type WacProps = {
   children: ReactNode;
@@ -17,8 +18,11 @@ type T = {
 type obj = {
   [key: string]: number;
 };
+
+type Acl = {
+  [key: string]: string;
+};
 export type K = {
-  name: string;
   author: string;
   title: string;
   description: string;
@@ -26,6 +30,7 @@ export type K = {
   publishedAt: string;
   urlToImage: string;
   content: string;
+  id: string;
 };
 interface IWData {
   main: obj;
@@ -101,7 +106,7 @@ export const useWeatherContextValue = () => useContext(weatherContext);
 export const NewsApiDataProvider = (props: newsProps) => {
   const URI = "https://newsapi.org";
   const PARTH = "/v2/top-headlines";
-  const QUERY = "country=au&category=entertainment";
+  const QUERY = "country=au&category=entertainment&pageSize=24";
   const API_KEY = "6352c20ad9204ab181b8a82ac99d0299";
   const [newsData, setNewsData] = useState(newsInit);
 
@@ -113,10 +118,14 @@ export const NewsApiDataProvider = (props: newsProps) => {
         );
         const data = await response.json();
         if (data.status === "ok") {
+          const articlesWithId = data.articles.map((article: Acl) => ({
+            ...article,
+            id: uuidv4()
+          }));
           setNewsData({
             loading: false,
             status: data.status,
-            articles: data.articles
+            articles: articlesWithId
           });
         }
       } catch (error) {

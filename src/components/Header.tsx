@@ -17,7 +17,7 @@ import { Plus, CloseBox, ReorderHorizontal } from "mdi-material-ui";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appbar: {
-      backgroundColor: "#233138"
+      backgroundColor: "#363537"
     },
     mDrawer: {
       backgroundColor: "#85BDA6"
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "80vw"
     },
     icon: {
-      color: "#BEDCFE"
+      color: "#858585"
     },
     desktopNav: {
       display: "none",

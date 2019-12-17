@@ -3,6 +3,7 @@ import { useNewsContextValue } from "../util/apiCall";
 import Loading from "./Loading";
 import NewsCard from "./NewsCard";
 import { Grid, Container } from "@material-ui/core";
+
 const NewsLists = () => {
   const value = useNewsContextValue();
   const { loading, articles } = value;

@@ -8,18 +8,10 @@ function App() {
       <CssBaseLine />
       <Router>
         <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/news">
-            <News />
-          </Route>
-          <Route path="/photos">
-            <Photos />
-          </Route>
-          <Route path="/travel">
-            <Travel />
-          </Route>
+          <Route exact path="/" component={Home} />
+          <Route path="/news" component={News} />
+          <Route path="/photos" component={Photos} />
+          <Route path="/travel" component={Travel} />
         </Switch>
       </Router>
     </>
