@@ -37,27 +37,15 @@ const useStyles = makeStyles({
 });
 const NewsCard = (props: K) => {
   const classes = useStyles();
-  const {
-    title,
-    urlToImage,
-    author,
-    id,
-    publishedAt,
-    url,
-    description,
-    content
-  } = props;
+  const { title, urlToImage, author, id, publishedAt } = props;
   const realAuthor = author ? author : "unknown";
   const avatar = realAuthor.slice(0, 1).toUpperCase();
-
+  const creatAt = new Date(publishedAt).toDateString();
   return (
     <Grid item xs={12} md={6} lg={4} xl={3}>
       <Card className={classes.card}>
         <Link
-          to={{
-            pathname: `/news/${id}`,
-            state: { title, url, description, content, urlToImage, realAuthor }
-          }}
+          to={`/news/${id}`}
           style={{ color: "inherit", textDecoration: "none" }}
         >
           <CardActionArea>
@@ -80,7 +68,7 @@ const NewsCard = (props: K) => {
             </Avatar>
           }
           title={`${realAuthor}`}
-          subheader={`${new Date(publishedAt).toDateString()}`}
+          subheader={`${creatAt}`}
         />
       </Card>
     </Grid>

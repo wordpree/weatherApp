@@ -1,6 +1,5 @@
 import React, { useContext, ReactNode, useState, useEffect } from "react";
 import countryCode from "./countryCode";
-import uuidv4 from "uuid/v4";
 
 type WacProps = {
   children: ReactNode;
@@ -20,7 +19,7 @@ type obj = {
 };
 
 type Acl = {
-  [key: string]: string;
+  [key: string]: string | {};
 };
 export type K = {
   author: string;
@@ -31,6 +30,7 @@ export type K = {
   urlToImage: string;
   content: string;
   id: string;
+  source: { name: string; id: null | string };
 };
 interface IWData {
   main: obj;
@@ -118,10 +118,12 @@ export const NewsApiDataProvider = (props: newsProps) => {
         );
         const data = await response.json();
         if (data.status === "ok") {
-          const articlesWithId = data.articles.map((article: Acl) => ({
-            ...article,
-            id: uuidv4()
-          }));
+          const articlesWithId = data.articles.map(
+            (article: Acl, index: number) => ({
+              ...article,
+              id: `news-id-${index}`
+            })
+          );
           setNewsData({
             loading: false,
             status: data.status,
