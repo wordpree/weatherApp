@@ -12,7 +12,7 @@ import {
   Divider,
   Box
 } from "@material-ui/core";
-import { ArrowLeft, ArrowRight } from "mdi-material-ui";
+import { ArrowLeft } from "mdi-material-ui";
 import { Omit } from "@material-ui/types";
 import defaultImg from "../assets/en-unsplash.jpg";
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -72,12 +72,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const NewsItem = ({ articles, currentId }: INiProps) => {
-  console.log(articles);
   const classes = useStyles();
-  const currentIndex = articles.findIndex(article => article.id === currentId);
-  console.log(currentIndex);
   const currentItem = articles.find(article => article.id === currentId) as K;
-  console.log(currentItem);
+
   const {
     title,
     url,
@@ -95,14 +92,15 @@ const NewsItem = ({ articles, currentId }: INiProps) => {
       ? description.substring(0, 115) + "..."
       : description;
 
-  //   const prevId = articles[currentIndex - 1].id;
-  //   const nextId = articles[currentIndex + 1].id;
   const backToNews = React.forwardRef<any, Omit<LinkProps, "to">>(
-    (props, ref) => <Link to={`/news`} ref={ref} {...props}></Link>
+    (props, ref) => (
+      <Link
+        to={{ pathname: "/news", state: currentId }}
+        ref={ref}
+        {...props}
+      ></Link>
+    )
   );
-  //   const nextFarword = React.forwardRef<any, Omit<LinkProps, "to">>(
-  //     (props, ref) => <Link to={`/news/${nextId}`} ref={ref} {...props}></Link>
-  //   );
 
   return (
     <Container style={{ margin: "2.5rem auto 1rem auto", padding: "1rem" }}>

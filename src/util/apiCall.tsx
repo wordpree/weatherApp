@@ -44,7 +44,6 @@ interface IWData {
 }
 interface INData {
   loading: boolean;
-  status: string;
   articles: Array<K>;
 }
 const weatherInit: IWData = {
@@ -59,7 +58,6 @@ const weatherInit: IWData = {
 };
 const newsInit: INData = {
   loading: true,
-  status: "error",
   articles: []
 };
 const weatherContext = React.createContext(weatherInit);
@@ -106,7 +104,7 @@ export const useWeatherContextValue = () => useContext(weatherContext);
 export const NewsApiDataProvider = (props: newsProps) => {
   const URI = "https://newsapi.org";
   const PARTH = "/v2/top-headlines";
-  const QUERY = "country=au&category=entertainment&pageSize=24";
+  const QUERY = "country=au&category=entertainment&pageSize=48";
   const API_KEY = "6352c20ad9204ab181b8a82ac99d0299";
   const [newsData, setNewsData] = useState(newsInit);
 
@@ -117,16 +115,16 @@ export const NewsApiDataProvider = (props: newsProps) => {
           `${URI}${PARTH}?${QUERY}&apikey=${API_KEY}`
         );
         const data = await response.json();
+
         if (data.status === "ok") {
           const articlesWithId = data.articles.map(
             (article: Acl, index: number) => ({
               ...article,
-              id: `news-id-${index}`
+              id: `news-id-${index + 1}`
             })
           );
           setNewsData({
             loading: false,
-            status: data.status,
             articles: articlesWithId
           });
         }

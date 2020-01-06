@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import { NewsApiDataProvider } from "../util/apiCall";
 import NewsLists from "../components/NewsLists";
@@ -11,14 +11,16 @@ const useStyes = makeStyles({
 });
 const News = () => {
   const classes = useStyes();
-
+  const id = useLocation().state;
+  const cardNum = id && id.split("-")[2];
+  console.log(id, cardNum);
   return (
     <NewsApiDataProvider>
       <Header />
       <Switch>
         <Route exact path="/news">
           <div className={classes.news}>
-            <NewsLists />
+            <NewsLists cardNum={cardNum} />
           </div>
         </Route>
         <Route path="/news/:newsId" component={NewsDetail} />
