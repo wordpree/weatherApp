@@ -8,6 +8,10 @@ type WacProps = {
 type newsProps = {
   children: ReactNode;
 };
+type UnsPhoProps = {
+  children: ReactNode;
+  spot: string;
+};
 type T = {
   id: number;
   main: string;
@@ -20,6 +24,9 @@ type obj = {
 
 type Acl = {
   [key: string]: string | {};
+};
+type UnspRes = {
+  [key: string]: string | number | { user: { username: string } };
 };
 export type K = {
   author: string;
@@ -46,6 +53,25 @@ interface INData {
   loading: boolean;
   articles: Array<K>;
 }
+type UnsData = {
+  id: string;
+  urls: {
+    raw: string;
+    full: string;
+    regular: string;
+    small: string;
+    thumb: string;
+  };
+  des: string;
+  author: string;
+};
+
+interface IUnsData {
+  photos: Array<UnsData>;
+}
+const tourPhotoInit: IUnsData = {
+  photos: []
+};
 const weatherInit: IWData = {
   main: {},
   sys: {},
@@ -62,6 +88,7 @@ const newsInit: INData = {
 };
 const weatherContext = React.createContext(weatherInit);
 const newsContext = React.createContext(newsInit);
+const tourFeaturePho = React.createContext(tourPhotoInit);
 
 export const WeatherApiDataProvider = ({ children, location }: WacProps) => {
   const API_KEY = "00194910deb21b1edc80422332e0c1ec";
@@ -142,3 +169,37 @@ export const NewsApiDataProvider = (props: newsProps) => {
   );
 };
 export const useNewsContextValue = () => useContext(newsContext);
+
+export const UnspPhotoProvider = ({ children, spot }: UnsPhoProps) => {
+  const URI = "https://api.unsplash.com/";
+  const PTH = "/search/photos";
+  const QUERY = `${spot}&per_page=12&page=1`;
+  const API_KEY =
+    "62290e497985a003118ae759aa80d4f3f2a5c6b05a053f4d32a744866330b765";
+  const [photos, setPhotos] = useState(tourPhotoInit);
+  useEffect(() => {
+    async function apiUnspCall() {
+      const response = await fetch(
+        `${URI}${PTH}?query=${QUERY}&client_id=${API_KEY}`,
+        {
+          headers: { "Accept-Version": "v1" }
+        }
+      );
+      if (!response.ok) throw new Error(`error! status: ${response.status}`);
+      const result = await response.json();
+      const resultState = result.results.map((result: any) => ({
+        id: result.id,
+        des: result.alt_description,
+        urls: result.urls,
+        author: result.user.username
+      }));
+      setPhotos({ photos: resultState });
+      console.log(result);
+    }
+    apiUnspCall();
+  }, [QUERY]);
+  return (
+    <tourFeaturePho.Provider value={photos}>{children}</tourFeaturePho.Provider>
+  );
+};
+export const usePexelsPhotoContextValue = () => useContext(tourFeaturePho);

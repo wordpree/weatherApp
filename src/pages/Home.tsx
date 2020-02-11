@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Header, Search, Forecasts } from "../components";
-import { WeatherApiDataProvider } from "../util/apiCall";
+import { Header, Search, Forecasts, TourPhoto } from "../components";
+import { WeatherApiDataProvider, UnspPhotoProvider } from "../util/apiCall";
 import { makeStyles } from "@material-ui/styles";
 import langdingImage from "../assets/unsplash.jpg";
+
 const useStyles = makeStyles({
   landingPage: {
-    backgroundImage: `url(${langdingImage})`,
+    background: `url(${langdingImage}) no-repeat center center`,
     backgroundSize: "cover",
     height: "100vh",
     width: "100%"
@@ -15,14 +16,23 @@ const useStyles = makeStyles({
 const Home = () => {
   const classes = useStyles();
   const [location, setLocation] = useState("Brisbane, Australia");
+  const [spot, setSpot] = useState("Brisbane");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSpot(e.target.value);
+  };
   return (
-    <WeatherApiDataProvider location={location}>
-      <div className={classes.landingPage}>
-        <Header />
-        <Search setLocation={setLocation} />
-        <Forecasts />
-      </div>
-    </WeatherApiDataProvider>
+    <>
+      <Header />
+      <UnspPhotoProvider spot={spot}>
+        <TourPhoto onTextFieldChange={handleChange} />
+      </UnspPhotoProvider>
+      <WeatherApiDataProvider location={location}>
+        <div className={classes.landingPage}>
+          <Search setLocation={setLocation} />
+          <Forecasts />
+        </div>
+      </WeatherApiDataProvider>
+    </>
   );
 };
 
