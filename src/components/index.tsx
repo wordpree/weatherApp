@@ -3,5 +3,16 @@ import NavList from "./NavList";
 import NavLists from "./NavLists";
 import Search from "./Search";
 import Forecasts from "./Forecasts";
-
-export { Header, NavList, NavLists, Search, Forecasts };
+import TourPhoto from "./TourPhoto";
+import Title from "./Title";
+import Carousel from "./Carousel";
+export {
+  Header,
+  NavList,
+  NavLists,
+  Search,
+  Forecasts,
+  TourPhoto,
+  Title,
+  Carousel
+};
