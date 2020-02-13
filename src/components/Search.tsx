@@ -1,64 +1,41 @@
-import React, { useState, useEffect } from "react";
-import { InputBase, Paper, IconButton, Container } from "@material-ui/core";
+import React from "react";
+import { IconButton, TextField, Divider, Paper } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import { Magnify } from "mdi-material-ui";
-import { makeStyles, createStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles(
-  createStyles({
-    search: {
-      margin: "3rem 0.5rem 1.5rem 0.5rem"
-    },
-    paper: {
-      display: "flex",
-      alignItems: "center",
-      maxWidth: 500,
-      padding: "3px 6px"
-    },
-    iconButton: { padding: 4 }
-  })
-);
-
-type Dispatch<A> = (value: A) => void;
-type SetStateAction<S> = S | ((prevState: S) => S);
-
-interface ISearchProps {
-  setLocation: Dispatch<SetStateAction<string>>;
+interface ITPP {
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Search = ({ setLocation }: ISearchProps) => {
-  const classes = useStyles();
-  const [inputValue, setInputValue] = useState("Brisbane, Australia");
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-  };
-  useEffect(() => {
-    function handleEnter(event: KeyboardEvent) {
-      if (event.keyCode === 13) {
-        setLocation(inputValue);
-      }
-    }
-    window.addEventListener("keydown", handleEnter);
-    return () => {
-      window.removeEventListener("keydown", handleEnter);
-    };
-  }, [inputValue, setLocation]);
+const useStyles = makeStyles({
+  div: {
+    padding: "0.5rem"
+  },
+  form: {
+    textAlign: "center",
+    margin: "0 auto"
+  },
+  input: {
+    width: "48%"
+  }
+});
 
+const Search = ({ handleSubmit, handleChange }: ITPP) => {
+  const classes = useStyles();
   return (
-    <section className={classes.search}>
-      <Container maxWidth="sm">
-        <Paper className={classes.paper}>
-          <InputBase
-            placeholder="City, Country"
-            fullWidth
-            onChange={handleInput}
-            value={inputValue}
-          />
-          <IconButton className={classes.iconButton} aria-label="search">
-            <Magnify />
-          </IconButton>
-        </Paper>
-      </Container>
-    </section>
+    <div className={classes.div}>
+      <form onSubmit={handleSubmit} className={classes.form}>
+        <TextField
+          label="city, country"
+          onChange={handleChange}
+          className={classes.input}
+        />
+        <IconButton type="submit">
+          <Magnify />
+        </IconButton>
+      </form>
+    </div>
   );
 };
 

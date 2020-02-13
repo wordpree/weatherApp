@@ -11,15 +11,14 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { usePexelsPhotoContextValue } from "../util/apiCall";
-
-type Props = {
-  onTextFieldChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+import Search from "./Search";
 
 const useStyles = makeStyles({
   box: {
+    padding: "1rem 0.25rem",
     margin: "0 auto",
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
     "&>*": {
@@ -32,19 +31,12 @@ const useStyles = makeStyles({
   }
 });
 
-const TourPhoto = ({ onTextFieldChange }: Props) => {
+const TourPhoto = () => {
   const data = usePexelsPhotoContextValue();
-  console.log(data);
+  //console.log(data);
   const classes = useStyles();
   return (
     <>
-      <Box className={classes.box}>
-        <Typography variant="h5">
-          What is your dreaming destination ?
-        </Typography>
-        <TextField label="spot" onChange={onTextFieldChange} />
-      </Box>
-      <Divider />
       <Grid container>
         {data.photos.map((photo, index) => (
           <Grid item xs={12} md={6} lg={4} key={index}>

@@ -25,39 +25,58 @@ import {
   WaterPercent,
   WeatherWindy
 } from "mdi-material-ui";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
+  paper: {
+    [theme.breakpoints.up("sm")]: {
+      transform: "translateY(25%)",
+      WebkitTransform: "translateY(25%)"
+    }
+  },
   card: {
     display: "flex",
     flexDirection: "column",
-    background: "linear-gradient(180deg, #7BC9D5 0%, #C4AF86 100%)",
+    background: "linear-gradient(180deg, #7BC9D5 0%, #B1B59A 100%)",
     position: "relative",
     minHeight: 240
   },
-  head: { margin: "0 auto" },
+  head: {
+    margin: "0 auto",
+    [theme.breakpoints.down("sm")]: {
+      padding: 0
+    }
+  },
   title: { fontSize: "1.5rem", color: "#fff" },
   subHeader: { color: "rgba(250,250,250,0.54)" },
-  content: { margin: "0 auto" },
+  content: {
+    margin: "0 auto",
+    display: "flex",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: 0
+    }
+  },
   listItem: { padding: 4 },
   listPrimary: { fontSize: "0.8rem", color: "#fff" },
   tempPrimary: { fontSize: "2rem", color: "#fff" },
   timePrimary: { fontSize: "1.25rem", color: "#fff" },
   listSecondary: { color: "rgba(250,250,250,0.54)" },
   weatherList: {
-    position: "absolute",
-    minWidth: 240,
-    minHeight: 160,
-    top: "10%",
-    left: "8%"
+    [theme.breakpoints.up("md")]: {
+      position: "absolute",
+      minWidth: 240,
+      minHeight: 160,
+      top: "10%",
+      left: "8%"
+    }
   },
+
   avatar: { backgroundColor: "inherit" }
-});
+}));
 
 const Forecasts = () => {
   const classes = useStyles();
   const data = useWeatherContextValue();
-  console.log(data);
   const { main, name, sys, weather, wind, loading, timezone } = data;
   const icons = [
     Umbrella,
@@ -105,9 +124,9 @@ const Forecasts = () => {
   return loading ? (
     <Loading value={100} />
   ) : (
-    <section style={{ marginTop: "3rem" }}>
+    <section>
       <Container>
-        <Paper style={{ backgroundColor: "transparent" }}>
+        <Paper className={classes.paper}>
           <Card className={classes.card}>
             <CardHeader
               classes={{ title: classes.title, subheader: classes.subHeader }}

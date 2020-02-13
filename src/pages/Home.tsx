@@ -1,5 +1,12 @@
-import React, { useState } from "react";
-import { Header, Search, Forecasts, TourPhoto } from "../components";
+import React, { useState, useEffect } from "react";
+import {
+  Header,
+  Search,
+  Forecasts,
+  TourPhoto,
+  Title,
+  Carousel
+} from "../components";
 import { WeatherApiDataProvider, UnspPhotoProvider } from "../util/apiCall";
 import { makeStyles } from "@material-ui/styles";
 import langdingImage from "../assets/unsplash.jpg";
@@ -15,20 +22,29 @@ const useStyles = makeStyles({
 
 const Home = () => {
   const classes = useStyles();
-  const [location, setLocation] = useState("Brisbane, Australia");
-  const [spot, setSpot] = useState("Brisbane");
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSpot(e.target.value);
+  const [submit, setSubmit] = useState("Brisbane, Australia");
+  const [input, setInput] = useState("Brisbane,Australia");
+
+  const handler = {
+    handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+      setSubmit(input);
+      e.preventDefault();
+    },
+    handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+      setInput(e.target.value);
+    }
   };
   return (
     <>
       <Header />
-      <UnspPhotoProvider spot={spot}>
-        <TourPhoto onTextFieldChange={handleChange} />
-      </UnspPhotoProvider>
-      <WeatherApiDataProvider location={location}>
+      <Carousel />
+      <Title />
+      <Search {...handler} />
+      {/*<UnspPhotoProvider spot={submit}>
+        <TourPhoto />
+      </UnspPhotoProvider>*/}
+      <WeatherApiDataProvider location={submit}>
         <div className={classes.landingPage}>
-          <Search setLocation={setLocation} />
           <Forecasts />
         </div>
       </WeatherApiDataProvider>

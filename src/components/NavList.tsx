@@ -1,10 +1,12 @@
 import React from "react";
 import { Link, LinkProps } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   ListItem,
   ListItemText,
   ListItemIcon,
-  Divider
+  Divider,
+  Theme
 } from "@material-ui/core";
 
 interface INavProps {
@@ -14,22 +16,34 @@ interface INavProps {
   mobile?: boolean | undefined;
 }
 
+const useStyle = makeStyles((theme: Theme) => ({
+  listText: {
+    color: "#C0D7BB",
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "inline-block"
+    }
+  },
+  li: {
+    padding: "0.5rem 0.75rem",
+    maxWidth: "85%",
+    margin: "0 auto"
+  }
+}));
+
 const NavList = ({ to, mobile, ...props }: INavProps) => {
-  //ref type need fixed later
+  const classes = useStyle();
   const routeLink = React.forwardRef<LinkProps, any>((props, ref) => (
     <Link to={to} {...props} ref={ref} />
   ));
   return (
-    <>
+    <li className={classes.li}>
       <ListItem button component={routeLink} to={to}>
-        <ListItemIcon>{props.icon}</ListItemIcon>
-        <ListItemText
-          primary={props.label}
-          style={{ color: mobile ? "#233138" : "#C0D7BB" }}
-        />
+        {mobile && <ListItemIcon>{props.icon}</ListItemIcon>}
+        <ListItemText primary={props.label} className={classes.listText} />
       </ListItem>
-      <Divider style={{ color: "#233138" }} />
-    </>
+      {mobile && <Divider style={{ backgroundColor: "#fff" }} />}
+    </li>
   );
 };
 

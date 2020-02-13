@@ -7,13 +7,16 @@ import { makeStyles } from "@material-ui/styles";
 import NewsDetail from "../components/NewsDetail";
 
 const useStyes = makeStyles({
-  news: { padding: "2rem 0", backgroundColor: "rgba(126, 199, 209,0.2)" }
+  news: {
+    padding: "2rem 0",
+    background: "linear-gradient(180deg ,#8EBCBF 0%, #C1E4EB 100% )"
+  }
 });
 const News = () => {
   const classes = useStyes();
   const id = useLocation().state;
   const cardNum = id && id.split("-")[2];
-  console.log(id, cardNum);
+
   return (
     <NewsApiDataProvider>
       <Header />

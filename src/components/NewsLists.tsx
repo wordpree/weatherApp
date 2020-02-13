@@ -20,6 +20,10 @@ const NewsLists = ({ cardNum }: INlProps) => {
     currentPage: 1,
     items: articles
   });
+  const classNames = {
+    enter: "animated",
+    enterActive: "fadeIn"
+  };
 
   const handlePageChage = (currentPage: number) => {
     setPageNav({
@@ -40,10 +44,7 @@ const NewsLists = ({ cardNum }: INlProps) => {
       });
     }
   }, [loading, articles]);
-  const classNames = {
-    enter: "animated",
-    enterActive: "fadeIn"
-  };
+
   return loading ? (
     <Loading value={100} />
   ) : (
@@ -62,7 +63,6 @@ const NewsLists = ({ cardNum }: INlProps) => {
           </Grid>
         </CSSTransition>
       </Container>
-
       <Container>
         <Pagination
           currentPage={pageNav.currentPage}

@@ -1,46 +1,44 @@
 import React, { useState } from "react";
 import NavLists from "./NavLists";
+
 import {
-  AppBar,
+  Box,
   Drawer,
-  Fab,
-  Toolbar,
   IconButton,
   List,
   ListItem,
   ListItemIcon,
-  Divider
+  Paper
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Plus, CloseBox, ReorderHorizontal } from "mdi-material-ui";
+import { CloseBox, ReorderHorizontal } from "mdi-material-ui";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    appbar: {
-      backgroundColor: "#363537"
+    navLists: {
+      display: "flex",
+      justifyContent: "space-between",
+      background: "linear-gradient(90deg, #1E4242 0%, #324242 100%)",
+      alignItems: "center"
     },
     mDrawer: {
-      backgroundColor: "#85BDA6"
+      background: "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, #B1B59A 100%)",
+      backdropFilter: "blur(5px)"
     },
     mobileNav: {
-      display: "flex",
-      justifyContent: "flex-end",
+      display: "block",
       [theme.breakpoints.up("md")]: {
         display: "none"
       }
     },
     mobileLists: {
-      width: "80vw"
+      width: "100vw",
+      height: "100%",
+      backgroundColor: "inherit",
+      padding: "1.25rem 1rem"
     },
     icon: {
       color: "#858585"
-    },
-    desktopNav: {
-      display: "none",
-      [theme.breakpoints.up("md")]: {
-        display: "flex",
-        justifyContent: "space-between"
-      }
     },
     iconsBtn: {
       flexGrow: 1
@@ -68,25 +66,32 @@ const Header = () => {
   };
 
   const mobileLists = (
-    <div className={classes.mobileLists}>
+    <Paper
+      className={classes.mobileLists}
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
       <List>
         <ListItem button>
           <ListItemIcon>
-            <CloseBox onClick={toggleDrawer(false)} />
+            <CloseBox
+              onClick={toggleDrawer(false)}
+              style={{ color: "#C0D7BB" }}
+            />
           </ListItemIcon>
         </ListItem>
-        <Divider style={{ backgroundColor: "#2D3047" }} />
       </List>
       <NavLists mobile />
-    </div>
+    </Paper>
   );
 
   const renderMobile = (
-    <Toolbar className={classes.mobileNav}>
+    <Box className={classes.mobileNav}>
       <IconButton aria-label="more menu" onClick={toggleDrawer(true)}>
         <ReorderHorizontal classes={{ root: classes.icon }} />
       </IconButton>
       <Drawer
+        transitionDuration={{ enter: 1000, exit: 600 }}
         anchor="right"
         open={right}
         classes={{ paper: classes.mDrawer }}
@@ -94,16 +99,14 @@ const Header = () => {
       >
         {mobileLists}
       </Drawer>
-    </Toolbar>
+    </Box>
   );
 
   return (
-    <AppBar classes={{ root: classes.appbar }} position="static">
-      <Toolbar className={classes.desktopNav}>
-        <NavLists styles={{ display: "flex", flexGrow: 1 }} desktop />
-      </Toolbar>
+    <Paper elevation={8} square className={classes.navLists}>
+      <NavLists desktop />
       {renderMobile}
-    </AppBar>
+    </Paper>
   );
 };
 
