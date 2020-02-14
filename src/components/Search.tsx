@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton, TextField, Divider, Paper } from "@material-ui/core";
+import { IconButton, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Magnify } from "mdi-material-ui";
 
@@ -10,7 +10,8 @@ interface ITPP {
 
 const useStyles = makeStyles({
   div: {
-    padding: "0.5rem"
+    padding: "0.5rem",
+    margin: "0.25rem 0.25rem 1rem"
   },
   form: {
     textAlign: "center",

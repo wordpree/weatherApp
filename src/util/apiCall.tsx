@@ -64,6 +64,7 @@ type UnsData = {
   };
   des: string;
   author: string;
+  link: string;
 };
 
 interface IUnsData {
@@ -191,7 +192,8 @@ export const UnspPhotoProvider = ({ children, spot }: UnsPhoProps) => {
         id: result.id,
         des: result.alt_description,
         urls: result.urls,
-        author: result.user.username
+        author: result.user.name,
+        link: result.links.html
       }));
       setPhotos({ photos: resultState });
       console.log(result);

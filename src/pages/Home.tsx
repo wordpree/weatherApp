@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Header,
   Search,
   Forecasts,
   TourPhoto,
   Title,
-  Carousel
+  Banner
 } from "../components";
 import { WeatherApiDataProvider, UnspPhotoProvider } from "../util/apiCall";
 import { makeStyles } from "@material-ui/styles";
@@ -22,6 +22,7 @@ const useStyles = makeStyles({
 
 const Home = () => {
   const classes = useStyles();
+  //hanlde search process
   const [submit, setSubmit] = useState("Brisbane, Australia");
   const [input, setInput] = useState("Brisbane,Australia");
 
@@ -34,15 +35,17 @@ const Home = () => {
       setInput(e.target.value);
     }
   };
+  //handle banner data process
+
   return (
     <>
       <Header />
-      <Carousel />
+      <Banner />
       <Title />
       <Search {...handler} />
-      {/*<UnspPhotoProvider spot={submit}>
+      <UnspPhotoProvider spot={submit}>
         <TourPhoto />
-      </UnspPhotoProvider>*/}
+      </UnspPhotoProvider>
       <WeatherApiDataProvider location={submit}>
         <div className={classes.landingPage}>
           <Forecasts />

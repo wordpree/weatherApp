@@ -5,7 +5,7 @@ import Search from "./Search";
 import Forecasts from "./Forecasts";
 import TourPhoto from "./TourPhoto";
 import Title from "./Title";
-import Carousel from "./Carousel";
+import Banner from "./Banner";
 export {
   Header,
   NavList,
@@ -14,5 +14,5 @@ export {
   Forecasts,
   TourPhoto,
   Title,
-  Carousel
+  Banner
 };
