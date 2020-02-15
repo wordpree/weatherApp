@@ -8,20 +8,8 @@ import {
   Banner
 } from "../components";
 import { WeatherApiDataProvider, UnspPhotoProvider } from "../util/apiCall";
-import { makeStyles } from "@material-ui/styles";
-import langdingImage from "../assets/unsplash.jpg";
-
-const useStyles = makeStyles({
-  landingPage: {
-    background: `url(${langdingImage}) no-repeat center center`,
-    backgroundSize: "cover",
-    height: "100vh",
-    width: "100%"
-  }
-});
 
 const Home = () => {
-  const classes = useStyles();
   //hanlde search process
   const [submit, setSubmit] = useState("Brisbane, Australia");
   const [input, setInput] = useState("Brisbane,Australia");
@@ -47,9 +35,7 @@ const Home = () => {
         <TourPhoto />
       </UnspPhotoProvider>
       <WeatherApiDataProvider location={submit}>
-        <div className={classes.landingPage}>
-          <Forecasts />
-        </div>
+        <Forecasts />
       </WeatherApiDataProvider>
     </>
   );

@@ -7,6 +7,7 @@ type WacProps = {
 };
 type newsProps = {
   children: ReactNode;
+  city: string;
 };
 type UnsPhoProps = {
   children: ReactNode;
@@ -129,10 +130,10 @@ export const WeatherApiDataProvider = ({ children, location }: WacProps) => {
 };
 export const useWeatherContextValue = () => useContext(weatherContext);
 
-export const NewsApiDataProvider = (props: newsProps) => {
+export const NewsApiDataProvider = ({ city, children }: newsProps) => {
   const URI = "https://newsapi.org";
-  const PARTH = "/v2/top-headlines";
-  const QUERY = "country=au&category=entertainment&pageSize=48";
+  const PARTH = "/v2/everything";
+  const QUERY = `${city}&pageSize=48&page=1&sortBy=popularity`;
   const API_KEY = "6352c20ad9204ab181b8a82ac99d0299";
   const [newsData, setNewsData] = useState(newsInit);
 
@@ -140,7 +141,7 @@ export const NewsApiDataProvider = (props: newsProps) => {
     async function newsApiCall() {
       try {
         const response = await fetch(
-          `${URI}${PARTH}?${QUERY}&apikey=${API_KEY}`
+          `${URI}${PARTH}?q=${QUERY}&apikey=${API_KEY}`
         );
         const data = await response.json();
 
@@ -161,12 +162,10 @@ export const NewsApiDataProvider = (props: newsProps) => {
       }
     }
     newsApiCall();
-  }, []);
+  }, [QUERY]);
 
   return (
-    <newsContext.Provider value={newsData}>
-      {props.children}
-    </newsContext.Provider>
+    <newsContext.Provider value={newsData}>{children}</newsContext.Provider>
   );
 };
 export const useNewsContextValue = () => useContext(newsContext);

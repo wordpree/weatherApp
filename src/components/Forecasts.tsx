@@ -5,19 +5,18 @@ import { useWeatherContextValue } from "../util/apiCall";
 
 import {
   Container,
-  Card,
-  CardContent,
-  CardHeader,
   Avatar,
   Paper,
-  List,
   ListItem,
   ListItemText,
   ListItemAvatar,
   Divider,
-  ListItemIcon
+  Grid,
+  Typography,
+  List
 } from "@material-ui/core";
 import {
+  ClockOutline,
   TemperatureCelsius,
   Umbrella,
   WeatherSunsetDown,
@@ -28,33 +27,29 @@ import {
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
+  container: {
+    background: "#fffdff",
+    margin: "2.5rem auto",
+    padding: 0
+  },
   paper: {
-    [theme.breakpoints.up("sm")]: {
-      transform: "translateY(25%)",
-      WebkitTransform: "translateY(25%)"
-    }
+    backgroundImage:
+      "linear-gradient(to left, #BDBBBE 0%, #9D9EA3 100%), radial-gradient(88% 271%, rgba(255, 255, 255, 0.25) 0%, rgba(254, 254, 254, 0.25) 1%, rgba(0, 0, 0, 0.25) 100%), radial-gradient(50% 100%, rgba(255, 255, 255, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%)",
+    backgroundBlendMode: "normal, lighten, soft-light"
   },
-  card: {
-    display: "flex",
-    flexDirection: "column",
-    background: "linear-gradient(180deg, #7BC9D5 0%, #B1B59A 100%)",
-    position: "relative",
-    minHeight: 240
+  name: {
+    display: "block",
+    color: "#fff",
+    fontSize: "1.5rem",
+    padding: "0.25rem"
   },
-  head: {
-    margin: "0 auto",
-    [theme.breakpoints.down("sm")]: {
-      padding: 0
-    }
+  time: {
+    color: "rgba(250, 250, 250, 0.54)",
+    display: "block",
+    fontSize: "0.875rem"
   },
-  title: { fontSize: "1.5rem", color: "#fff" },
-  subHeader: { color: "rgba(250,250,250,0.54)" },
-  content: {
-    margin: "0 auto",
-    display: "flex",
-    [theme.breakpoints.down("sm")]: {
-      paddingTop: 0
-    }
+  spanTemp: {
+    marginLeft: "0.4rem"
   },
   listItem: { padding: 4 },
   listPrimary: { fontSize: "0.8rem", color: "#fff" },
@@ -62,15 +57,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   timePrimary: { fontSize: "1.25rem", color: "#fff" },
   listSecondary: { color: "rgba(250,250,250,0.54)" },
   weatherList: {
-    [theme.breakpoints.up("md")]: {
-      position: "absolute",
-      minWidth: 240,
-      minHeight: 160,
-      top: "10%",
-      left: "8%"
-    }
+    display: "flex"
   },
-
   avatar: { backgroundColor: "inherit" }
 }));
 
@@ -80,13 +68,15 @@ const Forecasts = () => {
   const { main, name, sys, weather, wind, loading, timezone } = data;
   const icons = [
     Umbrella,
+    ClockOutline,
     WaterPercent,
     WeatherWindy,
     WeatherSunsetUp,
     WeatherSunsetDown
   ];
   const title = !loading && [
-    { primary: weather[0].main, secondary: weather[0].description },
+    weather[0].main,
+    dataFormat(localTime(new Date(), timezone)),
     `${main.humidity}%`,
     wind.speed + " " + degreeToDir(wind.deg),
     dataFormat(localTime(new Date(sys.sunrise * 1000), timezone)),
@@ -95,80 +85,66 @@ const Forecasts = () => {
 
   const weatherLists = (icons: any, title: any) =>
     icons.map((Icon: any, index: number) => (
-      <div key={index}>
-        <ListItem disableGutters classes={{ root: classes.listItem }}>
-          <ListItemAvatar>
-            <Avatar className={classes.avatar}>
-              <Icon style={{ color: "#8A8349" }} />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            classes={{
-              primary: classes.listPrimary,
-              secondary: classes.listSecondary
-            }}
-            primary={
-              typeof title[index] === "object"
-                ? title[index].primary
-                : title[index]
-            }
-            secondary={
-              typeof title[index] === "object" ? title[index].secondary : null
-            }
-          />
-        </ListItem>
-        <Divider />
-      </div>
+      <ListItem disableGutters key={index} classes={{ root: classes.listItem }}>
+        <ListItemAvatar>
+          <Avatar className={classes.avatar}>
+            <Icon style={{ color: "#8A8349" }} />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          classes={{
+            primary: classes.listPrimary,
+            secondary: classes.listSecondary
+          }}
+          primary={title[index]}
+        />
+      </ListItem>
     ));
 
   return loading ? (
     <Loading value={100} />
   ) : (
-    <section>
-      <Container>
-        <Paper className={classes.paper}>
-          <Card className={classes.card}>
-            <CardHeader
-              classes={{ title: classes.title, subheader: classes.subHeader }}
-              className={classes.head}
-              avatar={
-                <Avatar
+    <Container className={classes.container}>
+      <Typography variant="h5" gutterBottom>
+        We've got our local infomation for you !
+      </Typography>
+      <Grid container>
+        <Grid item xs={7}>
+          <Paper className={classes.paper}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div>
+                <img
                   src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
+                  alt={`${weather[0].description}`}
                   style={{
                     width: 146,
                     height: 146
                   }}
                 />
-              }
-              title={name}
-              subheader={localTime(new Date(), timezone).toDateString()}
-            />
-            <CardContent className={classes.content}>
-              <List aria-label="temperature">
-                <ListItem>
-                  <ListItemText
-                    classes={{ primary: classes.tempPrimary }}
-                    primary={Math.floor(main.temp + 0.5)}
-                  />
-                  <ListItemIcon>
+              </div>
+              <div>
+                <span className={classes.name}>
+                  {name}
+                  <span className={classes.spanTemp}>
+                    {Math.floor(main.temp + 0.5)}
                     <TemperatureCelsius style={{ color: "#fff" }} />
-                  </ListItemIcon>
-                </ListItem>
-                <ListItem>
-                  <ListItemText
-                    classes={{ primary: classes.timePrimary }}
-                    primary={dataFormat(localTime(new Date(), timezone))}
-                  />
-                </ListItem>
-              </List>
-              <List className={classes.weatherList} aria-label="weather lists">
-                {weatherLists(icons, title)}
-              </List>
-            </CardContent>
-          </Card>
-        </Paper>
-      </Container>
-    </section>
+                  </span>
+
+                  <Typography>{weather[0].description}</Typography>
+                </span>
+                <span className={classes.time}>
+                  {localTime(new Date(), timezone).toDateString()}
+                </span>
+              </div>
+            </div>
+            <Divider />
+            <List className={classes.weatherList}>
+              {weatherLists(icons, title)}
+            </List>
+          </Paper>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 export default Forecasts;

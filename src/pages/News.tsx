@@ -18,7 +18,7 @@ const News = () => {
   const cardNum = id && id.split("-")[2];
 
   return (
-    <NewsApiDataProvider>
+    <NewsApiDataProvider city="brisbane">
       <Header />
       <Switch>
         <Route exact path="/news">

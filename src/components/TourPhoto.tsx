@@ -8,6 +8,12 @@ import { NextArrow, PrevArrow } from "./Arrow";
 
 const useStyles = makeStyles({
   sliderWrapper: { padding: 8 },
+  card: {
+    "&:hover": {
+      boxShadow:
+        "0px 3px 5px -1px rgba(0,0,0,0.2), 0px 5px 8px 0px rgba(0,0,0,0.14), 0px 1px 14px 0px rgba(0,0,0,0.12)"
+    }
+  },
   header: { background: "#344E57" },
   media: {
     paddingTop: "85%"
@@ -27,9 +33,10 @@ const useStyles = makeStyles({
 const TourPhoto = () => {
   const data = usePexelsPhotoContextValue();
   const classes = useStyles();
+  const lg = useMediaQuery("(min-width:1280px)");
   const md = useMediaQuery("(min-width:960px)");
   const sm = useMediaQuery("(max-width:600px)");
-  const silides = md ? 4 : sm ? 1 : 2;
+  const silides = lg ? 4 : md ? 3 : sm ? 1 : 2;
   console.log(data);
   const settings = {
     dots: false,
@@ -67,7 +74,7 @@ const TourPhoto = () => {
     return (
       <div key={index}>
         <div className={classes.sliderWrapper}>
-          <Card>
+          <Card elevation={2} className={classes.card}>
             <CardHeader title={title} className={classes.header} />
             <CardMedia
               image={photo.urls.regular}
