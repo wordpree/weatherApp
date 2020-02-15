@@ -1,13 +1,13 @@
 import React from "react";
 import { Card, CardMedia, CardHeader, Typography } from "@material-ui/core";
-
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles } from "@material-ui/core/styles";
 import { usePexelsPhotoContextValue } from "../util/apiCall";
 import Carousel from "./Carousel";
 import { NextArrow, PrevArrow } from "./Arrow";
 
 const useStyles = makeStyles({
-  card: { marginRight: "0.5rem" },
+  sliderWrapper: { padding: 8 },
   header: { background: "#344E57" },
   media: {
     paddingTop: "85%"
@@ -27,13 +27,16 @@ const useStyles = makeStyles({
 const TourPhoto = () => {
   const data = usePexelsPhotoContextValue();
   const classes = useStyles();
+  const md = useMediaQuery("(min-width:960px)");
+  const sm = useMediaQuery("(max-width:600px)");
+  const silides = md ? 4 : sm ? 1 : 2;
   console.log(data);
   const settings = {
     dots: false,
     infinite: true,
     speed: 1600,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: silides,
+    slidesToScroll: silides,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />
   };
@@ -63,13 +66,15 @@ const TourPhoto = () => {
     );
     return (
       <div key={index}>
-        <Card className={classes.card}>
-          <CardHeader title={title} className={classes.header} />
-          <CardMedia
-            image={photo.urls.regular}
-            className={classes.media}
-          ></CardMedia>
-        </Card>
+        <div className={classes.sliderWrapper}>
+          <Card>
+            <CardHeader title={title} className={classes.header} />
+            <CardMedia
+              image={photo.urls.regular}
+              className={classes.media}
+            ></CardMedia>
+          </Card>
+        </div>
       </div>
     );
   });
