@@ -4,17 +4,28 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   title: {
-    margin: "2.5rem auto 0.25rem auto",
+    margin: "2.5rem auto",
     textAlign: "center",
     padding: "1rem 0.25rem"
+  },
+  typo: {
+    fontFamily: "Oswald, sans-serif",
+    letterSpacing: "0.1em",
+    textTransform: "uppercase"
   }
 });
 
-const Title = () => {
+interface IProps {
+  text: string;
+  css?: {};
+}
+const Title = ({ text, css }: IProps) => {
   const classes = useStyles();
   return (
     <div className={classes.title}>
-      <Typography variant="h5">What is your dreaming destination ?</Typography>
+      <Typography className={classes.typo} variant="h3" style={{ ...css }}>
+        {text}
+      </Typography>
     </div>
   );
 };

@@ -4,7 +4,6 @@ import { dataFormat, degreeToDir, localTime } from "../util/utils";
 import { useWeatherContextValue } from "../util/apiCall";
 
 import {
-  Container,
   Avatar,
   Paper,
   ListItem,
@@ -27,11 +26,6 @@ import {
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    background: "#fffdff",
-    margin: "2.5rem auto",
-    padding: 0
-  },
   paper: {
     backgroundImage:
       "linear-gradient(to left, #BDBBBE 0%, #9D9EA3 100%), radial-gradient(88% 271%, rgba(255, 255, 255, 0.25) 0%, rgba(254, 254, 254, 0.25) 1%, rgba(0, 0, 0, 0.25) 100%), radial-gradient(50% 100%, rgba(255, 255, 255, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%)",
@@ -62,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   avatar: { backgroundColor: "inherit" }
 }));
 
-const Forecasts = () => {
+const LocalWeather = () => {
   const classes = useStyles();
   const data = useWeatherContextValue();
   const { main, name, sys, weather, wind, loading, timezone } = data;
@@ -104,47 +98,40 @@ const Forecasts = () => {
   return loading ? (
     <Loading value={100} />
   ) : (
-    <Container className={classes.container}>
-      <Typography variant="h5" gutterBottom>
-        We've got our local infomation for you !
-      </Typography>
-      <Grid container>
-        <Grid item xs={7}>
-          <Paper className={classes.paper}>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <div>
-                <img
-                  src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
-                  alt={`${weather[0].description}`}
-                  style={{
-                    width: 146,
-                    height: 146
-                  }}
-                />
-              </div>
-              <div>
-                <span className={classes.name}>
-                  {name}
-                  <span className={classes.spanTemp}>
-                    {Math.floor(main.temp + 0.5)}
-                    <TemperatureCelsius style={{ color: "#fff" }} />
-                  </span>
+    <Grid item xs={12} md={7}>
+      <Paper className={classes.paper}>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <div>
+            <img
+              src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
+              alt={`${weather[0].description}`}
+              style={{
+                width: 146,
+                height: 146
+              }}
+            />
+          </div>
+          <div>
+            <span className={classes.name}>
+              {name}
+              <span className={classes.spanTemp}>
+                {Math.floor(main.temp + 0.5)}
+                <TemperatureCelsius style={{ color: "#fff" }} />
+              </span>
 
-                  <Typography>{weather[0].description}</Typography>
-                </span>
-                <span className={classes.time}>
-                  {localTime(new Date(), timezone).toDateString()}
-                </span>
-              </div>
-            </div>
-            <Divider />
-            <List className={classes.weatherList}>
-              {weatherLists(icons, title)}
-            </List>
-          </Paper>
-        </Grid>
-      </Grid>
-    </Container>
+              <Typography>{weather[0].description}</Typography>
+            </span>
+            <span className={classes.time}>
+              {localTime(new Date(), timezone).toDateString()}
+            </span>
+          </div>
+        </div>
+        <Divider />
+        <List className={classes.weatherList}>
+          {weatherLists(icons, title)}
+        </List>
+      </Paper>
+    </Grid>
   );
 };
-export default Forecasts;
+export default LocalWeather;

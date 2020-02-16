@@ -2,7 +2,8 @@ import Header from "./Header";
 import NavList from "./NavList";
 import NavLists from "./NavLists";
 import Search from "./Search";
-import Forecasts from "./Forecasts";
+import LocalNews from "./LocalNews";
+import LocalWeather from "./LocalWeather";
 import TourPhoto from "./TourPhoto";
 import Title from "./Title";
 import Banner from "./Banner";
@@ -11,7 +12,8 @@ export {
   NavList,
   NavLists,
   Search,
-  Forecasts,
+  LocalNews,
+  LocalWeather,
   TourPhoto,
   Title,
   Banner

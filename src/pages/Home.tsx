@@ -2,17 +2,22 @@ import React, { useState } from "react";
 import {
   Header,
   Search,
-  Forecasts,
+  LocalNews,
+  LocalWeather,
   TourPhoto,
   Title,
   Banner
 } from "../components";
-import { WeatherApiDataProvider, UnspPhotoProvider } from "../util/apiCall";
+import {
+  WeatherApiDataProvider,
+  UnspPhotoProvider,
+  NewsApiDataProvider
+} from "../util/apiCall";
+import { Grid, Container } from "@material-ui/core";
 
 const Home = () => {
-  //hanlde search process
   const [submit, setSubmit] = useState("Brisbane, Australia");
-  const [input, setInput] = useState("Brisbane,Australia");
+  const [input, setInput] = useState("Brisbane, Australia");
 
   const handler = {
     handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -23,20 +28,26 @@ const Home = () => {
       setInput(e.target.value);
     }
   };
-  //handle banner data process
 
   return (
     <>
       <Header />
       <Banner />
-      <Title />
       <Search {...handler} />
       <UnspPhotoProvider spot={submit}>
         <TourPhoto />
       </UnspPhotoProvider>
-      <WeatherApiDataProvider location={submit}>
-        <Forecasts />
-      </WeatherApiDataProvider>
+      <Container>
+        <Title text="Weather & News" css={{ borderBottom: "2px solid" }} />
+        <Grid container spacing={5}>
+          <WeatherApiDataProvider location={submit}>
+            <LocalWeather />
+          </WeatherApiDataProvider>
+          <NewsApiDataProvider city={submit.replace(",", " And ")}>
+            <LocalNews />
+          </NewsApiDataProvider>
+        </Grid>
+      </Container>
     </>
   );
 };

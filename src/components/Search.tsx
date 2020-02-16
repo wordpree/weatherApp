@@ -2,6 +2,7 @@ import React from "react";
 import { IconButton, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Magnify } from "mdi-material-ui";
+import Title from "./Title";
 
 interface ITPP {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -25,18 +26,21 @@ const useStyles = makeStyles({
 const Search = ({ handleSubmit, handleChange }: ITPP) => {
   const classes = useStyles();
   return (
-    <div className={classes.div}>
-      <form onSubmit={handleSubmit} className={classes.form}>
-        <TextField
-          label="city, country"
-          onChange={handleChange}
-          className={classes.input}
-        />
-        <IconButton type="submit">
-          <Magnify />
-        </IconButton>
-      </form>
-    </div>
+    <>
+      <Title text="Search & Fun" />
+      <div className={classes.div}>
+        <form onSubmit={handleSubmit} className={classes.form}>
+          <TextField
+            label="city, country"
+            onChange={handleChange}
+            className={classes.input}
+          />
+          <IconButton type="submit">
+            <Magnify />
+          </IconButton>
+        </form>
+      </div>
+    </>
   );
 };
 

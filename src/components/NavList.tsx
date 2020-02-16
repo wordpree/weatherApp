@@ -24,8 +24,11 @@ const useStyle = makeStyles((theme: Theme) => ({
       display: "inline-block"
     }
   },
+  typo: {
+    fontFamily: "Oswald, sans-serif"
+  },
   li: {
-    padding: "0.5rem 0.75rem",
+    padding: "0 0.75rem",
     maxWidth: "85%",
     margin: "0 auto"
   }
@@ -40,7 +43,11 @@ const NavList = ({ to, mobile, ...props }: INavProps) => {
     <li className={classes.li}>
       <ListItem button component={routeLink} to={to}>
         {mobile && <ListItemIcon>{props.icon}</ListItemIcon>}
-        <ListItemText primary={props.label} className={classes.listText} />
+        <ListItemText
+          primary={props.label}
+          className={classes.listText}
+          classes={{ primary: classes.typo }}
+        />
       </ListItem>
       {mobile && <Divider style={{ backgroundColor: "#fff" }} />}
     </li>

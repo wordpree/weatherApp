@@ -47,10 +47,11 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
     typo: {
-      fontSize: "0.8em",
+      fontSize: "0.85em",
       [theme.breakpoints.up("md")]: {
-        fontSize: "1em"
-      }
+        fontSize: "1.2em"
+      },
+      fontFamily: "Oswald, sans-serif"
     }
   })
 );

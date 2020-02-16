@@ -8,13 +8,13 @@ const useStyles = makeStyles({
     position: "absolute",
     right: 0,
     top: "50%",
-    transform: "translate(calc(50% - 8px),-50%)"
+    transform: "translate(calc(50% - 2px),-50%)"
   },
   fabPrev: {
     position: "absolute",
     left: 0,
     top: "50%",
-    transform: "translate(calc(-50% + 8px),-50%)",
+    transform: "translate(calc(-50% + 2px),-50%)",
     zIndex: 1
   }
 });
