@@ -9,8 +9,7 @@ const useStyles = makeStyles({
     padding: "1rem 0.25rem"
   },
   typo: {
-    fontFamily: "Oswald, sans-serif",
-    letterSpacing: "0.1em",
+    letterSpacing: "0.09em",
     textTransform: "uppercase"
   }
 });

@@ -50,8 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: "0.85em",
       [theme.breakpoints.up("md")]: {
         fontSize: "1.2em"
-      },
-      fontFamily: "Oswald, sans-serif"
+      }
     }
   })
 );

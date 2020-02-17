@@ -1,5 +1,11 @@
 import React from "react";
-import { Card, CardMedia, Typography, CardContent } from "@material-ui/core";
+import {
+  Card,
+  CardMedia,
+  Typography,
+  CardContent,
+  CardActionArea
+} from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles } from "@material-ui/core/styles";
 import { AlarmPlus, Web } from "mdi-material-ui";
@@ -32,7 +38,6 @@ const useStyles = makeStyles({
     fontSize: 11,
     display: "inline-block",
     marginBottom: 2,
-    fontFamily: "Oswald, sans-serif",
     fontWeight: 300,
     "&:hover": {
       textDecoration: "underline"
@@ -41,8 +46,7 @@ const useStyles = makeStyles({
   typoSite: {
     padding: "1px 2px",
     color: "rgba(255,255,255,0.6)",
-    fontSize: "0.9rem",
-    fontFamily: "Oswald, sans-serif"
+    fontSize: "0.9rem"
   },
   typoAuthor: {
     marginBottom: "1rem"
@@ -50,7 +54,6 @@ const useStyles = makeStyles({
   des: {
     color: "#fff",
     fontSize: "1.25rem",
-    fontFamily: "Oswald, sans-serif",
     textTransform: "uppercase",
     fontWeight: 500,
     lineHeight: 1.4,
@@ -79,7 +82,6 @@ const useStyles = makeStyles({
   },
   typo: {
     color: "rgba(207,201,122,0.6)",
-    fontFamily: "Oswald, sans-serif",
     fontWeight: 300
   },
   anchorWeb: {
@@ -116,43 +118,47 @@ const TourPhoto = () => {
       <div key={index}>
         <div className={classes.sliderWrapper}>
           <Card elevation={3} className={classes.card}>
-            <CardMedia
-              image={md ? photo.urls.regular : photo.urls.small}
-              className={classes.media}
-            />
-            <CardContent className={classes.content}>
-              <Typography className={classes.typoAuthor}>
-                <span style={{ color: "#fff" }}>By</span>{" "}
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={classes.anchorAuthor}
-                  href={photo.link}
-                >
-                  {photo.author}
-                </a>
-              </Typography>
-              <Typography className={classes.des}>
-                {photo.des ? photo.des : `one shot of ${spot}`}
-              </Typography>
-              <Typography className={classes.typoSite}>{photo.site}</Typography>
-              <div className={classes.meta}>
-                <span className={classes.spanMeta}>
-                  <AlarmPlus fontSize="inherit" />
-                  {new Date(photo.date).toDateString()}
-                  {" -- "}
-                  <Web fontSize="inherit" />
+            <CardActionArea>
+              <CardMedia
+                image={md ? photo.urls.regular : photo.urls.small}
+                className={classes.media}
+              />
+              <CardContent className={classes.content}>
+                <Typography className={classes.typoAuthor}>
+                  <span style={{ color: "#fff" }}>By</span>{" "}
                   <a
-                    href="https://unsplash.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={classes.anchorWeb}
+                    className={classes.anchorAuthor}
+                    href={photo.link}
                   >
-                    Unsplash
+                    {photo.author}
                   </a>
-                </span>
-              </div>
-            </CardContent>
+                </Typography>
+                <Typography className={classes.des}>
+                  {photo.des ? photo.des : `one shot of ${spot}`}
+                </Typography>
+                <Typography className={classes.typoSite}>
+                  {photo.site}
+                </Typography>
+                <div className={classes.meta}>
+                  <span className={classes.spanMeta}>
+                    <AlarmPlus fontSize="inherit" />
+                    {new Date(photo.date).toDateString()}
+                    {" -- "}
+                    <Web fontSize="inherit" />
+                    <a
+                      href="https://unsplash.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={classes.anchorWeb}
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </CardContent>
+            </CardActionArea>
           </Card>
         </div>
       </div>

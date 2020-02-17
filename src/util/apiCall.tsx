@@ -46,6 +46,8 @@ interface IWData {
   name: string;
   weather: Array<T>;
   wind: obj;
+  vis: number;
+  clouds: number;
   timezone: number;
   coord: obj;
   loading: boolean;
@@ -82,6 +84,8 @@ const weatherInit: IWData = {
   name: "",
   weather: [],
   wind: {},
+  vis: 0,
+  clouds: 0,
   timezone: 0,
   coord: {},
   loading: true
@@ -115,7 +119,9 @@ export const WeatherApiDataProvider = ({ children, location }: WacProps) => {
             name: data.name,
             weather: data.weather,
             wind: data.wind,
+            vis: data.visibility,
             timezone: data.timezone,
+            clouds: data.clouds.all,
             coord: data.coord,
             loading: false
           })

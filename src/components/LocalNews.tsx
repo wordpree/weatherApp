@@ -6,19 +6,36 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemText,
-  Divider
+  Divider,
+  Button,
+  Tooltip
 } from "@material-ui/core";
+import { Link, LinkProps } from "react-router-dom";
+import { Omit } from "@material-ui/types";
 import { makeStyles } from "@material-ui/core/styles";
 import { useNewsContextValue } from "../util/apiCall";
 import Loading from "./Loading";
 const useStyles = makeStyles({
-  primary: {
-    fontFamily: "Oswald, sans-serif"
-  },
-  secondary: {
-    fontFamily: "Oswald, sans-serif"
-  },
   textPrimary: {
+    textDecoration: "none",
+    color: "inherit",
+    "&:hover": {
+      textDecoration: "underline"
+    }
+  },
+  divBtn: {
+    textAlign: "center",
+    padding: "0.25rem"
+  },
+  moreBtn: {
+    margin: "0 auto",
+    background: "rgba(255, 204, 14,0.8)",
+    letterSpacing: 1.2,
+    "&:hover": {
+      background: "rgb(255, 204, 14)"
+    }
+  },
+  tooltip: {
     textDecoration: "none",
     color: "inherit",
     "&:hover": {
@@ -30,6 +47,9 @@ const useStyles = makeStyles({
 const LocalNews = () => {
   const classes = useStyles();
   const data = useNewsContextValue();
+  const link = React.forwardRef<any, Omit<LinkProps, "to">>((props, ref) => (
+    <Link ref={ref} {...props} to="/news" />
+  ));
   console.log(data);
   return data.loading ? (
     <Loading value={100} />
@@ -42,16 +62,12 @@ const LocalNews = () => {
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                   <Avatar
-                    alt="Remy Sharp"
+                    alt={`${item.author ? item.author : "unkown"}`}
                     variant="square"
                     src={`${item.urlToImage}`}
                   />
                 </ListItemAvatar>
                 <ListItemText
-                  classes={{
-                    primary: classes.primary,
-                    secondary: classes.secondary
-                  }}
                   primary={
                     <a
                       target="_blank"
@@ -70,6 +86,29 @@ const LocalNews = () => {
             </React.Fragment>
           ))}
         </List>
+        <div className={classes.divBtn}>
+          <Tooltip
+            title={
+              <a
+                className={classes.tooltip}
+                href="https://newsapi.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Powed by newsapi
+              </a>
+            }
+            interactive
+          >
+            <Button
+              className={classes.moreBtn}
+              variant="contained"
+              component={link}
+            >
+              Learn More
+            </Button>
+          </Tooltip>
+        </div>
       </Grid>
     )
   );
