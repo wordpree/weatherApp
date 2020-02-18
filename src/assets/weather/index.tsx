@@ -1,5 +1,5 @@
 import frog from "./annie-spratt-frog-unsplash.jpg";
-import night from "./Biel-Morro-night-unsplash.jpg";
+import night from "./georges-boutros-night-unsplash.jpg";
 import thunder from "./eberhard-grossgasteiger--thunder-unsplash.jpg";
 import rainy from "./fred-marriage-rain-unsplash.jpg";
 import snow from "./jeffrey-blum-snow-unsplash.jpg";

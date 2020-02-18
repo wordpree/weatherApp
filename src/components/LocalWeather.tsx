@@ -34,6 +34,8 @@ import {
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
     margin: "0 auto",
     textAlign: "center",
     minHeight: 495,
@@ -51,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up("sm")]: {
       width: "85%",
       padding: "1rem",
-      backdropFilter: "blur(5px)",
+      backdropFilter: "blur(6px)",
       borderRadius: 15
     },
     backgroundColor: "rgba(0,0,0,0.1)",
@@ -136,7 +138,11 @@ const LocalWeather = () => {
     WeatherSunsetDown
   ];
   const localHour = localTime(new Date(), timezone).getHours();
+  console.log(localHour);
   const weatherImg = (weatherId: any): string => {
+    if (localHour >= 18 || localHour <= 6) {
+      return night;
+    }
     if (weatherId >= 200 && weatherId <= 232) {
       return thunder;
     }
@@ -154,9 +160,6 @@ const LocalWeather = () => {
     }
     if (weatherId >= 801 && weatherId <= 804) {
       return cloudy;
-    }
-    if (localHour >= 18 || localHour <= 6) {
-      return night;
     }
     return sunny;
   };

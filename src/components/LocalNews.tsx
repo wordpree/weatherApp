@@ -41,6 +41,10 @@ const useStyles = makeStyles({
     "&:hover": {
       textDecoration: "underline"
     }
+  },
+  credit: {
+    textAlign: "right",
+    color: "rgba(0,0,0,0.45)"
   }
 });
 
@@ -86,6 +90,16 @@ const LocalNews = () => {
             </React.Fragment>
           ))}
         </List>
+        <div className={classes.credit}>
+          <a
+            className={classes.tooltip}
+            href="https://newsapi.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Powed by newsapi
+          </a>
+        </div>
         <div className={classes.divBtn}>
           <Tooltip
             title={
