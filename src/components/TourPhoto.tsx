@@ -13,7 +13,7 @@ import { usePexelsPhotoContextValue } from "../util/apiCall";
 import Carousel from "./Carousel";
 import { NextArrow, PrevArrow } from "./Arrow";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   sliderWrapper: { padding: 2 },
   card: {
     position: "relative"
@@ -75,7 +75,10 @@ const useStyles = makeStyles({
     fontSize: 11
   },
   media: {
-    paddingTop: "164%",
+    paddingTop: "114%",
+    [theme.breakpoints.up("md")]: {
+      paddingTop: "164%"
+    },
     "&:hover": { transform: "scale(1.02)" },
     transition: "all 1s ease-in-out",
     cursor: "pointer"
@@ -91,7 +94,7 @@ const useStyles = makeStyles({
       color: "rgba(255,255,255,0.8)"
     }
   }
-});
+}));
 
 const TourPhoto = () => {
   const data = usePexelsPhotoContextValue();
@@ -100,7 +103,7 @@ const TourPhoto = () => {
   const md = useMediaQuery("(min-width:960px)");
   const sm = useMediaQuery("(max-width:600px)");
   const silides = lg ? 4 : md ? 3 : sm ? 1 : 2;
-  console.log(data);
+
   const settings = {
     dots: false,
     autoplay: true,

@@ -57,7 +57,7 @@ const LocalNews = () => {
     !data.loading && (
       <Grid item xs={12} md={5}>
         <List>
-          {data.articles.slice(0, 4).map((item, key) => (
+          {data.articles.slice(0, 5).map((item, key) => (
             <React.Fragment key={key}>
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
@@ -78,7 +78,7 @@ const LocalNews = () => {
                       {item.title}
                     </a>
                   }
-                  secondary={`${item.description.substr(0, 100)}...`}
+                  secondary={`${item.description.substr(0, 50)}...`}
                 />
               </ListItem>
 

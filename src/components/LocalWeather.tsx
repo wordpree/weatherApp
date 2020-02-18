@@ -10,11 +10,9 @@ import {
   Grid,
   Typography,
   List,
-  Card,
-  CardContent,
-  CardMedia,
   ListItemIcon,
-  Divider
+  Divider,
+  Paper
 } from "@material-ui/core";
 import {
   TemperatureCelsius,
@@ -28,30 +26,41 @@ import {
   frog,
   night,
   thunder,
-  rain,
+  rainy,
   snow,
-  clouds,
+  cloudy,
   sunny
 } from "../assets/weather";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  card: {
-    position: "relative"
+  paper: {
+    margin: "0 auto",
+    textAlign: "center",
+    minHeight: 495,
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+      justifyContent: "center",
+      flexDirection: "column"
+    }
   },
-  cardCont: {
-    position: "absolute",
-    left: "50%",
-    top: "50%",
-    transform: "translate(-50%,-50%)",
-    backgroundColor: "rgba(0,0,0,0.2)",
-    backdropFilter: "blur(7px)",
-    borderRadius: 10
-  },
-  media: {
-    paddingTop: "70%"
+  weatherWrapper: {
+    width: "100%",
+    padding: "0 0.25rem",
+    backdropFilter: "blur(3px)",
+    borderRadius: 0,
+    [theme.breakpoints.up("sm")]: {
+      width: "85%",
+      padding: "1rem",
+      backdropFilter: "blur(5px)",
+      borderRadius: 15
+    },
+    backgroundColor: "rgba(0,0,0,0.1)",
+    margin: "0 auto",
+    textAlign: "center"
   },
   weatherList1: {
-    display: "flex"
+    display: "flex",
+    justifyContent: "center"
   },
   primaryItemText1: {
     fontSize: "1.5rem",
@@ -66,7 +75,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: "rgba(255,255,255,0.7)"
   },
   divTime: {
-    fontFamily: "Oswald, sans- serif",
     textAlign: "center",
     fontSize: "1.25rem",
     color: "#fff",
@@ -127,16 +135,31 @@ const LocalWeather = () => {
     WeatherSunsetUp,
     WeatherSunsetDown
   ];
-  // const weatherImg = (weatherId:number)=>{
-  //   switch (weatherId) {
-  //     case weatherId>199 && weatherId<233:
-
-  //       break;
-
-  //     default:
-  //       break;
-  //   }
-  // }
+  const localHour = localTime(new Date(), timezone).getHours();
+  const weatherImg = (weatherId: any): string => {
+    if (weatherId >= 200 && weatherId <= 232) {
+      return thunder;
+    }
+    if (
+      (weatherId >= 300 && weatherId <= 321) ||
+      (weatherId >= 500 && weatherId <= 531)
+    ) {
+      return rainy;
+    }
+    if (weatherId >= 600 && weatherId <= 622) {
+      return snow;
+    }
+    if (weatherId >= 701 && weatherId <= 781) {
+      return frog;
+    }
+    if (weatherId >= 801 && weatherId <= 804) {
+      return cloudy;
+    }
+    if (localHour >= 18 || localHour <= 6) {
+      return night;
+    }
+    return sunny;
+  };
   const title = !loading && [
     `${main.humidity}%`,
     wind.speed + " " + degreeToDir(wind.deg),
@@ -145,12 +168,12 @@ const LocalWeather = () => {
   ];
 
   const weatherDescription = (
-    <span>
+    <p>
       Currently weather : The high temp is {main.temp_max}&#176;,low temp is{" "}
       {main.temp_min}&#176;. It feels lik {main.feels_like}&#176;. The pressure
       is {main.pressure} and visibility is {vis}. Cloudiness percentage is{" "}
       {clouds}%
-    </span>
+    </p>
   );
 
   const weatherLists = (icons: any, title: any) =>
@@ -173,13 +196,14 @@ const LocalWeather = () => {
     <Loading value={100} />
   ) : (
     <Grid item xs={12} md={7}>
-      <Card className={classes.card}>
-        <CardMedia
-          className={classes.media}
-          image={sunny}
-          title="Contemplative Reptile"
-        />
-        <CardContent className={classes.cardCont}>
+      <Paper
+        elevation={4}
+        className={classes.paper}
+        style={{
+          backgroundImage: `url(${weatherImg(weather[0].id)})`
+        }}
+      >
+        <div className={classes.weatherWrapper}>
           <List className={classes.weatherList1}>
             <ListItem>
               <ListItemAvatar>
@@ -239,8 +263,8 @@ const LocalWeather = () => {
           <List className={classes.weatherList3}>
             {weatherLists(icons, title)}
           </List>
-        </CardContent>
-      </Card>
+        </div>
+      </Paper>
     </Grid>
   );
 };

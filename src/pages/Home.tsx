@@ -38,14 +38,14 @@ const Home = () => {
         <TourPhoto />
       </UnspPhotoProvider>
       <Container>
-        <Title text="Weather & News" css={{ borderBottom: "2px solid" }} />
+        <Title text="News & Weather" css={{ borderBottom: "2px solid" }} />
         <Grid container spacing={5}>
-          <WeatherApiDataProvider location={submit}>
-            <LocalWeather />
-          </WeatherApiDataProvider>
           <NewsApiDataProvider city={submit.replace(",", " And ")}>
             <LocalNews />
           </NewsApiDataProvider>
+          <WeatherApiDataProvider location={submit}>
+            <LocalWeather />
+          </WeatherApiDataProvider>
         </Grid>
       </Container>
     </>
