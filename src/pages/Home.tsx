@@ -40,8 +40,8 @@ const Home = () => {
       <Container>
         <Title text="News & Weather" css={{ borderBottom: "2px solid" }} />
         <Grid container spacing={5}>
-          <NewsApiDataProvider city={submit.replace(",", " And ")}>
-            <LocalNews />
+          <NewsApiDataProvider query={submit}>
+            <LocalNews query={submit} />
           </NewsApiDataProvider>
           <WeatherApiDataProvider location={submit}>
             <LocalWeather />

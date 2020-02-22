@@ -48,11 +48,15 @@ const useStyles = makeStyles({
   }
 });
 
-const LocalNews = () => {
+interface LNProps {
+  query: string;
+}
+
+const LocalNews = ({ query }: LNProps) => {
   const classes = useStyles();
   const data = useNewsContextValue();
   const link = React.forwardRef<any, Omit<LinkProps, "to">>((props, ref) => (
-    <Link ref={ref} {...props} to="/news" />
+    <Link ref={ref} {...props} to={{ pathname: "/news", state: { query } }} />
   ));
   console.log(data);
   return data.loading ? (

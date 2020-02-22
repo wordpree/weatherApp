@@ -1,5 +1,5 @@
 import React, { useContext, ReactNode, useState, useEffect } from "react";
-import countryCode from "./countryCode";
+import { countryCode } from "./countryCode";
 
 type WacProps = {
   children: ReactNode;
@@ -7,7 +7,7 @@ type WacProps = {
 };
 type newsProps = {
   children: ReactNode;
-  city: string;
+  query: string;
 };
 type UnsPhoProps = {
   children: ReactNode;
@@ -26,9 +26,7 @@ type obj = {
 type Acl = {
   [key: string]: string | {};
 };
-type UnspRes = {
-  [key: string]: string | number | { user: { username: string } };
-};
+
 export type K = {
   author: string;
   title: string;
@@ -138,10 +136,10 @@ export const WeatherApiDataProvider = ({ children, location }: WacProps) => {
 };
 export const useWeatherContextValue = () => useContext(weatherContext);
 
-export const NewsApiDataProvider = ({ city, children }: newsProps) => {
+export const NewsApiDataProvider = ({ query, children }: newsProps) => {
   const URI = "https://newsapi.org";
   const PARTH = "/v2/everything";
-  const QUERY = `${city}&pageSize=48&page=1&sortBy=popularity`;
+  const QUERY = `${query}`;
   const API_KEY = "6352c20ad9204ab181b8a82ac99d0299";
   const [newsData, setNewsData] = useState(newsInit);
 
@@ -149,7 +147,7 @@ export const NewsApiDataProvider = ({ city, children }: newsProps) => {
     async function newsApiCall() {
       try {
         const response = await fetch(
-          `${URI}${PARTH}?q=${QUERY}&apikey=${API_KEY}`
+          `${URI}${PARTH}?q=${QUERY}&apikey=${API_KEY}&pageSize=24&page=1&sortBy=popularity`
         );
         const data = await response.json();
 

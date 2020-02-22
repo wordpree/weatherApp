@@ -8,22 +8,23 @@ import NewsDetail from "../components/NewsDetail";
 
 const useStyes = makeStyles({
   news: {
-    padding: "2rem 0",
-    background: "linear-gradient(180deg ,#8EBCBF 0%, #C1E4EB 100% )"
+    padding: "2rem 0"
   }
 });
 const News = () => {
   const classes = useStyes();
-  const id = useLocation().state;
-  const cardNum = id && id.split("-")[2];
-
+  const location = useLocation().state;
+  const query = location
+    ? location.query.replace(",", " AND ")
+    : "Brisbane AND Australia";
+  console.log(query);
   return (
-    <NewsApiDataProvider city="brisbane">
+    <NewsApiDataProvider query={query}>
       <Header />
       <Switch>
         <Route exact path="/news">
           <div className={classes.news}>
-            <NewsLists cardNum={cardNum} />
+            <NewsLists />
           </div>
         </Route>
         <Route path="/news/:newsId" component={NewsDetail} />

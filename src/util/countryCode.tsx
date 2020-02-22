@@ -249,7 +249,7 @@ const countryCodes: ICtyCodes = {
   ZW: "Zimbabwe"
 };
 
-const countryCode = (lookup: string) => {
+export const countryCode = (lookup: string) => {
   let country: string | undefined = "";
   let query: string | null = null;
 
@@ -266,4 +266,14 @@ const countryCode = (lookup: string) => {
   return query;
 };
 
-export default countryCode;
+export const countryISOCode = (query: string): string | undefined => {
+  const target = query.trim();
+  if (target.length === 0) {
+    return "invalid input";
+  } else {
+    const code = Object.keys(countryCodes).find(
+      key => countryCodes[key].toLowerCase() === target.toLowerCase()
+    );
+    return code;
+  }
+};
