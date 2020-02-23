@@ -138,7 +138,6 @@ const LocalWeather = () => {
     WeatherSunsetDown
   ];
   const localHour = localTime(new Date(), timezone).getHours();
-  console.log(localHour);
   const weatherImg = (weatherId: any): string => {
     if (localHour >= 18 || localHour <= 6) {
       return night;

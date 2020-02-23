@@ -15,8 +15,10 @@ import {
   ListItem,
   ListItemText,
   ListItemAvatar,
-  Avatar
+  Avatar,
+  useMediaQuery
 } from "@material-ui/core";
+import { AlarmPlus, Account } from "mdi-material-ui";
 import Loading from "./Loading";
 import Title from "./Title";
 import imgFromUnsplash from "../assets/en-unsplash.jpg";
@@ -52,6 +54,12 @@ const useStyles = makeStyles(theme => ({
   secTCard: {
     position: "relative"
   },
+  secTCardHder: {
+    letterSpacing: 1,
+    backgroundColor: "rgba(0,0,0,0.65)",
+    color: "#fff",
+    textAlign: "center"
+  },
   secTCardCont: {
     position: "absolute",
     bottom: 0,
@@ -62,16 +70,16 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "rgba(0,0,0,0.35)"
   },
   secTMedia: {
-    paddingTop: "115%"
+    paddingTop: "56.75%",
+    [theme.breakpoints.up("lg")]: {
+      paddingTop: "115%"
+    }
   },
   secTwHt: {
     fontSize: "1.2rem"
   },
-  secTwHd: {
-    minHeight: 125
-  },
   secTTypoMeta: {
-    display: "block",
+    display: "inline-block",
     marginBottom: "0.75em",
     backgroundColor: "#FFCC0E",
     color: "#000",
@@ -81,12 +89,12 @@ const useStyles = makeStyles(theme => ({
     letterSpacing: 1
   },
   thrTypoTitle: {
-    minHeight: "4.5rem",
-    padding: "0.25em 0.1em ",
+    padding: "0.5em 0.1em ",
     backgroundColor: "rgba(0,0,0,0.75)",
     color: "#fff",
     borderBottom: "1px solid #FFCC0E",
-    textAlign: "center"
+    textAlign: "center",
+    letterSpacing: 1
   },
   thrTMedia: {
     paddingTop: "56.25%"
@@ -105,7 +113,7 @@ const useStyles = makeStyles(theme => ({
     padding: "0.45em 0.2em",
     borderTop: "1px solid #FFCC0E",
     textAlign: "center",
-    letterSpacing: 1.1
+    letterSpacing: 1
   },
   fourGrid: {
     "&>div": {
@@ -127,7 +135,7 @@ const useStyles = makeStyles(theme => ({
   fourTypoCont: {
     padding: "0.45em 0.2em",
     textAlign: "center",
-    letterSpacing: 1.1
+    letterSpacing: 1
   },
   fourCardMedia1: {
     paddingTop: "63.5%",
@@ -146,13 +154,39 @@ const useStyles = makeStyles(theme => ({
     padding: "0.45em 0.75em",
     textAlign: "center"
   },
+  fourTypoSubTl: {
+    fontWeight: 300,
+    letterSpacing: 1,
+    fontSize: "0.875em"
+  },
+  fourSpanMeta: {
+    "&>*": {
+      marginRight: "0.25em",
+      display: "inline-flex",
+      alignItems: "center"
+    }
+  },
+  fourMeta: {
+    color: "#000",
+    "&>span": {
+      padding: "0.25em",
+      marginRight: "0.875em",
+      marginBottom: "0.25em",
+      backgroundColor: "#FFCC0E",
+      display: "inline-block"
+    },
+    marginTop: "1rem",
+    fontSize: "0.875em",
+    display: "inline-block"
+  },
   textPrimary: {
     textDecoration: "none",
     color: "inherit",
     "&:hover": {
       textDecoration: "underline",
       textDecorationColor: "#FFCC0E"
-    }
+    },
+    letterSpacing: 1
   },
   credit: {
     textAlign: "right",
@@ -163,13 +197,13 @@ const useStyles = makeStyles(theme => ({
 const NewsLists = () => {
   const classes = useStyles();
   const { loading, articles } = useNewsContextValue();
-
+  const mediaQuery = useMediaQuery("(max-width:400px)");
   const titleLmt = (url: null | undefined | string) => {
     if (!url) {
       return 'Header line\'s going missing';
     } else {
-      if (url.length > 80) {
-        return url.substring(0, 80) + "...";
+      if (url.length > 30) {
+        return url.substring(0, 30) + "...";
       }
     }
     return url;
@@ -201,7 +235,7 @@ const NewsLists = () => {
               rel="noopener noreferrer"
             >
               <CardMedia
-                image={item.urlToImage}
+                image={imgUrl(item.urlToImage)}
                 className={classes.secOMedia}
               />
               <CardContent className={classes.secOMeta}>
@@ -231,7 +265,10 @@ const NewsLists = () => {
           <Card variant="outlined" className={classes.secTCard}>
             <CardHeader
               title={titleLmt(item.title)}
-              classes={{ title: classes.secThdTitle }}
+              classes={{
+                title: classes.secThdTitle,
+                root: classes.secTCardHder
+              }}
             />
             <CardActionArea
               href={item.url}
@@ -239,7 +276,7 @@ const NewsLists = () => {
               rel="noopener noreferrer"
             >
               <CardMedia
-                image={item.urlToImage}
+                image={imgUrl(item.urlToImage)}
                 className={classes.secTMedia}
               />
             </CardActionArea>
@@ -277,7 +314,10 @@ const NewsLists = () => {
             </Typography>
           </div>
           <Card variant="outlined">
-            <CardMedia image={item.urlToImage} className={classes.thrTMedia} />
+            <CardMedia
+              image={imgUrl(item.urlToImage)}
+              className={classes.thrTMedia}
+            />
           </Card>
           <div className={classes.thrTypoContainer}>
             <Typography
@@ -305,10 +345,16 @@ const NewsLists = () => {
             className={key % 2 === 0 ? classes.fEntry : classes.fEntryRev}
           >
             <Card variant="outlined" className={classes.fourCard1}>
-              <CardMedia
-                image={imgUrl(item.urlToImage)}
-                className={classes.fourCardMedia1}
-              />
+              <CardActionArea
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <CardMedia
+                  image={imgUrl(item.urlToImage)}
+                  className={classes.fourCardMedia1}
+                />
+              </CardActionArea>
             </Card>
             <div className={classes.fourTypoWrapper1}>
               <Typography variant="h6">{titleLmt(item.title)}</Typography>
@@ -319,22 +365,41 @@ const NewsLists = () => {
               >
                 {item.content.substring(0, 180) + " ..."}
               </Typography>
+              <div className={classes.fourMeta}>
+                <span className={classes.fourSpanMeta}>
+                  <AlarmPlus fontSize="inherit" />
+                  <span>{new Date(item.publishedAt).toDateString()}</span>
+                </span>
+                <span className={classes.fourSpanMeta}>
+                  <Account fontSize="inherit" />
+                  <span>{authorConfirm(item.author)}</span>
+                </span>
+              </div>
             </div>
           </div>
         ))}
       </Grid>
       <Grid item xs={12} lg={5}>
-        <Grid container spacing={4}>
+        <Grid container spacing={mediaQuery ? 1 : 2}>
           {data.slice(5, 11).map((item, key) => (
             <Grid item key={key} xs={6}>
               <Card variant="outlined">
-                <CardMedia
-                  className={classes.fourCardMedia2}
-                  image={item.urlToImage}
-                />
+                <CardActionArea
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <CardMedia
+                    className={classes.fourCardMedia2}
+                    image={imgUrl(item.urlToImage)}
+                  />
+                </CardActionArea>
               </Card>
               <div className={classes.thrTypoTitle}>
-                <Typography variant="subtitle1">
+                <Typography
+                  variant="subtitle1"
+                  classes={{ subtitle1: classes.fourTypoSubTl }}
+                >
                   {titleLmt(item.title)}
                 </Typography>
               </div>
@@ -343,7 +408,7 @@ const NewsLists = () => {
         </Grid>
         <Divider />
         <List>
-          {data.slice(11, 15).map((item, key) => (
+          {data.slice(11, 16).map((item, key) => (
             <React.Fragment key={key}>
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
@@ -351,7 +416,7 @@ const NewsLists = () => {
                     style={{ width: 150, height: 100 }}
                     alt={authorConfirm(item.author)}
                     variant="square"
-                    src={`${imgUrl(item.urlToImage)}`}
+                    src={imgUrl(item.urlToImage)}
                   />
                 </ListItemAvatar>
                 <ListItemText
@@ -366,7 +431,7 @@ const NewsLists = () => {
                       {titleLmt(item.title)}
                     </a>
                   }
-                  secondary={`${item.description.substr(0, 50)}...`}
+                  secondary={!mediaQuery && item.description}
                 />
               </ListItem>
               <Divider style={{ backgroundColor: "#000" }} />
@@ -386,7 +451,7 @@ const NewsLists = () => {
         {sectionOne(articles.slice(0, 2))}
         {sectionTwo(articles.slice(2, 6))}
         {sectionThree(articles.slice(6, 9))}
-        {sectionFour(articles.slice(9, 24))}
+        {sectionFour(articles.slice(9, 25))}
         <div className={classes.credit}>
           <a
             className={classes.textPrimary}
