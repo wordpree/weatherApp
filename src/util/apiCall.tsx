@@ -109,7 +109,6 @@ export const WeatherApiDataProvider = ({ children, location }: WacProps) => {
         `${FETCH_URI}${PATH}?q=${query}&units=metric&APPID=${API_KEY}`
       );
       const data = await response.json();
-      console.log(data);
       data.cod === 200
         ? setForecasts({
             main: data.main,
@@ -147,7 +146,7 @@ export const NewsApiDataProvider = ({ query, children }: newsProps) => {
     async function newsApiCall() {
       try {
         const response = await fetch(
-          `${URI}${PARTH}?q=${QUERY}&apikey=${API_KEY}&pageSize=24&page=1&sortBy=popularity`
+          `${URI}${PARTH}?q=${QUERY}&apikey=${API_KEY}&pageSize=25&page=1&sortBy=popularity`
         );
         const data = await response.json();
 
@@ -203,7 +202,6 @@ export const UnspPhotoProvider = ({ children, spot }: UnsPhoProps) => {
         site: spot
       }));
       setPhotos({ photos: resultState });
-      console.log(result);
     }
     apiUnspCall();
   }, [QUERY, spot]);

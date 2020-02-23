@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Header,
   Search,
@@ -16,12 +16,12 @@ import {
 import { Grid, Container } from "@material-ui/core";
 
 const Home = () => {
-  const [submit, setSubmit] = useState("Brisbane, Australia");
-  const [input, setInput] = useState("Brisbane, Australia");
-
+  const [input, setInput] = useState("");
+  const [query, setQuery] = useState("Brisbane,Australia");
   const handler = {
     handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-      setSubmit(input);
+      localStorage.setItem("query", input);
+      setQuery(input);
       e.preventDefault();
     },
     handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -29,21 +29,35 @@ const Home = () => {
     }
   };
 
+  useEffect(() => {
+    function getQuery() {
+      let query = "";
+      if (localStorage.getItem("query")) {
+        query = localStorage.getItem("query") as string;
+        console.log(query);
+      } else {
+        query = "Brisbane,Australia";
+      }
+      return query;
+    }
+    setQuery(getQuery());
+  }, []);
+
   return (
     <>
       <Header />
       <Banner />
       <Search {...handler} />
-      <UnspPhotoProvider spot={submit}>
+      <UnspPhotoProvider spot={query}>
         <TourPhoto />
       </UnspPhotoProvider>
       <Container>
         <Title text="News & Weather" css={{ borderBottom: "2px solid" }} />
         <Grid container spacing={5}>
-          <NewsApiDataProvider query={submit}>
-            <LocalNews query={submit} />
+          <NewsApiDataProvider query={query}>
+            <LocalNews query={query} />
           </NewsApiDataProvider>
-          <WeatherApiDataProvider location={submit}>
+          <WeatherApiDataProvider location={query}>
             <LocalWeather />
           </WeatherApiDataProvider>
         </Grid>
