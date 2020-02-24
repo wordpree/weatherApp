@@ -233,6 +233,7 @@ const countryCodes: ICtyCodes = {
   UA: "Ukraine",
   AE: "United Arab Emirates",
   GB: "United Kingdom",
+  UK: "United Kingdom",
   US: "United States",
   UM: "United States Outlying Islands",
   UY: "Uruguay",
@@ -257,7 +258,8 @@ export const countryCode = (lookup: string) => {
     const location: string[] = lookup.split(",");
     country = Object.keys(countryCodes).find(
       key =>
-        countryCodes[key].toLowerCase() === location[1].trim().toLowerCase()
+        countryCodes[key].toLowerCase() === location[1].trim().toLowerCase() ||
+        key.toLowerCase() === location[1].trim().toLowerCase()
     );
     query = location[0] + "," + country;
   } else {

@@ -194,11 +194,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+type dataType = null | undefined | string;
+
 const NewsLists = () => {
   const classes = useStyles();
   const { loading, articles } = useNewsContextValue();
-  const mediaQuery = useMediaQuery("(max-width:400px)");
-  const titleLmt = (url: null | undefined | string) => {
+  const smQuery = useMediaQuery("(max-width:400px)");
+
+  const titleLmt = (url: dataType) => {
     if (!url) {
       return 'Header line\'s going missing';
     } else {
@@ -209,7 +212,7 @@ const NewsLists = () => {
     return url;
   };
 
-  const imgUrl = (url: null | undefined | string) => {
+  const imgUrl = (url: dataType) => {
     if (!url) {
       return imgFromUnsplash;
     } else {
@@ -217,12 +220,19 @@ const NewsLists = () => {
     }
     return url;
   };
-  const authorConfirm = (author: null | undefined | string) => {
+  const authorConfirm = (author: dataType) => {
     if (!author) {
       return "Author Unkown";
     }
     return author;
   };
+
+  const contentLmt = (cont: string | null | undefined) => {
+    if (cont) {
+      return smQuery ? cont.substring(0, 90) : cont.substring(0, 160);
+    }
+  };
+
   const sectionOne = (data: Array<K>) => (
     <Grid container spacing={1} style={{ margin: "2rem 0" }}>
       {data.map((item, key) => (
@@ -289,7 +299,7 @@ const NewsLists = () => {
                 component="p"
                 className={classes.secTTypoCont}
               >
-                {item.content.substring(0, 160) + " ..."}
+                {contentLmt(item.content)}
               </Typography>
             </CardContent>
           </Card>
@@ -380,7 +390,7 @@ const NewsLists = () => {
         ))}
       </Grid>
       <Grid item xs={12} lg={5}>
-        <Grid container spacing={mediaQuery ? 1 : 2}>
+        <Grid container spacing={smQuery ? 1 : 2}>
           {data.slice(5, 11).map((item, key) => (
             <Grid item key={key} xs={6}>
               <Card variant="outlined">
@@ -431,7 +441,7 @@ const NewsLists = () => {
                       {titleLmt(item.title)}
                     </a>
                   }
-                  secondary={!mediaQuery && item.description}
+                  secondary={!smQuery && item.description}
                 />
               </ListItem>
               <Divider style={{ backgroundColor: "#000" }} />

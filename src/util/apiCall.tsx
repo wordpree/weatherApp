@@ -108,7 +108,9 @@ export const WeatherApiDataProvider = ({ children, location }: WacProps) => {
       const response = await fetch(
         `${FETCH_URI}${PATH}?q=${query}&units=metric&APPID=${API_KEY}`
       );
+
       const data = await response.json();
+      console.log("weather fetch ", query);
       data.cod === 200
         ? setForecasts({
             main: data.main,
@@ -138,7 +140,7 @@ export const useWeatherContextValue = () => useContext(weatherContext);
 export const NewsApiDataProvider = ({ query, children }: newsProps) => {
   const URI = "https://newsapi.org";
   const PARTH = "/v2/everything";
-  const QUERY = `${query}`;
+  const QUERY = query.split(",")[0];
   const API_KEY = "6352c20ad9204ab181b8a82ac99d0299";
   const [newsData, setNewsData] = useState(newsInit);
 
@@ -149,7 +151,7 @@ export const NewsApiDataProvider = ({ query, children }: newsProps) => {
           `${URI}${PARTH}?q=${QUERY}&apikey=${API_KEY}&pageSize=25&page=1&sortBy=popularity`
         );
         const data = await response.json();
-
+        console.log("news fetch ", QUERY);
         if (data.status === "ok") {
           const articlesWithId = data.articles.map(
             (article: Acl, index: number) => ({
@@ -192,6 +194,7 @@ export const UnspPhotoProvider = ({ children, spot }: UnsPhoProps) => {
       );
       if (!response.ok) throw new Error(`error! status: ${response.status}`);
       const result = await response.json();
+      console.log("photo fetch ", spot);
       const resultState = result.results.map((result: any) => ({
         id: result.id,
         des: result.alt_description,
@@ -209,4 +212,4 @@ export const UnspPhotoProvider = ({ children, spot }: UnsPhoProps) => {
     <tourFeaturePho.Provider value={photos}>{children}</tourFeaturePho.Provider>
   );
 };
-export const usePexelsPhotoContextValue = () => useContext(tourFeaturePho);
+export const useUnspPhotoContextValue = () => useContext(tourFeaturePho);

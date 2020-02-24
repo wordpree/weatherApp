@@ -16,8 +16,14 @@ import {
 import { Grid, Container } from "@material-ui/core";
 
 const Home = () => {
+  const handleStorage = () => {
+    const req = localStorage.getItem("query");
+    const storageData = req ? req : "Brisbane,Australia";
+    return storageData;
+  };
   const [input, setInput] = useState("");
-  const [query, setQuery] = useState("Brisbane,Australia");
+  const [query, setQuery] = useState(handleStorage());
+
   const handler = {
     handleSubmit(e: React.FormEvent<HTMLFormElement>) {
       localStorage.setItem("query", input);
@@ -31,16 +37,14 @@ const Home = () => {
 
   useEffect(() => {
     function getQuery() {
-      let query = "";
-      if (localStorage.getItem("query")) {
-        query = localStorage.getItem("query") as string;
-        console.log(query);
-      } else {
+      let query = localStorage.getItem("query");
+      if (!query) {
         query = "Brisbane,Australia";
+        localStorage.setItem("query", query);
       }
-      return query;
+      setQuery(query);
     }
-    setQuery(getQuery());
+    getQuery();
   }, []);
 
   return (

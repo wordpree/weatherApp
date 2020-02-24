@@ -9,7 +9,7 @@ import {
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles } from "@material-ui/core/styles";
 import { AlarmPlus, Web } from "mdi-material-ui";
-import { usePexelsPhotoContextValue } from "../util/apiCall";
+import { useUnspPhotoContextValue } from "../util/apiCall";
 import Carousel from "./Carousel";
 import { NextArrow, PrevArrow } from "./Arrow";
 
@@ -97,13 +97,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TourPhoto = () => {
-  const data = usePexelsPhotoContextValue();
+  const data = useUnspPhotoContextValue();
   const classes = useStyles();
   const lg = useMediaQuery("(min-width:1280px)");
   const md = useMediaQuery("(min-width:960px)");
   const sm = useMediaQuery("(max-width:600px)");
   const silides = lg ? 4 : md ? 3 : sm ? 1 : 2;
-
+  console.log("photo: ", data);
   const settings = {
     dots: false,
     autoplay: true,

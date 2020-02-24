@@ -120,6 +120,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const LocalWeather = () => {
   const classes = useStyles();
   const data = useWeatherContextValue();
+  console.log("local weather: ", data);
   const {
     main,
     name,
