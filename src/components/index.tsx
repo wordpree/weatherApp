@@ -7,6 +7,7 @@ import LocalWeather from "./LocalWeather";
 import TourPhoto from "./TourPhoto";
 import Title from "./Title";
 import Banner from "./Banner";
+import Recommend from "./Recommend";
 export {
   Header,
   NavList,
@@ -16,5 +17,6 @@ export {
   LocalWeather,
   TourPhoto,
   Title,
-  Banner
+  Banner,
+  Recommend
 };

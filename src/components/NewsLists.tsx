@@ -216,7 +216,7 @@ const NewsLists = () => {
     if (!url) {
       return imgFromUnsplash;
     } else {
-      if (!url.includes("http")) return "http://" + url;
+      if (!url.includes("http")) return "https://" + url;
     }
     return url;
   };

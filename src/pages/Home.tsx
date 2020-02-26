@@ -6,7 +6,8 @@ import {
   LocalWeather,
   TourPhoto,
   Title,
-  Banner
+  Banner,
+  Recommend
 } from "../components";
 import {
   WeatherApiDataProvider,
@@ -51,6 +52,7 @@ const Home = () => {
     <>
       <Header />
       <Banner />
+      <Recommend />
       <Search {...handler} />
       <UnspPhotoProvider spot={query}>
         <TourPhoto />

@@ -18,9 +18,11 @@ const useStyles = makeStyles({
     textAlign: "center",
     margin: "0 auto"
   },
-  input: {
-    width: "48%"
-  }
+  textField: {
+    width: "48%",
+    letterSpacing: 1
+  },
+  input: {}
 });
 
 const Search = ({ handleSubmit, handleChange }: ITPP) => {
@@ -33,7 +35,7 @@ const Search = ({ handleSubmit, handleChange }: ITPP) => {
           <TextField
             label="city, country"
             onChange={handleChange}
-            className={classes.input}
+            className={classes.textField}
           />
           <IconButton type="submit">
             <Magnify />
