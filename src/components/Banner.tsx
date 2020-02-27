@@ -62,7 +62,7 @@ const Banner = () => {
       </div>
     </div>
   ));
-  return <Carousel carousel={carousel} settings={settings} maxWidth={false} />;
+  return <Carousel carousel={carousel} settings={settings} />;
 };
 
 export default Banner;

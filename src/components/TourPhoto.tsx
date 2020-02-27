@@ -4,7 +4,8 @@ import {
   CardMedia,
   Typography,
   CardContent,
-  CardActionArea
+  CardActionArea,
+  Container
 } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles } from "@material-ui/core/styles";
@@ -103,7 +104,7 @@ const TourPhoto = () => {
   const md = useMediaQuery("(min-width:960px)");
   const sm = useMediaQuery("(max-width:600px)");
   const silides = lg ? 4 : md ? 3 : sm ? 1 : 2;
-  console.log("photo: ", data);
+
   const settings = {
     dots: false,
     autoplay: true,
@@ -167,7 +168,11 @@ const TourPhoto = () => {
       </div>
     );
   });
-  return <Carousel settings={settings} carousel={sliderData} maxWidth="lg" />;
+  return (
+    <Container maxWidth="lg" style={{ padding: 0 }}>
+      <Carousel settings={settings} carousel={sliderData} />
+    </Container>
+  );
 };
 
 export default TourPhoto;

@@ -110,7 +110,6 @@ export const WeatherApiDataProvider = ({ children, location }: WacProps) => {
       );
 
       const data = await response.json();
-      console.log("weather fetch ", query);
       data.cod === 200
         ? setForecasts({
             main: data.main,
@@ -151,7 +150,6 @@ export const NewsApiDataProvider = ({ query, children }: newsProps) => {
           `${URI}${PARTH}?q=${QUERY}&apikey=${API_KEY}&pageSize=25&page=1&sortBy=popularity`
         );
         const data = await response.json();
-        console.log("news fetch ", QUERY);
         if (data.status === "ok") {
           const articlesWithId = data.articles.map(
             (article: Acl, index: number) => ({
@@ -194,7 +192,6 @@ export const UnspPhotoProvider = ({ children, spot }: UnsPhoProps) => {
       );
       if (!response.ok) throw new Error(`error! status: ${response.status}`);
       const result = await response.json();
-      console.log("photo fetch ", spot);
       const resultState = result.results.map((result: any) => ({
         id: result.id,
         des: result.alt_description,

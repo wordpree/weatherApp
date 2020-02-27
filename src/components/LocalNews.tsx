@@ -58,7 +58,7 @@ const LocalNews = ({ query }: LNProps) => {
   const link = React.forwardRef<any, Omit<LinkProps, "to">>((props, ref) => (
     <Link ref={ref} {...props} to="/news" />
   ));
-  console.log("local news: ", data);
+
   return data.loading ? (
     <Loading value={100} />
   ) : (

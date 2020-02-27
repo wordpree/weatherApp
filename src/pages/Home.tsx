@@ -52,7 +52,6 @@ const Home = () => {
     <>
       <Header />
       <Banner />
-      <Recommend />
       <Search {...handler} />
       <UnspPhotoProvider spot={query}>
         <TourPhoto />
@@ -68,6 +67,7 @@ const Home = () => {
           </WeatherApiDataProvider>
         </Grid>
       </Container>
+      <Recommend />
     </>
   );
 };
