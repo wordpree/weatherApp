@@ -1,15 +1,18 @@
 import React from "react";
-import { Typography, Button, useMediaQuery } from "@material-ui/core";
-import styled from "styled-components";
-import Carousel from "../Carousel";
+import { Typography, useMediaQuery } from "@material-ui/core";
+import Carousel1 from "../Carousel1";
+import { Slide, Image } from "pure-react-carousel";
 import {
   StyledSection,
   StyledLargeWrapper,
   StyledImgWrapper,
+  StyledBgImg,
   StyledImg,
   StyledContent,
   StyledSmallWrapper,
-  StyledSmall
+  StyledSmall,
+  StyledButton,
+  StyledPrcBtn
 } from "./styled";
 
 interface IAProps {
@@ -17,58 +20,66 @@ interface IAProps {
   reverse: boolean;
 }
 
-const StyledButton = styled(props => (
-  <Button {...props} size="large" variant="outlined" />
-))`
-  display: none;
-  @media (min-width: 600px) {
-    display: block;
-  }
-  border-radius: 50px;
-  border: 2px solid #000;
-`;
-
-const settings = {
-  arrows: false,
-  dots: false,
-  autoplay: false,
-  slidesToShow: 1.1
-};
-
 function Attractions({ urls, reverse }: IAProps) {
   const md = useMediaQuery("(min-width:768px)");
-  const sliderData = urls.slice(1, 5).map((item, key) => (
-    <StyledSmall key={key}>
-      <StyledImgWrapper>
-        <StyledImg src={item} />
-      </StyledImgWrapper>
-      <StyledContent>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-      </StyledContent>
-    </StyledSmall>
-  ));
+  const sm = useMediaQuery("(min-width:450px)");
 
+  const settings = {
+    orientation: "horizontal" as "horizontal" | "vertical" | undefined,
+    visibleSlides: md ? 4 : sm ? 2 : 1,
+    totalSlides: 4,
+    step: 1,
+    naturalSlideWidth: 17,
+    naturalSlideHeight: 10
+  };
+  const slideData = urls.slice(1, 5).map((item, key) => (
+    <Slide key={key} index={key}>
+      <Image src={item} hasMasterSpinner />
+    </Slide>
+  ));
+  const noneSlideData = (
+    <StyledSmallWrapper>
+      {urls.slice(1, 5).map((item, key) => (
+        <StyledSmall key={key}>
+          <StyledImgWrapper>
+            <StyledImg src={item} />
+          </StyledImgWrapper>
+          <StyledContent>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+            do,consectetur adipiscing elit
+          </StyledContent>
+        </StyledSmall>
+      ))}
+    </StyledSmallWrapper>
+  );
   return (
     <StyledSection reverse={reverse}>
-      <StyledLargeWrapper>
-        <StyledImgWrapper>
-          <StyledImg src={urls[0]} />
-        </StyledImgWrapper>
+      <StyledLargeWrapper reverse={!reverse}>
+        <StyledBgImg img={urls[0]} />
         <StyledContent>
           <Typography variant="h2">Paris</Typography>
           <Typography variant="body1">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+            do,consectetur adipiscing elit
           </Typography>
-          <StyledButton>Explore your new scene</StyledButton>
+          <StyledButton size="large" variant="outlined" mobile={false}>
+            Explore your new scene
+          </StyledButton>
         </StyledContent>
       </StyledLargeWrapper>
-      <StyledSmallWrapper>
-        {md ? (
-          sliderData
-        ) : (
-          <Carousel settings={settings} carousel={sliderData} />
-        )}
-      </StyledSmallWrapper>
+
+      {md ? (
+        noneSlideData
+      ) : (
+        <Carousel1
+          settings={settings}
+          carousel={slideData}
+          btnType={<StyledPrcBtn />}
+        />
+      )}
+      <StyledButton size="large" variant="outlined" mobile={true}>
+        Explore your new scene
+      </StyledButton>
     </StyledSection>
   );
 }
