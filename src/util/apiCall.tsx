@@ -1,5 +1,5 @@
 import React, { useContext, ReactNode, useState, useEffect } from "react";
-import { countryCode } from "./countryCode";
+import { countryCode, querySygicCity } from "./countryCode";
 
 type WacProps = {
   children: ReactNode;
@@ -73,6 +73,77 @@ type UnsData = {
 interface IUnsData {
   photos: Array<UnsData>;
 }
+
+/**********sygic api call data type start*********************/
+type SygicProps = {
+  children: ReactNode;
+  location: string;
+};
+
+type SygicMetaProps = {
+  children: ReactNode;
+  id: string;
+};
+
+type SygicCollection = {
+  name_long: string;
+  place_ids: Array<string>;
+};
+type ReferType = {
+  [key: string]: string | number;
+};
+
+export interface SygicPlace {
+  name: string;
+  url: string;
+  id: string;
+  categories: Array<string>;
+  tag_keys: Array<string>;
+  address: string;
+  admission: string;
+  opening_hours_note: string;
+  description: {
+    text: string;
+    provider: string;
+    link: string;
+  };
+  opening_hours_raw: string;
+  references: Array<ReferType>;
+  attributes: {};
+  duration_estimate: number;
+  marker: string;
+  perex: string;
+  main_media: {
+    media: Array<{ url_template: string }>;
+  };
+}
+
+interface ISygicRes {
+  status_code: number;
+  data: { collections: Array<SygicCollection> } | { places: Array<SygicPlace> };
+}
+
+export interface ISygicMeta {
+  type: string;
+  url_template: string;
+  url: string;
+  created_at: string;
+  attribution: {
+    title: string;
+    title_url: string;
+    author: string;
+    author_url: string;
+    license_url: string;
+    license: string;
+  };
+}
+
+export interface ISygicMetaRes {
+  statuse_code: number;
+  data: { media: Array<ISygicMeta> };
+}
+/**********sygic api call data type end*********************/
+
 const tourPhotoInit: IUnsData = {
   photos: []
 };
@@ -92,9 +163,12 @@ const newsInit: INData = {
   loading: true,
   articles: []
 };
+const sygicInit = { loading: true, name: "", placeArray: [] as SygicPlace[] };
+
 const weatherContext = React.createContext(weatherInit);
 const newsContext = React.createContext(newsInit);
 const tourFeaturePho = React.createContext(tourPhotoInit);
+const sygicContext = React.createContext(sygicInit);
 
 export const WeatherApiDataProvider = ({ children, location }: WacProps) => {
   const API_KEY = "00194910deb21b1edc80422332e0c1ec";
@@ -210,3 +284,69 @@ export const UnspPhotoProvider = ({ children, spot }: UnsPhoProps) => {
   );
 };
 export const useUnspPhotoContextValue = () => useContext(tourFeaturePho);
+
+export const SygicContextProvider = ({ children, location }: SygicProps) => {
+  const API_KEY = "Iw3v10JNHl3iaauM5TSyO9yYOLT20OSf6c6J4tZa";
+  const URL = "https://api.sygictravelapi.com/1.2/en";
+  const PATH = "/collections";
+
+  const city = location.split(",")[0];
+  const country = location.split(",")[1];
+  const queryCityIndex = querySygicCity(city, false);
+  const queryCuntryIndex = querySygicCity(country, true);
+  const [sygicData, setSygicData] = useState(sygicInit);
+
+  useEffect(() => {
+    let QUERY = "";
+    const CORS = "https://cors-anywhere.herokuapp.com/"; //avoid crossing-origin block
+    if (city === undefined && country !== undefined) {
+      QUERY = `parent_place_id=${queryCuntryIndex}`;
+    }
+    if (city !== undefined) {
+      QUERY = `parent_place_id=${queryCityIndex}`;
+    }
+    if (city === undefined && country === undefined) {
+      QUERY = "parent_place_id=country:73";
+    }
+    async function sygicApiCall(url: string): Promise<ISygicRes | undefined> {
+      try {
+        const res = await fetch(url, {
+          headers: {
+            "x-api-key": API_KEY
+          }
+        });
+        if (!res.ok) throw new Error("Error messege: " + res.status);
+        return await res.json();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    const url = CORS + URL + PATH + "?" + QUERY;
+    const response = sygicApiCall(url); //api call for poi collections
+    response.then(data => {
+      if (data) {
+        const dataCol = data.data as {
+          collections: SygicCollection[];
+        };
+
+        const name = dataCol.collections[0].name_long;
+        const place_ids = dataCol.collections[0].place_ids;
+        const newQuery = place_ids.join("|");
+        const detailsUrl = CORS + URL + "/places?ids=" + newQuery;
+        const detailsResponse = sygicApiCall(detailsUrl); //api call for each poi details
+        detailsResponse.then(places => {
+          if (places) {
+            const placeData = places.data as { places: SygicPlace[] };
+            const placeArray = placeData.places;
+            setSygicData({ loading: false, name, placeArray });
+          }
+        });
+      }
+    });
+  }, [city, country, queryCityIndex, queryCuntryIndex]);
+
+  return (
+    <sygicContext.Provider value={sygicData}>{children}</sygicContext.Provider>
+  );
+};
+export const useSygicContextValue = () => useContext(sygicContext);

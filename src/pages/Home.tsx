@@ -7,12 +7,14 @@ import {
   TourPhoto,
   Title,
   Banner,
-  Recommend
+  Recommend,
+  SygicCollections
 } from "../components";
 import {
   WeatherApiDataProvider,
   UnspPhotoProvider,
-  NewsApiDataProvider
+  NewsApiDataProvider,
+  SygicContextProvider
 } from "../util/apiCall";
 import { Grid, Container } from "@material-ui/core";
 
@@ -53,6 +55,9 @@ const Home = () => {
       <Header />
       <Banner />
       <Search {...handler} />
+      <SygicContextProvider location={query}>
+        <SygicCollections />
+      </SygicContextProvider>
       <UnspPhotoProvider spot={query}>
         <TourPhoto />
       </UnspPhotoProvider>
