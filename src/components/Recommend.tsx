@@ -26,6 +26,7 @@ const StyledTypography = styled(Typography)`
   text-align: center;
   letter-spacing: 1px;
 `;
+
 function Recommend() {
   const imgUrls = [
     [paris, rome, barelona, newyork, lodon],

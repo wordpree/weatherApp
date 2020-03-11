@@ -1,4 +1,4 @@
-import SygicCollections from "./SygicCollections";
-import SygicCollection from "./SygicCollection";
+import SygicDataAllocate from "./SygicDataAllocate";
+import SygicCollection from "./SygicPlaces";
 import SygicDetail from "./SygicDetail";
-export { SygicCollections, SygicCollection, SygicDetail };
+export { SygicDataAllocate, SygicCollection, SygicDetail };

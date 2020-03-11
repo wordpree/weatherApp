@@ -33,3 +33,21 @@ export const degreeToDir = (degree: number) => {
   ];
   return arr[val % 16];
 };
+
+export async function fetchData<T>(
+  url: string,
+  header: Record<string, string> | boolean
+): Promise<T | undefined> {
+  try {
+    let res;
+    if (typeof header === "boolean") {
+      res = await fetch(url);
+    } else {
+      res = await fetch(url, { headers: header });
+    }
+    if (!res.ok) throw new Error(`error :${res.status}`);
+    return await res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}

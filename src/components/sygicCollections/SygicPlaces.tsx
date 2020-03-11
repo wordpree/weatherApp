@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, LinkProps } from "react-router-dom";
-import { SygicPlace } from "../../util/apiCall";
+import { ISygicPlace } from "../../util/type";
 import { Omit } from "@material-ui/types";
 import { MapMarker, ClockOutline } from "mdi-material-ui";
 import {
@@ -52,33 +52,34 @@ interface ISCProps1 {
 }
 
 interface ISCProps {
-  data: SygicPlace;
+  place: ISygicPlace;
 }
 
-function SygicCollection({ data }: ISCProps) {
+function SygicPlaces({ place }: ISCProps) {
   const classes = useStyles();
-  const dashId = data.id.replace(":", "-");
+  const dashId = place.id.replace(":", "-");
   const LinkForward = React.forwardRef<any, Omit<LinkProps, "to">>(
     (props, ref) => (
       <Link
-        to={{ pathname: `/attraction/${dashId}`, state: data }}
+        to={{ pathname: `/attraction/${dashId}`, state: place }}
         ref={ref}
         {...props}
       />
     )
   );
-  const durationTime = data.duration_estimate;
+  const durationTime = place.duration_estimate;
   const dTFmt =
     durationTime < 3600
       ? durationTime / 60 + " mins"
       : durationTime >= 7200
       ? durationTime / 3600 + " hours"
       : durationTime / 3600 + " hour";
-  const imgUrl = data.main_media.media[0].url_template.replace(
+  const imgUrl = place.main_media.media[0].url_template.replace(
     "{size}",
-    "700x525"
+    "600x450"
   );
-
+  const brief =
+    place.perex.length > 20 ? place.perex.substring(20) + "..." : place.perex;
   return (
     <>
       <Card>
@@ -97,10 +98,10 @@ function SygicCollection({ data }: ISCProps) {
           className={classes.typo}
         >
           <MapMarker style={{ fontSize: "1rem" }} />
-          <span>{data.address}</span>
+          <span>{place.address}</span>
         </Typography>
-        <Typography variant="h6">{data.name}</Typography>
-        <Typography variant="body1">{data.perex}</Typography>
+        <Typography variant="h6">{place.name}</Typography>
+        <Typography variant="body1">{brief}</Typography>
         <Typography variant="body2" className={classes.typo}>
           <ClockOutline style={{ fontSize: "1rem" }} />
           <span>Duration: {dTFmt}</span>
@@ -110,4 +111,4 @@ function SygicCollection({ data }: ISCProps) {
   );
 }
 
-export default SygicCollection;
+export default SygicPlaces;

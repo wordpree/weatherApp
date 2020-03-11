@@ -1,11 +1,8 @@
-import React, { useState, useEffect, Component } from "react";
-import { useLocation } from "react-router-dom";
+import React, { Component } from "react";
 import { Typography, Grid, Container, Paper } from "@material-ui/core";
 import { NextArrow, PrevArrow } from "../Arrow";
-import { ISygicMeta, SygicPlace, ISygicMetaRes } from "../../util/apiCall";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import {
   StyledSlickWrapper1,
   StyledSlickImge,
@@ -108,35 +105,6 @@ class SygicDetail extends Component<{}, ISDState> {
 }
 
 export function SygicDetail1() {
-  // const { state } = useLocation();
-  // const info: SygicPlace = state;
-  // const [meta, setMeta] = useState({ media: [] as ISygicMeta[] });
-
-  // useEffect(() => {
-  //   const API_KEY = "Iw3v10JNHl3iaauM5TSyO9yYOLT20OSf6c6J4tZa";
-  //   const URL = "https://api.sygictravelapi.com/1.2/en";
-
-  //   const PATH = `/places/${info.id}/media`;
-  //   const url = URL + PATH;
-  //   async function sygicMediaCall(url: string) {
-  //     try {
-  //       const req = await fetch(url, {
-  //         headers: {
-  //           "x-api-key": API_KEY
-  //         }
-  //       });
-  //       if (!req.ok) throw new Error(`error :${req.status}`);
-  //       const res = (await req.json()) as ISygicMetaRes;
-  //       setMeta({
-  //         media: res.data.media
-  //       });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   sygicMediaCall(url);
-  // }, [info.id]);
-
   //console.log(state);
   const urls = [one, two, three, four];
   const settings = {

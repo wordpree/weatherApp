@@ -15,7 +15,7 @@ const News = () => {
   const item = query ? query : "Brisbane";
 
   return (
-    <NewsApiDataProvider query={item}>
+    <NewsApiDataProvider location={item}>
       <Header />
       <div className={classes.news}>
         <NewsLists />

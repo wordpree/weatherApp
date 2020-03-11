@@ -11,13 +11,24 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles } from "@material-ui/core/styles";
 import { AlarmPlus, Web } from "mdi-material-ui";
 import { useUnspPhotoContextValue } from "../util/apiCall";
-import Carousel from "./Carousel";
-import { NextArrow, PrevArrow } from "./Arrow";
+import Loading from "./Loading";
+import Slider from "react-slick";
 
 const useStyles = makeStyles(theme => ({
-  sliderWrapper: { padding: 2 },
   card: {
-    position: "relative"
+    position: "relative",
+    height: "100%"
+  },
+  cardAction: {
+    height: "100%",
+    padding: 2
+  },
+  cardMedia: {
+    paddingTop: "116%",
+    "&:hover": {
+      transform: "scale(1.01)",
+      transition: "all 0.8s"
+    }
   },
   content: {
     position: "absolute",
@@ -98,7 +109,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TourPhoto = () => {
-  const data = useUnspPhotoContextValue();
+  const { results, loading, site } = useUnspPhotoContextValue();
   const classes = useStyles();
   const lg = useMediaQuery("(min-width:1280px)");
   const md = useMediaQuery("(min-width:960px)");
@@ -107,71 +118,70 @@ const TourPhoto = () => {
 
   const settings = {
     dots: false,
-    autoplay: true,
     infinite: true,
-    speed: 1000,
     slidesToShow: silides,
     slidesToScroll: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />
+    autoplay: true,
+    speed: 800,
+    autoplaySpeed: 3000
   };
 
-  const sliderData = data.photos.map((photo, index) => {
-    const spot = photo.site.split(",")[0];
+  const sliderData = results.map((photo, index) => {
+    const spot = site.split(",")[0];
     return (
       <div key={index}>
-        <div className={classes.sliderWrapper}>
-          <Card elevation={3} className={classes.card}>
-            <CardActionArea>
-              <CardMedia
-                image={md ? photo.urls.regular : photo.urls.small}
-                className={classes.media}
-              />
-              <CardContent className={classes.content}>
-                <Typography className={classes.typoAuthor}>
-                  <span style={{ color: "#fff" }}>By</span>{" "}
+        <Card elevation={4} className={classes.card}>
+          <CardActionArea className={classes.cardAction}>
+            <CardMedia
+              image={md ? photo.urls.regular : photo.urls.small}
+              className={classes.cardMedia}
+            />
+            <CardContent className={classes.content}>
+              <Typography className={classes.typoAuthor}>
+                <span style={{ color: "#fff" }}>By</span>{" "}
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={classes.anchorAuthor}
+                  href={photo.links.html}
+                >
+                  {photo.user.name}
+                </a>
+              </Typography>
+              <Typography className={classes.des}>
+                {photo.alt_description
+                  ? photo.alt_description
+                  : `one shot of ${spot}`}
+              </Typography>
+              <Typography className={classes.typoSite}>{site}</Typography>
+              <div className={classes.meta}>
+                <span className={classes.spanMeta}>
+                  <AlarmPlus fontSize="inherit" />
+                  {new Date(photo.created_at).toDateString()}
+                  {" -- "}
+                  <Web fontSize="inherit" />
                   <a
+                    href="https://unsplash.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={classes.anchorAuthor}
-                    href={photo.link}
+                    className={classes.anchorWeb}
                   >
-                    {photo.author}
+                    Unsplash
                   </a>
-                </Typography>
-                <Typography className={classes.des}>
-                  {photo.des ? photo.des : `one shot of ${spot}`}
-                </Typography>
-                <Typography className={classes.typoSite}>
-                  {photo.site}
-                </Typography>
-                <div className={classes.meta}>
-                  <span className={classes.spanMeta}>
-                    <AlarmPlus fontSize="inherit" />
-                    {new Date(photo.date).toDateString()}
-                    {" -- "}
-                    <Web fontSize="inherit" />
-                    <a
-                      href="https://unsplash.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={classes.anchorWeb}
-                    >
-                      Unsplash
-                    </a>
-                  </span>
-                </div>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </div>
+                </span>
+              </div>
+            </CardContent>
+          </CardActionArea>
+        </Card>
       </div>
     );
   });
-  return (
+  return !loading ? (
     <Container maxWidth="lg" style={{ padding: 0 }}>
-      <Carousel settings={settings} carousel={sliderData} />
+      <Slider {...settings}>{sliderData}</Slider>
     </Container>
+  ) : (
+    <Loading value={100} />
   );
 };
 

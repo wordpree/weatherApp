@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { DotGroup } from "pure-react-carousel";
 import { Button } from "@material-ui/core";
 
 export const StyledSection = styled.section<{ reverse: boolean }>`
@@ -70,23 +69,6 @@ export const StyledImg = styled.img`
   width: auto;
   height: auto;
   display: block;
-`;
-
-export const StyledPrcBtn = styled(DotGroup)`
-  text-align: center;
-  button {
-    padding: 0;
-    border: 0;
-    width: 25px;
-    height: 12px;
-    background: #f6c50f;
-    margin-right: 5px;
-    border-radius: 10px;
-  }
-  .carousel__dot--selected {
-    background: #c29a0c;
-    transition: background-color 0.5s ease-in-out;
-  }
 `;
 
 export const StyledButton = styled(({ mobile, ...rest }) => (

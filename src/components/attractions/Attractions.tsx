@@ -1,7 +1,7 @@
 import React from "react";
-import { Typography, useMediaQuery } from "@material-ui/core";
-import Carousel1 from "../Carousel1";
-import { Slide, Image } from "pure-react-carousel";
+import { Typography, useMediaQuery, Paper } from "@material-ui/core";
+import Slider from "react-slick";
+
 import {
   StyledSection,
   StyledLargeWrapper,
@@ -11,8 +11,7 @@ import {
   StyledContent,
   StyledSmallWrapper,
   StyledSmall,
-  StyledButton,
-  StyledPrcBtn
+  StyledButton
 } from "./styled";
 
 interface IAProps {
@@ -25,17 +24,16 @@ function Attractions({ urls, reverse }: IAProps) {
   const sm = useMediaQuery("(min-width:450px)");
 
   const settings = {
-    orientation: "horizontal" as "horizontal" | "vertical" | undefined,
-    visibleSlides: md ? 4 : sm ? 2 : 1,
-    totalSlides: 4,
-    step: 1,
-    naturalSlideWidth: 17,
-    naturalSlideHeight: 10
+    slidesToShow: md ? 4 : sm ? 2 : 1
   };
   const slideData = urls.slice(1, 5).map((item, key) => (
-    <Slide key={key} index={key}>
-      <Image src={item} hasMasterSpinner />
-    </Slide>
+    <div key={key}>
+      <Paper
+        style={{
+          background: `center / cover no-repeat url(${item}) no-repeat`
+        }}
+      />
+    </div>
   ));
   const noneSlideData = (
     <StyledSmallWrapper>
@@ -45,6 +43,10 @@ function Attractions({ urls, reverse }: IAProps) {
             <StyledImg src={item} />
           </StyledImgWrapper>
           <StyledContent>
+            <img
+              src="https://cdn.travel.sygic.com/web/markers/discovering-garden-botanical.png"
+              alt=""
+            />
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
             do,consectetur adipiscing elit
           </StyledContent>
@@ -68,15 +70,7 @@ function Attractions({ urls, reverse }: IAProps) {
         </StyledContent>
       </StyledLargeWrapper>
 
-      {md ? (
-        noneSlideData
-      ) : (
-        <Carousel1
-          settings={settings}
-          carousel={slideData}
-          btnType={<StyledPrcBtn />}
-        />
-      )}
+      {md ? noneSlideData : <Slider {...settings}>{slideData}</Slider>}
       <StyledButton size="large" variant="outlined" mobile={true}>
         Explore your new scene
       </StyledButton>

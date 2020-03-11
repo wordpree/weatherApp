@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Container } from "@material-ui/core";
-
+import { Container, Card } from "@material-ui/core";
 export const StyledContainer = styled(Container)`
   @media (max-width: 760px) {
     padding-left: 0.25rem;
@@ -8,6 +7,7 @@ export const StyledContainer = styled(Container)`
   }
 `;
 
+/* sygic detail */
 export const StyledSlickWrapper1 = styled.div`
   .slick-slider {
     width: 100%;
@@ -46,5 +46,15 @@ export const StyledPaperWrapper = styled.div`
 export const StyledSlickImge = styled.div`
   padding-top: 63%;
   .slick-thumbnail .slick-current & {
+  }
+`;
+
+/*sygic hotel*/
+
+export const StyledCardH = styled(Card)`
+  padding: 1rem;
+  margin-bottom: 1rem;
+  @media (min-width: 768px) {
+    display: flex;
   }
 `;

@@ -6,8 +6,9 @@ import LocalNews from "./LocalNews";
 import LocalWeather from "./LocalWeather";
 import TourPhoto from "./TourPhoto";
 import Title from "./Title";
-import Banner from "./Banner";
+import Banner from "./banner";
 import Recommend from "./Recommend";
+import { SygicDataAllocate } from "./sygicCollections";
 export {
   Header,
   NavList,
@@ -18,5 +19,6 @@ export {
   TourPhoto,
   Title,
   Banner,
-  Recommend
+  Recommend,
+  SygicDataAllocate
 };

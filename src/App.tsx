@@ -5,11 +5,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Error from "./components/Error";
 import { SygicDetail } from "./components/sygicCollections";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 function App() {
   const theme = createMuiTheme({
     typography: {
       fontFamily: [
-        "Oswald",
+        "Playfair Display",
         "Roboto",
         '"Helvetica Neue"',
         "Arial",

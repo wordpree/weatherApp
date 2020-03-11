@@ -119,18 +119,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const LocalWeather = () => {
   const classes = useStyles();
-  const data = useWeatherContextValue();
-  const {
-    main,
-    name,
-    sys,
-    weather,
-    wind,
-    loading,
-    timezone,
-    vis,
-    clouds
-  } = data;
+  const { data, loading } = useWeatherContextValue();
+  const { main, name, sys, weather, wind, timezone, visibility, clouds } = data;
   const icons = [
     WaterPercent,
     WeatherWindy,
@@ -169,12 +159,12 @@ const LocalWeather = () => {
     dataFormat(localTime(new Date(sys.sunset * 1000), timezone))
   ];
 
-  const weatherDescription = (
+  const weatherDescription = !loading && (
     <p>
       Currently weather : The high temp is {main.temp_max}&#176;,low temp is{" "}
       {main.temp_min}&#176;. It feels lik {main.feels_like}&#176;. The pressure
-      is {main.pressure} and visibility is {vis}. Cloudiness percentage is{" "}
-      {clouds}%
+      is {main.pressure} and visibility is {visibility}. Cloudiness percentage
+      is {clouds.all}%
     </p>
   );
 

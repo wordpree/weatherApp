@@ -1,5 +1,6 @@
 import React from "react";
-import { useNewsContextValue, K } from "../util/apiCall";
+import { useNewsContextValue } from "../util/apiCall";
+import { INData } from "../util/type";
 import {
   Grid,
   Container,
@@ -233,7 +234,7 @@ const NewsLists = () => {
     }
   };
 
-  const sectionOne = (data: Array<K>) => (
+  const sectionOne = (data: Array<INData>) => (
     <Grid container spacing={1} style={{ margin: "2rem 0" }}>
       {data.map((item, key) => (
         <Grid item xs={12} md={6} key={key}>
@@ -268,7 +269,7 @@ const NewsLists = () => {
       ))}
     </Grid>
   );
-  const sectionTwo = (data: Array<K>) => (
+  const sectionTwo = (data: Array<INData>) => (
     <Grid container spacing={2} style={{ margin: "2rem 0" }}>
       {data.map((item, key) => (
         <Grid key={key} item xs={12} md={6} lg={3}>
@@ -307,7 +308,7 @@ const NewsLists = () => {
       ))}
     </Grid>
   );
-  const sectionThree = (data: Array<K>) => (
+  const sectionThree = (data: Array<INData>) => (
     <Grid container spacing={3} style={{ margin: "2rem 0" }}>
       {data.map((item, key) => (
         <Grid key={key} item xs={12} md={6} lg={4}>
@@ -346,7 +347,7 @@ const NewsLists = () => {
       ))}
     </Grid>
   );
-  const sectionFour = (data: Array<K>) => (
+  const sectionFour = (data: Array<INData>) => (
     <Grid container spacing={4} style={{ margin: "2rem 0" }}>
       <Grid item xs={12} lg={7} className={classes.fourGrid}>
         {data.slice(0, 5).map((item, key) => (

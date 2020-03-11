@@ -8,7 +8,7 @@ import {
   Title,
   Banner,
   Recommend,
-  SygicCollections
+  SygicDataAllocate
 } from "../components";
 import {
   WeatherApiDataProvider,
@@ -56,15 +56,15 @@ const Home = () => {
       <Banner />
       <Search {...handler} />
       <SygicContextProvider location={query}>
-        <SygicCollections />
+        <SygicDataAllocate />
       </SygicContextProvider>
-      <UnspPhotoProvider spot={query}>
+      <UnspPhotoProvider location={query}>
         <TourPhoto />
       </UnspPhotoProvider>
       <Container>
         <Title text="News & Weather" css={{ borderBottom: "2px solid" }} />
         <Grid container spacing={5}>
-          <NewsApiDataProvider query={query}>
+          <NewsApiDataProvider location={query}>
             <LocalNews query={query} />
           </NewsApiDataProvider>
           <WeatherApiDataProvider location={query}>
