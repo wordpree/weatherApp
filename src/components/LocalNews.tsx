@@ -1,4 +1,5 @@
 import React from "react";
+import { INData } from "../util/type";
 import {
   Grid,
   List,
@@ -13,8 +14,8 @@ import {
 import { Link, LinkProps } from "react-router-dom";
 import { Omit } from "@material-ui/types";
 import { makeStyles } from "@material-ui/core/styles";
-import { useNewsContextValue } from "../util/apiCall";
 import Loading from "./Loading";
+
 const useStyles = makeStyles({
   textPrimary: {
     textDecoration: "none",
@@ -49,86 +50,82 @@ const useStyles = makeStyles({
 });
 
 interface LNProps {
-  query: string;
+  news: INData[];
 }
 
-const LocalNews = ({ query }: LNProps) => {
+const LocalNews = ({ news }: LNProps) => {
   const classes = useStyles();
-  const data = useNewsContextValue();
+
   const link = React.forwardRef<any, Omit<LinkProps, "to">>((props, ref) => (
     <Link ref={ref} {...props} to="/news" />
   ));
-
-  return data.loading ? (
-    <Loading value={100} />
-  ) : (
-    !data.loading && (
-      <Grid item xs={12} md={5}>
-        <List>
-          {data.articles.slice(0, 5).map((item, key) => (
-            <React.Fragment key={key}>
-              <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                  <Avatar
-                    alt={`${item.author ? item.author : "unkown"}`}
-                    variant="square"
-                    src={`${item.urlToImage}`}
-                  />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={classes.textPrimary}
-                      href={`${item.url}`}
-                    >
-                      {item.title}
-                    </a>
-                  }
-                  secondary={`${item.description.substr(0, 50)}...`}
+  if (news.length === 0) return <Loading value={100} />;
+  return (
+    <Grid item xs={12} md={5}>
+      <List>
+        {news.slice(0, 5).map((item, key) => (
+          <React.Fragment key={key}>
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Avatar
+                  alt={`${item.author ? item.author : "unkown"}`}
+                  variant="square"
+                  src={`${item.urlToImage}`}
                 />
-              </ListItem>
+              </ListItemAvatar>
+              <ListItemText
+                primary={
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={classes.textPrimary}
+                    href={`${item.url}`}
+                  >
+                    {item.title}
+                  </a>
+                }
+                secondary={`${item.description.substr(0, 50)}...`}
+              />
+            </ListItem>
 
-              <Divider component="li" variant="inset" />
-            </React.Fragment>
-          ))}
-        </List>
-        <div className={classes.credit}>
-          <a
-            className={classes.tooltip}
-            href="https://newsapi.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Powed by newsapi
-          </a>
-        </div>
-        <div className={classes.divBtn}>
-          <Tooltip
-            title={
-              <a
-                className={classes.tooltip}
-                href="https://newsapi.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Powed by newsapi
-              </a>
-            }
-            interactive
-          >
-            <Button
-              className={classes.moreBtn}
-              variant="contained"
-              component={link}
+            <Divider component="li" variant="inset" />
+          </React.Fragment>
+        ))}
+      </List>
+      <div className={classes.credit}>
+        <a
+          className={classes.tooltip}
+          href="https://newsapi.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Powed by newsapi
+        </a>
+      </div>
+      <div className={classes.divBtn}>
+        <Tooltip
+          title={
+            <a
+              className={classes.tooltip}
+              href="https://newsapi.org/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Learn More
-            </Button>
-          </Tooltip>
-        </div>
-      </Grid>
-    )
+              Powed by newsapi
+            </a>
+          }
+          interactive
+        >
+          <Button
+            className={classes.moreBtn}
+            variant="contained"
+            component={link}
+          >
+            Learn More
+          </Button>
+        </Tooltip>
+      </div>
+    </Grid>
   );
 };
 

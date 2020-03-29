@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
 import {
   Header,
   Search,
@@ -8,73 +9,55 @@ import {
   Title,
   Banner,
   Recommend,
-  SygicDataAllocate
+  SygicCollections,
+  Restaurants,
+  SygicColDet,
+  Loading
 } from "../components";
-import {
-  WeatherApiDataProvider,
-  UnspPhotoProvider,
-  NewsApiDataProvider,
-  SygicContextProvider
-} from "../util/apiCall";
+
 import { Grid, Container } from "@material-ui/core";
+import { IWData, INData, ISygicCollection, IHmLocation } from "../util/type";
 
-const Home = () => {
-  const handleStorage = () => {
-    const req = localStorage.getItem("query");
-    const storageData = req ? req : "Brisbane,Australia";
-    return storageData;
-  };
-  const [input, setInput] = useState("");
-  const [query, setQuery] = useState(handleStorage());
+interface IHProps {
+  weather: IWData | undefined;
+  news: INData[] | undefined;
+  collections: ISygicCollection[] | undefined;
+}
 
-  const handler = {
-    handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-      localStorage.setItem("query", input);
-      setQuery(input);
-      e.preventDefault();
-    },
-    handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-      setInput(e.target.value);
-    }
-  };
+const Home = ({ weather, news, collections }: IHProps) => {
+  const storageValue: IHmLocation = JSON.parse(
+    localStorage.getItem("locale") as string
+  );
+
+  const locationDetail = "";
 
   useEffect(() => {
-    function getQuery() {
-      let query = localStorage.getItem("query");
-      if (!query) {
-        query = "Brisbane,Australia";
-        localStorage.setItem("query", query);
-      }
-      setQuery(query);
-    }
-    getQuery();
-  }, []);
-
+    localStorage.setItem("locale", JSON.stringify(locationDetail));
+  }, [locationDetail]);
+  if (!weather || !news || !collections) return <Loading value={100} />;
   return (
-    <>
-      <Header />
-      <Banner />
-      <Search {...handler} />
-      <SygicContextProvider location={query}>
-        <SygicDataAllocate />
-      </SygicContextProvider>
-      <UnspPhotoProvider location={query}>
+    <Switch>
+      <Route exact path="/">
+        <Header />
+        <Banner />
+        <Search />
+        <SygicCollections collections={collections} />
+        <Container>
+          <Title text="News & Weather" css={{ borderBottom: "2px solid" }} />
+          <Grid container spacing={5}>
+            <LocalNews news={news} />
+            <LocalWeather weather={weather} />
+          </Grid>
+        </Container>
+        {/* <UnspPhotoProvider location={query}>
         <TourPhoto />
       </UnspPhotoProvider>
-      <Container>
-        <Title text="News & Weather" css={{ borderBottom: "2px solid" }} />
-        <Grid container spacing={5}>
-          <NewsApiDataProvider location={query}>
-            <LocalNews query={query} />
-          </NewsApiDataProvider>
-          <WeatherApiDataProvider location={query}>
-            <LocalWeather />
-          </WeatherApiDataProvider>
-        </Grid>
-      </Container>
-      <Recommend />
-    </>
+      <Recommend />} */}
+      </Route>
+      {/* <Route path="/attractions/:id">
+        <SygicColDet />
+      </Route> */}
+    </Switch>
   );
 };
-
 export default Home;

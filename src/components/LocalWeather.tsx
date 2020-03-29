@@ -1,7 +1,7 @@
 import React from "react";
 import Loading from "./Loading";
 import { dataFormat, degreeToDir, localTime } from "../util/utils";
-import { useWeatherContextValue } from "../util/apiCall";
+
 import {
   Avatar,
   ListItem,
@@ -22,6 +22,8 @@ import {
   WeatherWindy
 } from "mdi-material-ui";
 import { makeStyles, Theme } from "@material-ui/core/styles";
+import { IWData } from "../util/type";
+
 import {
   frog,
   night,
@@ -31,6 +33,10 @@ import {
   cloudy,
   sunny
 } from "../assets/weather";
+
+interface IWProps {
+  weather: IWData;
+}
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -117,10 +123,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   avatar: { backgroundColor: "inherit" }
 }));
 
-const LocalWeather = () => {
+const LocalWeather = ({ weather: weatherData }: IWProps) => {
   const classes = useStyles();
-  const { data, loading } = useWeatherContextValue();
-  const { main, name, sys, weather, wind, timezone, visibility, clouds } = data;
+
+  if (!weatherData.hasOwnProperty("weather")) {
+    return <Loading value={100} />;
+  }
+  const {
+    main,
+    name,
+    sys,
+    weather,
+    wind,
+    timezone,
+    visibility,
+    clouds
+  } = weatherData;
   const icons = [
     WaterPercent,
     WeatherWindy,
@@ -152,14 +170,14 @@ const LocalWeather = () => {
     }
     return sunny;
   };
-  const title = !loading && [
+  const title = [
     `${main.humidity}%`,
     wind.speed + " " + degreeToDir(wind.deg),
     dataFormat(localTime(new Date(sys.sunrise * 1000), timezone)),
     dataFormat(localTime(new Date(sys.sunset * 1000), timezone))
   ];
 
-  const weatherDescription = !loading && (
+  const weatherDescription = (
     <p>
       Currently weather : The high temp is {main.temp_max}&#176;,low temp is{" "}
       {main.temp_min}&#176;. It feels lik {main.feels_like}&#176;. The pressure
@@ -184,9 +202,7 @@ const LocalWeather = () => {
       </ListItem>
     ));
 
-  return loading ? (
-    <Loading value={100} />
-  ) : (
+  return (
     <Grid item xs={12} md={7}>
       <Paper
         elevation={4}
@@ -200,7 +216,7 @@ const LocalWeather = () => {
             <ListItem>
               <ListItemAvatar>
                 <Avatar
-                  src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
+                  src={`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
                   alt={`${weather[0].description}`}
                   style={{
                     width: 146,
@@ -260,4 +276,5 @@ const LocalWeather = () => {
     </Grid>
   );
 };
+
 export default LocalWeather;
