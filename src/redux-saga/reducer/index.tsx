@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   weather: weatherReducer,
   news: newsReducer,
   collections: sygicColsReducer,
-  placeDets: sygicDetailReducer
+  places: sygicDetailReducer
 });
 export type TravelStore = ReturnType<typeof rootReducer>;
 export default rootReducer;

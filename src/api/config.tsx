@@ -17,7 +17,7 @@ export const newsorgApi = (location: string) =>
   `https://newsapi.org/v2/everything?q=${location}&pageSize=25&page=1&apikey=${N_API_KEY}`;
 
 export const sygicApi = (placeId: string) =>
-  `${CORS}https://api.sygictravelapi.com/1.2/en/collections?parent_place_id=${placeId}&prefer_unique=1&limit=3`;
+  `${CORS}https://api.sygictravelapi.com/1.2/en/collections?parent_place_id=${placeId}&prefer_unique=1&limit=5`;
 
 export const sygicDetailApi = (ids: string) =>
   `${CORS}https://api.sygictravelapi.com/1.2/en/places?ids=${ids}`;

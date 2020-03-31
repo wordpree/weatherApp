@@ -102,21 +102,21 @@ export const getSygicCollectionsFailed = (
 });
 
 export const reqSygicDetail = (
-  ids: string,
-  flag: { num: number; id: number }[]
+  id: number[],
+  placeIds: string
 ): TYPE.TravelActionType => ({
   type: TYPE.REQUEST_SYGIC_DETAIL,
-  ids,
-  flag
+  id,
+  placeIds
 });
 
 export const getSygicDetailSuccess = (
   places: ISygicPlace[],
-  flag: { num: number; id: number }[]
+  id: number[]
 ): TYPE.TravelActionType => ({
   type: TYPE.REQUEST_SYGIC_DETAIL_SUCCEEDED,
   places,
-  flag
+  id
 });
 
 export const getSygicDetailFailed = (error: string): TYPE.TravelActionType => ({

@@ -161,25 +161,14 @@ export const getStorageSearchPara = () => {
 
 export const idsSort = (
   collections: ISygicCollection[]
-): [Array<{ num: number; id: number }>, string] | undefined => {
+): [number[], string] | undefined => {
   if (collections.length === 0) return undefined;
+  let placeIds: string[] = [];
+  let id: number[] = [];
+  collections.forEach(col => {
+    placeIds = placeIds.concat(col.place_ids);
+    id.push(col.id);
+  });
 
-  const item = collections.map(col => ({
-    placeIds: col.place_ids,
-    id: col.id
-  }));
-
-  let newIds = "";
-  const flag = [];
-  for (let i = 0; i < item.length; i++) {
-    let temp = item[i];
-    if (temp.placeIds.length > 9) {
-      flag.push({ num: 9, id: temp.id });
-    } else {
-      flag.push({ num: temp.placeIds.length, id: temp.id });
-    }
-    const dem = newIds ? "|" : "";
-    newIds = newIds + dem + temp.placeIds.slice(0, 9).join("|");
-  }
-  return [flag, newIds];
+  return [id.slice(0, 3), placeIds.slice(0, 27).join("|")];
 };

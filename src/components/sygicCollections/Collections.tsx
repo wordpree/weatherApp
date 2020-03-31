@@ -30,7 +30,7 @@ const Collections = ({ collections }: ISProps) => {
     <Container>
       <div className={classes.gridWrapper}>
         <Grid container spacing={2}>
-          {collections.map((col, index) => (
+          {collections.slice(0, 3).map((col, index) => (
             <SygicCollection col={col} key={index} image={img[index]} />
           ))}
         </Grid>

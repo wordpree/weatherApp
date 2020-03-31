@@ -1,4 +1,4 @@
-import { put, call, take, fork } from "redux-saga/effects";
+import { put, call, take } from "redux-saga/effects";
 import * as TYPE from "../actionType";
 import { fetchSygic } from "../../api";
 import * as url from "../../api/config";
@@ -13,11 +13,10 @@ function* getSygicCols(placeId: string) {
   }
 }
 
-function* getSygicPlaces(ids: string, flag: { num: number; id: number }[]) {
-  //ids:place_ids,flag:divider for different collections
+function* getSygicPlaces(placeIds: string, id: number[]) {
   try {
-    const res = yield call(fetchSygic, url.sygicDetailApi(ids));
-    yield put(actions.getSygicDetailSuccess(res.data.places, flag));
+    const res = yield call(fetchSygic, url.sygicDetailApi(placeIds));
+    yield put(actions.getSygicDetailSuccess(res.data.places, id));
   } catch (error) {
     yield put(actions.getSygicDetailFailed(error));
   }
@@ -33,7 +32,7 @@ export function* SygicCollections() {
 export function* sygicPlaces() {
   while (true) {
     yield take(TYPE.REQUEST_SYGIC_COLS_SUCCEEDED);
-    const { ids, flag } = yield take(TYPE.REQUEST_SYGIC_DETAIL);
-    yield call(getSygicPlaces, ids, flag);
+    const { placeIds, id } = yield take(TYPE.REQUEST_SYGIC_DETAIL);
+    yield call(getSygicPlaces, placeIds, id);
   }
 }

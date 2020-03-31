@@ -41,7 +41,4 @@ const Home = () => {
   );
 };
 
-const mapStateToProps = (state: TravelStore) => ({
-  collections: state.collections
-});
-export default connect(mapStateToProps)(Home);
+export default Home;

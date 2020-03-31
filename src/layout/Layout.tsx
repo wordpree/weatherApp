@@ -3,7 +3,7 @@ import { Home, News, Photos, Travel } from "../pages";
 import { Route, Switch } from "react-router-dom";
 import Error from "../components/Error";
 import { Details } from "../components";
-import { ISygicCollection, IGooglePlaceDetail, Flag } from "../util/type";
+import { ISygicCollection, IGooglePlaceDetail } from "../util/type";
 import {
   setStorageSearchPara,
   getStorageSearchPara,
@@ -16,7 +16,7 @@ interface ILProps {
   reqNewsAction(location: string): void;
   reqSygicCollections(placeId: string): void;
   reqWeatherAction(geo: string): void;
-  reqSygicDetail(ids: string, flag: Flag[]): void;
+  reqSygicDetail(id: number[], placeIds: string): void;
 }
 
 function Layout({
@@ -40,10 +40,10 @@ function Layout({
 
   useEffect(() => {
     /* sygic travel details*/
-    const sort = idsSort(collections);
-    if (sort !== undefined) {
-      const [flag, ids] = sort;
-      reqSygicDetail(ids, flag);
+    const mix = idsSort(collections);
+    if (mix !== undefined) {
+      const [id, placeIds] = mix;
+      reqSygicDetail(id, placeIds);
     }
   }, [collections]);
 

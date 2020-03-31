@@ -175,11 +175,6 @@ export interface IUnsDataRes {
 
 /**sygic api start**/
 
-export interface Detail {
-  id: number;
-  places: ISygicPlace[];
-}
-
 type ReferType = {
   [key: string]: string | number;
 };
