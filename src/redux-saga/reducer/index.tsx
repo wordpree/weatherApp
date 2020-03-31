@@ -3,14 +3,16 @@ import detailReducer from "./gPlaceDetailReducer";
 import completeReducer from "./gAutonCompleteReducer";
 import weatherReducer from "./openWeatherReducer";
 import newsReducer from "./newsorgReducer";
-import sygicColsRudecer from "./sCollectionsReducer";
+import sygicColsReducer from "./sCollectionsReducer";
+import sygicDetailReducer from "./sPlaceDetailReducer";
 
 const rootReducer = combineReducers({
-  location: detailReducer,
+  detail: detailReducer,
   predictions: completeReducer,
   weather: weatherReducer,
   news: newsReducer,
-  collections: sygicColsRudecer
+  collections: sygicColsReducer,
+  placeDets: sygicDetailReducer
 });
 export type TravelStore = ReturnType<typeof rootReducer>;
 export default rootReducer;

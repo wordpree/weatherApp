@@ -2,7 +2,7 @@ import { ISygicCollection } from "../../util/type";
 import * as TYPE from "../actionType";
 const initState = [] as ISygicCollection[];
 
-const sygicColsRudecer = (
+const sygicColsReducer = (
   state = initState,
   actions: TYPE.ISygicColsResSuccess
 ) => {
@@ -13,4 +13,4 @@ const sygicColsRudecer = (
       return state;
   }
 };
-export default sygicColsRudecer;
+export default sygicColsReducer;

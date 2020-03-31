@@ -52,12 +52,14 @@ export interface ISygicColsResErr {
 /******* sygic collections detail action *****/
 export interface ISygicDetailReq {
   type: typeof REQUEST_SYGIC_DETAIL;
-  ids: string;
+  ids: string; //place_ids
+  flag: { num: number; id: number }[];
 }
 
 export interface ISygicDetailResSuccess {
   type: typeof REQUEST_SYGIC_DETAIL_SUCCEEDED;
   places: ISygicPlace[];
+  flag: { num: number; id: number }[];
 }
 
 export interface ISygicDetailResErr {

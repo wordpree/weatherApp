@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import React from "react";
+import { connect } from "react-redux";
+import { TravelStore } from "../redux-saga/reducer";
 import {
   Header,
   Search,
@@ -9,55 +10,36 @@ import {
   Title,
   Banner,
   Recommend,
-  SygicCollections,
+  Collections,
   Restaurants,
-  SygicColDet,
-  Loading
+  ColDet
 } from "../components";
 
 import { Grid, Container } from "@material-ui/core";
-import { IWData, INData, ISygicCollection, IHmLocation } from "../util/type";
 
-interface IHProps {
-  weather: IWData | undefined;
-  news: INData[] | undefined;
-  collections: ISygicCollection[] | undefined;
-}
-
-const Home = ({ weather, news, collections }: IHProps) => {
-  const storageValue: IHmLocation = JSON.parse(
-    localStorage.getItem("locale") as string
-  );
-
-  const locationDetail = "";
-
-  useEffect(() => {
-    localStorage.setItem("locale", JSON.stringify(locationDetail));
-  }, [locationDetail]);
-  if (!weather || !news || !collections) return <Loading value={100} />;
+const Home = () => {
   return (
-    <Switch>
-      <Route exact path="/">
-        <Header />
-        <Banner />
-        <Search />
-        <SygicCollections collections={collections} />
-        <Container>
-          <Title text="News & Weather" css={{ borderBottom: "2px solid" }} />
-          <Grid container spacing={5}>
-            <LocalNews news={news} />
-            <LocalWeather weather={weather} />
-          </Grid>
-        </Container>
-        {/* <UnspPhotoProvider location={query}>
+    <>
+      <Header />
+      <Banner />
+      <Search />
+      <Collections />
+      <Container>
+        <Title text="News & Weather" css={{ borderBottom: "2px solid" }} />
+        <Grid container spacing={5}>
+          <LocalNews />
+          <LocalWeather />
+        </Grid>
+      </Container>
+      {/* <UnspPhotoProvider location={query}>
         <TourPhoto />
       </UnspPhotoProvider>
       <Recommend />} */}
-      </Route>
-      {/* <Route path="/attractions/:id">
-        <SygicColDet />
-      </Route> */}
-    </Switch>
+    </>
   );
 };
-export default Home;
+
+const mapStateToProps = (state: TravelStore) => ({
+  collections: state.collections
+});
+export default connect(mapStateToProps)(Home);

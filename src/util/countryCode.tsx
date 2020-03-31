@@ -1,6 +1,3 @@
-import sygicCities from "./sygicTopCity.json";
-import sygicCountries from "./sygicTopCountry.json";
-
 interface ICtyCodes {
   [k: string]: string;
 }
@@ -253,22 +250,6 @@ const countryCodes: ICtyCodes = {
   ZW: "Zimbabwe"
 };
 
-export const querySygicCity = (query: string, isCountry: boolean) => {
-  if (query.trim().length === 0) {
-    return undefined;
-  }
-  const sygicData: ICtyCodes = isCountry ? sygicCountries : sygicCities;
-  const res = Object.keys(sygicData).find(
-    (key: string) =>
-      sygicData[key].toLowerCase().includes(query.trim().toLowerCase()) ||
-      sygicData[key]
-        .toLowerCase()
-        .replace(" ", "")
-        .includes(query.trim().toLowerCase())
-  );
-  return res;
-};
-
 export const countryCode = (lookup: string) => {
   let country: string | undefined = "";
   let query: string | null = null;
@@ -286,3 +267,5 @@ export const countryCode = (lookup: string) => {
   }
   return query;
 };
+
+export const zomatoCityId = (country_name: string) => {};

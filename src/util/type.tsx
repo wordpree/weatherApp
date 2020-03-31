@@ -1,9 +1,109 @@
 import { ReactNode } from "react";
 
+/*props interface start *******************/
+export interface Flag {
+  num: number;
+  id: number;
+}
+
+export interface IHmAddress {
+  city: IHmAddressBase;
+  country: IHmAddressBase;
+}
+export interface IHmAddressBase {
+  long_name: string;
+  short_name: string;
+}
+export interface IHmGeo {
+  geo: {
+    lat: number;
+    lng: number;
+  };
+}
+export interface ISygicCol {
+  address: IHmAddressBase[];
+  children: ReactNode;
+}
+
+export interface ISygicColDet {
+  place_ids: string[];
+  children: ReactNode;
+}
+
+export type IHmLocation = IHmAddress & IHmGeo;
+
 export interface IApiProps {
   children: ReactNode;
   location: string;
 }
+export interface IProps {
+  children: ReactNode;
+}
+
+export type TApiData =
+  | IGoogleAutoData
+  | IZomatoColtnData
+  | ISygicCollection
+  | ISygicPlace
+  | IGooglePlaceDetail;
+
+type func<T> = React.Dispatch<React.SetStateAction<T>>;
+
+export interface IState<T> {
+  data: T[];
+  setData: func<T[]>;
+}
+/******props interface end ************************************/
+
+/***  google place  start***/
+type Adress = {
+  long_name: string;
+  short_name: string;
+  types: string[];
+};
+type Location = {
+  lat: number;
+  lng: number;
+};
+export interface IGooglePlaceDetailRes {
+  result: IGooglePlaceDetail;
+}
+export interface IGooglePlaceDetail {
+  address_components: Array<Adress>;
+  geometry: {
+    location: Location;
+  };
+}
+
+export interface IGoogleAutoRes {
+  predictions: Array<IGoogleAutoData>;
+}
+export interface IGoogleAutoData {
+  description: string;
+  id: string;
+  place_id: string;
+}
+/* google place end*************/
+
+/* zomato collection api start*/
+export interface IZomatoColtnRes {
+  collections: Array<IZomatoColtnData>;
+}
+
+export interface IZomatoColtnData {
+  collection: {
+    collection_id: number;
+    res_count: number;
+    image_url: string;
+    url: string;
+    title: string;
+    description: string;
+    share_url: string;
+  };
+}
+
+/* zomato collection api end******************/
+
 /** openweather api start**/
 type W = {
   id: number;
@@ -75,10 +175,10 @@ export interface IUnsDataRes {
 
 /**sygic api start**/
 
-type SygicMetaProps = {
-  children: ReactNode;
-  id: string;
-};
+export interface Detail {
+  id: number;
+  places: ISygicPlace[];
+}
 
 type ReferType = {
   [key: string]: string | number;
@@ -92,6 +192,7 @@ type MediaAttr = {
   license_url: string;
 };
 export interface ISygicCollection {
+  id: number;
   name_long: string;
   place_ids: Array<string>;
 }
@@ -118,7 +219,7 @@ export interface ISygicPlace {
   marker: string;
   perex: string;
   main_media: {
-    media: Array<{ url_template: string; attribution: MediaAttr }>;
+    media: Array<{ url_template: string; attribution: MediaAttr; url: string }>;
   };
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
-import { NewsApiDataProvider } from "../util/apiCall";
+import { NewsProvider } from "../util/apiCall";
 import NewsLists from "../components/NewsLists";
 import { makeStyles } from "@material-ui/styles";
 
@@ -15,12 +15,12 @@ const News = () => {
   const item = query ? query : "Brisbane";
 
   return (
-    <NewsApiDataProvider location={item}>
+    <NewsProvider location={item}>
       <Header />
       <div className={classes.news}>
         <NewsLists />
       </div>
-    </NewsApiDataProvider>
+    </NewsProvider>
   );
 };
 

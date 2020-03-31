@@ -1,38 +1,42 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import styled from "styled-components";
 
-const useStyles = makeStyles(theme => ({
-  title: {
-    margin: "2.5rem auto 0.5rem",
-    textAlign: "center",
-    padding: "0.25rem"
-  },
-  typo: {
-    letterSpacing: "0.09em",
-    textTransform: "uppercase",
-    fontSize: "1.5rem",
-    [theme.breakpoints.up("md")]: {
-      fontSize: "2rem"
-    },
-    [theme.breakpoints.up("lg")]: {
-      fontSize: "3rem"
-    }
+const StyledTitleWrapper = styled.div`
+  margin: 2rem auto;
+  padding: 0.75rem 0.25rem;
+  text-align: center;
+`;
+const StyledTypo = styled(Typography)`
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
   }
-}));
+  @media (min-width: 1024px) {
+    font-size: 2.5rem;
+  }
+  &:after {
+    display: table;
+    content: "";
+    height: 1px;
+    width: 100%;
+    color: rgb(255, 204, 14);
+  }
+`;
 
 interface IProps {
   text: string;
   css?: {};
 }
 const Title = ({ text, css }: IProps) => {
-  const classes = useStyles();
   return (
-    <div className={classes.title}>
-      <Typography className={classes.typo} variant="h3" style={{ ...css }}>
+    <StyledTitleWrapper>
+      <StyledTypo variant="h3" style={{ ...css }}>
         {text}
-      </Typography>
-    </div>
+      </StyledTypo>
+    </StyledTitleWrapper>
   );
 };
 

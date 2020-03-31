@@ -1,5 +1,5 @@
 import React from "react";
-import { useNewsContextValue } from "../util/apiCall";
+import { useNewsContext } from "../util/apiCall";
 import { INData } from "../util/type";
 import {
   Grid,
@@ -199,8 +199,11 @@ type dataType = null | undefined | string;
 
 const NewsLists = () => {
   const classes = useStyles();
-  const { loading, articles } = useNewsContextValue();
+  const { loading, articles } = useNewsContext();
   const smQuery = useMediaQuery("(max-width:400px)");
+
+  const contentIn =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, seddo,consectetur adipiscing elit";
 
   const titleLmt = (url: dataType) => {
     if (!url) {
@@ -261,7 +264,9 @@ const NewsLists = () => {
             </CardActionArea>
             <CardContent>
               <Typography variant="body2" component="p">
-                {item.content.substring(0, 250) + "..."}
+                {item.content
+                  ? item.content.substring(0, 250) + "..."
+                  : contentIn}
               </Typography>
             </CardContent>
           </Card>
@@ -300,7 +305,7 @@ const NewsLists = () => {
                 component="p"
                 className={classes.secTTypoCont}
               >
-                {contentLmt(item.content)}
+                {contentLmt(item.content ? item.content : contentIn)}
               </Typography>
             </CardContent>
           </Card>
@@ -336,7 +341,9 @@ const NewsLists = () => {
               component="p"
               className={classes.thrTypoCont}
             >
-              {item.content.substring(0, 160) + " ..."}
+              {item.content
+                ? item.content.substring(0, 160) + " ..."
+                : contentIn}
             </Typography>
             <Typography variant="caption" className={classes.thrTypoMeta}>
               By {authorConfirm(item.author)} Published At{" "}
@@ -374,7 +381,9 @@ const NewsLists = () => {
                 component="p"
                 className={classes.fourTypoCont}
               >
-                {item.content.substring(0, 180) + " ..."}
+                {item.content
+                  ? item.content.substring(0, 180) + " ..."
+                  : contentIn}
               </Typography>
               <div className={classes.fourMeta}>
                 <span className={classes.fourSpanMeta}>

@@ -1,6 +1,8 @@
 import React from "react";
 import Loading from "./Loading";
 import { dataFormat, degreeToDir, localTime } from "../util/utils";
+import { connect } from "react-redux";
+import { TravelStore } from "../redux-saga/reducer";
 
 import {
   Avatar,
@@ -277,4 +279,7 @@ const LocalWeather = ({ weather: weatherData }: IWProps) => {
   );
 };
 
-export default LocalWeather;
+const mapStateToProps = (state: TravelStore) => ({
+  weather: state.weather
+});
+export default connect(mapStateToProps)(LocalWeather);

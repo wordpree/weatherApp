@@ -6,20 +6,18 @@ import { TravelActionType } from "../redux-saga/actionType";
 import {
   reqNewsAction,
   reqSygicCollections,
-  reqWeatherAction
+  reqWeatherAction,
+  reqSygicDetail
 } from "../redux-saga/actions";
 
 const mapStateToProps = (state: TravelStore) => ({
-  state: {
-    collections: state.collections,
-    weather: state.weather,
-    news: state.news
-  }
+  detail: state.detail,
+  collections: state.collections
 });
 
 const mapDispatchToPorps = (dispatch: Dispatch<TravelActionType>) =>
   bindActionCreators(
-    { reqNewsAction, reqSygicCollections, reqWeatherAction },
+    { reqSygicCollections, reqSygicDetail, reqWeatherAction, reqNewsAction },
     dispatch
   );
 

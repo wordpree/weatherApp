@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Container, Card } from "@material-ui/core";
+import { Container, Card, Typography } from "@material-ui/core";
 export const StyledContainer = styled(Container)`
   @media (max-width: 760px) {
     padding-left: 0.25rem;
@@ -52,9 +52,35 @@ export const StyledSlickImge = styled.div`
 /*sygic hotel*/
 
 export const StyledCardH = styled(Card)`
+  background: rgb(255, 204, 14);
   padding: 1rem;
   margin-bottom: 1rem;
   @media (min-width: 768px) {
     display: flex;
   }
+`;
+
+/* sygic places*/
+export const StyledImgBackDrop = styled.span`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+`;
+
+export const StyledTypoName = styled(Typography)`
+  padding: 6px 3px;
+  color: rgb(255, 204, 14);
+  border: 3px solid #fff;
+  display: inline-block;
+  top: 50%;
+  position: relative;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
 `;

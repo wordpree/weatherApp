@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   IconButton,
   TextField,
@@ -54,7 +54,8 @@ const Search = ({
   clearAutoCompleteAction,
   predictions
 }: ISProps) => {
-  const [choose, setChoose] = useState({ description: "", place_id: "" });
+  const chooseInit = { description: "", place_id: "" };
+  const [choose, setChoose] = useState(chooseInit);
   const classes = useStyles();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,6 +80,7 @@ const Search = ({
         <form
           onSubmit={e => {
             submitAction(choose.place_id);
+            setChoose(chooseInit);
             e.preventDefault();
           }}
           className={classes.form}
@@ -92,7 +94,10 @@ const Search = ({
 
           <IconButton
             type="submit"
-            onClick={() => submitAction(choose.place_id)}
+            onClick={() => {
+              submitAction(choose.place_id);
+              setChoose(chooseInit);
+            }}
           >
             <Magnify />
           </IconButton>

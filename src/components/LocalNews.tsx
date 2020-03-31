@@ -1,5 +1,7 @@
 import React from "react";
 import { INData } from "../util/type";
+import { connect } from "react-redux";
+import { TravelStore } from "../redux-saga/reducer";
 import {
   Grid,
   List,
@@ -129,4 +131,7 @@ const LocalNews = ({ news }: LNProps) => {
   );
 };
 
-export default LocalNews;
+const mapStateToProps = (state: TravelStore) => ({
+  news: state.news
+});
+export default connect(mapStateToProps)(LocalNews);
