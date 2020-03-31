@@ -19,4 +19,4 @@ export const sygicApi = (placeId: string) =>
   `https://api.sygictravelapi.com/1.2/en/collections?parent_place_id=${placeId}&prefer_unique=1&limit=3`;
 
 export const sygicDetailApi = (ids: string) =>
-  `https://cors-anywhere.herokuapp.com/https://api.sygictravelapi.com/1.2/en/places?ids=${ids}`;
+  `https://api.sygictravelapi.com/1.2/en/places?ids=${ids}`;

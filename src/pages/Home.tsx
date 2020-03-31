@@ -12,7 +12,8 @@ import {
   Recommend,
   Collections,
   Restaurants,
-  ColDet
+  ColDet,
+  Footer
 } from "../components";
 
 import { Grid, Container } from "@material-ui/core";
@@ -35,6 +36,7 @@ const Home = () => {
         <TourPhoto />
       </UnspPhotoProvider>
       <Recommend />} */}
+      <Footer />
     </>
   );
 };

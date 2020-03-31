@@ -10,7 +10,6 @@ import {
   Fade
 } from "@material-ui/core";
 import { ISygicPlace } from "../../util/type";
-
 interface ISCLProps {
   place: ISygicPlace;
 }

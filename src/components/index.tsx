@@ -11,6 +11,7 @@ import Recommend from "./Recommend";
 import { Collections, ColDet, Details } from "./sygicCollections";
 import Restaurants from "./restaurants";
 import Loading from "./Loading";
+import Footer from "./footer";
 export {
   Header,
   NavList,
@@ -26,5 +27,6 @@ export {
   ColDet,
   Restaurants,
   Loading,
-  Details
+  Details,
+  Footer
 };

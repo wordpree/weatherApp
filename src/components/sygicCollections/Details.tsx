@@ -6,6 +6,7 @@ import { Detail } from "../../util/type";
 import { TravelStore } from "../../redux-saga/reducer";
 import { DetList1, DetList2, DetList3, DetList4 } from "./index";
 import { Container, makeStyles, Typography } from "@material-ui/core";
+import Footer from "../footer";
 
 interface ISDProps {
   placeDets: Detail[];
@@ -33,16 +34,15 @@ const Details = ({ placeDets }: ISDProps) => {
   return (
     <>
       <Header />
-      <Container>
-        {current && (
-          <>
-            <DetList1 place={current.places[0]} />
-            <DetList2 place={current.places.slice(1, 4)} />
-            <DetList3 place={current.places.slice(4, 7)} />
-            <DetList4 place={current.places.slice(7, 9)} />
-          </>
-        )}
-      </Container>
+      {current && (
+        <Container>
+          <DetList1 place={current.places[0]} />
+          <DetList2 place={current.places.slice(1, 4)} />
+          <DetList3 place={current.places.slice(4, 7)} />
+          <DetList4 place={current.places.slice(7, 9)} />
+        </Container>
+      )}
+      <Footer />
     </>
   );
 };

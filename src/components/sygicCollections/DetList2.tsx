@@ -40,7 +40,13 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: 0
     }
   },
-  card: {},
+  cardAct: {
+    transition: "all 0.6s ease-in-out 0.1s",
+    position: "relative",
+    "&:hover": {
+      transform: "scale(1.08)"
+    }
+  },
   media: {
     paddingTop: "66%"
   },
@@ -71,8 +77,8 @@ const DetList2 = ({ place }: ISCLProps) => {
           return (
             <div key={item.id} className={classes.cardWrapper}>
               <Fade in={Boolean(place.length)}>
-                <Card className={classes.card}>
-                  <CardActionArea>
+                <Card>
+                  <CardActionArea className={classes.cardAct}>
                     <CardMedia image={img} className={classes.media} />
                   </CardActionArea>
                 </Card>
