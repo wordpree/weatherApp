@@ -177,7 +177,6 @@ export const idsSort = (
       flag.push({ num: 9, id: temp.id });
     } else {
       flag.push({ num: temp.placeIds.length, id: temp.id });
-      console.log("len<9...", flag);
     }
     const dem = newIds ? "|" : "";
     newIds = newIds + dem + temp.placeIds.slice(0, 9).join("|");
