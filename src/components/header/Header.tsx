@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme: Theme) =>
     navLists: {
       display: "flex",
       justifyContent: "space-between",
-      background: "linear-gradient(90deg, #1E4242 0%, #324242 100%)",
-      alignItems: "center"
+      alignItems: "center",
+      padding: "0.25rem 1rem"
     },
     mDrawer: {
       background: "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, #B1B59A 100%)",
@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
     mobileLists: {
-      width: "100vw",
       height: "100%",
       backgroundColor: "inherit",
       padding: "1.25rem 1rem"
@@ -74,10 +73,7 @@ const Header = () => {
       <List>
         <ListItem button>
           <ListItemIcon>
-            <CloseBox
-              onClick={toggleDrawer(false)}
-              style={{ color: "#C0D7BB" }}
-            />
+            <CloseBox onClick={toggleDrawer(false)} style={{ color: "#ddd" }} />
           </ListItemIcon>
         </ListItem>
       </List>

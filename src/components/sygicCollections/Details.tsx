@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import Header from "../Header";
+import Header from "../header/Header";
 import { ISygicPlace } from "../../util/type";
 import { TravelStore } from "../../redux-saga/reducer";
 import { DetList1, DetList2, DetList3, DetList4 } from "./index";

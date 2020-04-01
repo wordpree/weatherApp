@@ -17,17 +17,20 @@ interface INavProps {
 }
 
 const useStyle = makeStyles((theme: Theme) => ({
+  item: {},
   listText: {
-    color: "#C0D7BB",
     display: "none",
     [theme.breakpoints.up("sm")]: {
-      display: "inline-block"
+      display: "inline-block",
+      padding: "0.1rem 0.75rem"
     }
   },
   li: {
-    padding: "0 0.75rem",
-    maxWidth: "85%",
-    margin: "0 auto"
+    transition: "all 0.3s ease-in-out",
+    "&:hover": {
+      color: "#ccc",
+      backgroundColor: "rgb(1, 179, 167)"
+    }
   }
 }));
 
@@ -38,7 +41,7 @@ const NavList = ({ to, mobile, ...props }: INavProps) => {
   ));
   return (
     <li className={classes.li}>
-      <ListItem button component={routeLink} to={to}>
+      <ListItem button component={routeLink} to={to} className={classes.item}>
         {mobile && <ListItemIcon>{props.icon}</ListItemIcon>}
         <ListItemText primary={props.label} className={classes.listText} />
       </ListItem>

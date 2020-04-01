@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../components/Header";
+import Header from "../components/header/Header";
 import { NewsProvider } from "../util/apiCall";
 import NewsLists from "../components/NewsLists";
 import { makeStyles } from "@material-ui/styles";

@@ -19,34 +19,34 @@ interface INavListsProps {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    navLists: {
-      display: "flex",
-      padding: 0,
-      flexDirection: "column",
-      [theme.breakpoints.up("md")]: {
-        flexDirection: "row"
-      }
+    li: {
+      listStyle: "none"
     },
     btnRoot: {
       border: "none",
       margin: "0 auto"
     },
     logo: {
-      border: "1px solid #C0D7BB",
       padding: "0.25rem 1rem",
-      color: "#C0D7BB"
+      color: "#01B3A7"
     },
     mobileNav: {
-      marginTop: "0.75rem"
+      marginTop: "0.75rem",
+      color: "#ddd"
     },
     desktopNav: {
       display: "none",
       [theme.breakpoints.up("md")]: {
+        padding: "0.5rem 1rem",
         display: "flex",
-        justifyContent: "flex-end"
+        "&>li:first-child": {
+          backgroundColor: "rgb(1, 179, 167)",
+          color: "#ccc"
+        }
       }
     },
     typo: {
+      fontWeight: "bold",
       fontSize: "0.85em",
       [theme.breakpoints.up("md")]: {
         fontSize: "1.2em"
@@ -68,30 +68,28 @@ const NavLists = ({ mobile, desktop }: INavListsProps) => {
   );
   return (
     <>
-      <List className={classes.navLists}>
-        <ListItem>
-          <Button
-            component={routeLink}
-            variant="outlined"
-            startIcon={<TennisBall />}
-            classes={{ label: classes.logo, root: classes.btnRoot }}
-          >
-            <Typography variant="subtitle1" className={classes.typo}>
-              Travle & go
-            </Typography>
-          </Button>
-        </ListItem>
-        <List className={desktop ? classes.desktopNav : classes.mobileNav}>
-          {iconLists.map(({ Icon, label, to }) => (
-            <NavList
-              icon={<Icon style={{ color: "#C0D7BB" }} />}
-              key={label}
-              label={label}
-              to={to}
-              mobile={mobile}
-            />
-          ))}
-        </List>
+      <li className={classes.li}>
+        <Button
+          component={routeLink}
+          variant="outlined"
+          startIcon={<TennisBall />}
+          classes={{ label: classes.logo, root: classes.btnRoot }}
+        >
+          <Typography variant="h6" className={classes.typo}>
+            Travellie & go
+          </Typography>
+        </Button>
+      </li>
+      <List className={desktop ? classes.desktopNav : classes.mobileNav}>
+        {iconLists.map(({ Icon, label, to }) => (
+          <NavList
+            icon={<Icon style={{ color: "#ccc" }} />}
+            key={label}
+            label={label}
+            to={to}
+            mobile={mobile}
+          />
+        ))}
       </List>
     </>
   );

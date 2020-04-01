@@ -14,7 +14,8 @@ const useStyles = makeStyles({
     borderRadius: 0,
     backgroundColor: "rgba(255,255,255,0.7)",
     "&:hover": {
-      backgroundColor: "rgba(255,255,255,0.8)"
+      color: "#ccc",
+      backgroundColor: "rgb(1, 179, 167)"
     }
   },
   fabNext: {
