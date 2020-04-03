@@ -5,7 +5,7 @@ import Search from "./search";
 import LocalNews from "./LocalNews";
 import LocalWeather from "./LocalWeather";
 import TourPhoto from "./TourPhoto";
-import { ZCollections } from "./zomato";
+import { ZCollections, ZCollection } from "./zomato";
 import Collection from "./Collection";
 import Title from "./Title";
 import Banner from "./banner";
@@ -14,6 +14,8 @@ import { Collections, ColDet, Details } from "./sygicCollections";
 import Restaurants from "./restaurants";
 import Loading from "./Loading";
 import Footer from "./footer";
+import ScrollToTop from "./ScrollToTop";
+import SubTitle from "./SubTitle";
 export {
   Header,
   NavList,
@@ -21,10 +23,13 @@ export {
   Collection,
   Search,
   ZCollections,
+  ZCollection,
   LocalNews,
   LocalWeather,
   TourPhoto,
+  SubTitle,
   Title,
+  ScrollToTop,
   Banner,
   Recommend,
   Collections,

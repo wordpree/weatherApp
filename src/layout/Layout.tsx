@@ -11,23 +11,20 @@ import {
 } from "../util/utils";
 
 interface ILProps {
-  collections: ISygicCollection[];
+  //collections: ISygicCollection[];
   detail: IGooglePlaceDetail;
   reqNewsAction(location: string): void;
-  reqSygicCollections(placeId: string): void;
+  //reqSygicCollections(placeId: string): void;
   reqWeatherAction(geo: string): void;
-  reqSygicDetail(id: number[], placeIds: string): void;
+  //reqSygicDetail(id: number[], placeIds: string): void;
   reqZomatoCityAction(geo: string): void;
   reqZomatoCollectionAction(geo: string): void;
 }
 
 function Layout({
-  collections,
   detail,
   reqNewsAction,
-  reqSygicCollections,
   reqWeatherAction,
-  reqSygicDetail,
   reqZomatoCityAction,
   reqZomatoCollectionAction
 }: ILProps) {

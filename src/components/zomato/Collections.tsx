@@ -4,6 +4,9 @@ import ZCollection from "./Collection";
 import { TravelStore } from "../../redux-saga/reducer";
 import { IZomatoCollectionRes } from "../../util/type";
 import { Grid, Container, makeStyles, Button } from "@material-ui/core";
+import { Omit } from "@material-ui/types";
+import { LinkProps, Link } from "react-router-dom";
+
 import SubTitle from "../SubTitle";
 
 interface ICProps {
@@ -36,6 +39,9 @@ const useStyles = makeStyles({
 const ZCollections = ({ collections }: ICProps) => {
   const classes = useStyles();
 
+  const RoutLink = React.forwardRef<any, Omit<LinkProps, "to">>(
+    (props, ref) => <Link ref={ref} to="/restaurant" {...props} />
+  );
   return (
     <Container className={classes.container}>
       <SubTitle title="Enjoy the local cuisines of your selection" />
@@ -51,7 +57,12 @@ const ZCollections = ({ collections }: ICProps) => {
           ))}
         </Grid>
       </div>
-      <Button variant="outlined" className={classes.btn} size="large">
+      <Button
+        variant="outlined"
+        className={classes.btn}
+        size="large"
+        component={RoutLink}
+      >
         Learn more
       </Button>
     </Container>
