@@ -5,6 +5,10 @@ import weatherReducer from "./openWeatherReducer";
 import newsReducer from "./newsorgReducer";
 import sygicColsReducer from "./sCollectionsReducer";
 import sygicDetailReducer from "./sPlaceDetailReducer";
+import {
+  zomatoCityReducer,
+  zomatoCollectionReducer
+} from "./zRestaurantReducer";
 
 const rootReducer = combineReducers({
   detail: detailReducer,
@@ -12,7 +16,9 @@ const rootReducer = combineReducers({
   weather: weatherReducer,
   news: newsReducer,
   collections: sygicColsReducer,
-  places: sygicDetailReducer
+  places: sygicDetailReducer,
+  id: zomatoCityReducer,
+  zCollections: zomatoCollectionReducer
 });
 export type TravelStore = ReturnType<typeof rootReducer>;
 export default rootReducer;

@@ -9,7 +9,7 @@ import {
   CardActionArea,
   makeStyles
 } from "@material-ui/core";
-import { SubTitle } from "./SubTitle";
+import SubTitle from "../SubTitle";
 
 interface ISCLProps {
   place: ISygicPlace[];

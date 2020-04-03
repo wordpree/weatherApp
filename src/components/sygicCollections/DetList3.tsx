@@ -10,7 +10,7 @@ import {
   makeStyles,
   Button
 } from "@material-ui/core";
-import { SubTitle } from "./SubTitle";
+import SubTitle from "../SubTitle";
 
 interface ISCLProps {
   place: ISygicPlace[];

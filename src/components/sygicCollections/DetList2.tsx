@@ -8,7 +8,7 @@ import {
   Fade
 } from "@material-ui/core";
 import { ISygicPlace } from "../../util/type";
-import { SubTitle } from "./SubTitle";
+import SubTitle from "../SubTitle";
 
 interface ISCLProps {
   place: ISygicPlace[];

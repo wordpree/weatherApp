@@ -1,8 +1,9 @@
 const G_API_KEY = "AIzaSyBIDPYFVWcF6oMGjC09UXAjXz7L735A36Y";
 const W_API_KEY = "00194910deb21b1edc80422332e0c1ec";
 const N_API_KEY = "6352c20ad9204ab181b8a82ac99d0299";
-const CORS = "https://cors-anywhere.herokuapp.com/";
+export const Z_API_KEY = "dcd4f50adb1146d8bdcc1e2da6c07dc1";
 export const S_API_KEY = "Iw3v10JNHl3iaauM5TSyO9yYOLT20OSf6c6J4tZa";
+const CORS = "https://cors-anywhere.herokuapp.com/";
 
 export const googleAutoComplete = (address: string) =>
   `${CORS}https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${address}&types=(regions)&key=${G_API_KEY}`;
@@ -21,3 +22,9 @@ export const sygicApi = (placeId: string) =>
 
 export const sygicDetailApi = (ids: string) =>
   `${CORS}https://api.sygictravelapi.com/1.2/en/places?ids=${ids}`;
+
+export const zomatoCityUrl = (geo: string) =>
+  `https://developers.zomato.com/api/v2.1/cities?${geo}`;
+
+export const zomatoCollectionsUrl = (geo: string) =>
+  `https://developers.zomato.com/api/v2.1/collections?${geo}`;

@@ -5,6 +5,8 @@ import Search from "./search";
 import LocalNews from "./LocalNews";
 import LocalWeather from "./LocalWeather";
 import TourPhoto from "./TourPhoto";
+import { ZCollections } from "./zomato";
+import Collection from "./Collection";
 import Title from "./Title";
 import Banner from "./banner";
 import Recommend from "./Recommend";
@@ -16,7 +18,9 @@ export {
   Header,
   NavList,
   NavLists,
+  Collection,
   Search,
+  ZCollections,
   LocalNews,
   LocalWeather,
   TourPhoto,

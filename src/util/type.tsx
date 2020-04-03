@@ -42,7 +42,6 @@ export interface IProps {
 
 export type TApiData =
   | IGoogleAutoData
-  | IZomatoColtnData
   | ISygicCollection
   | ISygicPlace
   | IGooglePlaceDetail;
@@ -86,19 +85,15 @@ export interface IGoogleAutoData {
 /* google place end*************/
 
 /* zomato collection api start*/
-export interface IZomatoColtnRes {
-  collections: Array<IZomatoColtnData>;
-}
+export type IZomatoCollectionRes = Array<IZomatoCollection>;
 
-export interface IZomatoColtnData {
+export interface IZomatoCollection {
   collection: {
     collection_id: number;
     res_count: number;
     image_url: string;
-    url: string;
     title: string;
     description: string;
-    share_url: string;
   };
 }
 

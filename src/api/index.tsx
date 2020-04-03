@@ -1,8 +1,12 @@
 import { fetchData } from "../util/utils";
-import { S_API_KEY } from "./config";
+import { S_API_KEY, Z_API_KEY } from "./config";
 
 const sygicHeader = {
   "x-api-key": S_API_KEY
+};
+
+const zomatoHeader = {
+  "user-key": Z_API_KEY
 };
 
 export const fetchGooglePlace = async (url: string) => {
@@ -33,6 +37,14 @@ export const fetchSygic = async (url: string) => {
   const res = await fetchData(url, sygicHeader);
   if (res.status_code !== 200) {
     throw new Error(`${res.status_code}`);
+  }
+  return res;
+};
+
+export const fetchZomato = async (url: string) => {
+  const res = await fetchData(url, zomatoHeader);
+  if (res.code && res.code !== 200) {
+    throw new Error(`${res.code}, ${res.code.state}:${res.code.message}`);
   }
   return res;
 };

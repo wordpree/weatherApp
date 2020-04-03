@@ -3,6 +3,7 @@ import { googleDetailSaga, googleCompleteSaga } from "./googleSaga";
 import openWeatherSaga from "./weatherSaga";
 import newsorgSaga from "./newsorgSaga";
 import { SygicCollections, sygicPlaces } from "./sygicSaga";
+import { zCollectionSaga, zCitySaga } from "./zomatoSaga";
 
 export default function* saga() {
   yield all([
@@ -11,6 +12,8 @@ export default function* saga() {
     fork(openWeatherSaga),
     fork(newsorgSaga),
     fork(SygicCollections),
-    fork(sygicPlaces)
+    fork(sygicPlaces),
+    fork(zCollectionSaga),
+    fork(zCitySaga)
   ]);
 }

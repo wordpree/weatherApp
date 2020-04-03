@@ -59,7 +59,7 @@ const NavLists = ({ mobile, desktop }: INavListsProps) => {
   const classes = useStyles();
   const iconLists = [
     { Icon: Home, label: "Home", to: "/" },
-    { Icon: Airballoon, label: "Travel", to: "/travel" },
+    { Icon: Airballoon, label: "Restaurant", to: "/restaurant" },
     { Icon: Camera, label: "Photos", to: "/photos" },
     { Icon: Newspaper, label: "News", to: "/news" }
   ];

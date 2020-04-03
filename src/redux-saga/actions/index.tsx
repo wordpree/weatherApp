@@ -5,7 +5,8 @@ import {
   IWData,
   INData,
   ISygicCollection,
-  ISygicPlace
+  ISygicPlace,
+  IZomatoCollectionRes
 } from "../../util/type";
 
 /******* google place api *****/
@@ -121,4 +122,39 @@ export const getSygicDetailSuccess = (
 
 export const getSygicDetailFailed = (error: string): TYPE.TravelActionType => ({
   type: TYPE.REQUEST_SYGIC_DETAIL_FAILED
+});
+
+/***********************Zomato restaurant*****************/
+export const reqZomatoCityAction = (geo: string): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_ZOMATO_CITY,
+  geo
+});
+
+export const resZomatoCitySuccess = (id: number): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_ZOMATO_CITY_SUCCEEDED,
+  id
+});
+
+export const resZomatoCityFailed = (error: string): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_ZOMATO_CITY_FAILED
+});
+
+export const reqZomatoCollectionAction = (
+  geo: string
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_ZOMATO_COLLECTION,
+  geo
+});
+
+export const resZomatoCollectionSuccess = (
+  collections: IZomatoCollectionRes
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_ZOMATO_COLLECTION_SUCCEEDED,
+  collections
+});
+
+export const resZomatoCollectionFailed = (
+  error: string
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_ZOMATO_COLLECTION_FAILED
 });

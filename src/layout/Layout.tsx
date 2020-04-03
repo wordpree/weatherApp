@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Home, News, Photos, Travel } from "../pages";
+import { Home, News, Photos, Restaurant } from "../pages";
 import { Route, Switch } from "react-router-dom";
 import Error from "../components/Error";
 import { Details } from "../components";
@@ -17,6 +17,8 @@ interface ILProps {
   reqSygicCollections(placeId: string): void;
   reqWeatherAction(geo: string): void;
   reqSygicDetail(id: number[], placeIds: string): void;
+  reqZomatoCityAction(geo: string): void;
+  reqZomatoCollectionAction(geo: string): void;
 }
 
 function Layout({
@@ -25,27 +27,35 @@ function Layout({
   reqNewsAction,
   reqSygicCollections,
   reqWeatherAction,
-  reqSygicDetail
+  reqSygicDetail,
+  reqZomatoCityAction,
+  reqZomatoCollectionAction
 }: ILProps) {
   useEffect(() => {
     setStorageSearchPara(detail);
     const [placeId, location, geoLocation] = getStorageSearchPara();
     /*sygic travel collections*/
-    reqSygicCollections(placeId);
+    // reqSygicCollections(placeId);
+
+    /*zomato retaurant*/
+    reqZomatoCollectionAction(geoLocation);
+    reqZomatoCityAction(geoLocation);
+
     /**newsorg */
     reqNewsAction(location);
+
     /**openweathermap */
     reqWeatherAction(geoLocation);
   }, [detail]);
 
-  useEffect(() => {
-    /* sygic travel details*/
-    const mix = idsSort(collections);
-    if (mix !== undefined) {
-      const [id, placeIds] = mix;
-      reqSygicDetail(id, placeIds);
-    }
-  }, [collections]);
+  // useEffect(() => {
+  //   /* sygic travel details*/
+  //   const mix = idsSort(collections);
+  //   if (mix !== undefined) {
+  //     const [id, placeIds] = mix;
+  //     reqSygicDetail(id, placeIds);
+  //   }
+  // }, [collections]);
 
   return (
     <Switch>
@@ -53,7 +63,7 @@ function Layout({
       <Route path="/attractions/:id" component={Details} />
       <Route path="/news" component={News} />
       <Route path="/photos" component={Photos} />
-      <Route path="/travel" component={Travel} />
+      <Route path="/restaurant" component={Restaurant} />
       <Route component={Error} />
     </Switch>
   );

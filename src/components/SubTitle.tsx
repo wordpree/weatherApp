@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     margin: "2rem auto 0.75rem auto"
   }
 });
-export const SubTitle = (props: { title: string }) => {
+const SubTitle = (props: { title: string }) => {
   const classes = useStyles();
   return (
     <Typography className={classes.subtitle} variant="h3">
@@ -17,3 +17,5 @@ export const SubTitle = (props: { title: string }) => {
     </Typography>
   );
 };
+
+export default SubTitle;

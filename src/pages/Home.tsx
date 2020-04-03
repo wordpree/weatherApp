@@ -8,6 +8,7 @@ import {
   LocalWeather,
   TourPhoto,
   Title,
+  ZCollections,
   Banner,
   Recommend,
   Collections,
@@ -25,6 +26,7 @@ const Home = () => {
       <Banner />
       <Search />
       <Collections />
+      <ZCollections />
       <Container>
         <Title text="News & Weather" css={{ borderBottom: "2px solid" }} />
         <Grid container spacing={5}>

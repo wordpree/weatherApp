@@ -4,7 +4,8 @@ import {
   IWData,
   INData,
   ISygicCollection,
-  ISygicPlace
+  ISygicPlace,
+  IZomatoCollectionRes
 } from "../../util/type";
 
 export const REQUEST_G_PLACE_DETAIL = "REQUEST_G_PLACE_DETAIL";
@@ -33,6 +34,46 @@ export const REQUEST_SYGIC_COLS_FAILED = "REQUEST_SYGIC_COLS_FAILED";
 export const REQUEST_SYGIC_DETAIL = "REQUEST_SYGIC_DETAIL";
 export const REQUEST_SYGIC_DETAIL_SUCCEEDED = "REQUEST_SYGIC_DETAIL_SUCCEEDED ";
 export const REQUEST_SYGIC_DETAIL_FAILED = "REQUEST_SYGIC_DETAIL_FAILED";
+
+export const REQUEST_ZOMATO_CITY = "REQUEST_ZOMATO_CITY";
+export const REQUEST_ZOMATO_CITY_SUCCEEDED = "REQUEST_ZOMATO_CITY_SUCCEEDED ";
+export const REQUEST_ZOMATO_CITY_FAILED = "REQUEST_ZOMATO_CITY_FAILED";
+
+export const REQUEST_ZOMATO_COLLECTION = "REQUEST_ZOMATO_COLLECTION";
+export const REQUEST_ZOMATO_COLLECTION_SUCCEEDED =
+  "REQUEST_ZOMATO_COLLECTION_SUCCEEDED ";
+export const REQUEST_ZOMATO_COLLECTION_FAILED =
+  "REQUEST_ZOMATO_COLLECTION_FAILED";
+
+/******* zomato city*****/
+export interface IZomatoCityReq {
+  type: typeof REQUEST_ZOMATO_CITY;
+  geo: string;
+}
+
+export interface IZomatoCityResSuccess {
+  type: typeof REQUEST_ZOMATO_CITY_SUCCEEDED;
+  id: number;
+}
+
+export interface IZomatoCityResErr {
+  type: typeof REQUEST_ZOMATO_CITY_FAILED;
+}
+
+/******* zomato collection basted on city id*****/
+export interface IZomatoCollectionReq {
+  type: typeof REQUEST_ZOMATO_COLLECTION;
+  geo: string;
+}
+
+export interface IZomatoCollectionResSuccess {
+  type: typeof REQUEST_ZOMATO_COLLECTION_SUCCEEDED;
+  collections: IZomatoCollectionRes;
+}
+
+export interface IZomatoCollectionResErr {
+  type: typeof REQUEST_ZOMATO_COLLECTION_FAILED;
+}
 
 /******* sygic collections action *****/
 export interface ISygicColsReq {
@@ -148,4 +189,10 @@ export type TravelActionType =
   | ISygicColsResErr
   | ISygicDetailReq
   | ISygicDetailResSuccess
-  | ISygicDetailResErr;
+  | ISygicDetailResErr
+  | IZomatoCityReq
+  | IZomatoCityResSuccess
+  | IZomatoCityResErr
+  | IZomatoCollectionReq
+  | IZomatoCollectionResSuccess
+  | IZomatoCollectionResErr;

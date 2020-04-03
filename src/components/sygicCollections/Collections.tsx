@@ -3,6 +3,7 @@ import SygicCollection from "./Collection";
 import { Grid, Container, makeStyles } from "@material-ui/core";
 import { TravelStore } from "../../redux-saga/reducer";
 import { connect } from "react-redux";
+import SubTitle from "../SubTitle";
 import { ISygicCollection } from "../../util/type";
 
 import {
@@ -16,6 +17,9 @@ interface ISProps {
 }
 
 const useStyles = makeStyles({
+  container: {
+    marginTop: "4rem"
+  },
   gridWrapper: {
     margin: "0 auto",
     textAlign: "center"
@@ -27,11 +31,17 @@ const Collections = ({ collections }: ISProps) => {
   const img = [Catarina_Sousa, Josh_Sorenson, Porapak_Apichodilok];
 
   return (
-    <Container>
+    <Container className={classes.container}>
+      <SubTitle title="Your destination is over there,one more step" />
       <div className={classes.gridWrapper}>
         <Grid container spacing={2}>
           {collections.slice(0, 3).map((col, index) => (
-            <SygicCollection col={col} key={index} image={img[index]} />
+            <SygicCollection
+              sCol={col}
+              key={index}
+              image={img[index]}
+              bpNumber={4}
+            />
           ))}
         </Grid>
       </div>
