@@ -26,6 +26,8 @@ const sStyles = (theme: Theme) =>
     }
   });
 
-const SygicCollection = (props: ISCProps) => <Collection {...props} />;
+const SygicCollection = (props: ISCProps) => (
+  <Collection {...props} path="attractions" />
+);
 
 export default withStyles(sStyles)(SygicCollection);

@@ -1,5 +1,4 @@
 import React from "react";
-import { ISygicPlace } from "../../util/type";
 import { Link, LinkProps } from "react-router-dom";
 import { Omit } from "@material-ui/types";
 import {
@@ -11,10 +10,13 @@ import {
   Button
 } from "@material-ui/core";
 import SubTitle from "../SubTitle";
+import { ISygicPlace, IZomatoDetail } from "../../util/type";
+import { sortDetailsData } from "../../util/utils";
 
 interface ISCLProps {
-  place: ISygicPlace[];
+  detail: IZomatoDetail[] | ISygicPlace[];
 }
+
 const useStyles = makeStyles(theme => ({
   entry: {
     marginTop: "2.5rem"
@@ -83,30 +85,27 @@ const useStyles = makeStyles(theme => ({
     }
   }
 }));
-const DetList3 = ({ place }: ISCLProps) => {
+const DetList3 = ({ detail }: ISCLProps) => {
   const classes = useStyles();
-  if (place.length === 0) return <div />;
+
   const LinkForward = React.forwardRef<any, Omit<LinkProps, "to">>(
     (props, ref) => (
       <Link to={{ pathname: `/attraction/` }} ref={ref} {...props} />
     )
   );
-
+  let data: (IZomatoDetail | ISygicPlace)[] = detail;
   return (
     <>
       <SubTitle title="Keep going on your new finding" />
       <div className={classes.entry}>
-        {place.map(item => {
-          const imgUrl = item.main_media.media[0].url_template.replace(
-            "{size}",
-            "700x450"
-          );
+        {data.map(item => {
+          const ret = sortDetailsData(item);
           return (
-            <div className={classes.cardWrapper} key={item.id}>
+            <div className={classes.cardWrapper} key={ret.id}>
               <Card className={classes.card}>
                 <CardActionArea className={classes.cardAct}>
                   <CardMedia
-                    image={imgUrl}
+                    image={ret.img}
                     className={classes.media}
                     component={LinkForward}
                   />
@@ -114,12 +113,12 @@ const DetList3 = ({ place }: ISCLProps) => {
               </Card>
               <div className={classes.cardCont}>
                 <Typography variant="h5" className={classes.title}>
-                  {item.name}
+                  {ret.name}
                 </Typography>
                 <Typography variant="caption" color="textSecondary">
-                  {item.address}
+                  {ret.address}
                 </Typography>
-                <Typography variant="body1">{item.perex}</Typography>
+                <Typography variant="body1">{ret.perex}</Typography>
                 <Button variant="outlined" className={classes.btn}>
                   View more imformation
                 </Button>

@@ -20,6 +20,7 @@ interface ICProps {
   image: string;
   bpNumber: any;
   classes?: any;
+  path: string;
 }
 
 const collectionStyles = () =>
@@ -50,7 +51,14 @@ const collectionStyles = () =>
     typo: {}
   });
 
-const Collection = ({ zCol, sCol, image, bpNumber, classes }: ICProps) => {
+const Collection = ({
+  zCol,
+  sCol,
+  image,
+  bpNumber,
+  classes,
+  path
+}: ICProps) => {
   const id = zCol ? zCol.collection.collection_id : sCol ? sCol.id : undefined;
   const title = zCol
     ? zCol.collection.title
@@ -61,7 +69,7 @@ const Collection = ({ zCol, sCol, image, bpNumber, classes }: ICProps) => {
   // const classes = useStyles();
 
   const LinkRef = React.forwardRef<any, Omit<LinkProps, "to">>((props, ref) => {
-    return <Link ref={ref} {...props} to={`/attractions/${id}`} />;
+    return <Link ref={ref} {...props} to={`/${path}/${id}`} />;
   });
   return (
     <Grid item xs={12} sm={bpNumber} key={id}>

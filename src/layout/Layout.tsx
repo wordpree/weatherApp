@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Home, News, Photos, Restaurant } from "../pages";
 import { Route, Switch } from "react-router-dom";
 import Error from "../components/Error";
-import { Details } from "../components";
+import { Details, ZDetail } from "../components";
 import { ISygicCollection, IGooglePlaceDetail } from "../util/type";
 import {
   setStorageSearchPara,
@@ -56,11 +56,12 @@ function Layout({
 
   return (
     <Switch>
-      <Route exact path="/" render={() => <Home />} />
+      <Route exact path="/" component={Home} />
       <Route path="/attractions/:id" component={Details} />
+      <Route path="/restaurant/:id" component={ZDetail} />
       <Route path="/news" component={News} />
       <Route path="/photos" component={Photos} />
-      <Route path="/restaurant" component={Restaurant} />
+      <Route exact path="/restaurant" component={Restaurant} />
       <Route component={Error} />
     </Switch>
   );

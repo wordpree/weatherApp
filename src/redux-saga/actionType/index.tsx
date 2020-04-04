@@ -5,7 +5,8 @@ import {
   INData,
   ISygicCollection,
   ISygicPlace,
-  IZomatoCollectionRes
+  IZomatoCollectionRes,
+  IZomatoDetailRes
 } from "../../util/type";
 
 export const REQUEST_G_PLACE_DETAIL = "REQUEST_G_PLACE_DETAIL";
@@ -45,6 +46,11 @@ export const REQUEST_ZOMATO_COLLECTION_SUCCEEDED =
 export const REQUEST_ZOMATO_COLLECTION_FAILED =
   "REQUEST_ZOMATO_COLLECTION_FAILED";
 
+export const REQUEST_ZOMATO_DETAIL = "REQUEST_ZOMATO_DETAIL";
+export const REQUEST_ZOMATO_DETAIL_SUCCEEDED =
+  "REQUEST_ZOMATO_DETAIL_SUCCEEDED";
+export const REQUEST_ZOMATO_DETAIL_FAILED = "REQUEST_ZOMATO_DETAIL_FAILED";
+
 /******* zomato city*****/
 export interface IZomatoCityReq {
   type: typeof REQUEST_ZOMATO_CITY;
@@ -73,6 +79,22 @@ export interface IZomatoCollectionResSuccess {
 
 export interface IZomatoCollectionResErr {
   type: typeof REQUEST_ZOMATO_COLLECTION_FAILED;
+}
+
+/******* zomato collection details basted on city id and collection id*****/
+export interface IZomatoDetailReq {
+  type: typeof REQUEST_ZOMATO_DETAIL;
+  cityId: number;
+  colId: string;
+}
+
+export interface IZomatoDetailResSuccess {
+  type: typeof REQUEST_ZOMATO_DETAIL_SUCCEEDED;
+  detail: IZomatoDetailRes;
+}
+
+export interface IZomatoDetailResErr {
+  type: typeof REQUEST_ZOMATO_DETAIL_FAILED;
 }
 
 /******* sygic collections action *****/
@@ -195,4 +217,7 @@ export type TravelActionType =
   | IZomatoCityResErr
   | IZomatoCollectionReq
   | IZomatoCollectionResSuccess
-  | IZomatoCollectionResErr;
+  | IZomatoCollectionResErr
+  | IZomatoDetailReq
+  | IZomatoDetailResSuccess
+  | IZomatoDetailResErr;

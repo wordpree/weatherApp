@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, LinkProps } from "react-router-dom";
+import { NavLink, LinkProps } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   ListItem,
@@ -37,7 +37,17 @@ const useStyle = makeStyles((theme: Theme) => ({
 const NavList = ({ to, mobile, ...props }: INavProps) => {
   const classes = useStyle();
   const routeLink = React.forwardRef<LinkProps, any>((props, ref) => (
-    <Link to={to} {...props} ref={ref} />
+    <NavLink
+      strict
+      exact
+      to={to}
+      {...props}
+      ref={ref}
+      activeStyle={{
+        backgroundColor: "rgb(1, 179, 167)",
+        color: "#ccc"
+      }}
+    />
   ));
   return (
     <li className={classes.li}>

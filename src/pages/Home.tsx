@@ -1,6 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import { TravelStore } from "../redux-saga/reducer";
 import {
   Header,
   Search,
@@ -12,7 +10,6 @@ import {
   Banner,
   Recommend,
   Collections,
-  Restaurants,
   ColDet,
   Footer
 } from "../components";

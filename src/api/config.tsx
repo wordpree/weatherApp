@@ -28,3 +28,6 @@ export const zomatoCityUrl = (geo: string) =>
 
 export const zomatoCollectionsUrl = (geo: string) =>
   `https://developers.zomato.com/api/v2.1/collections?${geo}`;
+
+export const zomatoDetailsUrl = (cityId: number, colId: string) =>
+  `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&collection_id=${colId}`;

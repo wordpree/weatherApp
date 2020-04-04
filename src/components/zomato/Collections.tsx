@@ -6,7 +6,6 @@ import { IZomatoCollectionRes } from "../../util/type";
 import { Grid, Container, makeStyles, Button } from "@material-ui/core";
 import { Omit } from "@material-ui/types";
 import { LinkProps, Link } from "react-router-dom";
-
 import SubTitle from "../SubTitle";
 
 interface ICProps {

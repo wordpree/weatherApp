@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Header from "../header/Header";
 import { ISygicPlace } from "../../util/type";
 import { TravelStore } from "../../redux-saga/reducer";
-import { DetList1, DetList2, DetList3, DetList4 } from "./index";
+import { DetList1, DetList2, DetList3, DetList4 } from "../detail";
 import { Container } from "@material-ui/core";
 import Footer from "../footer";
 
@@ -23,12 +23,12 @@ const Details = ({ placesDet }: IDProps) => {
   return (
     <>
       <Header />
-      {current && (
+      {current && current.places.length && (
         <Container>
-          <DetList1 place={current.places[0]} />
-          <DetList2 place={current.places.slice(1, 4)} />
-          <DetList3 place={current.places.slice(4, 7)} />
-          <DetList4 place={current.places.slice(7, 9)} />
+          <DetList1 detail={current.places[0]} />
+          <DetList2 detail={current.places.slice(1, 4)} />
+          <DetList3 detail={current.places.slice(4, 7)} />
+          <DetList4 detail={current.places.slice(7, 9)} />
         </Container>
       )}
       <Footer />

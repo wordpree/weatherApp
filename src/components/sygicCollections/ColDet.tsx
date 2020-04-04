@@ -4,7 +4,6 @@ import { Container } from "@material-ui/core";
 
 import Title from "../Title";
 import { useLocation } from "react-router-dom";
-import SygicColDetLists from "./DetLists";
 
 const ColDet = () => {
   const { name, ids } = useLocation().state;
@@ -14,8 +13,6 @@ const ColDet = () => {
       <Header />
       <Container>
         <Title text={name} />
-
-        <SygicColDetLists />
       </Container>
     </>
   );

@@ -7,7 +7,8 @@ import sygicColsReducer from "./sCollectionsReducer";
 import sygicDetailReducer from "./sPlaceDetailReducer";
 import {
   zomatoCityReducer,
-  zomatoCollectionReducer
+  zomatoCollectionReducer,
+  zomatoDetailReducer
 } from "./zRestaurantReducer";
 
 const rootReducer = combineReducers({
@@ -17,8 +18,9 @@ const rootReducer = combineReducers({
   news: newsReducer,
   collections: sygicColsReducer,
   places: sygicDetailReducer,
-  id: zomatoCityReducer,
-  zCollections: zomatoCollectionReducer
+  zId: zomatoCityReducer,
+  zCollections: zomatoCollectionReducer,
+  zColDetail: zomatoDetailReducer
 });
 export type TravelStore = ReturnType<typeof rootReducer>;
 export default rootReducer;

@@ -6,7 +6,8 @@ import {
   INData,
   ISygicCollection,
   ISygicPlace,
-  IZomatoCollectionRes
+  IZomatoCollectionRes,
+  IZomatoDetailRes
 } from "../../util/type";
 
 /******* google place api *****/
@@ -157,4 +158,26 @@ export const resZomatoCollectionFailed = (
   error: string
 ): TYPE.TravelActionType => ({
   type: TYPE.REQUEST_ZOMATO_COLLECTION_FAILED
+});
+
+export const reqZomatoDetailAction = (
+  cityId: number,
+  colId: string
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_ZOMATO_DETAIL,
+  cityId,
+  colId
+});
+
+export const resZomatoDetailSuccess = (
+  detail: IZomatoDetailRes
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_ZOMATO_DETAIL_SUCCEEDED,
+  detail
+});
+
+export const resZomatoDetailFailed = (
+  error: string
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_ZOMATO_DETAIL_FAILED
 });

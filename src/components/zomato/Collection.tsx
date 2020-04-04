@@ -26,6 +26,8 @@ const zStyles = (theme: Theme) =>
     }
   });
 
-const ZCollection = (props: ISCProps) => <Collection {...props} />;
+const ZCollection = (props: ISCProps) => (
+  <Collection {...props} path="restaurant" />
+);
 
 export default withStyles(zStyles)(ZCollection);

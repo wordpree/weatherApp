@@ -1,8 +1,9 @@
 import * as TYPE from "../actionType";
-import { IZomatoCollectionRes } from "../../util/type";
+import { IZomatoCollectionRes, IZomatoDetailRes } from "../../util/type";
 
-const initCityState = 0;
+const initCityState = null;
 const initColsState = [] as IZomatoCollectionRes;
+const initDetState = [] as IZomatoDetailRes;
 
 export const zomatoCityReducer = (
   state = initCityState,
@@ -23,6 +24,18 @@ export const zomatoCollectionReducer = (
   switch (actions.type) {
     case TYPE.REQUEST_ZOMATO_COLLECTION_SUCCEEDED:
       return actions.collections;
+    default:
+      return state;
+  }
+};
+
+export const zomatoDetailReducer = (
+  state = initDetState,
+  actions: TYPE.IZomatoDetailResSuccess
+) => {
+  switch (actions.type) {
+    case TYPE.REQUEST_ZOMATO_DETAIL_SUCCEEDED:
+      return actions.detail;
     default:
       return state;
   }

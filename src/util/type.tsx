@@ -53,6 +53,12 @@ export interface IState<T> {
   setData: func<T[]>;
 }
 /******props interface end ************************************/
+/******type guard*********/
+export function detailIsZ(
+  detail: ISygicPlace | IZomatoDetail
+): detail is IZomatoDetail {
+  return (detail as IZomatoDetail).restaurant.cuisines !== undefined;
+}
 
 /***  google place  start***/
 type Adress = {
@@ -96,6 +102,28 @@ export interface IZomatoCollection {
     description: string;
   };
 }
+
+export interface IZomatoDetailData {
+  name: string;
+  id: number;
+  location: { address: string; locality_verbose: string };
+  cuisines: string;
+  timings: string;
+  currency: string;
+  average_cost_for_two: number;
+  highlights: string[];
+  thumb: string;
+  featured_image: string;
+  phone_numbers: string;
+  establishment: string[];
+  user_rating: {
+    aggregate_rating: "3.8";
+    rating_text: "Good";
+    votes: "23";
+  };
+}
+export type IZomatoDetail = { restaurant: IZomatoDetailData };
+export type IZomatoDetailRes = Array<{ restaurant: IZomatoDetailData }>;
 
 /* zomato collection api end******************/
 

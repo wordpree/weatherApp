@@ -9,9 +9,11 @@ import {
   Button,
   Fade
 } from "@material-ui/core";
-import { ISygicPlace } from "../../util/type";
+import { ISygicPlace, IZomatoDetail } from "../../util/type";
+import { sortDetailsData } from "../../util/utils";
+
 interface ISCLProps {
-  place: ISygicPlace;
+  detail: IZomatoDetail | ISygicPlace;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -31,6 +33,16 @@ const useStyles = makeStyles(theme => ({
     },
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat"
+  },
+  contentRate: {
+    textAlign: "center",
+    color: "#ddd",
+    letterSpacing: 1.5,
+    position: "absolute",
+    padding: "2%",
+    top: 0,
+    right: 0,
+    background: "#01B3A7"
   },
   content: {
     textAlign: "center",
@@ -61,28 +73,34 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const DetList1 = ({ place }: ISCLProps) => {
+const DetList1 = ({ detail }: ISCLProps) => {
   const classes = useStyles();
-  if (!place.id) return <div />;
-
-  const img = place.main_media.media[0].url_template.replace(
-    "{size}",
-    "1200x600"
-  );
+  const ret = sortDetailsData(detail);
 
   return (
-    <Fade in={Boolean(place.id)}>
+    <Fade in={Boolean(detail)}>
       <Card className={classes.card}>
         <CardActionArea>
-          <CardMedia image={img} className={classes.media} />
+          <CardMedia image={ret.img} className={classes.media} />
         </CardActionArea>
+        {ret.rating && (
+          <CardContent className={classes.contentRate}>
+            <Typography variant="h4">{ret.rating.aggregate_rating}</Typography>
+          </CardContent>
+        )}
         <CardContent className={classes.content}>
           <Typography variant="h4" className={classes.typo}>
-            {place.name}
+            {ret.name}
           </Typography>
           <Typography variant="body1" className={classes.typo}>
-            {place.perex}
+            {ret.address}
+            {ret.perex}
           </Typography>
+          {ret.establishment && (
+            <Typography variant="body2" className={classes.typo}>
+              {`${ret.cuisines} - ${ret.establishment[0]}`}
+            </Typography>
+          )}
           <Button variant="outlined" className={classes.btn}>
             Learn more
           </Button>

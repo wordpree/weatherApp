@@ -1,5 +1,4 @@
 import React from "react";
-import { ISygicPlace } from "../../util/type";
 import { Link, LinkProps } from "react-router-dom";
 import { Omit } from "@material-ui/types";
 import {
@@ -10,9 +9,11 @@ import {
   makeStyles
 } from "@material-ui/core";
 import SubTitle from "../SubTitle";
+import { ISygicPlace, IZomatoDetail } from "../../util/type";
+import { sortDetailsData } from "../../util/utils";
 
 interface ISCLProps {
-  place: ISygicPlace[];
+  detail: IZomatoDetail[] | ISygicPlace[];
 }
 
 const useStyles = makeStyles(theme => ({
@@ -22,7 +23,8 @@ const useStyles = makeStyles(theme => ({
       margin: "0 auto"
     },
     [theme.breakpoints.up(768)]: {
-      display: "flex"
+      display: "flex",
+      justifyContent: "center"
     },
     marginBottom: "4rem"
   },
@@ -75,9 +77,9 @@ const useStyles = makeStyles(theme => ({
   title: { color: "#00535e", fontWeight: "bold" }
 }));
 
-const DetList4 = ({ place }: ISCLProps) => {
+const DetList4 = ({ detail }: ISCLProps) => {
   const classes = useStyles();
-  if (place.length === 0) return <div />;
+  let data: (IZomatoDetail | ISygicPlace)[] = detail;
   const LinkForward = React.forwardRef<any, Omit<LinkProps, "to">>(
     (props, ref) => (
       <Link to={{ pathname: `/attraction/` }} ref={ref} {...props} />
@@ -87,17 +89,14 @@ const DetList4 = ({ place }: ISCLProps) => {
     <>
       <SubTitle title="Change everything to your recent memory" />
       <div className={classes.entry}>
-        {place.map(item => {
-          const imgUrl = item.main_media.media[0].url_template.replace(
-            "{size}",
-            "600x520"
-          );
+        {data.map(item => {
+          const ret = sortDetailsData(item);
           return (
-            <div className={classes.cardWrapper} key={item.id}>
+            <div className={classes.cardWrapper} key={ret.id}>
               <Card className={classes.card}>
                 <CardActionArea className={classes.cardAct}>
                   <CardMedia
-                    image={imgUrl}
+                    image={ret.img}
                     className={classes.media}
                     component={LinkForward}
                   />
@@ -105,9 +104,9 @@ const DetList4 = ({ place }: ISCLProps) => {
                 </CardActionArea>
               </Card>
               <div className={classes.cardCont}>
-                <Typography variant="body1">{item.perex}</Typography>
+                <Typography variant="body1">{ret.perex}</Typography>
                 <Typography variant="h5" className={classes.title}>
-                  {item.name}
+                  {ret.name}
                 </Typography>
               </div>
             </div>

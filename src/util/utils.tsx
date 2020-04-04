@@ -1,6 +1,13 @@
 import sygicCities from "./sygicTopCity.json";
 import sygicCountries from "./sygicTopCountry.json";
-import { IHmAddressBase, IGooglePlaceDetail, ISygicCollection } from "./type";
+import {
+  IHmAddressBase,
+  IGooglePlaceDetail,
+  ISygicCollection,
+  ISygicPlace,
+  IZomatoDetail,
+  detailIsZ
+} from "./type";
 
 interface ICtyCodes {
   [k: string]: string;
@@ -171,4 +178,27 @@ export const idsSort = (
   });
 
   return [id.slice(0, 3), placeIds.slice(0, 27).join("|")];
+};
+
+export const sortDetailsData = (item: ISygicPlace | IZomatoDetail) => {
+  let ret;
+  if (detailIsZ(item)) {
+    ret = {
+      address: item.restaurant.location.address,
+      cuisines: item.restaurant.cuisines,
+      establishment: item.restaurant.establishment,
+      rating: item.restaurant.user_rating,
+      id: item.restaurant.id,
+      img: item.restaurant.featured_image,
+      name: item.restaurant.name
+    };
+  } else {
+    ret = {
+      img: item.main_media.media[0].url_template.replace("{size}", "750x500"),
+      name: item.name,
+      perex: item.perex,
+      id: item.id
+    };
+  }
+  return ret;
 };

@@ -2,7 +2,7 @@ import React from "react";
 import NavList from "./NavList";
 import { Link, LinkProps } from "react-router-dom";
 import { Omit } from "@material-ui/types";
-import { List, Theme, Typography, Button, ListItem } from "@material-ui/core";
+import { List, Theme, Typography, Button } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import {
   Home,
@@ -38,11 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "none",
       [theme.breakpoints.up("md")]: {
         padding: "0.5rem 1rem",
-        display: "flex",
-        "&>li:first-child": {
-          backgroundColor: "rgb(1, 179, 167)",
-          color: "#ccc"
-        }
+        display: "flex"
       }
     },
     typo: {
@@ -76,7 +72,7 @@ const NavLists = ({ mobile, desktop }: INavListsProps) => {
           classes={{ label: classes.logo, root: classes.btnRoot }}
         >
           <Typography variant="h6" className={classes.typo}>
-            Travellie & go
+            Travelus & life
           </Typography>
         </Button>
       </li>

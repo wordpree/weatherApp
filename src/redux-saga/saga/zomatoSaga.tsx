@@ -1,4 +1,4 @@
-import { call, put, take, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import * as TYPE from "../actionType";
 import { fetchZomato } from "../../api/index";
 import * as urls from "../../api/config";
@@ -6,9 +6,15 @@ import {
   resZomatoCitySuccess,
   resZomatoCollectionFailed,
   resZomatoCollectionSuccess,
-  resZomatoCityFailed
+  resZomatoCityFailed,
+  resZomatoDetailSuccess,
+  resZomatoDetailFailed
 } from "../actions";
-import { IZomatoCityReq, IZomatoCollectionReq } from "../actionType";
+import {
+  IZomatoCityReq,
+  IZomatoCollectionReq,
+  IZomatoDetailReq
+} from "../actionType";
 
 function* getZomatoCity({ geo }: IZomatoCityReq) {
   try {
@@ -28,10 +34,23 @@ function* getZomatoCollection({ geo }: IZomatoCollectionReq) {
   }
 }
 
+function* getZomatoDetail({ cityId, colId }: IZomatoDetailReq) {
+  try {
+    const res = yield call(fetchZomato, urls.zomatoDetailsUrl(cityId, colId));
+    yield put(resZomatoDetailSuccess(res.restaurants));
+  } catch (error) {
+    yield put(resZomatoDetailFailed(error));
+  }
+}
+
 export function* zCitySaga() {
   yield takeLatest(TYPE.REQUEST_ZOMATO_CITY, getZomatoCity);
 }
 
 export function* zCollectionSaga() {
   yield takeLatest(TYPE.REQUEST_ZOMATO_CITY, getZomatoCollection);
+}
+
+export function* zDetailSaga() {
+  yield takeLatest(TYPE.REQUEST_ZOMATO_DETAIL, getZomatoDetail);
 }
