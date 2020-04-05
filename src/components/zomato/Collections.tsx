@@ -6,7 +6,7 @@ import { IZomatoCollectionRes } from "../../util/type";
 import { Grid, Container, makeStyles, Button } from "@material-ui/core";
 import { Omit } from "@material-ui/types";
 import { LinkProps, Link } from "react-router-dom";
-import SubTitle from "../SubTitle";
+import Title from "../Title";
 
 interface ICProps {
   collections: IZomatoCollectionRes;
@@ -15,24 +15,24 @@ interface ICProps {
 const useStyles = makeStyles({
   container: {
     margin: "4rem auto 0",
-    textAlign: "center"
+    textAlign: "center",
   },
   gridWrapper: {
     margin: "0 auto",
-    textAlign: "center"
+    textAlign: "center",
   },
   btn: {
     transition: "all 0.4s ease-in-out",
     margin: "2rem  1rem auto",
     color: "#ddd",
     fontWeight: "bold",
-    background: "#00535e",
+    background: "#01B3A7",
     "&:hover": {
-      background: "#003138",
-      color: "#ddd",
-      borderColor: "#00535e"
-    }
-  }
+      background: "#01857C",
+      color: "#ccc",
+      borderColor: "#01857C",
+    },
+  },
 });
 
 const ZCollections = ({ collections }: ICProps) => {
@@ -43,7 +43,7 @@ const ZCollections = ({ collections }: ICProps) => {
   );
   return (
     <Container className={classes.container}>
-      <SubTitle title="Enjoy the local cuisines of your selection" />
+      <Title text="Enjoy the local cuisines of your selection" />
       <div className={classes.gridWrapper}>
         <Grid container spacing={3}>
           {collections.map((col, index) => (
@@ -70,7 +70,7 @@ const ZCollections = ({ collections }: ICProps) => {
 
 const mapStateToProps = (state: TravelStore) => ({
   detail: state.detail,
-  collections: state.zCollections.slice(0, 4)
+  collections: state.zCollections.slice(0, 4),
 });
 
 export default connect(mapStateToProps)(ZCollections);

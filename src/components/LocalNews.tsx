@@ -11,7 +11,7 @@ import {
   ListItemText,
   Divider,
   Button,
-  Tooltip
+  Tooltip,
 } from "@material-ui/core";
 import { Link, LinkProps } from "react-router-dom";
 import { Omit } from "@material-ui/types";
@@ -23,32 +23,37 @@ const useStyles = makeStyles({
     textDecoration: "none",
     color: "inherit",
     "&:hover": {
-      textDecoration: "underline"
-    }
+      textDecoration: "underline",
+    },
   },
   divBtn: {
     textAlign: "center",
-    padding: "0.25rem"
+    padding: "0.25rem",
   },
   moreBtn: {
     margin: "0 auto",
-    background: "rgba(255, 204, 14,0.8)",
+    transition: "all 0.4s ease-in-out",
+    background: "#01B3A7",
+    color: "#ddd",
     letterSpacing: 1.2,
+    fontWeight: "bold",
     "&:hover": {
-      background: "rgb(255, 204, 14)"
-    }
+      background: "#01857C",
+      color: "#ccc",
+      borderColor: "01857C",
+    },
   },
   tooltip: {
     textDecoration: "none",
     color: "inherit",
     "&:hover": {
-      textDecoration: "underline"
-    }
+      textDecoration: "underline",
+    },
   },
   credit: {
     textAlign: "right",
-    color: "rgba(0,0,0,0.45)"
-  }
+    color: "rgba(0,0,0,0.45)",
+  },
 });
 
 interface LNProps {
@@ -132,6 +137,6 @@ const LocalNews = ({ news }: LNProps) => {
 };
 
 const mapStateToProps = (state: TravelStore) => ({
-  news: state.news
+  news: state.news,
 });
 export default connect(mapStateToProps)(LocalNews);

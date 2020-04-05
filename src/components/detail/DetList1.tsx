@@ -7,7 +7,7 @@ import {
   CardContent,
   Typography,
   Button,
-  Fade
+  Fade,
 } from "@material-ui/core";
 import { ISygicPlace, IZomatoDetail } from "../../util/type";
 import { sortDetailsData } from "../../util/utils";
@@ -16,23 +16,23 @@ interface ISCLProps {
   detail: IZomatoDetail | ISygicPlace;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   card: {
-    position: "relative"
+    position: "relative",
   },
   media: {
     paddingTop: "130%",
     [theme.breakpoints.up(500)]: {
-      paddingTop: "80%"
+      paddingTop: "80%",
     },
     [theme.breakpoints.up("sm")]: {
-      paddingTop: "50%"
+      paddingTop: "50%",
     },
     [theme.breakpoints.up("md")]: {
-      paddingTop: "35%"
+      paddingTop: "35%",
     },
     backgroundSize: "cover",
-    backgroundRepeat: "no-repeat"
+    backgroundRepeat: "no-repeat",
   },
   contentRate: {
     textAlign: "center",
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     padding: "2%",
     top: 0,
     right: 0,
-    background: "#01B3A7"
+    background: "#01B3A7",
   },
   content: {
     textAlign: "center",
@@ -55,10 +55,10 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     transform: "translateX(-50%)",
     backgroundImage:
-      "linear-gradient( to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 30%,rgba(0,0,0,0.68) 100% )"
+      "linear-gradient( to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 30%,rgba(0,0,0,0.68) 100% )",
   },
   typo: {
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   btn: {
     transition: "all 0.4s ease-in-out",
@@ -66,11 +66,11 @@ const useStyles = makeStyles(theme => ({
     color: "#ddd",
     borderColor: "#fff",
     "&:hover": {
-      background: "#00535e",
+      background: "#01B3A7",
       color: "#ddd",
-      borderColor: "#00535e"
-    }
-  }
+      borderColor: "#01B3A7",
+    },
+  },
 }));
 
 const DetList1 = ({ detail }: ISCLProps) => {

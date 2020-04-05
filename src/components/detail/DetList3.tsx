@@ -7,9 +7,9 @@ import {
   Typography,
   CardActionArea,
   makeStyles,
-  Button
+  Button,
 } from "@material-ui/core";
-import SubTitle from "../SubTitle";
+import Title from "../Title";
 import { ISygicPlace, IZomatoDetail } from "../../util/type";
 import { sortDetailsData } from "../../util/utils";
 
@@ -17,43 +17,43 @@ interface ISCLProps {
   detail: IZomatoDetail[] | ISygicPlace[];
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   entry: {
-    marginTop: "2.5rem"
+    marginTop: "2.5rem",
   },
   cardWrapper: {
     marginBottom: "2rem",
     [theme.breakpoints.up(768)]: {
-      display: "flex"
-    }
+      display: "flex",
+    },
   },
   card: {
     [theme.breakpoints.up(768)]: {
       flex: "1 0 33%",
-      maxWidth: "33%"
-    }
+      maxWidth: "33%",
+    },
   },
   cardAct: {
     transition: "transform 0.5s ease-in-out 0.1s",
     "&:hover": {
-      transform: "scale(1.05)"
-    }
+      transform: "scale(1.05)",
+    },
   },
   media: {
     paddingTop: "50%",
     [theme.breakpoints.up(768)]: {
-      paddingTop: "85%"
+      paddingTop: "85%",
     },
     [theme.breakpoints.up("md")]: {
-      paddingTop: "68%"
+      paddingTop: "68%",
     },
     [theme.breakpoints.up(1024)]: {
-      paddingTop: "60%"
+      paddingTop: "60%",
     },
     [theme.breakpoints.up(1125)]: {
-      paddingTop: "50%"
+      paddingTop: "50%",
     },
-    minWidth: 296
+    minWidth: 296,
   },
   cardCont: {
     position: "relative",
@@ -61,29 +61,35 @@ const useStyles = makeStyles(theme => ({
       flexGrow: 0,
       flexShrink: 1,
       maxWidth: "100%",
-      marginLeft: "2rem"
+      marginLeft: "2rem",
+      textAlign: "left",
     },
     [theme.breakpoints.up(1024)]: {
-      maxWidth: "60%"
+      maxWidth: "60%",
     },
     letterSpacing: 1.2,
     "&>*": {
-      marginTop: "0.5rem"
-    }
+      marginTop: "0.5rem",
+    },
   },
   title: {
     color: "#00535e",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   btn: {
     marginTop: "1rem",
-    color: "#00535e",
-    borderColor: "#00535e",
+    color: "#01B3A7",
+    borderColor: "#01B3A7",
     "&:hover": {
       color: "#ddd",
-      backgroundColor: "#00535e"
-    }
-  }
+      backgroundColor: "#01B3A7",
+    },
+  },
+  span: {
+    color: "#ccc",
+    padding: "4px 2px",
+    backgroundColor: "#01B3A7",
+  },
 }));
 const DetList3 = ({ detail }: ISCLProps) => {
   const classes = useStyles();
@@ -96,9 +102,9 @@ const DetList3 = ({ detail }: ISCLProps) => {
   let data: (IZomatoDetail | ISygicPlace)[] = detail;
   return (
     <>
-      <SubTitle title="Keep going on your new finding" />
+      <Title text="Keep going on your new finding" />
       <div className={classes.entry}>
-        {data.map(item => {
+        {data.map((item) => {
           const ret = sortDetailsData(item);
           return (
             <div className={classes.cardWrapper} key={ret.id}>
@@ -118,6 +124,19 @@ const DetList3 = ({ detail }: ISCLProps) => {
                 <Typography variant="caption" color="textSecondary">
                   {ret.address}
                 </Typography>
+                {ret.establishment && (
+                  <>
+                    <Typography variant="body2">
+                      {`${ret.cuisines} - ${ret.establishment[0]}`}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      <span className={classes.span}>
+                        {ret.rating.aggregate_rating}
+                      </span>
+                      {` - ${ret.rating.votes} reviews`}
+                    </Typography>
+                  </>
+                )}
                 <Typography variant="body1">{ret.perex}</Typography>
                 <Button variant="outlined" className={classes.btn}>
                   View more imformation

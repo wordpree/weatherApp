@@ -3,13 +3,13 @@ import SygicCollection from "./Collection";
 import { Grid, Container, makeStyles } from "@material-ui/core";
 import { TravelStore } from "../../redux-saga/reducer";
 import { connect } from "react-redux";
-import SubTitle from "../SubTitle";
+import Title from "../Title";
 import { ISygicCollection } from "../../util/type";
 
 import {
   Catarina_Sousa,
   Josh_Sorenson,
-  Porapak_Apichodilok
+  Porapak_Apichodilok,
 } from "../../assets/collections";
 
 interface ISProps {
@@ -18,12 +18,12 @@ interface ISProps {
 
 const useStyles = makeStyles({
   container: {
-    marginTop: "4rem"
+    marginTop: "4rem",
   },
   gridWrapper: {
     margin: "0 auto",
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
 const Collections = ({ collections }: ISProps) => {
@@ -32,7 +32,7 @@ const Collections = ({ collections }: ISProps) => {
 
   return (
     <Container className={classes.container}>
-      <SubTitle title="Your destination is over there,one more step" />
+      <Title text="Your destination is over there,one more step" />
       <div className={classes.gridWrapper}>
         <Grid container spacing={2}>
           {collections.slice(0, 3).map((col, index) => (
@@ -50,6 +50,6 @@ const Collections = ({ collections }: ISProps) => {
 };
 
 const mapStateToProps = (state: TravelStore) => ({
-  collections: state.collections
+  collections: state.collections,
 });
 export default connect(mapStateToProps)(Collections);

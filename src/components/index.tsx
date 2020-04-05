@@ -14,7 +14,6 @@ import { Collections, ColDet, Details } from "./sygicCollections";
 import Loading from "./Loading";
 import Footer from "./footer";
 import ScrollToTop from "./ScrollToTop";
-import SubTitle from "./SubTitle";
 export {
   Header,
   NavList,
@@ -27,7 +26,6 @@ export {
   LocalNews,
   LocalWeather,
   TourPhoto,
-  SubTitle,
   Title,
   ScrollToTop,
   Banner,
@@ -36,5 +34,5 @@ export {
   ColDet,
   Loading,
   Details,
-  Footer
+  Footer,
 };

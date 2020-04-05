@@ -6,17 +6,17 @@ import {
   makeStyles,
   Typography,
   Fade,
-  CardContent
+  CardContent,
 } from "@material-ui/core";
 import { ISygicPlace, IZomatoDetail } from "../../util/type";
 import { sortDetailsData } from "../../util/utils";
-import SubTitle from "../SubTitle";
+import Title from "../Title";
 
 interface ISCLProps {
   detail: IZomatoDetail[] | ISygicPlace[];
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   entry: {
     marginTop: "2rem",
     display: "flex",
@@ -29,9 +29,9 @@ const useStyles = makeStyles(theme => ({
       "&::webkitScrollbar": {
         /* webkit */
         width: 0,
-        height: 0
-      }
-    }
+        height: 0,
+      },
+    },
   },
   cardWrapper: {
     maxWidth: "32.5%",
@@ -40,21 +40,21 @@ const useStyles = makeStyles(theme => ({
       scrollSnapAlign: "start",
       minWidth: "75%",
       paddingRight: 12,
-      paddingLeft: 0
-    }
+      paddingLeft: 0,
+    },
   },
   card: {
-    position: "relative"
+    position: "relative",
   },
   cardAct: {
     transition: "all 0.6s ease-in-out 0.1s",
     position: "relative",
     "&:hover": {
-      transform: "scale(1.08)"
-    }
+      transform: "scale(1.08)",
+    },
   },
   media: {
-    paddingTop: "66%"
+    paddingTop: "66%",
   },
   contentRate: {
     textAlign: "center",
@@ -64,29 +64,29 @@ const useStyles = makeStyles(theme => ({
     padding: "0.5rem !important",
     top: 0,
     right: 0,
-    background: "#01B3A7"
+    background: "#01B3A7",
   },
   content: {
     letterSpacing: 1.2,
     background: "#01B3A7",
     color: "#ccc",
     fontWeight: "bold",
-    minHeight: 170
+    minHeight: 170,
   },
   des: {},
   typo2: {
-    padding: "0.5rem"
-  }
+    padding: "0.5rem",
+  },
 }));
 
-const DetList2: React.FC<ISCLProps> = ({ detail }: ISCLProps) => {
+const DetList2 = ({ detail }: ISCLProps) => {
   const classes = useStyles();
   let data: (IZomatoDetail | ISygicPlace)[] = detail;
   return (
     <>
-      <SubTitle title="Enjoy where you are starting" />
+      <Title text="Enjoy where you are starting" />
       <div className={classes.entry}>
-        {data.map(item => {
+        {data.map((item) => {
           const ret = sortDetailsData(item);
           return (
             <div key={ret.id} className={classes.cardWrapper}>

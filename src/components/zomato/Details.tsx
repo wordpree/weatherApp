@@ -14,6 +14,7 @@ import { Header } from "../../components";
 import { Footer } from "../../components";
 import DetListLeft from "./DetListLeft";
 import { DetList1, DetList2, DetList3, DetList4 } from "../detail";
+import Loading from "../Loading";
 
 interface IDProps {
   reqZomatoDetailAction(cityId: number, colId: string): void;
@@ -24,11 +25,11 @@ interface IDProps {
 const useStyles = makeStyles({
   container: {
     margin: "4rem auto 0",
-    textAlign: "center"
+    textAlign: "center",
   },
   gridWrapper: {
     margin: "0 auto",
-    textAlign: "center"
+    textAlign: "center",
   },
   btn: {
     transition: "all 0.4s ease-in-out",
@@ -39,9 +40,9 @@ const useStyles = makeStyles({
     "&:hover": {
       background: "#003138",
       color: "#ddd",
-      borderColor: "#00535e"
-    }
-  }
+      borderColor: "#00535e",
+    },
+  },
 });
 
 const ZDetail = ({ cityId, reqZomatoDetailAction, detail }: IDProps) => {
@@ -61,7 +62,7 @@ const ZDetail = ({ cityId, reqZomatoDetailAction, detail }: IDProps) => {
       <Container className={classes.container}>
         <Title text="Enjoy the local cuisines of your selection" />
         <div className={classes.gridWrapper}>
-          {detail && detail.length && (
+          {detail && detail.length ? (
             <>
               <DetList1 detail={detail[0]} />
               <DetList2 detail={detail.slice(1, 4)} />
@@ -69,6 +70,8 @@ const ZDetail = ({ cityId, reqZomatoDetailAction, detail }: IDProps) => {
               <DetList4 detail={detail.slice(7, 9)} />
               <DetListLeft detail={detail.slice(9)} />
             </>
+          ) : (
+            <Loading value={100} />
           )}
         </div>
       </Container>
@@ -79,12 +82,12 @@ const ZDetail = ({ cityId, reqZomatoDetailAction, detail }: IDProps) => {
 
 const mapStateToProps = (state: TravelStore) => ({
   cityId: state.zId,
-  detail: state.zColDetail
+  detail: state.zColDetail,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<TravelActionType>) => ({
   reqZomatoDetailAction: (cityId: number, colId: string) =>
-    dispatch(reqZomatoDetailAction(cityId, colId))
+    dispatch(reqZomatoDetailAction(cityId, colId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ZDetail);

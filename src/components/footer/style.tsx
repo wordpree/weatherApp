@@ -10,7 +10,7 @@ export const StyledDivWrapper = styled.div`
   min-width: 160px;
   margin: 2rem auto 0 auto;
   display: flex;
-  background-color: #11263a;
+  background-color: #01857c;
   align-items: center;
   text-align: center;
   justify-content: space-around;

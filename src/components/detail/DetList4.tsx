@@ -6,9 +6,9 @@ import {
   CardMedia,
   Typography,
   CardActionArea,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
-import SubTitle from "../SubTitle";
+import Title from "../Title";
 import { ISygicPlace, IZomatoDetail } from "../../util/type";
 import { sortDetailsData } from "../../util/utils";
 
@@ -16,17 +16,17 @@ interface ISCLProps {
   detail: IZomatoDetail[] | ISygicPlace[];
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   entry: {
     [theme.breakpoints.between(450, 768)]: {
       maxWidth: "80%",
-      margin: "0 auto"
+      margin: "0 auto",
     },
     [theme.breakpoints.up(768)]: {
       display: "flex",
-      justifyContent: "center"
+      justifyContent: "center",
     },
-    marginBottom: "4rem"
+    marginBottom: "4rem",
   },
   cardWrapper: {
     marginBottom: "3rem",
@@ -35,16 +35,18 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up(768)]: {
       flex: "1 1 48%",
       maxWidth: "48%",
-      marginRight: "1%"
-    }
+      marginRight: "1%",
+    },
   },
-  card: {},
+  card: {
+    position: "relative",
+  },
   cardAct: {
     transition: "all 0.6s ease-in-out 0.1s",
     position: "relative",
     "&:hover": {
-      transform: "scale(1.08)"
-    }
+      transform: "scale(1.08)",
+    },
   },
   back: {
     position: "absolute",
@@ -53,11 +55,21 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     height: "100%",
     background:
-      "linear-gradient(180deg, transparent 0%,transparent 50%, #000 100%)"
+      "linear-gradient(180deg, transparent 0%,transparent 50%, #000 100%)",
   },
   media: {
     paddingTop: "86%",
-    minWidth: 296
+    minWidth: 296,
+  },
+  typoRating: {
+    textAlign: "center",
+    color: "#ddd",
+    letterSpacing: 1.5,
+    position: "absolute",
+    padding: "0.5rem !important",
+    top: 0,
+    right: 0,
+    background: "#01B3A7",
   },
   cardCont: {
     padding: "5%",
@@ -71,10 +83,10 @@ const useStyles = makeStyles(theme => ({
     width: "80%",
     background: "#fff",
     "&>*": {
-      marginBottom: "0.75rem"
-    }
+      marginBottom: "0.75rem",
+    },
   },
-  title: { color: "#00535e", fontWeight: "bold" }
+  title: { color: "#00535e", fontWeight: "bold" },
 }));
 
 const DetList4 = ({ detail }: ISCLProps) => {
@@ -87,9 +99,9 @@ const DetList4 = ({ detail }: ISCLProps) => {
   );
   return (
     <>
-      <SubTitle title="Change everything to your recent memory" />
+      <Title text="Change everything to your recent memory" />
       <div className={classes.entry}>
-        {data.map(item => {
+        {data.map((item) => {
           const ret = sortDetailsData(item);
           return (
             <div className={classes.cardWrapper} key={ret.id}>
@@ -102,12 +114,16 @@ const DetList4 = ({ detail }: ISCLProps) => {
                   />
                   <div className={classes.back} />
                 </CardActionArea>
+                <Typography variant="subtitle1" className={classes.typoRating}>
+                  {ret.rating && ret.rating.aggregate_rating}
+                </Typography>
               </Card>
               <div className={classes.cardCont}>
                 <Typography variant="body1">{ret.perex}</Typography>
                 <Typography variant="h5" className={classes.title}>
                   {ret.name}
                 </Typography>
+                <Typography variant="body2">{ret.addressLocal}</Typography>
               </div>
             </div>
           );

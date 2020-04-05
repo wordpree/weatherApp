@@ -6,7 +6,7 @@ import {
   ISygicCollection,
   ISygicPlace,
   IZomatoDetail,
-  detailIsZ
+  detailIsZ,
 } from "./type";
 
 interface ICtyCodes {
@@ -17,7 +17,7 @@ export const dataFormat = (date: Date) => {
   return date.toLocaleString("en-AU", {
     hour: "numeric",
     minute: "numeric",
-    hour12: true
+    hour12: true,
   });
 };
 
@@ -44,7 +44,7 @@ export const degreeToDir = (degree: number) => {
     "W",
     "WNW",
     "NW",
-    "NNW"
+    "NNW",
   ];
   return arr[val % 16];
 };
@@ -116,7 +116,7 @@ export const setStorageSearchPara = (detail: IGooglePlaceDetail) => {
   const storageParaInit = [
     "city:3358",
     "Brisbane OR Australia",
-    "lat=-27.4679&lon=153.0281"
+    "lat=-27.4679&lon=153.0281",
   ];
   if (!detail.hasOwnProperty("address_components")) {
     const localStore = localStorage.getItem("location");
@@ -127,21 +127,21 @@ export const setStorageSearchPara = (detail: IGooglePlaceDetail) => {
     return;
   }
   const geo = detail.geometry.location;
-  const cityIndex = detail.address_components.find(address =>
+  const cityIndex = detail.address_components.find((address) =>
     findNameWithType(address.types, "locality")
   );
-  const countryIndex = detail.address_components.find(address =>
+  const countryIndex = detail.address_components.find((address) =>
     findNameWithType(address.types, "country")
   );
 
   if (cityIndex && countryIndex) {
     const city = {
       long_name: cityIndex.long_name,
-      short_name: cityIndex.short_name
+      short_name: cityIndex.short_name,
     };
     const country = {
       long_name: countryIndex.long_name,
-      short_name: countryIndex.short_name
+      short_name: countryIndex.short_name,
     };
     placeId = querySygicCityNCountry([city, country]); //sygic collections
     location = `${cityIndex.long_name} OR ${countryIndex.long_name}`; //newsorg
@@ -156,7 +156,7 @@ export const getStorageSearchPara = () => {
   const storageParaInit = [
     "city:3358",
     "Brisbane OR Australia",
-    "lat=-27.4679&lon=153.0281"
+    "lat=-27.4679&lon=153.0281",
   ];
   const store = localStorage.getItem("location");
   if (store && store !== "undefined") {
@@ -172,7 +172,7 @@ export const idsSort = (
   if (collections.length === 0) return undefined;
   let placeIds: string[] = [];
   let id: number[] = [];
-  collections.forEach(col => {
+  collections.forEach((col) => {
     placeIds = placeIds.concat(col.place_ids);
     id.push(col.id);
   });
@@ -185,19 +185,20 @@ export const sortDetailsData = (item: ISygicPlace | IZomatoDetail) => {
   if (detailIsZ(item)) {
     ret = {
       address: item.restaurant.location.address,
+      addressLocal: item.restaurant.location.locality_verbose,
       cuisines: item.restaurant.cuisines,
       establishment: item.restaurant.establishment,
       rating: item.restaurant.user_rating,
       id: item.restaurant.id,
       img: item.restaurant.featured_image,
-      name: item.restaurant.name
+      name: item.restaurant.name,
     };
   } else {
     ret = {
       img: item.main_media.media[0].url_template.replace("{size}", "750x500"),
       name: item.name,
       perex: item.perex,
-      id: item.id
+      id: item.id,
     };
   }
   return ret;
