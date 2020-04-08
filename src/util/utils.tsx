@@ -1,17 +1,4 @@
-import sygicCities from "./sygicTopCity.json";
-import sygicCountries from "./sygicTopCountry.json";
-import {
-  IHmAddressBase,
-  IGooglePlaceDetail,
-  ISygicCollection,
-  ISygicPlace,
-  IZomatoDetail,
-  detailIsZ,
-} from "./type";
-
-interface ICtyCodes {
-  [k: string]: string;
-}
+import { IGooglePlaceDetail, ITriposoPoi, IZomatoDetail } from "./type";
 
 export const dataFormat = (date: Date) => {
   return date.toLocaleString("en-AU", {
@@ -67,56 +54,15 @@ export function findNameWithType(types: string[], query: string) {
   return types.join(",").includes(query);
 }
 
-function setString(input: string) {
-  return input.trim().toLowerCase();
-}
-
-export function querySygicCityNCountry(address: IHmAddressBase[]) {
-  let res;
-  const city_short = setString(address[0].short_name);
-  const city_long = setString(address[0].long_name);
-  const country_short = setString(address[1].short_name);
-  const country_long = setString(address[1].long_name);
-  const sygicCitiesData: ICtyCodes = sygicCities;
-  const sygicCountriesData: ICtyCodes = sygicCountries;
-
-  res = Object.keys(sygicCitiesData).find((key: string) => {
-    const city = sygicCitiesData[key].toLowerCase(); //city contains country info
-    return (
-      //city must be a city of a matched country
-      (city.includes(city_short) || city.includes(city_long)) &&
-      (city.includes(country_short) || city.includes(country_long))
-    );
-  });
-
-  if (!res) {
-    //city not found,search country instead
-    res = Object.keys(sygicCountriesData).find((key: string) => {
-      const country = sygicCountriesData[key].toLowerCase();
-      return (
-        country.includes(country_short) ||
-        country.includes(country_long) ||
-        country_short.includes(country) ||
-        country_long.includes(country)
-      );
-    });
-  }
-  if (!res) {
-    //country not found too
-    res = "city:3358";
-  }
-  return res;
-}
-
 export const setStorageSearchPara = (detail: IGooglePlaceDetail) => {
-  let placeId;
   let location;
   let geoLocation;
+  let coordinate;
   let result;
   const storageParaInit = [
-    "city:3358",
     "Brisbane OR Australia",
     "lat=-27.4679&lon=153.0281",
+    "-27.4679, 153.0281",
   ];
   if (!detail.hasOwnProperty("address_components")) {
     const localStore = localStorage.getItem("location");
@@ -135,18 +81,10 @@ export const setStorageSearchPara = (detail: IGooglePlaceDetail) => {
   );
 
   if (cityIndex && countryIndex) {
-    const city = {
-      long_name: cityIndex.long_name,
-      short_name: cityIndex.short_name,
-    };
-    const country = {
-      long_name: countryIndex.long_name,
-      short_name: countryIndex.short_name,
-    };
-    placeId = querySygicCityNCountry([city, country]); //sygic collections
     location = `${cityIndex.long_name} OR ${countryIndex.long_name}`; //newsorg
-    geoLocation = `lat=${geo.lat}&lon=${geo.lng}`; //openweathermap
-    result = [placeId, location, geoLocation];
+    geoLocation = `lat=${geo.lat}&lon=${geo.lng}`; //openweathermap,zomato
+    coordinate = `${geo.lat},${geo.lng}`; //triposo
+    result = [location, geoLocation, coordinate];
     localStorage.setItem("location", JSON.stringify(result));
   }
 };
@@ -154,9 +92,9 @@ export const setStorageSearchPara = (detail: IGooglePlaceDetail) => {
 export const getStorageSearchPara = () => {
   //local store has been set before
   const storageParaInit = [
-    "city:3358",
     "Brisbane OR Australia",
     "lat=-27.4679&lon=153.0281",
+    "-27.4679, 153.0281",
   ];
   const store = localStorage.getItem("location");
   if (store && store !== "undefined") {
@@ -166,22 +104,18 @@ export const getStorageSearchPara = () => {
   }
 };
 
-export const idsSort = (
-  collections: ISygicCollection[]
-): [number[], string] | undefined => {
-  if (collections.length === 0) return undefined;
-  let placeIds: string[] = [];
-  let id: number[] = [];
-  collections.forEach((col) => {
-    placeIds = placeIds.concat(col.place_ids);
-    id.push(col.id);
-  });
+/******type guard*********/
+function detailIsZ(
+  detail: ITriposoPoi | IZomatoDetail
+): detail is IZomatoDetail {
+  return (detail as IZomatoDetail).restaurant !== undefined;
+}
 
-  return [id.slice(0, 3), placeIds.slice(0, 27).join("|")];
-};
-
-export const sortDetailsData = (item: ISygicPlace | IZomatoDetail) => {
+export const sortDetailsData = (item: ITriposoPoi | IZomatoDetail) => {
   let ret;
+  if (!item) {
+    return null;
+  }
   if (detailIsZ(item)) {
     ret = {
       address: item.restaurant.location.address,
@@ -191,13 +125,15 @@ export const sortDetailsData = (item: ISygicPlace | IZomatoDetail) => {
       rating: item.restaurant.user_rating,
       id: item.restaurant.id,
       img: item.restaurant.featured_image,
+      imgOrigin: item.restaurant.featured_image, //fixed triposo large sized image for first detail
       name: item.restaurant.name,
     };
   } else {
     ret = {
-      img: item.main_media.media[0].url_template.replace("{size}", "750x500"),
+      img: item.images[0].sizes.medium.url,
+      imgOrigin: item.images[0].sizes.original.url, //apllied first detail cardmedia
       name: item.name,
-      perex: item.perex,
+      snippet: item.snippet,
       id: item.id,
     };
   }

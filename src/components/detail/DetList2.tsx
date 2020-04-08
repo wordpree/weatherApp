@@ -8,12 +8,12 @@ import {
   Fade,
   CardContent,
 } from "@material-ui/core";
-import { ISygicPlace, IZomatoDetail } from "../../util/type";
+import { ITriposoPoi, IZomatoDetail } from "../../util/type";
 import { sortDetailsData } from "../../util/utils";
 import Title from "../Title";
 
 interface ISCLProps {
-  detail: IZomatoDetail[] | ISygicPlace[];
+  detail: IZomatoDetail[] | ITriposoPoi[];
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     letterSpacing: 1.2,
     background: "#01B3A7",
-    color: "#ccc",
+    color: "#fff",
     fontWeight: "bold",
     minHeight: 170,
   },
@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
 
 const DetList2 = ({ detail }: ISCLProps) => {
   const classes = useStyles();
-  let data: (IZomatoDetail | ISygicPlace)[] = detail;
+  let data: (IZomatoDetail | ITriposoPoi)[] = detail;
   return (
     <>
       <Title text="Enjoy where you are starting" />
@@ -89,34 +89,36 @@ const DetList2 = ({ detail }: ISCLProps) => {
         {data.map((item) => {
           const ret = sortDetailsData(item);
           return (
-            <div key={ret.id} className={classes.cardWrapper}>
-              <Fade in={Boolean(data)}>
-                <Card className={classes.card}>
-                  <CardActionArea className={classes.cardAct}>
-                    <CardMedia image={ret.img} className={classes.media} />
-                  </CardActionArea>
-                  <CardContent className={classes.content}>
-                    <Typography variant="h5">{ret.name}</Typography>
-                    <Typography variant="body1">{ret.address}</Typography>
-                    {ret.establishment && (
-                      <Typography variant="body2" className={classes.typo2}>
-                        {`${ret.cuisines} - ${ret.establishment[0]}`}
-                      </Typography>
-                    )}
-                    <Typography variant="body1" className={classes.des}>
-                      {ret.perex}
-                    </Typography>
-                  </CardContent>
-                  {ret.rating && (
-                    <CardContent className={classes.contentRate}>
-                      <Typography variant="subtitle1">
-                        {ret.rating.aggregate_rating}
+            ret && (
+              <div key={ret.id} className={classes.cardWrapper}>
+                <Fade in={Boolean(data)}>
+                  <Card className={classes.card}>
+                    <CardActionArea className={classes.cardAct}>
+                      <CardMedia image={ret.img} className={classes.media} />
+                    </CardActionArea>
+                    <CardContent className={classes.content}>
+                      <Typography variant="h5">{ret.name}</Typography>
+                      <Typography variant="body1">{ret.address}</Typography>
+                      {ret.establishment && (
+                        <Typography variant="body2" className={classes.typo2}>
+                          {`${ret.cuisines} - ${ret.establishment[0]}`}
+                        </Typography>
+                      )}
+                      <Typography variant="body1" className={classes.des}>
+                        {ret.snippet && ret.snippet.substring(0, 120) + "..."}
                       </Typography>
                     </CardContent>
-                  )}
-                </Card>
-              </Fade>
-            </div>
+                    {ret.rating && (
+                      <CardContent className={classes.contentRate}>
+                        <Typography variant="subtitle1">
+                          {ret.rating.aggregate_rating}
+                        </Typography>
+                      </CardContent>
+                    )}
+                  </Card>
+                </Fade>
+              </div>
+            )
           );
         })}
       </div>

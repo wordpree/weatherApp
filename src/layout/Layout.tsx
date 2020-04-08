@@ -2,21 +2,14 @@ import React, { useEffect } from "react";
 import { Home, News, Photos, Restaurant } from "../pages";
 import { Route, Switch } from "react-router-dom";
 import Error from "../components/Error";
-import { Details, ZDetail } from "../components";
-import { ISygicCollection, IGooglePlaceDetail } from "../util/type";
-import {
-  setStorageSearchPara,
-  getStorageSearchPara,
-  idsSort
-} from "../util/utils";
+import { TDetail, ZDetail } from "../components";
+import { IGooglePlaceDetail } from "../util/type";
+import { setStorageSearchPara, getStorageSearchPara } from "../util/utils";
 
 interface ILProps {
-  //collections: ISygicCollection[];
   detail: IGooglePlaceDetail;
   reqNewsAction(location: string): void;
-  //reqSygicCollections(placeId: string): void;
   reqWeatherAction(geo: string): void;
-  //reqSygicDetail(id: number[], placeIds: string): void;
   reqZomatoCityAction(geo: string): void;
   reqZomatoCollectionAction(geo: string): void;
 }
@@ -26,13 +19,11 @@ function Layout({
   reqNewsAction,
   reqWeatherAction,
   reqZomatoCityAction,
-  reqZomatoCollectionAction
+  reqZomatoCollectionAction,
 }: ILProps) {
   useEffect(() => {
     setStorageSearchPara(detail);
-    const [placeId, location, geoLocation] = getStorageSearchPara();
-    /*sygic travel collections*/
-    // reqSygicCollections(placeId);
+    const [location, geoLocation] = getStorageSearchPara();
 
     /*zomato retaurant*/
     reqZomatoCollectionAction(geoLocation);
@@ -43,21 +34,18 @@ function Layout({
 
     /**openweathermap */
     reqWeatherAction(geoLocation);
-  }, [detail]);
-
-  // useEffect(() => {
-  //   /* sygic travel details*/
-  //   const mix = idsSort(collections);
-  //   if (mix !== undefined) {
-  //     const [id, placeIds] = mix;
-  //     reqSygicDetail(id, placeIds);
-  //   }
-  // }, [collections]);
+  }, [
+    detail,
+    reqZomatoCollectionAction,
+    reqZomatoCityAction,
+    reqNewsAction,
+    reqWeatherAction,
+  ]);
 
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/attractions/:id" component={Details} />
+      <Route path="/attractions/:tag" component={TDetail} />
       <Route path="/restaurant/:id" component={ZDetail} />
       <Route path="/news" component={News} />
       <Route path="/photos" component={Photos} />

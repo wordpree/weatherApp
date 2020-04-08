@@ -9,11 +9,11 @@ import {
   Button,
   Fade,
 } from "@material-ui/core";
-import { ISygicPlace, IZomatoDetail } from "../../util/type";
+import { ITriposoPoi, IZomatoDetail } from "../../util/type";
 import { sortDetailsData } from "../../util/utils";
 
 interface ISCLProps {
-  detail: IZomatoDetail | ISygicPlace;
+  detail: IZomatoDetail | ITriposoPoi;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -78,35 +78,39 @@ const DetList1 = ({ detail }: ISCLProps) => {
   const ret = sortDetailsData(detail);
 
   return (
-    <Fade in={Boolean(detail)}>
-      <Card className={classes.card}>
-        <CardActionArea>
-          <CardMedia image={ret.img} className={classes.media} />
-        </CardActionArea>
-        {ret.rating && (
-          <CardContent className={classes.contentRate}>
-            <Typography variant="h4">{ret.rating.aggregate_rating}</Typography>
-          </CardContent>
-        )}
-        <CardContent className={classes.content}>
-          <Typography variant="h4" className={classes.typo}>
-            {ret.name}
-          </Typography>
-          <Typography variant="body1" className={classes.typo}>
-            {ret.address}
-            {ret.perex}
-          </Typography>
-          {ret.establishment && (
-            <Typography variant="body2" className={classes.typo}>
-              {`${ret.cuisines} - ${ret.establishment[0]}`}
-            </Typography>
+    ret && (
+      <Fade in={Boolean(detail)}>
+        <Card className={classes.card}>
+          <CardActionArea>
+            <CardMedia image={ret.img} className={classes.media} />
+          </CardActionArea>
+          {ret.rating && (
+            <CardContent className={classes.contentRate}>
+              <Typography variant="h4">
+                {ret.rating.aggregate_rating}
+              </Typography>
+            </CardContent>
           )}
-          <Button variant="outlined" className={classes.btn}>
-            Learn more
-          </Button>
-        </CardContent>
-      </Card>
-    </Fade>
+          <CardContent className={classes.content}>
+            <Typography variant="h4" className={classes.typo}>
+              {ret.name}
+            </Typography>
+            <Typography variant="body1" className={classes.typo}>
+              {ret.address}
+              {ret.snippet && ret.snippet.substring(0, 120) + "..."}
+            </Typography>
+            {ret.establishment && (
+              <Typography variant="body2" className={classes.typo}>
+                {`${ret.cuisines} - ${ret.establishment[0]}`}
+              </Typography>
+            )}
+            <Button variant="outlined" className={classes.btn}>
+              Learn more
+            </Button>
+          </CardContent>
+        </Card>
+      </Fade>
+    )
   );
 };
 

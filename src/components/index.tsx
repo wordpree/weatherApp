@@ -10,7 +10,7 @@ import Collection from "./Collection";
 import Title from "./Title";
 import Banner from "./banner";
 import Recommend from "./Recommend";
-import { Collections, ColDet, Details } from "./sygicCollections";
+import { TDetail, TCollections } from "./triposo";
 import Loading from "./Loading";
 import Footer from "./footer";
 import ScrollToTop from "./ScrollToTop";
@@ -30,9 +30,8 @@ export {
   ScrollToTop,
   Banner,
   Recommend,
-  Collections,
-  ColDet,
   Loading,
-  Details,
+  TCollections,
+  TDetail,
   Footer,
 };

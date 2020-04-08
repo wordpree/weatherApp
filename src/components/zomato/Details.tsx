@@ -2,7 +2,10 @@ import React, { useEffect, Dispatch } from "react";
 import { connect } from "react-redux";
 import { TravelStore } from "../../redux-saga/reducer";
 import { useParams } from "react-router-dom";
-import { reqZomatoDetailAction } from "../../redux-saga/actions";
+import {
+  reqZomatoDetailAction,
+  deleteZomatoDetailAction,
+} from "../../redux-saga/actions";
 import { TravelActionType } from "../../redux-saga/actionType";
 import { Grid, Container, makeStyles } from "@material-ui/core";
 import { Omit } from "@material-ui/types";
@@ -12,12 +15,12 @@ import { Title } from "../../components";
 import ScrollToTop from "../ScrollToTop";
 import { Header } from "../../components";
 import { Footer } from "../../components";
-import DetListLeft from "./DetListLeft";
-import { DetList1, DetList2, DetList3, DetList4 } from "../detail";
+import { DetList1, DetList2, DetList3, DetList4, DetListLeft } from "../detail";
 import Loading from "../Loading";
 
 interface IDProps {
   reqZomatoDetailAction(cityId: number, colId: string): void;
+  deleteZomatoDetailAction(): void;
   cityId: number;
   detail: IZomatoDetailRes;
 }
@@ -45,15 +48,23 @@ const useStyles = makeStyles({
   },
 });
 
-const ZDetail = ({ cityId, reqZomatoDetailAction, detail }: IDProps) => {
+const ZDetail = ({
+  cityId,
+  reqZomatoDetailAction,
+  detail,
+  deleteZomatoDetailAction,
+}: IDProps) => {
   const classes = useStyles();
   const { id } = useParams();
 
   useEffect(() => {
     if (id !== undefined && cityId !== null) {
       reqZomatoDetailAction(cityId, id);
+      return () => {
+        deleteZomatoDetailAction();
+      };
     }
-  }, [cityId, id]);
+  }, []);
 
   return (
     <>
@@ -88,6 +99,7 @@ const mapStateToProps = (state: TravelStore) => ({
 const mapDispatchToProps = (dispatch: Dispatch<TravelActionType>) => ({
   reqZomatoDetailAction: (cityId: number, colId: string) =>
     dispatch(reqZomatoDetailAction(cityId, colId)),
+  deleteZomatoDetailAction: () => dispatch(deleteZomatoDetailAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ZDetail);

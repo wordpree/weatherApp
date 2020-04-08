@@ -1,5 +1,5 @@
 import React from "react";
-import { IZomatoCollection, ISygicCollection } from "../util/type";
+import { IZomatoCollection, ITriposoCol } from "../util/type";
 import { Link, LinkProps } from "react-router-dom";
 import { Omit } from "@material-ui/types";
 import {
@@ -11,12 +11,12 @@ import {
   CardMedia,
   Typography,
   Grow,
-  CardContent
+  CardContent,
 } from "@material-ui/core";
 
 interface ICProps {
   zCol?: IZomatoCollection;
-  sCol?: ISygicCollection;
+  tCol?: ITriposoCol;
   image: string;
   bpNumber: any;
   classes?: any;
@@ -30,15 +30,15 @@ const collectionStyles = () =>
       position: "relative",
       transition: "all 0.4s ease-in-out 0.1s",
       "&:hover": {
-        transform: "scale(1.05)"
-      }
+        transform: "scale(1.05)",
+      },
     },
     gradient: {
       top: 0,
       left: 0,
       width: "100%",
       height: "100%",
-      position: "absolute"
+      position: "absolute",
     },
     media: {},
     content: {
@@ -46,27 +46,24 @@ const collectionStyles = () =>
       bottom: 0,
       width: "100%",
       color: "#ddd",
-      textAlign: "center"
+      textAlign: "center",
     },
-    typo: {}
+    typoH6: { fontWeight: "bold" },
+    typoB2: { letterSpacing: 1 },
   });
 
 const Collection = ({
   zCol,
-  sCol,
+  tCol,
   image,
   bpNumber,
   classes,
-  path
+  path,
 }: ICProps) => {
-  const id = zCol ? zCol.collection.collection_id : sCol ? sCol.id : undefined;
-  const title = zCol
-    ? zCol.collection.title
-    : sCol
-    ? sCol.name_long
-    : undefined;
-  const zDescription = zCol ? zCol.collection.description : undefined;
-  // const classes = useStyles();
+  const id = (zCol && zCol.collection.collection_id) || (tCol && tCol.id);
+  const title = (zCol && zCol.collection.title) || (tCol && tCol.title);
+  const description =
+    (zCol && zCol.collection.description) || (tCol && tCol.description);
 
   const LinkRef = React.forwardRef<any, Omit<LinkProps, "to">>((props, ref) => {
     return <Link ref={ref} {...props} to={`/${path}/${id}`} />;
@@ -75,7 +72,7 @@ const Collection = ({
     <Grid item xs={12} sm={bpNumber} key={id}>
       <Grow
         in={
-          (sCol && sCol.hasOwnProperty("place_ids")) ||
+          (tCol && tCol.hasOwnProperty("id")) ||
           (zCol && zCol.hasOwnProperty("collection"))
         }
       >
@@ -89,14 +86,12 @@ const Collection = ({
             <div className={classes.gradient} />
           </CardActionArea>
           <CardContent className={classes.content}>
-            <Typography variant="h6" className={classes.typo}>
+            <Typography variant="h6" className={classes.typoH6}>
               {title}
             </Typography>
-            {zDescription && (
-              <Typography variant="body2" className={classes.typo}>
-                {zDescription}
-              </Typography>
-            )}
+            <Typography variant="body2" className={classes.typoB2}>
+              {description}
+            </Typography>
           </CardContent>
         </Card>
       </Grow>

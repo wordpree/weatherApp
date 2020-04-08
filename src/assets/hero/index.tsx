@@ -14,4 +14,8 @@ import tl from "./todd-kent-large-unsplash.jpg";
 import tm from "./todd-kent-medium-unsplash.jpg";
 import ts from "./todd-kent-small-unsplash.jpg";
 
-export { dl, dm, ds, el, em, es, ml, mm, ms, tl, tm, ts };
+import rl from "./Roman-Kraft-LG-Unsplash.jpg";
+import rm from "./Roman-Kraft-MD-Unsplash.jpg";
+import rs from "./Roman-Kraft-SM-Unsplash.jpg";
+
+export { dl, dm, ds, el, em, es, ml, mm, ms, tl, tm, ts, rl, rm, rs };

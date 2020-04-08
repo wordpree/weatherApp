@@ -9,11 +9,11 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import Title from "../Title";
-import { ISygicPlace, IZomatoDetail } from "../../util/type";
+import { ITriposoPoi, IZomatoDetail } from "../../util/type";
 import { sortDetailsData } from "../../util/utils";
 
 interface ISCLProps {
-  detail: IZomatoDetail[] | ISygicPlace[];
+  detail: IZomatoDetail[] | ITriposoPoi[];
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
 
 const DetList4 = ({ detail }: ISCLProps) => {
   const classes = useStyles();
-  let data: (IZomatoDetail | ISygicPlace)[] = detail;
+  let data: (IZomatoDetail | ITriposoPoi)[] = detail;
   const LinkForward = React.forwardRef<any, Omit<LinkProps, "to">>(
     (props, ref) => (
       <Link to={{ pathname: `/attraction/` }} ref={ref} {...props} />
@@ -104,28 +104,37 @@ const DetList4 = ({ detail }: ISCLProps) => {
         {data.map((item) => {
           const ret = sortDetailsData(item);
           return (
-            <div className={classes.cardWrapper} key={ret.id}>
-              <Card className={classes.card}>
-                <CardActionArea className={classes.cardAct}>
-                  <CardMedia
-                    image={ret.img}
-                    className={classes.media}
-                    component={LinkForward}
-                  />
-                  <div className={classes.back} />
-                </CardActionArea>
-                <Typography variant="subtitle1" className={classes.typoRating}>
-                  {ret.rating && ret.rating.aggregate_rating}
-                </Typography>
-              </Card>
-              <div className={classes.cardCont}>
-                <Typography variant="body1">{ret.perex}</Typography>
-                <Typography variant="h5" className={classes.title}>
-                  {ret.name}
-                </Typography>
-                <Typography variant="body2">{ret.addressLocal}</Typography>
+            ret && (
+              <div className={classes.cardWrapper} key={ret.id}>
+                <Card className={classes.card}>
+                  <CardActionArea className={classes.cardAct}>
+                    <CardMedia
+                      image={ret.img}
+                      className={classes.media}
+                      component={LinkForward}
+                    />
+                    <div className={classes.back} />
+                  </CardActionArea>
+                  {ret.rating && (
+                    <Typography
+                      variant="subtitle1"
+                      className={classes.typoRating}
+                    >
+                      {ret.rating.aggregate_rating}
+                    </Typography>
+                  )}
+                </Card>
+                <div className={classes.cardCont}>
+                  <Typography variant="body1">
+                    {ret.snippet && ret.snippet.substring(0, 120) + "..."}
+                  </Typography>
+                  <Typography variant="h5" className={classes.title}>
+                    {ret.name}
+                  </Typography>
+                  <Typography variant="body2">{ret.addressLocal}</Typography>
+                </div>
               </div>
-            </div>
+            )
           );
         })}
       </div>

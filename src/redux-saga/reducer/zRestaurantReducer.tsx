@@ -31,11 +31,13 @@ export const zomatoCollectionReducer = (
 
 export const zomatoDetailReducer = (
   state = initDetState,
-  actions: TYPE.IZomatoDetailResSuccess
+  actions: TYPE.IZomatoDetailResSuccess | TYPE.IZomatoDeleteDetail
 ) => {
   switch (actions.type) {
     case TYPE.REQUEST_ZOMATO_DETAIL_SUCCEEDED:
       return actions.detail;
+    case TYPE.DELETE_ZOMATO_DETAIL:
+      return [];
     default:
       return state;
   }

@@ -40,12 +40,6 @@ export interface IProps {
   children: ReactNode;
 }
 
-export type TApiData =
-  | IGoogleAutoData
-  | ISygicCollection
-  | ISygicPlace
-  | IGooglePlaceDetail;
-
 type func<T> = React.Dispatch<React.SetStateAction<T>>;
 
 export interface IState<T> {
@@ -53,12 +47,6 @@ export interface IState<T> {
   setData: func<T[]>;
 }
 /******props interface end ************************************/
-/******type guard*********/
-export function detailIsZ(
-  detail: ISygicPlace | IZomatoDetail
-): detail is IZomatoDetail {
-  return (detail as IZomatoDetail).restaurant.cuisines !== undefined;
-}
 
 /***  google place  start***/
 type Adress = {
@@ -89,7 +77,49 @@ export interface IGoogleAutoData {
   place_id: string;
 }
 /* google place end*************/
+/*** triposo pois api start*******/
+export type ITriposoCol = { title: string; description: string; id: string };
+type Img = {
+  medium: {
+    url: string;
+  };
+  original: {
+    url: string;
+  };
+  thumbnail: {
+    url: string;
+  };
+};
 
+type ImgData = {
+  attribution: {
+    attribution_link: string;
+    attribution_text: string;
+  };
+  caption: string;
+  sizes: Img;
+};
+
+type Content = {
+  attribution: {
+    source_id: string;
+    url: string;
+  };
+  title: string;
+  sections: { body: string; image: ImgData; title: string }[];
+};
+
+export interface ITriposoPoi {
+  id: string;
+  name: string;
+  score: number;
+  intro: string;
+  images: ImgData[];
+  content: Content;
+  snippet: string;
+}
+
+/*** triposo pois api end*******/
 /* zomato collection api start*/
 export type IZomatoCollectionRes = Array<IZomatoCollection>;
 
@@ -195,74 +225,3 @@ export interface IUnsDataRes {
 }
 
 /** unsplash api end****************/
-
-/**sygic api start**/
-
-type ReferType = {
-  [key: string]: string | number;
-};
-type MediaAttr = {
-  title: string;
-  title_url: string;
-  author: string;
-  author_url: string;
-  license: string;
-  license_url: string;
-};
-export interface ISygicCollection {
-  id: number;
-  name_long: string;
-  place_ids: Array<string>;
-}
-
-export interface ISygicPlace {
-  name: string;
-  url: string;
-  id: string;
-  customer_rating?: number;
-  hotel_star_rating?: number;
-  categories: Array<string>;
-  tag_keys: Array<string>;
-  address: string;
-  admission: string;
-  opening_hours_note: string;
-  description: {
-    text: string;
-    provider: string;
-    link: string;
-  };
-  opening_hours_raw: string;
-  references: Array<ReferType>;
-  duration_estimate: number;
-  marker: string;
-  perex: string;
-  main_media: {
-    media: Array<{ url_template: string; attribution: MediaAttr; url: string }>;
-  };
-}
-
-export interface ISygicPlacesRes {
-  data: { places: Array<ISygicPlace> };
-}
-export interface IsygicCollectionsRes {
-  data: { collections: Array<ISygicCollection> };
-}
-export interface ISygicMeta {
-  type: string;
-  url_template: string;
-  url: string;
-  created_at: string;
-  attribution: {
-    title: string;
-    title_url: string;
-    author: string;
-    author_url: string;
-    license_url: string;
-    license: string;
-  };
-}
-
-export interface ISygicMetaRes {
-  data: { medias: Array<ISygicMeta> };
-}
-/**********sygic api end*********************/

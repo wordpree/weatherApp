@@ -1,20 +1,13 @@
 import React from "react";
-import SygicCollection from "./Collection";
+import TriposoCollection from "./Collection";
 import { Grid, Container, makeStyles } from "@material-ui/core";
-import { TravelStore } from "../../redux-saga/reducer";
-import { connect } from "react-redux";
 import Title from "../Title";
-import { ISygicCollection } from "../../util/type";
 
 import {
   Catarina_Sousa,
   Josh_Sorenson,
   Porapak_Apichodilok,
 } from "../../assets/collections";
-
-interface ISProps {
-  collections: ISygicCollection[];
-}
 
 const useStyles = makeStyles({
   container: {
@@ -26,18 +19,36 @@ const useStyles = makeStyles({
   },
 });
 
-const Collections = ({ collections }: ISProps) => {
+const Collections = () => {
   const classes = useStyles();
   const img = [Catarina_Sousa, Josh_Sorenson, Porapak_Apichodilok];
-
+  const cols = [
+    {
+      id: "sightseeing",
+      title: "Attractions on your way",
+      description:
+        "Enjoy the most popular natural attractions,parks,buildings and museums",
+    },
+    {
+      id: "do",
+      title: "Activities in the locality",
+      description:
+        "Where you find your outdoor adventures and indoor facilities",
+    },
+    {
+      id: "nightlife",
+      title: "night life at your fingers",
+      description: "Explore local colorful and alien culture under the light",
+    },
+  ];
   return (
     <Container className={classes.container}>
       <Title text="Your destination is over there,one more step" />
       <div className={classes.gridWrapper}>
         <Grid container spacing={2}>
-          {collections.slice(0, 3).map((col, index) => (
-            <SygicCollection
-              sCol={col}
+          {cols.map((col, index) => (
+            <TriposoCollection
+              tCol={col}
               key={index}
               image={img[index]}
               bpNumber={4}
@@ -49,7 +60,4 @@ const Collections = ({ collections }: ISProps) => {
   );
 };
 
-const mapStateToProps = (state: TravelStore) => ({
-  collections: state.collections,
-});
-export default connect(mapStateToProps)(Collections);
+export default Collections;

@@ -3,10 +3,9 @@ import {
   IGooglePlaceDetail,
   IWData,
   INData,
-  ISygicCollection,
-  ISygicPlace,
   IZomatoCollectionRes,
-  IZomatoDetailRes
+  IZomatoDetailRes,
+  ITriposoPoi,
 } from "../../util/type";
 
 export const REQUEST_G_PLACE_DETAIL = "REQUEST_G_PLACE_DETAIL";
@@ -50,7 +49,32 @@ export const REQUEST_ZOMATO_DETAIL = "REQUEST_ZOMATO_DETAIL";
 export const REQUEST_ZOMATO_DETAIL_SUCCEEDED =
   "REQUEST_ZOMATO_DETAIL_SUCCEEDED";
 export const REQUEST_ZOMATO_DETAIL_FAILED = "REQUEST_ZOMATO_DETAIL_FAILED";
+export const DELETE_ZOMATO_DETAIL = "DELETE_ZOMATO_DETAIL";
 
+export const REQUEST_TRIPOSO_POI = "REQUEST_TRIPOSO_POI";
+export const REQUEST_TRIPOSO_POI_SUCCEEDED = "REQUEST_TRIPOSO_POI_SUCCEEDED ";
+export const REQUEST_TRIPOSO_POI_FAILED = "REQUEST_TRIPOSO_POI_FAILED";
+export const DELETE_TRIPOSO_POI = "DELETE_TRIPOSO_POI";
+
+/******* triposo pois based on geo coordinate*****/
+export interface ITriposoPoiReq {
+  type: typeof REQUEST_TRIPOSO_POI;
+  geo: string;
+  tagLabel: string[];
+}
+
+export interface ITriposoPoiResSuccess {
+  type: typeof REQUEST_TRIPOSO_POI_SUCCEEDED;
+  poiPlaces: ITriposoPoi[];
+}
+
+export interface ITriposoPoiResErr {
+  type: typeof REQUEST_TRIPOSO_POI_FAILED;
+}
+
+export interface ITriposoPoiDelete {
+  type: typeof DELETE_TRIPOSO_POI;
+}
 /******* zomato city*****/
 export interface IZomatoCityReq {
   type: typeof REQUEST_ZOMATO_CITY;
@@ -97,15 +121,13 @@ export interface IZomatoDetailResErr {
   type: typeof REQUEST_ZOMATO_DETAIL_FAILED;
 }
 
+export interface IZomatoDeleteDetail {
+  type: typeof DELETE_ZOMATO_DETAIL;
+}
 /******* sygic collections action *****/
 export interface ISygicColsReq {
   type: typeof REQUEST_SYGIC_COLS;
   placeId: string;
-}
-
-export interface ISygicColsResSuccess {
-  type: typeof REQUEST_SYGIC_COLS_SUCCEEDED;
-  collections: ISygicCollection[];
 }
 
 export interface ISygicColsResErr {
@@ -116,12 +138,6 @@ export interface ISygicColsResErr {
 export interface ISygicDetailReq {
   type: typeof REQUEST_SYGIC_DETAIL;
   placeIds: string;
-  id: number[];
-}
-
-export interface ISygicDetailResSuccess {
-  type: typeof REQUEST_SYGIC_DETAIL_SUCCEEDED;
-  places: ISygicPlace[];
   id: number[];
 }
 
@@ -207,10 +223,8 @@ export type TravelActionType =
   | INewsResSuccess
   | INewsResERR
   | ISygicColsReq
-  | ISygicColsResSuccess
   | ISygicColsResErr
   | ISygicDetailReq
-  | ISygicDetailResSuccess
   | ISygicDetailResErr
   | IZomatoCityReq
   | IZomatoCityResSuccess
@@ -220,4 +234,9 @@ export type TravelActionType =
   | IZomatoCollectionResErr
   | IZomatoDetailReq
   | IZomatoDetailResSuccess
-  | IZomatoDetailResErr;
+  | IZomatoDetailResErr
+  | IZomatoDeleteDetail
+  | ITriposoPoiReq
+  | ITriposoPoiResSuccess
+  | ITriposoPoiResErr
+  | ITriposoPoiDelete;

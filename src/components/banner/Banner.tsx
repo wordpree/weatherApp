@@ -15,19 +15,28 @@ import {
   ds,
   es,
   ms,
-  ts
+  ts,
+  rl,
+  rm,
+  rs,
 } from "../../assets/hero";
 
 const Banner = () => {
-  const largeImg = [dl, el, ml, tl];
-  const mediumImg = [dm, em, mm, tm];
-  const smallImg = [ds, es, ms, ts];
+  const largeImg = [rl, ml, dl, el, tl];
+  const mediumImg = [rm, mm, dm, em, tm];
+  const smallImg = [rs, ms, ds, es, ts];
 
   const md = useMediaQuery("(min-width:960px)");
   const lg = useMediaQuery("(min-width:1248px)");
   const properImg = lg ? largeImg : md ? mediumImg : smallImg;
 
-  const author = ["Dan Freeman", "Eva Dang", "Manuel Cosentino", "todd kent"];
+  const author = [
+    "Dan Freeman",
+    "Eva Dang",
+    "Manuel Cosentino",
+    "Todd Kent",
+    "Roman Kraft",
+  ];
   const settings = {
     dots: true,
     fade: true,
@@ -36,7 +45,7 @@ const Banner = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />
+    prevArrow: <PrevArrow />,
   };
 
   const carousel = properImg.map((img, key) => (

@@ -10,11 +10,11 @@ import {
   Button,
 } from "@material-ui/core";
 import Title from "../Title";
-import { ISygicPlace, IZomatoDetail } from "../../util/type";
+import { ITriposoPoi, IZomatoDetail } from "../../util/type";
 import { sortDetailsData } from "../../util/utils";
 
 interface ISCLProps {
-  detail: IZomatoDetail[] | ISygicPlace[];
+  detail: IZomatoDetail[] | ITriposoPoi[];
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -99,7 +99,7 @@ const DetList3 = ({ detail }: ISCLProps) => {
       <Link to={{ pathname: `/attraction/` }} ref={ref} {...props} />
     )
   );
-  let data: (IZomatoDetail | ISygicPlace)[] = detail;
+  let data: (IZomatoDetail | ITriposoPoi)[] = detail;
   return (
     <>
       <Title text="Keep going on your new finding" />
@@ -107,42 +107,46 @@ const DetList3 = ({ detail }: ISCLProps) => {
         {data.map((item) => {
           const ret = sortDetailsData(item);
           return (
-            <div className={classes.cardWrapper} key={ret.id}>
-              <Card className={classes.card}>
-                <CardActionArea className={classes.cardAct}>
-                  <CardMedia
-                    image={ret.img}
-                    className={classes.media}
-                    component={LinkForward}
-                  />
-                </CardActionArea>
-              </Card>
-              <div className={classes.cardCont}>
-                <Typography variant="h5" className={classes.title}>
-                  {ret.name}
-                </Typography>
-                <Typography variant="caption" color="textSecondary">
-                  {ret.address}
-                </Typography>
-                {ret.establishment && (
-                  <>
-                    <Typography variant="body2">
-                      {`${ret.cuisines} - ${ret.establishment[0]}`}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      <span className={classes.span}>
-                        {ret.rating.aggregate_rating}
-                      </span>
-                      {` - ${ret.rating.votes} reviews`}
-                    </Typography>
-                  </>
-                )}
-                <Typography variant="body1">{ret.perex}</Typography>
-                <Button variant="outlined" className={classes.btn}>
-                  View more imformation
-                </Button>
+            ret && (
+              <div className={classes.cardWrapper} key={ret.id}>
+                <Card className={classes.card}>
+                  <CardActionArea className={classes.cardAct}>
+                    <CardMedia
+                      image={ret.img}
+                      className={classes.media}
+                      component={LinkForward}
+                    />
+                  </CardActionArea>
+                </Card>
+                <div className={classes.cardCont}>
+                  <Typography variant="h5" className={classes.title}>
+                    {ret.name}
+                  </Typography>
+                  <Typography variant="caption" color="textSecondary">
+                    {ret.address}
+                  </Typography>
+                  {ret.establishment && (
+                    <>
+                      <Typography variant="body2">
+                        {`${ret.cuisines} - ${ret.establishment[0]}`}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        <span className={classes.span}>
+                          {ret.rating.aggregate_rating}
+                        </span>
+                        {` - ${ret.rating.votes} reviews`}
+                      </Typography>
+                    </>
+                  )}
+                  <Typography variant="body1">
+                    {ret.snippet && ret.snippet.substring(0, 120) + "..."}
+                  </Typography>
+                  <Button variant="outlined" className={classes.btn}>
+                    View more imformation
+                  </Button>
+                </div>
               </div>
-            </div>
+            )
           );
         })}
       </div>

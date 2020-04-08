@@ -7,16 +7,16 @@ import {
   StyledDivSMedia,
   StyledDivPowerBy,
   StyledUl,
-  StyledAnchor
+  StyledAnchor,
 } from "./style";
 
 const Footer = () => {
   const power = [
     "NewsApi | ",
     "OpenWeatherMap | ",
-    "SygicTravel | ",
+    "Triposo | ",
     "Zomato | ",
-    "Unsplash"
+    "Unsplash",
   ].map((item, index) => (
     <StyledAnchor href="#b" key={index}>
       <span>{item}</span>

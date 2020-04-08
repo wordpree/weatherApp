@@ -9,9 +9,8 @@ import {
   ZCollections,
   Banner,
   Recommend,
-  Collections,
-  ColDet,
-  Footer
+  TCollections,
+  Footer,
 } from "../components";
 
 import { Grid, Container } from "@material-ui/core";
@@ -22,7 +21,7 @@ const Home = () => {
       <Header />
       <Banner />
       <Search />
-      <Collections />
+      <TCollections />
       <ZCollections />
       <Container>
         <Title text="News & Weather" css={{ borderBottom: "2px solid" }} />

@@ -2,7 +2,7 @@ import { all, fork } from "redux-saga/effects";
 import { googleDetailSaga, googleCompleteSaga } from "./googleSaga";
 import openWeatherSaga from "./weatherSaga";
 import newsorgSaga from "./newsorgSaga";
-import { SygicCollections, sygicPlaces } from "./sygicSaga";
+import triposoPoiSaga from "./triposoSaga";
 import { zCollectionSaga, zCitySaga, zDetailSaga } from "./zomatoSaga";
 
 export default function* saga() {
@@ -11,10 +11,9 @@ export default function* saga() {
     fork(googleCompleteSaga),
     fork(openWeatherSaga),
     fork(newsorgSaga),
-    fork(SygicCollections),
-    fork(sygicPlaces),
     fork(zCollectionSaga),
     fork(zCitySaga),
-    fork(zDetailSaga)
+    fork(zDetailSaga),
+    fork(triposoPoiSaga),
   ]);
 }
