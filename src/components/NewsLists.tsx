@@ -1,6 +1,8 @@
 import React from "react";
-import { useNewsContext } from "../util/apiCall";
 import { INData } from "../util/type";
+import { connect } from "react-redux";
+import { TravelStore } from "../redux-saga/reducer";
+import ScrollToTop from "./ScrollToTop";
 import {
   Grid,
   Container,
@@ -17,16 +19,16 @@ import {
   ListItemText,
   ListItemAvatar,
   Avatar,
-  useMediaQuery
+  useMediaQuery,
 } from "@material-ui/core";
 import { AlarmPlus, Account } from "mdi-material-ui";
 import Loading from "./Loading";
 import Title from "./Title";
 import imgFromUnsplash from "../assets/en-unsplash.jpg";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   secOAction: {
-    position: "relative"
+    position: "relative",
   },
   secOMeta: {
     position: "absolute",
@@ -37,29 +39,29 @@ const useStyles = makeStyles(theme => ({
     color: "#fff",
     letterSpacing: 1.1,
     textAlign: "center",
-    width: "100%"
+    width: "100%",
   },
   secOMedia: {
-    paddingTop: "56.75%"
+    paddingTop: "56.75%",
   },
   secOTypo1: {
     marginBottom: "0.5em",
     backgroundColor: "#FFCC0E",
     padding: "0.1em 0.25em",
-    color: "#000"
+    color: "#000",
   },
   secThdTitle: {
-    fontSize: "1rem"
+    fontSize: "1rem",
   },
   icon: { color: "#fff" },
   secTCard: {
-    position: "relative"
+    position: "relative",
   },
   secTCardHder: {
     letterSpacing: 1,
     backgroundColor: "rgba(0,0,0,0.65)",
     color: "#fff",
-    textAlign: "center"
+    textAlign: "center",
   },
   secTCardCont: {
     position: "absolute",
@@ -68,26 +70,26 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     textAlign: "center",
     color: "#fff",
-    backgroundColor: "rgba(0,0,0,0.35)"
+    backgroundColor: "rgba(0,0,0,0.35)",
   },
   secTMedia: {
     paddingTop: "56.75%",
     [theme.breakpoints.up("lg")]: {
-      paddingTop: "115%"
-    }
+      paddingTop: "115%",
+    },
   },
   secTwHt: {
-    fontSize: "1.2rem"
+    fontSize: "1.2rem",
   },
   secTTypoMeta: {
     display: "inline-block",
     marginBottom: "0.75em",
     backgroundColor: "#FFCC0E",
     color: "#000",
-    padding: "0.25em 0.1em"
+    padding: "0.25em 0.1em",
   },
   secTTypoCont: {
-    letterSpacing: 1
+    letterSpacing: 1,
   },
   thrTypoTitle: {
     padding: "0.5em 0.1em ",
@@ -95,77 +97,77 @@ const useStyles = makeStyles(theme => ({
     color: "#fff",
     borderBottom: "1px solid #FFCC0E",
     textAlign: "center",
-    letterSpacing: 1
+    letterSpacing: 1,
   },
   thrTMedia: {
-    paddingTop: "56.25%"
+    paddingTop: "56.25%",
   },
   thrTypoContainer: {
-    textAlign: "center"
+    textAlign: "center",
   },
   thrTypoMeta: {
     marginTop: "1.5em",
     backgroundColor: "#FFCC0E",
     color: "#000",
     padding: "0.5em",
-    display: "inline-block"
+    display: "inline-block",
   },
   thrTypoCont: {
     padding: "0.45em 0.2em",
     borderTop: "1px solid #FFCC0E",
     textAlign: "center",
-    letterSpacing: 1
+    letterSpacing: 1,
   },
   fourGrid: {
     "&>div": {
       marginBottom: "1.75em",
-      padding: "0.75em 0.25em"
-    }
+      padding: "0.75em 0.25em",
+    },
   },
   fEntry: {
     [theme.breakpoints.up("md")]: {
-      display: "flex"
-    }
+      display: "flex",
+    },
   },
   fEntryRev: {
     [theme.breakpoints.up("md")]: {
       display: "flex",
-      flexDirection: "row-reverse"
-    }
+      flexDirection: "row-reverse",
+    },
   },
   fourTypoCont: {
     padding: "0.45em 0.2em",
     textAlign: "center",
-    letterSpacing: 1
+    letterSpacing: 1,
   },
   fourCardMedia1: {
     paddingTop: "63.5%",
-    width: "100%"
+    width: "100%",
   },
   fourCard1: {
     [theme.breakpoints.up("md")]: {
       width: "50%",
-      flex: "1 0 auto"
-    }
+      flex: "1 0 auto",
+    },
   },
   fourCardMedia2: {
-    paddingTop: "63.5%"
+    paddingTop: "63.5%",
   },
   fourTypoWrapper1: {
     padding: "0.45em 0.75em",
-    textAlign: "center"
+    textAlign: "center",
   },
   fourTypoSubTl: {
     fontWeight: 300,
     letterSpacing: 1,
-    fontSize: "0.875em"
+    fontSize: "0.875em",
   },
   fourSpanMeta: {
     "&>*": {
       marginRight: "0.25em",
       display: "inline-flex",
-      alignItems: "center"
-    }
+      alignItems: "center",
+    },
   },
   fourMeta: {
     color: "#000",
@@ -174,32 +176,34 @@ const useStyles = makeStyles(theme => ({
       marginRight: "0.875em",
       marginBottom: "0.25em",
       backgroundColor: "#FFCC0E",
-      display: "inline-block"
+      display: "inline-block",
     },
     marginTop: "1rem",
     fontSize: "0.875em",
-    display: "inline-block"
+    display: "inline-block",
   },
   textPrimary: {
     textDecoration: "none",
     color: "inherit",
     "&:hover": {
       textDecoration: "underline",
-      textDecorationColor: "#FFCC0E"
+      textDecorationColor: "#FFCC0E",
     },
-    letterSpacing: 1
+    letterSpacing: 1,
   },
   credit: {
     textAlign: "right",
-    color: "rgba(0,0,0,0.45)"
-  }
+    color: "rgba(0,0,0,0.45)",
+  },
 }));
 
 type dataType = null | undefined | string;
+interface INewsProps {
+  news: INData[];
+}
 
-const NewsLists = () => {
+const NewsLists = ({ news }: INewsProps) => {
   const classes = useStyles();
-  const { loading, articles } = useNewsContext();
   const smQuery = useMediaQuery("(max-width:400px)");
 
   const contentIn =
@@ -283,7 +287,7 @@ const NewsLists = () => {
               title={titleLmt(item.title)}
               classes={{
                 title: classes.secThdTitle,
-                root: classes.secTCardHder
+                root: classes.secTCardHder,
               }}
             />
             <CardActionArea
@@ -462,16 +466,17 @@ const NewsLists = () => {
     </Grid>
   );
 
-  return loading ? (
+  return news.length === 0 ? (
     <Loading value={100} />
   ) : (
     <>
+      <ScrollToTop />
       <Title text="Headline news from locals" />
       <Container>
-        {sectionOne(articles.slice(0, 2))}
-        {sectionTwo(articles.slice(2, 6))}
-        {sectionThree(articles.slice(6, 9))}
-        {sectionFour(articles.slice(9, 25))}
+        {sectionOne(news.slice(0, 2))}
+        {sectionTwo(news.slice(2, 6))}
+        {sectionThree(news.slice(6, 9))}
+        {sectionFour(news.slice(9, 25))}
         <div className={classes.credit}>
           <a
             className={classes.textPrimary}
@@ -487,4 +492,7 @@ const NewsLists = () => {
   );
 };
 
-export default NewsLists;
+const mapStateToProps = (state: TravelStore) => ({
+  news: state.news,
+});
+export default connect(mapStateToProps)(NewsLists);
