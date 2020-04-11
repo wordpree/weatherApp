@@ -1,5 +1,9 @@
 import { all, fork } from "redux-saga/effects";
-import { googleDetailSaga, googleCompleteSaga } from "./googleSaga";
+import {
+  googleDetailSaga,
+  googleCompleteSaga,
+  textsearchSaga,
+} from "./googleSaga";
 import openWeatherSaga from "./weatherSaga";
 import newsorgSaga from "./newsorgSaga";
 import triposoPoiSaga from "./triposoSaga";
@@ -9,6 +13,7 @@ export default function* saga() {
   yield all([
     fork(googleDetailSaga),
     fork(googleCompleteSaga),
+    fork(textsearchSaga),
     fork(openWeatherSaga),
     fork(newsorgSaga),
     fork(zCollectionSaga),

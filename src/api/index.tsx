@@ -1,5 +1,5 @@
 import { fetchData } from "../util/utils";
-import { S_API_KEY, Z_API_KEY } from "./config";
+import { S_API_KEY, Z_API_KEY, P_API_KEY } from "./config";
 
 const sygicHeader = {
   "x-api-key": S_API_KEY,
@@ -9,6 +9,9 @@ const zomatoHeader = {
   "user-key": Z_API_KEY,
 };
 
+const pexelsHeader = {
+  Authorization: P_API_KEY,
+};
 export const fetchGooglePlace = async (url: string) => {
   const res = await fetchData(url, false);
   if (res.status !== "OK") {
@@ -53,6 +56,14 @@ export const fetchTriposo = async (url: string) => {
   const res = await fetchData(url, false);
   if (res && (res.code || res.error)) {
     throw new Error(`code: ${res.code}, ${res.error}`);
+  }
+  return res;
+};
+
+export const fetchPexels = async (url: string) => {
+  const res = await fetchData(url, pexelsHeader);
+  if (res && (res.status || res.error)) {
+    throw new Error(`code: ${res.status}, ${res.error}`);
   }
   return res;
 };

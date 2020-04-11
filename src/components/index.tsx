@@ -9,7 +9,7 @@ import { ZCollections, ZCollection, ZDetail } from "./zomato";
 import Collection from "./Collection";
 import Title from "./Title";
 import Banner from "./banner";
-import Recommend from "./Recommend";
+import { Photos } from "./pexels";
 import { TDetail, TCollections } from "./triposo";
 import Loading from "./Loading";
 import Footer from "./footer";
@@ -27,9 +27,9 @@ export {
   LocalWeather,
   TourPhoto,
   Title,
+  Photos,
   ScrollToTop,
   Banner,
-  Recommend,
   Loading,
   TCollections,
   TDetail,

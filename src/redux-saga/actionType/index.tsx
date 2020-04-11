@@ -6,6 +6,7 @@ import {
   IZomatoCollectionRes,
   IZomatoDetailRes,
   ITriposoPoi,
+  IGoogleTextsearch,
 } from "../../util/type";
 
 export const REQUEST_G_PLACE_DETAIL = "REQUEST_G_PLACE_DETAIL";
@@ -55,6 +56,15 @@ export const REQUEST_TRIPOSO_POI = "REQUEST_TRIPOSO_POI";
 export const REQUEST_TRIPOSO_POI_SUCCEEDED = "REQUEST_TRIPOSO_POI_SUCCEEDED ";
 export const REQUEST_TRIPOSO_POI_FAILED = "REQUEST_TRIPOSO_POI_FAILED";
 export const DELETE_TRIPOSO_POI = "DELETE_TRIPOSO_POI";
+
+export const REQUEST_G_PLACE_POI_SUCCEEDED = "REQUEST_G_PLACE_POI_SUCCEEDED";
+export const REQUEST_G_PLACE_POI = "REQUEST_G_PLACE_POI";
+export const REQUEST_G_PLACE_POI_FAILED = "REQUEST_G_PLACE_POI_FAILED";
+
+export const REQUEST_G_PLACE_PHOTO_SUCCEEDED =
+  "REQUEST_G_PLACE_PHOTO_SUCCEEDED";
+export const REQUEST_G_PLACE_PHOTO = "REQUEST_G_PLACE_PHOTO";
+export const REQUEST_G_PLACE_PHOTO_FAILED = "REQUEST_G_PLACE_PHOTO_FAILED";
 
 /******* triposo pois based on geo coordinate*****/
 export interface ITriposoPoiReq {
@@ -208,7 +218,23 @@ export interface IGetGoogleAutoCompleteERR {
   type: typeof REQUEST_G_AUTO_COMPLETE_FAILED;
 }
 
+/******* google place textsearch action *****/
+export interface IReqGoogleTextsearch {
+  type: typeof REQUEST_G_PLACE_POI;
+  country: string;
+}
+export interface IGetGoogleTextsearchSuccess {
+  type: typeof REQUEST_G_PLACE_POI_SUCCEEDED;
+  pois: IGoogleTextsearch[];
+}
+export interface IGetGoogleTextsearchErr {
+  type: typeof REQUEST_G_PLACE_POI_FAILED;
+}
+
 export type TravelActionType =
+  | IReqGoogleTextsearch
+  | IGetGoogleTextsearchSuccess
+  | IGetGoogleTextsearchErr
   | ISearchDataSubmit
   | IGClearAutoComplete
   | ISearchDataInput

@@ -20,6 +20,7 @@
     "@types/redux-saga": "^0.10.5",
     "@types/styled-components": "^5.0.0",
     "animate.css": "^3.7.2",
+    "axios": "^0.19.2",
     "country-list": "^2.2.0",
     "create-react-app": "^3.4.0",
     "lodash.debounce": "^4.0.8",

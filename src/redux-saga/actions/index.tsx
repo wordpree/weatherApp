@@ -7,6 +7,7 @@ import {
   IZomatoCollectionRes,
   IZomatoDetailRes,
   ITriposoPoi,
+  IGoogleTextsearch,
 } from "../../util/type";
 
 /******* google place api *****/
@@ -157,11 +158,27 @@ export const reqTriposoPoiSuccess = (
   type: TYPE.REQUEST_TRIPOSO_POI_SUCCEEDED,
   poiPlaces,
 });
-
 export const reqTriposoPoiFailed = (error: string): TYPE.TravelActionType => ({
   type: TYPE.REQUEST_TRIPOSO_POI_FAILED,
 });
-
 export const deleteTriposoPois = (): TYPE.TravelActionType => ({
   type: TYPE.DELETE_TRIPOSO_POI,
+});
+
+export const reqGoogleSearchText = (
+  country: string
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_G_PLACE_POI,
+  country,
+});
+export const reqGoogleSearchTextSuccess = (
+  pois: IGoogleTextsearch[]
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_G_PLACE_POI_SUCCEEDED,
+  pois,
+});
+export const reqGoogleSearchTextFailed = (
+  error: string
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_G_PLACE_POI_FAILED,
 });

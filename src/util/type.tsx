@@ -76,6 +76,27 @@ export interface IGoogleAutoData {
   id: string;
   place_id: string;
 }
+
+export interface IGoogleTextsearch {
+  formatted_address: string;
+  geometry: {
+    location: {
+      lat: number;
+      lng: number;
+    };
+  };
+  id: string;
+  name: string;
+  photos: [
+    {
+      photo_reference: string;
+    }
+  ];
+  place_id: string;
+  rating: number;
+  user_ratings_total: 3920;
+}
+
 /* google place end*************/
 /*** triposo pois api start*******/
 export type ITriposoCol = { title: string; description: string; id: string };
@@ -199,29 +220,3 @@ export interface INDataRes {
 }
 
 /****** news api end********************/
-
-/**unsplash api start**/
-export interface IUnsData {
-  id: string;
-  created_at: Date;
-  urls: {
-    raw: string;
-    full: string;
-    regular: string;
-    small: string;
-    thumb: string;
-  };
-  user: {
-    name: string;
-  };
-  links: {
-    html: string;
-  };
-  alt_description: string;
-}
-export interface IUnsDataRes {
-  loading: boolean;
-  results: Array<IUnsData>;
-}
-
-/** unsplash api end****************/

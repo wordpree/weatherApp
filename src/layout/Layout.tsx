@@ -12,6 +12,7 @@ interface ILProps {
   reqWeatherAction(geo: string): void;
   reqZomatoCityAction(geo: string): void;
   reqZomatoCollectionAction(geo: string): void;
+  reqGoogleSearchText(country: string): void;
 }
 
 function Layout({
@@ -20,6 +21,7 @@ function Layout({
   reqWeatherAction,
   reqZomatoCityAction,
   reqZomatoCollectionAction,
+  reqGoogleSearchText,
 }: ILProps) {
   useEffect(() => {
     setStorageSearchPara(detail);
@@ -34,12 +36,16 @@ function Layout({
 
     /**openweathermap */
     reqWeatherAction(geoLocation);
+
+    /*pexels photos*/
+    reqGoogleSearchText(location.split("OR")[1]);
   }, [
     detail,
     reqZomatoCollectionAction,
     reqZomatoCityAction,
     reqNewsAction,
     reqWeatherAction,
+    reqGoogleSearchText,
   ]);
 
   return (

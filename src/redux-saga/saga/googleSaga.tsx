@@ -1,4 +1,4 @@
-import { put, call, take } from "redux-saga/effects";
+import { put, call, take, takeLatest } from "redux-saga/effects";
 import { fetchGooglePlace } from "../../api";
 import * as TYPE from "../actionType";
 import * as url from "../../api/config";
@@ -33,4 +33,17 @@ export function* googleDetailSaga() {
     const { placeId } = yield take(TYPE.REQUEST_G_PLACE_DETAIL);
     yield call(googlePlaceDetail, placeId);
   }
+}
+
+function* fetchGoogleTextsearch({ country }: TYPE.IReqGoogleTextsearch) {
+  try {
+    const res = yield call(fetchGooglePlace, url.googleTextsearch(country));
+    yield put(actions.reqGoogleSearchTextSuccess(res.results));
+  } catch (error) {
+    put(actions.reqGoogleSearchTextFailed(error));
+  }
+}
+
+export function* textsearchSaga() {
+  yield takeLatest(TYPE.REQUEST_G_PLACE_POI, fetchGoogleTextsearch);
 }

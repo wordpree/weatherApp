@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import detailReducer from "./gPlaceDetailReducer";
-import completeReducer from "./gAutonCompleteReducer";
+import {
+  detailReducer,
+  completeReducer,
+  textsearchReducer,
+} from "./googlePlaceReducer";
 import weatherReducer from "./openWeatherReducer";
 import newsReducer from "./newsorgReducer";
 import triposoPlacesPoiReducer from "./tPlacesPoiReducer";
-
 import {
   zomatoCityReducer,
   zomatoCollectionReducer,
@@ -20,6 +22,7 @@ const rootReducer = combineReducers({
   zCollections: zomatoCollectionReducer,
   zColDetail: zomatoDetailReducer,
   tPoisDetail: triposoPlacesPoiReducer,
+  gPois: textsearchReducer,
 });
 export type TravelStore = ReturnType<typeof rootReducer>;
 export default rootReducer;

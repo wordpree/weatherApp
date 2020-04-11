@@ -4,12 +4,11 @@ import {
   Search,
   LocalNews,
   LocalWeather,
-  TourPhoto,
   Title,
   ZCollections,
   Banner,
-  Recommend,
   TCollections,
+  Photos,
   Footer,
 } from "../components";
 
@@ -30,10 +29,7 @@ const Home = () => {
           <LocalWeather />
         </Grid>
       </Container>
-      {/* <UnspPhotoProvider location={query}>
-        <TourPhoto />
-      </UnspPhotoProvider>
-      <Recommend />} */}
+      <Photos />
       <Footer />
     </>
   );

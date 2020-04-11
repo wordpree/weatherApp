@@ -8,6 +8,7 @@ import {
   reqWeatherAction,
   reqZomatoCityAction,
   reqZomatoCollectionAction,
+  reqGoogleSearchText,
 } from "../redux-saga/actions";
 
 const mapStateToProps = (state: TravelStore) => ({
@@ -21,6 +22,7 @@ const mapDispatchToPorps = (dispatch: Dispatch<TravelActionType>) =>
       reqNewsAction,
       reqZomatoCityAction,
       reqZomatoCollectionAction,
+      reqGoogleSearchText,
     },
     dispatch
   );
