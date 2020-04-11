@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { TravelStore } from "../../redux-saga/reducer";
-import { IGoogleTextsearch } from "../../util/type";
+import { TravelStore } from "../redux-saga/reducer";
+import { IGoogleTextsearch } from "../util/type";
 import {
   GridList,
   GridListTile,
@@ -48,14 +48,17 @@ const Photos = ({ pois }: IPProps) => {
   const googlePlacePhoto = (reference: string, maxWidth: number) =>
     `${G_PLACE}/photo?maxwidth=${maxWidth}&photoreference=${reference}&key=${G_API_KEY}`;
   const photos = pois.length
-    ? pois.map((poi, index) => ({
-        img: googlePlacePhoto(poi.photos[0].photo_reference, 960),
-        name: poi.name,
-        rating: poi.rating,
-        counts: poi.user_ratings_total,
-        address: poi.formatted_address,
-        cols: index % 6 === 5 ? 2 : index % 6 === 0 ? 2 : 1,
-      }))
+    ? pois
+        .sort((a, b) => b.rating - a.rating)
+        .slice(0, 15)
+        .map((poi, index) => ({
+          img: googlePlacePhoto(poi.photos[0].photo_reference, 960),
+          name: poi.name,
+          rating: poi.rating,
+          counts: poi.user_ratings_total,
+          address: poi.formatted_address,
+          cols: index % 6 === 5 ? 2 : index % 6 === 0 ? 2 : 1,
+        }))
     : [];
   const md = useMediaQuery("(min-width:960px)");
   const sm = useMediaQuery("(min-width:450px)");

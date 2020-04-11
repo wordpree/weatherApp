@@ -16,7 +16,7 @@ const Footer = () => {
     "OpenWeatherMap | ",
     "Triposo | ",
     "Zomato | ",
-    "Unsplash",
+    "Google place",
   ].map((item, index) => (
     <StyledAnchor href="#b" key={index}>
       <span>{item}</span>

@@ -4,12 +4,11 @@ import NavLists from "./header/NavLists";
 import Search from "./search";
 import LocalNews from "./LocalNews";
 import LocalWeather from "./LocalWeather";
-import TourPhoto from "./TourPhoto";
 import { ZCollections, ZCollection, ZDetail } from "./zomato";
 import Collection from "./Collection";
 import Title from "./Title";
 import Banner from "./banner";
-import { Photos } from "./pexels";
+import Photos from "./Photos";
 import { TDetail, TCollections } from "./triposo";
 import Loading from "./Loading";
 import Footer from "./footer";
@@ -25,7 +24,6 @@ export {
   ZDetail,
   LocalNews,
   LocalWeather,
-  TourPhoto,
   Title,
   Photos,
   ScrollToTop,
