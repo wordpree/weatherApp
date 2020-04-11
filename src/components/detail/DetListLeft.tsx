@@ -101,7 +101,7 @@ const DetListLeft = ({ detail }: ICProps) => {
                       </Typography>
                       <Typography variant="body2" className={classes.typoB2}>
                         {ret.addressLocal}
-                        {ret.snippet && ret.snippet.substring(0, 120) + "..."}
+                        {ret.snippet && ret.snippet.substring(0, 80) + "..."}
                       </Typography>
                     </CardContent>
                   </Card>

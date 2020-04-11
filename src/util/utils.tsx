@@ -133,7 +133,7 @@ export const sortDetailsData = (item: ITriposoPoi | IZomatoDetail) => {
     };
   } else {
     ret = {
-      img: item.images[0].sizes.medium.url,
+      img: item.images[0].sizes.medium.url.replace("http", "https"),
       imgOrigin: item.images[0].sizes.original.url, //apllied first detail cardmedia
       name: item.name,
       snippet: item.snippet,
