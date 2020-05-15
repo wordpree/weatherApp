@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { NavLink } from "react-router-dom";
 import {
   Typography,
@@ -9,6 +9,18 @@ import {
   ListItemIcon,
 } from "@material-ui/core";
 import hero from "../../assets/hero/luca-bravo-unsplash.jpg";
+
+const scale = keyframes`
+     0% {
+       transform:scale(1);
+     }
+     60% {
+       transform:scale(1.04);
+     }
+     100% {
+       transform:scale(1);
+     }
+`;
 
 export const StyledMobileNav = styled.div`
   display: flex;
@@ -86,8 +98,7 @@ export const StyledNavLink = styled(NavLink)`
     transition: all 0.3s ease-in-out;
   }
 `;
-
-export const StyledImgWrapper = styled.div`
+export const StyledEntry = styled.div`
   min-height: 100vh;
   max-height: 960px;
   @media only screen and (min-width: 1024px) {
@@ -95,12 +106,18 @@ export const StyledImgWrapper = styled.div`
     max-height: inherit;
     min-height: inherit;
   }
+  position: relative;
+`;
+export const StyledImgWrapper = styled.div`
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   background-repeat: no-repeat;
   background-size: cover;
-  position: relative;
+  position: absolute;
   background-position: center;
-  position: relative;
   background-image: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.6) 0%,
@@ -109,6 +126,8 @@ export const StyledImgWrapper = styled.div`
       transparent 100%
     ),
     url(${hero});
+  animation: ${scale} 4s ease-in;
+  z-index: -999;
 `;
 export const StyledNav = styled.div`
   display: none;

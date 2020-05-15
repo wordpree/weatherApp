@@ -14,6 +14,7 @@ import {
   StyledMainWrapper,
   StyledMobileNav,
   StyledMobileBtn,
+  StyledEntry,
 } from "./styled";
 import { Menu } from "mdi-material-ui";
 import SearchFlights from "../flightSearch/SearchFlights";
@@ -31,8 +32,9 @@ const Banner = () => {
   const [open, setOpen] = useState(false);
   const handleClick = () => setOpen((prev) => !prev);
   return (
-    <div style={{ position: "relative" }}>
-      <StyledImgWrapper>
+    <StyledEntry>
+      <StyledImgWrapper></StyledImgWrapper>
+      <>
         <StyledHeader>
           <StyledLogo>
             <StyledLogoImg src={logo} alt="travelus logo" />
@@ -59,9 +61,9 @@ const Banner = () => {
             <SearchFlights />
           </StyledSearchContainer>
         </StyledMainWrapper>
-      </StyledImgWrapper>
+      </>
       <MobileExpand open={open} handleClick={setOpen} />
-    </div>
+    </StyledEntry>
   );
 };
 
