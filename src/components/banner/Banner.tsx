@@ -1,71 +1,68 @@
-import React from "react";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import Slider from "react-slick";
-import { NextArrow, PrevArrow } from "../Arrow";
-import { StyledImgWrapper, StyledTypo } from "./styled";
+import React, { useState } from "react";
 import {
-  dl,
-  dm,
-  el,
-  em,
-  ml,
-  mm,
-  tl,
-  tm,
-  ds,
-  es,
-  ms,
-  ts,
-  rl,
-  rm,
-  rs,
-} from "../../assets/hero";
+  StyledImgWrapper,
+  StyledNavTypo,
+  StyledLogo,
+  StyledNav,
+  StyledHeader,
+  StyledLogoImg,
+  StyledNavLink,
+  StyledMsgMain,
+  StyledContWrapper,
+  StyledMsgSub,
+  StyledSearchContainer,
+  StyledMainWrapper,
+  StyledMobileNav,
+  StyledMobileBtn,
+} from "./styled";
+import { Menu } from "mdi-material-ui";
+import SearchFlights from "../flightSearch/SearchFlights";
+import logo from "../../assets/hero/logo@2x.png";
+import MobileExpand from "./MobileExpand";
 
 const Banner = () => {
-  const largeImg = [rl, ml, dl, el, tl];
-  const mediumImg = [rm, mm, dm, em, tm];
-  const smallImg = [rs, ms, ds, es, ts];
-
-  const md = useMediaQuery("(min-width:960px)");
-  const lg = useMediaQuery("(min-width:1248px)");
-  const properImg = lg ? largeImg : md ? mediumImg : smallImg;
-
-  const author = [
-    "Dan Freeman",
-    "Eva Dang",
-    "Manuel Cosentino",
-    "Todd Kent",
-    "Roman Kraft",
+  const nav = [
+    { name: "Home", to: "/" },
+    { name: "Explore", to: "/explore" },
+    { name: "Hotels", to: "/hotels" },
+    { name: "Flights", to: "/flight" },
+    { name: "Blog", to: "/blog" },
   ];
-  const settings = {
-    dots: true,
-    fade: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-  };
-
-  const carousel = properImg.map((img, key) => (
-    <div key={key}>
-      <StyledImgWrapper style={{ backgroundImage: `url(${img})` }}>
-        <StyledTypo variant="caption">
-          By {author[key]} on{" "}
-          <a
-            href="https://unsplash.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: "none", color: "#fff" }}
-          >
-            Unsplash
-          </a>
-        </StyledTypo>
+  const [open, setOpen] = useState(false);
+  const handleClick = () => setOpen((prev) => !prev);
+  return (
+    <div style={{ position: "relative" }}>
+      <StyledImgWrapper>
+        <StyledHeader>
+          <StyledLogo>
+            <StyledLogoImg src={logo} alt="travelus logo" />
+          </StyledLogo>
+          <StyledNav>
+            {nav.map((item) => (
+              <StyledNavLink key={item.name} to={item.to}>
+                <StyledNavTypo variant="subtitle1">{item.name}</StyledNavTypo>
+              </StyledNavLink>
+            ))}
+          </StyledNav>
+          <StyledMobileNav>
+            <StyledMobileBtn onClick={handleClick}>
+              <Menu />
+            </StyledMobileBtn>
+          </StyledMobileNav>
+        </StyledHeader>
+        <StyledMainWrapper>
+          <StyledContWrapper>
+            <StyledMsgMain>Let's Get Your First Best Trip Ever!</StyledMsgMain>
+            <StyledMsgSub>Your life, your journey, your world</StyledMsgSub>
+          </StyledContWrapper>
+          <StyledSearchContainer>
+            <SearchFlights />
+          </StyledSearchContainer>
+        </StyledMainWrapper>
       </StyledImgWrapper>
+      <MobileExpand open={open} handleClick={setOpen} />
     </div>
-  ));
-  return <Slider {...settings}>{carousel}</Slider>;
+  );
 };
 
 export default Banner;

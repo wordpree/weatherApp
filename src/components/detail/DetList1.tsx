@@ -76,7 +76,8 @@ const useStyles = makeStyles((theme) => ({
 const DetList1 = ({ detail }: ISCLProps) => {
   const classes = useStyles();
   const ret = sortDetailsData(detail);
-
+  console.log(ret&&ret.img);
+  
   return (
     ret && (
       <Fade in={Boolean(detail)}>

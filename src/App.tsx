@@ -10,8 +10,15 @@ function App() {
     typography: {
       fontFamily: ["sans-serify", "Roboto", '"Helvetica Neue"', "Arial"].join(
         ","
-      )
-    }
+      ),
+    },
+    palette: {
+      primary: { main: "#028A8A" },
+      secondary: { main: "#fff" },
+    },
+    // overrides: {
+    //   MuiPickersDay: { backgroundColor: "#007bff" },
+    // },
   });
   return (
     <ThemeProvider theme={theme}>

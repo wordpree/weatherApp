@@ -17,7 +17,7 @@ import { Grid, Container } from "@material-ui/core";
 const Home = () => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Banner />
       <Search />
       <TCollections />
