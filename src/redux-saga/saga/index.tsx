@@ -6,7 +6,11 @@ import {
 } from "./googleSaga";
 import openWeatherSaga from "./weatherSaga";
 import newsorgSaga from "./newsorgSaga";
-import triposoPoiSaga from "./triposoSaga";
+import {
+  triposoPoiSaga,
+  triposoPopularSaga,
+  triposoLocationSaga,
+} from "./triposoSaga";
 import { zCollectionSaga, zCitySaga, zDetailSaga } from "./zomatoSaga";
 
 export default function* saga() {
@@ -20,5 +24,7 @@ export default function* saga() {
     fork(zCitySaga),
     fork(zDetailSaga),
     fork(triposoPoiSaga),
+    fork(triposoPopularSaga),
+    fork(triposoLocationSaga),
   ]);
 }

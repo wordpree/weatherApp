@@ -8,8 +8,8 @@ import {
 } from "../../redux-saga/actions";
 import { TravelActionType } from "../../redux-saga/actionType";
 import { Container, makeStyles } from "@material-ui/core";
-import { Omit } from "@material-ui/types";
-import { LinkProps, Link } from "react-router-dom";
+// import { Omit } from "@material-ui/types";
+// import { LinkProps, Link } from "react-router-dom";
 import { ITriposoPoi } from "../../util/type";
 import { getStorageSearchPara } from "../../util/utils";
 import { Title } from "../../components";

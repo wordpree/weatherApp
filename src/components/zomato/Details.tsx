@@ -7,9 +7,9 @@ import {
   deleteZomatoDetailAction,
 } from "../../redux-saga/actions";
 import { TravelActionType } from "../../redux-saga/actionType";
-import { Grid, Container, makeStyles } from "@material-ui/core";
-import { Omit } from "@material-ui/types";
-import { LinkProps, Link } from "react-router-dom";
+import { Container, makeStyles } from "@material-ui/core";
+// import { Omit } from "@material-ui/types";
+// import { LinkProps, Link } from "react-router-dom";
 import { IZomatoDetailRes } from "../../util/type";
 import { Title } from "../../components";
 import ScrollToTop from "../ScrollToTop";

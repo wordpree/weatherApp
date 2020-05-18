@@ -9,6 +9,8 @@ import {
   reqZomatoCityAction,
   reqZomatoCollectionAction,
   reqGoogleSearchText,
+  reqTriposoPopularPoiAction,
+  reqTriposoLocationAction,
 } from "../redux-saga/actions";
 
 const mapStateToProps = (state: TravelStore) => ({
@@ -23,6 +25,8 @@ const mapDispatchToPorps = (dispatch: Dispatch<TravelActionType>) =>
       reqZomatoCityAction,
       reqZomatoCollectionAction,
       reqGoogleSearchText,
+      reqTriposoPopularPoiAction,
+      reqTriposoLocationAction,
     },
     dispatch
   );

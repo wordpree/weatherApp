@@ -104,7 +104,6 @@ export const FormInput = ({
       <label htmlFor={id} className={classes.label}>
         {label}
       </label>
-
       <TextField
         className={classes.textField}
         placeholder={helper}

@@ -13,12 +13,9 @@ function App() {
       ),
     },
     palette: {
-      primary: { main: "#028A8A" },
+      primary: { main: "#04BFBF" },
       secondary: { main: "#fff" },
     },
-    // overrides: {
-    //   MuiPickersDay: { backgroundColor: "#007bff" },
-    // },
   });
   return (
     <ThemeProvider theme={theme}>

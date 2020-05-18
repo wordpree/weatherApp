@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   IconButton,
   TextField,
@@ -8,7 +8,7 @@ import {
   Divider,
   Paper,
   Container,
-  Grow
+  Grow,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Magnify } from "mdi-material-ui";
@@ -26,33 +26,33 @@ const useStyles = makeStyles({
   div: {
     padding: "0.5rem",
     margin: "1rem auto",
-    width: "55%"
+    width: "55%",
   },
   form: {
     textAlign: "center",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   textField: {
     letterSpacing: 1,
-    width: "86%"
+    width: "86%",
   },
   list: {
     maxHeight: 325,
-    overflow: "auto"
+    overflow: "auto",
   },
   item: {
     "&:hover": {
       background: "#777",
-      color: "#eee"
-    }
-  }
+      color: "#eee",
+    },
+  },
 });
 
 const Search = ({
   submitAction,
   inputAction,
   clearAutoCompleteAction,
-  predictions
+  predictions,
 }: ISProps) => {
   const chooseInit = { description: "", place_id: "" };
   const [choose, setChoose] = useState(chooseInit);
@@ -78,7 +78,7 @@ const Search = ({
 
       <div className={classes.div}>
         <form
-          onSubmit={e => {
+          onSubmit={(e) => {
             submitAction(choose.place_id);
             setChoose(chooseInit);
             e.preventDefault();
@@ -109,7 +109,7 @@ const Search = ({
           {
             <List className={classes.list}>
               {predictions &&
-                predictions.map(place => (
+                predictions.map((place) => (
                   <Paper key={place.id} elevation={3}>
                     <ListItem
                       button

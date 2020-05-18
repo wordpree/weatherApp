@@ -45,3 +45,9 @@ export const triposoPois = (geo: string, tagLabel: string[]) => {
   }
   return `https://www.triposo.com/api/20190906/poi.json?token=${T_API_KEY}&account=EERNPMK9&annotate=distance:${geo}&${temp}&distance=<30000&fields=all&order_by=-score&count=25&exclude_fields=structured_content_language_info,structured_content,tags`;
 };
+
+export const triposePopular = () =>
+  `https://www.triposo.com/api/20200405/poi.json?token=${T_API_KEY}&location_id=Australia&tag_labels=exploringnature&fields=all&exclude_fields=structured_content_language_info,structured_content,tags&account=EERNPMK9&order_by=-score`;
+
+export const triposoLocation = (tagLabels: string) =>
+  `https://www.triposo.com/api/20200405/location.json?token=${T_API_KEY}&part_of=Australia&tag_labels=${tagLabels}&fields=all&exclude_fields=structured_content_language_info,structured_content,tags&account=EERNPMK9&order_by=-score`;

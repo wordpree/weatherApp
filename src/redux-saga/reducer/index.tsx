@@ -6,7 +6,11 @@ import {
 } from "./googlePlaceReducer";
 import weatherReducer from "./openWeatherReducer";
 import newsReducer from "./newsorgReducer";
-import triposoPlacesPoiReducer from "./tPlacesPoiReducer";
+import {
+  triposoPlacesPoiReducer,
+  triposoLocationReducer,
+  triposoPopularReducer,
+} from "./tPlacesReducer";
 import {
   zomatoCityReducer,
   zomatoCollectionReducer,
@@ -22,6 +26,8 @@ const rootReducer = combineReducers({
   zCollections: zomatoCollectionReducer,
   zColDetail: zomatoDetailReducer,
   tPoisDetail: triposoPlacesPoiReducer,
+  tLocation: triposoLocationReducer,
+  tPopular: triposoPopularReducer,
   gPois: textsearchReducer,
 });
 export type TravelStore = ReturnType<typeof rootReducer>;

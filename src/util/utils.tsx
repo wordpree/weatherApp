@@ -42,7 +42,7 @@ export async function fetchData(
 ) {
   let res;
   if (typeof header === "boolean") {
-    console.log(url);
+    // console.log(url);
 
     res = await fetch(url);
     console.log(`${res.status}: ${res.statusText}`);

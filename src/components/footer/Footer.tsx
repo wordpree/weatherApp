@@ -1,6 +1,5 @@
 import React from "react";
 import { Facebook, Linkedin, Reddit, Twitter } from "mdi-material-ui";
-import { Typography } from "@material-ui/core";
 import {
   StyledDivWrapper,
   StyledDivRights,

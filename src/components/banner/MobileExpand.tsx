@@ -23,11 +23,10 @@ import {
 import logo from "../../assets/hero/logo@2x.png";
 
 interface IMEProps {
-  open: boolean;
-  handleClick: React.Dispatch<React.SetStateAction<boolean>>;
+  handleClick(state: boolean): void;
 }
 
-const MobileExpand = ({ open, handleClick }: IMEProps) => {
+const MobileExpand = ({ handleClick }: IMEProps) => {
   const lists = [
     { label: "Home", icon: <Home fontSize="large" />, link: "/" },
     { label: "Explore", icon: <Compass fontSize="large" />, link: "/explore" },
@@ -36,7 +35,7 @@ const MobileExpand = ({ open, handleClick }: IMEProps) => {
     { label: "Blog", icon: <Blogger fontSize="large" />, link: "/blog" },
   ];
   return (
-    <StyledOpen open={open}>
+    <StyledOpen>
       <StyledMobileHd>
         <StyledMobileLogo>
           <StyledMobileLogoImg src={logo} alt="logo" />

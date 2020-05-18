@@ -1,7 +1,8 @@
 import React from "react";
 import {
-  Header,
+  // Header,
   Search,
+  Attractions,
   LocalNews,
   LocalWeather,
   Title,
@@ -19,6 +20,7 @@ const Home = () => {
     <>
       {/* <Header /> */}
       <Banner />
+      <Attractions />
       <Search />
       <TCollections />
       <ZCollections />

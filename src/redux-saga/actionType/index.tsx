@@ -28,13 +28,17 @@ export const REQUEST_NEWSORG = "REQUEST_NEWSORG";
 export const REQUEST_NEWSORG_SUCCEEDED = "REQUEST_NEWSORG_SUCCEEDED";
 export const REQUEST_NEWSORG_FAILED = "REQUEST_NEWSORG_FAILED";
 
-export const REQUEST_SYGIC_COLS = "REQUEST_SYGIC_COLS";
-export const REQUEST_SYGIC_COLS_SUCCEEDED = "REQUEST_SYGIC_COLS_SUCCEEDED ";
-export const REQUEST_SYGIC_COLS_FAILED = "REQUEST_SYGIC_COLS_FAILED";
+export const REQUEST_TRIPOSO_POPULAR_POI = "REQUEST_TRIPOSO_POPULAR_POI";
+export const REQUEST_TRIPOSO_POPULAR_POI_SUCCEEDED =
+  "REQUEST_TRIPOSO_POPULAR_POI_SUCCEEDED ";
+export const REQUEST_TRIPOSO_POPULAR_POI_FAILED =
+  "REQUEST_TRIPOSO_POPULAR_POI_FAILED";
 
-export const REQUEST_SYGIC_DETAIL = "REQUEST_SYGIC_DETAIL";
-export const REQUEST_SYGIC_DETAIL_SUCCEEDED = "REQUEST_SYGIC_DETAIL_SUCCEEDED ";
-export const REQUEST_SYGIC_DETAIL_FAILED = "REQUEST_SYGIC_DETAIL_FAILED";
+export const REQUEST_TRIPOSO_LOCATION = "REQUEST_TRIPOSO_LOCATION";
+export const REQUEST_TRIPOSO_LOCATION_SUCCEEDED =
+  "REQUEST_TRIPOSO_LOCATION_SUCCEEDED ";
+export const REQUEST_TRIPOSO_LOCATION_FAILED =
+  "REQUEST_TRIPOSO_LOCATION_FAILED";
 
 export const REQUEST_ZOMATO_CITY = "REQUEST_ZOMATO_CITY";
 export const REQUEST_ZOMATO_CITY_SUCCEEDED = "REQUEST_ZOMATO_CITY_SUCCEEDED ";
@@ -65,6 +69,29 @@ export const REQUEST_G_PLACE_PHOTO_SUCCEEDED =
   "REQUEST_G_PLACE_PHOTO_SUCCEEDED";
 export const REQUEST_G_PLACE_PHOTO = "REQUEST_G_PLACE_PHOTO";
 export const REQUEST_G_PLACE_PHOTO_FAILED = "REQUEST_G_PLACE_PHOTO_FAILED";
+
+/******* Triposo --> popular |islands|national parks *****/
+export interface ITriposoPopularPoiReq {
+  type: typeof REQUEST_TRIPOSO_POPULAR_POI;
+}
+export interface ITriposoPopularPoiResSuccess {
+  type: typeof REQUEST_TRIPOSO_POPULAR_POI_SUCCEEDED;
+  poiPlaces: ITriposoPoi[];
+}
+export interface ITriposoPopularPoiResErr {
+  type: typeof REQUEST_TRIPOSO_POPULAR_POI_FAILED;
+}
+export interface ITriposoLocationReq {
+  type: typeof REQUEST_TRIPOSO_LOCATION;
+}
+export interface ITriposoLocationResSuccess {
+  type: typeof REQUEST_TRIPOSO_LOCATION_SUCCEEDED;
+  islands: ITriposoPoi[];
+  parks: ITriposoPoi[];
+}
+export interface ITriposoLocationResErr {
+  type: typeof REQUEST_TRIPOSO_LOCATION_FAILED;
+}
 
 /******* triposo pois based on geo coordinate*****/
 export interface ITriposoPoiReq {
@@ -133,26 +160,6 @@ export interface IZomatoDetailResErr {
 
 export interface IZomatoDeleteDetail {
   type: typeof DELETE_ZOMATO_DETAIL;
-}
-/******* sygic collections action *****/
-export interface ISygicColsReq {
-  type: typeof REQUEST_SYGIC_COLS;
-  placeId: string;
-}
-
-export interface ISygicColsResErr {
-  type: typeof REQUEST_SYGIC_COLS_FAILED;
-}
-
-/******* sygic collections detail action *****/
-export interface ISygicDetailReq {
-  type: typeof REQUEST_SYGIC_DETAIL;
-  placeIds: string;
-  id: number[];
-}
-
-export interface ISygicDetailResErr {
-  type: typeof REQUEST_SYGIC_DETAIL_FAILED;
 }
 
 /******* newsorg news action *****/
@@ -248,10 +255,12 @@ export type TravelActionType =
   | INewsReq
   | INewsResSuccess
   | INewsResERR
-  | ISygicColsReq
-  | ISygicColsResErr
-  | ISygicDetailReq
-  | ISygicDetailResErr
+  | ITriposoPopularPoiReq
+  | ITriposoPopularPoiResSuccess
+  | ITriposoPopularPoiResErr
+  | ITriposoLocationReq
+  | ITriposoLocationResSuccess
+  | ITriposoLocationResErr
   | IZomatoCityReq
   | IZomatoCityResSuccess
   | IZomatoCityResErr

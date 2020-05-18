@@ -52,6 +52,24 @@ export const getGooglePlaceDetailFailed = (
   type: TYPE.REQUEST_G_PLACE_DETAIL_FAILED,
 });
 
+export const reqGoogleSearchText = (
+  country: string
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_G_PLACE_POI,
+  country,
+});
+export const reqGoogleSearchTextSuccess = (
+  pois: IGoogleTextsearch[]
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_G_PLACE_POI_SUCCEEDED,
+  pois,
+});
+export const reqGoogleSearchTextFailed = (
+  error: string
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_G_PLACE_POI_FAILED,
+});
+
 /******* openweathermap place api *****/
 export const reqWeatherAction = (geo: string): TYPE.TravelActionType => ({
   type: TYPE.REQUEST_WEATHER,
@@ -142,7 +160,7 @@ export const resZomatoDetailFailed = (
 export const deleteZomatoDetailAction = (): TYPE.TravelActionType => ({
   type: TYPE.DELETE_ZOMATO_DETAIL,
 });
-
+/*********Triposo Api*********/
 export const reqTriposoPoiAction = (
   geo: string,
   tagLabel: string[]
@@ -165,20 +183,30 @@ export const deleteTriposoPois = (): TYPE.TravelActionType => ({
   type: TYPE.DELETE_TRIPOSO_POI,
 });
 
-export const reqGoogleSearchText = (
-  country: string
-): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_G_PLACE_POI,
-  country,
+export const reqTriposoPopularPoiAction = () => ({
+  type: TYPE.REQUEST_TRIPOSO_POPULAR_POI,
 });
-export const reqGoogleSearchTextSuccess = (
-  pois: IGoogleTextsearch[]
-): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_G_PLACE_POI_SUCCEEDED,
-  pois,
+
+export const reqTriposoPopularPoiSuccess = (poiPlaces: ITriposoPoi[]) => ({
+  type: TYPE.REQUEST_TRIPOSO_POPULAR_POI_SUCCEEDED,
+  poiPlaces,
 });
-export const reqGoogleSearchTextFailed = (
-  error: string
-): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_G_PLACE_POI_FAILED,
+export const reqTriposoPopularPoiFailed = (error: string) => ({
+  type: TYPE.REQUEST_TRIPOSO_POPULAR_POI_FAILED,
+});
+
+export const reqTriposoLocationAction = () => ({
+  type: TYPE.REQUEST_TRIPOSO_LOCATION,
+});
+
+export const reqTriposoLocationSuccess = (
+  islands: ITriposoPoi[],
+  parks: ITriposoPoi[]
+) => ({
+  type: TYPE.REQUEST_TRIPOSO_LOCATION_SUCCEEDED,
+  islands,
+  parks,
+});
+export const reqTriposoLocationFailed = (error: string) => ({
+  type: TYPE.REQUEST_TRIPOSO_LOCATION_FAILED,
 });

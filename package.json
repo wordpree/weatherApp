@@ -26,6 +26,7 @@
     "country-list": "^2.2.0",
     "create-react-app": "^3.4.0",
     "date-fns": "^2.13.0",
+    "jslint": "^0.12.1",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "mdi-material-ui": "^6.8.0",

@@ -16,6 +16,7 @@ import {
   StyledMobileBtn,
   StyledEntry,
 } from "./styled";
+import { SwipeableDrawer } from "@material-ui/core";
 import { Menu } from "mdi-material-ui";
 import SearchFlights from "../flightSearch/SearchFlights";
 import logo from "../../assets/hero/logo@2x.png";
@@ -31,10 +32,12 @@ const Banner = () => {
   ];
   const [open, setOpen] = useState(false);
   const handleClick = () => setOpen((prev) => !prev);
+  const handleDrawer = (state: boolean) => setOpen(state);
+
   return (
     <StyledEntry>
-      <StyledImgWrapper></StyledImgWrapper>
-      <>
+      <StyledImgWrapper />
+      <div>
         <StyledHeader>
           <StyledLogo>
             <StyledLogoImg src={logo} alt="travelus logo" />
@@ -61,8 +64,16 @@ const Banner = () => {
             <SearchFlights />
           </StyledSearchContainer>
         </StyledMainWrapper>
-      </>
-      <MobileExpand open={open} handleClick={setOpen} />
+      </div>
+      <SwipeableDrawer
+        transitionDuration={{ enter: 550, exit: 350 }}
+        anchor="left"
+        open={open}
+        onClose={() => handleDrawer(false)}
+        onOpen={() => handleDrawer(true)}
+      >
+        <MobileExpand handleClick={handleDrawer} />
+      </SwipeableDrawer>
     </StyledEntry>
   );
 };

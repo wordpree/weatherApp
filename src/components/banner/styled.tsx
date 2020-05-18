@@ -29,17 +29,10 @@ export const StyledMobileNav = styled.div`
   }
 `;
 
-export const StyledOpen = styled.div<{ open: boolean }>`
-  transition: all 0.4s ease-in-out;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 999;
+export const StyledOpen = styled.div`
   background: #068080;
-  transform: ${(props) => (props.open ? "translateX(0%)" : "translateX(100%)")};
+  width: 100vw;
+  height: 100vh;
 `;
 
 export const StyledMobileBtn = styled(Button)`
