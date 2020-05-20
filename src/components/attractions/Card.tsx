@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     position: "absolute",
     background:
-      "linear-gradient(180deg,transparent 0%,rgba(0,0,0,0.2) 30%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0.4) 100%)",
+      "linear-gradient(180deg,transparent 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0.5) 100%)",
   },
   media: {
     paddingTop: "68.7%",

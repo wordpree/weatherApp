@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Islands from "./Islands";
 import Parks from "./Parks";
 import Popular from "./Popular";
+import Subscribe from "./Subscribe";
 import { Container } from "@material-ui/core";
 import { TravelStore } from "../../redux-saga/reducer";
 import { ITriposoPoi } from "../../util/type";
@@ -16,11 +17,16 @@ interface IAProps {
 
 const Attractions = ({ popular, islands, parks }: IAProps) => {
   return popular && islands && popular.length !== 0 && islands.length !== 0 ? (
-    <Container>
-      <Popular data={popular} />
-      <Islands data={islands} />
-      <Parks data={parks} />
-    </Container>
+    <>
+      <Container>
+        <Popular data={popular} />
+        <Islands data={islands} />
+      </Container>
+      <Subscribe />
+      <Container>
+        <Parks data={parks} />
+      </Container>
+    </>
   ) : (
     <Loading value={100} />
   );

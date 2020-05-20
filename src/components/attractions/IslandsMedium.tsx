@@ -16,33 +16,39 @@ interface IIMProps {
 }
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    height: 0,
-    paddingTop: "56.25%",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
+  container: {
+    padding: "1rem",
   },
   cardLeft: {
     height: "100%",
+    borderTopLeftRadius: 15,
+    borderBottomLeftRadius: 15,
   },
   mediaLeft: {
     height: "100%",
   },
   cardRight: {
-    padding: "1rem 8% 0",
+    padding: "1rem 8% 1.5rem",
   },
   content: {
     textAlign: "center",
     "&>h5": {
       lineHeight: 1.9,
-      fontWeight: 300,
+      fontWeight: 400,
+    },
+    "&>p": {
+      lineHeight: 1.6,
+      letterSpacing: 1,
     },
   },
   medias: {
     display: "flex",
+    padding: "1rem",
     "&>div:first-child": {
       marginRight: "1.25rem",
+    },
+    "&>div": {
+      borderRadius: 15,
     },
   },
   media: {
@@ -54,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     "&>*": {
       color: "#fff",
-      margin: "0.5rem auto",
+      margin: "1rem auto",
       borderRadius: 10,
     },
   },
@@ -64,9 +70,9 @@ const IslandsMedium = ({ data }: IIMProps) => {
   const classes = useStyles();
 
   return (
-    <Grid container>
+    <Grid container className={classes.container}>
       <Grid item xs={6}>
-        <Card className={classes.cardLeft}>
+        <Card className={classes.cardLeft} raised>
           <CardMedia
             image={data.images[0].sizes.medium.url}
             className={classes.mediaLeft}

@@ -59,7 +59,7 @@ const Islands = ({ data }: IIProps) => {
     arrows: false,
     dots: false,
     infinite: true,
-    speed: 500,
+    speed: 650,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
@@ -68,6 +68,7 @@ const Islands = ({ data }: IIProps) => {
     nextArrow: <NextArrow arrowStyle={right} />,
     prevArrow: <PrevArrow arrowStyle={left} />,
     arrows: true,
+    speed: 500,
   };
   let slider: Slider | null = null;
   const lists = (Component: React.SFC<{ data: ITriposoPoi }>) =>

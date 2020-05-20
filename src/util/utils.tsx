@@ -45,7 +45,7 @@ export async function fetchData(
     // console.log(url);
 
     res = await fetch(url);
-    console.log(`${res.status}: ${res.statusText}--${url}`);
+    // console.log(`${res.status}: ${res.statusText}--${url}`);
   } else {
     res = await fetch(url, { headers: header });
   }
