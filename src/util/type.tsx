@@ -119,6 +119,7 @@ type ImgData = {
   };
   caption: string;
   sizes: Img;
+  owner: string;
 };
 
 type Content = {

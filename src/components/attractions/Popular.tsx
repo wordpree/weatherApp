@@ -1,45 +1,24 @@
-import React, { useRef } from "react";
+import React from "react";
 import Slider from "react-slick";
-import { makeStyles, Typography, Fab, useMediaQuery } from "@material-ui/core";
-import { ChevronLeft, ChevronRight } from "mdi-material-ui";
+import { makeStyles, useMediaQuery } from "@material-ui/core";
 import { ITriposoPoi } from "../../util/type";
-import { AttractionCard } from "./Card";
+import PopularCard from "./Card";
+import { SliderNav, Titles } from "../";
 
 interface IPProps {
   data: ITriposoPoi[];
 }
 
 const useStyles = makeStyles((theme) => ({
+  entry: {
+    margin: "4rem auto",
+  },
   wrapper: {
-    display: "flex",
-    justifyContent: "space-between",
     marginTop: "2.5rem",
     marginBottom: "2rem",
     [theme.breakpoints.up(768)]: {
       display: "flex",
       justifyContent: "space-between",
-    },
-  },
-  titleWrapper: {},
-  title: {
-    letterSpacing: 4,
-    color: "#028A8A",
-    marginBottom: "0.75rem",
-    borderBottom: "2px solid #028A8A",
-    display: "inline-block",
-    fontWeight: 600,
-  },
-  subTitle: {
-    letterSpacing: 1.5,
-  },
-  nav: {
-    display: "none",
-    [theme.breakpoints.up(768)]: {
-      flexShrink: 0,
-      display: "block",
-      "&>button:first-child": {
-        marginRight: "1rem",
-      },
     },
   },
   scroll: {
@@ -68,7 +47,6 @@ const Popular = ({ data }: IPProps) => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    appendDots: (dots: any) => <ul style={{ color: "#04BFBF" }}> {dots} </ul>,
     responsive: [
       {
         breakpoint: 1387,
@@ -85,53 +63,39 @@ const Popular = ({ data }: IPProps) => {
           infinite: false,
           slidesToShow: 2,
           slidesToScroll: 1,
-          initialSlide: 2,
         },
       },
     ],
   };
+  let slider: Slider | null = null;
   const md = useMediaQuery("(min-width:768px)");
   const cardLists = data.map((item) => (
-    <AttractionCard data={item} key={item.id} />
+    <PopularCard data={item} key={item.id} />
   ));
-  const ref = useRef<Slider>(null);
-  const handlePrevClick = () => {
-    ref && ref.current && ref.current.slickPrev();
-  };
-  const handleNextClick = () => {
-    ref && ref.current && ref.current.slickNext();
-  };
+
+  const handleSlider = (sliderRef: Slider | null) => (slider = sliderRef);
+  const preClick = () => slider && slider.slickPrev();
+  const nextClick = () => slider && slider.slickNext();
   return (
-    <>
+    <div className={classes.entry}>
       <div className={classes.wrapper}>
-        <div className={classes.titleWrapper}>
-          <Typography className={classes.title} variant="h4">
-            Popular Destinations
-          </Typography>
-          <Typography className={classes.subTitle} variant="h6">
-            Explore the stunning and fantastic splendrous on one more step
-            forward!
-          </Typography>
-        </div>
-        <div className={classes.nav}>
-          <Fab onClick={handlePrevClick} color="primary" size="small">
-            <ChevronLeft color="secondary" fontSize="large" />
-          </Fab>
-          <Fab onClick={handleNextClick} color="primary" size="small">
-            <ChevronRight color="secondary" fontSize="large" />
-          </Fab>
-        </div>
+        <Titles
+          title="Popular Destinations"
+          subTitle="Explore the stunning and fantastic splendrous on one more step
+            forward!"
+        />
+        <SliderNav prevClick={preClick} nextClick={nextClick} />
       </div>
       <div className={classes.scroll}>
         {md ? (
-          <Slider {...settings} ref={ref}>
+          <Slider {...settings} ref={(slider) => handleSlider(slider)}>
             {cardLists}
           </Slider>
         ) : (
           <div className={classes.cardWrapper}>{cardLists}</div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

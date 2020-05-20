@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "2%",
     marginLeft: "2%",
     marginBottom: "1rem",
-    borderRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
     [theme.breakpoints.down(768)]: {
       scrollSnapAlign: "start",
       minWidth: "75%",
@@ -75,9 +76,6 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     top: 0,
     right: 0,
-    borderRadius: 10,
-    borderTopLeftRadius: 0,
-    borderBottomRightRadius: 0,
   },
   content: {
     minHeight: 120,
@@ -87,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const AttractionCard = ({ data }: IACProps) => {
+const PopularCard = ({ data }: IACProps) => {
   const classes = useStyles();
   const snippet = data.snippet;
   const brief =
@@ -115,3 +113,5 @@ export const AttractionCard = ({ data }: IACProps) => {
     </Grow>
   );
 };
+
+export default PopularCard;
