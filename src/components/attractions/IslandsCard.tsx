@@ -26,6 +26,12 @@ const useStyles = makeStyles((theme) => ({
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
+  cardHeader: {
+    "& .MuiCardHeader-title": {
+      borderBottom: "2.5px solid #FABE0E",
+      display: "inline-block",
+    },
+  },
   media: {
     height: 0,
     paddingTop: "64.25%",
@@ -46,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
   },
   avatar: {
-    background: "#04bfbf",
+    background: "#028a8a",
     color: "#fff",
   },
 }));
@@ -57,6 +63,7 @@ const IslandsCard = ({ data }: IIProps) => {
     <Fade in={Boolean(data)}>
       <Card className={classes.card}>
         <CardHeader
+          className={classes.cardHeader}
           title={data.name}
           avatar={
             <Avatar className={classes.avatar}>

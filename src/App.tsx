@@ -13,7 +13,7 @@ function App() {
       ),
     },
     palette: {
-      primary: { main: "#04BFBF" },
+      primary: { main: "#028a8a" },
       secondary: { main: "#fff" },
     },
   });

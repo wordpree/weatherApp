@@ -7,16 +7,12 @@ import Slider from "react-slick";
 import { ChevronLeft, ChevronRight } from "mdi-material-ui";
 import { Arrow } from "../SliderNav";
 import IslandsMedium from "./IslandsMedium";
+import EntryDiv from "./EntryDiv";
 
 interface IIProps {
   data: ITriposoPoi[];
 }
 const useStyles = makeStyles((theme) => ({
-  entry: {
-    entry: {
-      margin: "4rem auto",
-    },
-  },
   titleWrapper: {
     marginTop: "2.5rem",
     marginBottom: "2rem",
@@ -77,7 +73,7 @@ const Islands = ({ data }: IIProps) => {
   const preClick = () => slider && slider.slickPrev();
   const nextClick = () => slider && slider.slickNext();
   return (
-    <div className={classes.entry}>
+    <EntryDiv>
       <div className={classes.titleWrapper}>
         <Titles
           title="Most Attractive Islands"
@@ -96,7 +92,7 @@ const Islands = ({ data }: IIProps) => {
           <Slider {...settings}>{lists(IslandsCard)} </Slider>
         )}
       </div>
-    </div>
+    </EntryDiv>
   );
 };
 

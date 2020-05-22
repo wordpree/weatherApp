@@ -4,15 +4,13 @@ import { makeStyles, useMediaQuery } from "@material-ui/core";
 import { ITriposoPoi } from "../../util/type";
 import PopularCard from "./Card";
 import { SliderNav, Titles } from "../";
+import EntryDiv from "./EntryDiv";
 
 interface IPProps {
   data: ITriposoPoi[];
 }
 
 const useStyles = makeStyles((theme) => ({
-  entry: {
-    margin: "4rem auto",
-  },
   wrapper: {
     marginTop: "2.5rem",
     marginBottom: "2rem",
@@ -77,7 +75,7 @@ const Popular = ({ data }: IPProps) => {
   const preClick = () => slider && slider.slickPrev();
   const nextClick = () => slider && slider.slickNext();
   return (
-    <div className={classes.entry}>
+    <EntryDiv>
       <div className={classes.wrapper}>
         <Titles
           title="Popular Destinations"
@@ -95,7 +93,7 @@ const Popular = ({ data }: IPProps) => {
           <div className={classes.cardWrapper}>{cardLists}</div>
         )}
       </div>
-    </div>
+    </EntryDiv>
   );
 };
 

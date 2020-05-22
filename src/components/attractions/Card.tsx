@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
   score: {
     padding: "0.25rem 0.5rem",
-    background: "#04BFBF",
+    background: "#FABE0E",
     position: "absolute",
     color: "#fff",
     top: 0,

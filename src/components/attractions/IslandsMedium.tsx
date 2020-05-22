@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     "&>h5": {
       lineHeight: 1.9,
       fontWeight: 400,
+      borderBottom: "2.5px solid #FABE0E",
     },
     "&>p": {
       lineHeight: 1.6,

@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   button: {
     flexGrow: 1,
     maxWidth: 150,
-    backgroundColor: "#04BFBF",
+    backgroundColor: "#028a8a",
     color: "#fff",
     padding: "0.5rem 2rem",
     borderRadius: 15,

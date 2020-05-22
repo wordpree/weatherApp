@@ -4,6 +4,7 @@ import { makeStyles, Typography } from "@material-ui/core";
 interface ITProps {
   title: string;
   subTitle: string;
+  style?: object;
 }
 
 const useStyles = makeStyles({
@@ -20,10 +21,10 @@ const useStyles = makeStyles({
   },
 });
 
-const Titles = ({ title, subTitle }: ITProps) => {
+const Titles = ({ title, subTitle, style }: ITProps) => {
   const classes = useStyles();
   return (
-    <div>
+    <div style={{ ...style }}>
       <Typography className={classes.title} variant="h4">
         {title}
       </Typography>

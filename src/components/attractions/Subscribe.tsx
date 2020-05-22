@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
   entry: {
     margin: "1.5rem auto",
     padding: "1.5rem",
-    backgroundColor: "#04bfbf",
+    backgroundColor: "#028a8a",
     textAlign: "center",
   },
   title: {
@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid #fff",
     borderRadius: 20,
     boxShadow: "none",
+    "&:hover": {
+      boxShadow: "none",
+    },
   },
 }));
 const Subscribe = () => {
