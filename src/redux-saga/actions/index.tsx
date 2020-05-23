@@ -210,3 +210,17 @@ export const reqTriposoLocationSuccess = (
 export const reqTriposoLocationFailed = (error: string) => ({
   type: TYPE.REQUEST_TRIPOSO_LOCATION_FAILED,
 });
+
+export const reqTriposoCitiesAction = () => ({
+  type: TYPE.REQUEST_TRIPOSO_CITIES,
+});
+
+export const reqTriposoCitiesSuccess = (
+  cities: Pick<ITriposoPoi, "coordinates" | "name">[]
+) => ({
+  type: TYPE.REQUEST_TRIPOSO_CITIES_SUCCEEDED,
+  cities,
+});
+export const reqTriposoCitiesFailed = (error: string) => ({
+  type: TYPE.REQUEST_TRIPOSO_CITIES_FAILED,
+});

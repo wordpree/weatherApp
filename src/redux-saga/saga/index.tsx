@@ -10,6 +10,7 @@ import {
   triposoPoiSaga,
   triposoPopularSaga,
   triposoLocationSaga,
+  triposoCitiesSaga,
 } from "./triposoSaga";
 import { zCollectionSaga, zCitySaga, zDetailSaga } from "./zomatoSaga";
 
@@ -26,5 +27,6 @@ export default function* saga() {
     fork(triposoPoiSaga),
     fork(triposoPopularSaga),
     fork(triposoLocationSaga),
+    fork(triposoCitiesSaga),
   ]);
 }

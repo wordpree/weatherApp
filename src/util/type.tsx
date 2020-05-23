@@ -134,6 +134,7 @@ type Content = {
 export interface ITriposoPoi {
   id: string;
   name: string;
+  coordinates: { latitude: string; longitude: string };
   score: number;
   intro: string;
   images: ImgData[];

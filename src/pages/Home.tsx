@@ -8,6 +8,7 @@ import {
   Title,
   ZCollections,
   Banner,
+  FoodCourt,
   TCollections,
   Photos,
   Footer,
@@ -21,6 +22,7 @@ const Home = () => {
       {/* <Header /> */}
       <Banner />
       <Attractions />
+      <FoodCourt />
       <Search />
       <TCollections />
       <ZCollections />

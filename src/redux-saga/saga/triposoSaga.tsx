@@ -8,12 +8,16 @@ import {
   reqTriposoPopularPoiFailed,
   reqTriposoLocationFailed,
   reqTriposoLocationSuccess,
+  reqTriposoCitiesSuccess,
+  reqTriposoCitiesFailed,
 } from "../actions";
 import {
   REQUEST_TRIPOSO_POI,
   ITriposoPoiReq,
   REQUEST_TRIPOSO_POPULAR_POI,
   REQUEST_TRIPOSO_LOCATION,
+  REQUEST_TRIPOSO_CITIES,
+  REQUEST_TRIPOSO_CITIES_SUCCEEDED,
 } from "../actionType";
 
 function* getTriposoData({ geo, tagLabel }: ITriposoPoiReq) {
@@ -46,6 +50,15 @@ function* getLocationData() {
   }
 }
 
+function* getCitiesData() {
+  try {
+    const cities = yield call(fetchTriposo, url.triposeCities());
+    yield put(reqTriposoCitiesSuccess(cities.results));
+  } catch (error) {
+    yield put(reqTriposoCitiesFailed(error));
+  }
+}
+
 export function* triposoPoiSaga() {
   yield takeLatest(REQUEST_TRIPOSO_POI, getTriposoData);
 }
@@ -56,4 +69,8 @@ export function* triposoPopularSaga() {
 
 export function* triposoLocationSaga() {
   yield takeLatest(REQUEST_TRIPOSO_LOCATION, getLocationData);
+}
+
+export function* triposoCitiesSaga() {
+  yield takeLatest(REQUEST_TRIPOSO_CITIES, getCitiesData);
 }

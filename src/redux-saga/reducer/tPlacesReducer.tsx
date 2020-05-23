@@ -6,11 +6,13 @@ import {
   ITriposoPoiDelete,
   ITriposoPopularPoiResSuccess,
   ITriposoLocationResSuccess,
+  ITriposoCitiesResSuccess,
   REQUEST_TRIPOSO_POPULAR_POI_SUCCEEDED,
   REQUEST_TRIPOSO_LOCATION_SUCCEEDED,
 } from "../actionType";
 
 const initState = [] as ITriposoPoi[];
+const initStateCities = [] as Pick<ITriposoPoi, "coordinates" | "name">[];
 const initStateLocation = {} as {
   islands: ITriposoPoi[];
   parks: ITriposoPoi[];
@@ -51,6 +53,18 @@ export const triposoLocationReducer = (
         islands: actions.islands,
         parks: actions.parks,
       };
+    default:
+      return state;
+  }
+};
+
+export const triposoCitiesReducer = (
+  state = initStateCities,
+  actions: ITriposoCitiesResSuccess
+) => {
+  switch (actions.type) {
+    case "REQUEST_TRIPOSO_CITIES_SUCCEEDED":
+      return actions.cities;
     default:
       return state;
   }

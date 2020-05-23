@@ -15,6 +15,7 @@ interface ILProps {
   reqGoogleSearchText(country: string): void;
   reqTriposoPopularPoiAction(): void;
   reqTriposoLocationAction(): void;
+  reqTriposoCitiesAction(): void;
 }
 
 function Layout({
@@ -26,6 +27,7 @@ function Layout({
   reqGoogleSearchText,
   reqTriposoPopularPoiAction,
   reqTriposoLocationAction,
+  reqTriposoCitiesAction,
 }: ILProps) {
   useEffect(() => {
     setStorageSearchPara(detail);
@@ -33,6 +35,7 @@ function Layout({
     /* triposo */
     reqTriposoPopularPoiAction();
     reqTriposoLocationAction();
+    reqTriposoCitiesAction();
 
     /*zomato retaurant*/
     reqZomatoCollectionAction(geoLocation);
@@ -55,6 +58,7 @@ function Layout({
     reqGoogleSearchText,
     reqTriposoPopularPoiAction,
     reqTriposoLocationAction,
+    reqTriposoCitiesAction,
   ]);
 
   return (

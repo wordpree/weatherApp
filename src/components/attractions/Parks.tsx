@@ -5,6 +5,7 @@ import EntryDiv from "./EntryDiv";
 import { Titles } from "../";
 import ParksSmall from "./ParksSmall";
 import ParksMedium from "./ParksMedium";
+import MoreButton from "./MoreButton";
 
 interface IPProps {
   data: ITriposoPoi[];
@@ -26,10 +27,11 @@ const Parks = ({ data }: IPProps) => {
         style={{ marginBottom: "1.5rem" }}
       />
       {lg ? (
-        <ParksMedium data={data} />
+        <ParksMedium data={data} more={more} />
       ) : (
-        <ParksSmall more={more} data={data} handleClick={handleClick} />
+        <ParksSmall more={more} data={data} />
       )}
+      <MoreButton handleClick={handleClick} more={more} />
     </EntryDiv>
   );
 };

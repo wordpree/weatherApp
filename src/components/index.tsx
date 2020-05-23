@@ -16,6 +16,7 @@ import Loading from "./Loading";
 import Footer from "./footer";
 import ScrollToTop from "./ScrollToTop";
 import SliderNav from "./SliderNav";
+import FoodCourt from "./food/";
 
 export {
   SliderNav,
@@ -30,6 +31,7 @@ export {
   ZDetail,
   LocalNews,
   LocalWeather,
+  FoodCourt,
   Titles,
   Title,
   Photos,

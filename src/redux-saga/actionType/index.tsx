@@ -8,6 +8,7 @@ import {
   ITriposoPoi,
   IGoogleTextsearch,
 } from "../../util/type";
+import { reqTriposoCitiesAction } from "../actions";
 
 export const REQUEST_G_PLACE_DETAIL = "REQUEST_G_PLACE_DETAIL";
 export const REQUEST_G_PLACE_DETAIL_SUCCEEDED =
@@ -40,6 +41,11 @@ export const REQUEST_TRIPOSO_LOCATION_SUCCEEDED =
 export const REQUEST_TRIPOSO_LOCATION_FAILED =
   "REQUEST_TRIPOSO_LOCATION_FAILED";
 
+export const REQUEST_TRIPOSO_CITIES_SUCCEEDED =
+  "REQUEST_TRIPOSO_CITIES_SUCCEEDED";
+export const REQUEST_TRIPOSO_CITIES = "REQUEST_TRIPOSO_CITIES";
+export const REQUEST_TRIPOSO_CITIES_FAILED = "REQUEST_TRIPOSO_CITIES_FAILED";
+
 export const REQUEST_ZOMATO_CITY = "REQUEST_ZOMATO_CITY";
 export const REQUEST_ZOMATO_CITY_SUCCEEDED = "REQUEST_ZOMATO_CITY_SUCCEEDED ";
 export const REQUEST_ZOMATO_CITY_FAILED = "REQUEST_ZOMATO_CITY_FAILED";
@@ -70,7 +76,7 @@ export const REQUEST_G_PLACE_PHOTO_SUCCEEDED =
 export const REQUEST_G_PLACE_PHOTO = "REQUEST_G_PLACE_PHOTO";
 export const REQUEST_G_PLACE_PHOTO_FAILED = "REQUEST_G_PLACE_PHOTO_FAILED";
 
-/******* Triposo --> popular |islands|national parks *****/
+/******* Triposo --> popular |islands|national parks |cities*****/
 export interface ITriposoPopularPoiReq {
   type: typeof REQUEST_TRIPOSO_POPULAR_POI;
 }
@@ -93,6 +99,16 @@ export interface ITriposoLocationResErr {
   type: typeof REQUEST_TRIPOSO_LOCATION_FAILED;
 }
 
+export interface ITriposoCitiesReq {
+  type: typeof REQUEST_TRIPOSO_CITIES;
+}
+export interface ITriposoCitiesResSuccess {
+  type: typeof REQUEST_TRIPOSO_CITIES_SUCCEEDED;
+  cities: Pick<ITriposoPoi, "coordinates" | "name">[];
+}
+export interface ITriposoCitiesResErr {
+  type: typeof REQUEST_TRIPOSO_CITIES_FAILED;
+}
 /******* triposo pois based on geo coordinate*****/
 export interface ITriposoPoiReq {
   type: typeof REQUEST_TRIPOSO_POI;

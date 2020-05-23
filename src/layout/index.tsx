@@ -11,6 +11,7 @@ import {
   reqGoogleSearchText,
   reqTriposoPopularPoiAction,
   reqTriposoLocationAction,
+  reqTriposoCitiesAction,
 } from "../redux-saga/actions";
 
 const mapStateToProps = (state: TravelStore) => ({
@@ -27,6 +28,7 @@ const mapDispatchToPorps = (dispatch: Dispatch<TravelActionType>) =>
       reqGoogleSearchText,
       reqTriposoPopularPoiAction,
       reqTriposoLocationAction,
+      reqTriposoCitiesAction,
     },
     dispatch
   );

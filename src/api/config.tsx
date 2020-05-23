@@ -51,3 +51,6 @@ export const triposePopular = () =>
 
 export const triposoLocation = (tagLabels: string) =>
   `https://www.triposo.com/api/20200405/location.json?token=${T_API_KEY}&part_of=Australia&tag_labels=${tagLabels}&fields=all&exclude_fields=structured_content_language_info,structured_content,tags&account=EERNPMK9&order_by=-score`;
+
+export const triposeCities = () =>
+  `https://www.triposo.com/api/20200405/location.json?token=${T_API_KEY}&account=EERNPMK9&fields=name,coordinates&tag_labels=city&part_of=Australia&order_by=-score&count=25`;
