@@ -17,7 +17,6 @@ import {
   REQUEST_TRIPOSO_POPULAR_POI,
   REQUEST_TRIPOSO_LOCATION,
   REQUEST_TRIPOSO_CITIES,
-  REQUEST_TRIPOSO_CITIES_SUCCEEDED,
 } from "../actionType";
 
 function* getTriposoData({ geo, tagLabel }: ITriposoPoiReq) {

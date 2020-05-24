@@ -8,7 +8,6 @@ import {
   ITriposoPoi,
   IGoogleTextsearch,
 } from "../../util/type";
-import { reqTriposoCitiesAction } from "../actions";
 
 export const REQUEST_G_PLACE_DETAIL = "REQUEST_G_PLACE_DETAIL";
 export const REQUEST_G_PLACE_DETAIL_SUCCEEDED =
@@ -61,6 +60,11 @@ export const REQUEST_ZOMATO_DETAIL_SUCCEEDED =
   "REQUEST_ZOMATO_DETAIL_SUCCEEDED";
 export const REQUEST_ZOMATO_DETAIL_FAILED = "REQUEST_ZOMATO_DETAIL_FAILED";
 export const DELETE_ZOMATO_DETAIL = "DELETE_ZOMATO_DETAIL";
+
+export const REQUEST_ZOMATO_CUISINE = "REQUEST_ZOMATO_CUISINE";
+export const REQUEST_ZOMATO_CUISINE_SUCCEEDED =
+  "REQUEST_ZOMATO_CUISINE_SUCCEEDED";
+export const REQUEST_ZOMATO_CUISINE_FAILED = "REQUEST_ZOMATO_CUISINE_FAILED";
 
 export const REQUEST_TRIPOSO_POI = "REQUEST_TRIPOSO_POI";
 export const REQUEST_TRIPOSO_POI_SUCCEEDED = "REQUEST_TRIPOSO_POI_SUCCEEDED ";
@@ -178,6 +182,23 @@ export interface IZomatoDeleteDetail {
   type: typeof DELETE_ZOMATO_DETAIL;
 }
 
+/******* zomato cusines details basted on cuisine id and coordinate****/
+export interface IZomatoCuisinesReq {
+  type: typeof REQUEST_ZOMATO_CUISINE;
+  cuisineId: number;
+  lat: number;
+  lon: number;
+}
+
+export interface IZomatoCuisinesResSuccess {
+  type: typeof REQUEST_ZOMATO_CUISINE_SUCCEEDED;
+  cuisines: IZomatoDetailRes;
+}
+
+export interface IZomatoCuisinesResErr {
+  type: typeof REQUEST_ZOMATO_CUISINE_FAILED;
+}
+
 /******* newsorg news action *****/
 export interface INewsReq {
   type: typeof REQUEST_NEWSORG;
@@ -287,6 +308,9 @@ export type TravelActionType =
   | IZomatoDetailResSuccess
   | IZomatoDetailResErr
   | IZomatoDeleteDetail
+  | IZomatoCuisinesReq
+  | IZomatoCuisinesResSuccess
+  | IZomatoCuisinesResErr
   | ITriposoPoiReq
   | ITriposoPoiResSuccess
   | ITriposoPoiResErr

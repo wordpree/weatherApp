@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ITriposoPoi } from "../../util/type";
-import { makeStyles, useMediaQuery } from "@material-ui/core";
+import { useMediaQuery } from "@material-ui/core";
 import EntryDiv from "./EntryDiv";
 import { Titles } from "../";
 import ParksSmall from "./ParksSmall";

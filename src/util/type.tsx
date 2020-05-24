@@ -134,7 +134,7 @@ type Content = {
 export interface ITriposoPoi {
   id: string;
   name: string;
-  coordinates: { latitude: string; longitude: string };
+  coordinates: { latitude: number; longitude: number };
   score: number;
   intro: string;
   images: ImgData[];
@@ -222,3 +222,9 @@ export interface INDataRes {
 }
 
 /****** news api end********************/
+export type City = Pick<ITriposoPoi, "coordinates" | "name">;
+export type Cuisine = {
+  cuisine_id: number;
+  cuisine_name: string;
+};
+export type Option = (City | Cuisine)[];

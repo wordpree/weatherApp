@@ -16,6 +16,7 @@ import {
   zomatoCityReducer,
   zomatoCollectionReducer,
   zomatoDetailReducer,
+  zomatoCuisineDetReducer,
 } from "./zRestaurantReducer";
 
 const rootReducer = combineReducers({
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   tPopular: triposoPopularReducer,
   gPois: textsearchReducer,
   zCities: triposoCitiesReducer,
+  zCuisines: zomatoCuisineDetReducer,
 });
 export type TravelStore = ReturnType<typeof rootReducer>;
 export default rootReducer;

@@ -12,7 +12,12 @@ import {
   triposoLocationSaga,
   triposoCitiesSaga,
 } from "./triposoSaga";
-import { zCollectionSaga, zCitySaga, zDetailSaga } from "./zomatoSaga";
+import {
+  zCollectionSaga,
+  zCitySaga,
+  zDetailSaga,
+  zCuisineSaga,
+} from "./zomatoSaga";
 
 export default function* saga() {
   yield all([
@@ -28,5 +33,6 @@ export default function* saga() {
     fork(triposoPopularSaga),
     fork(triposoLocationSaga),
     fork(triposoCitiesSaga),
+    fork(zCuisineSaga),
   ]);
 }

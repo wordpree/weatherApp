@@ -1,18 +1,15 @@
-import React, { useState } from "react";
-import { ITriposoPoi } from "../../util/type";
-import {
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  makeStyles,
-} from "@material-ui/core";
+import React from "react";
+import { FormControl, InputLabel, Select, makeStyles } from "@material-ui/core";
+import { Option } from "../../util/type";
+import { isCity } from "../../util/utils";
 
-type City = Pick<ITriposoPoi, "coordinates" | "name">;
-type Cusine = { cuisine_id: number; cuisine_name: string };
 interface IOProps {
-  option: (City | Cusine)[];
+  options: Option;
+  option: string;
   init: string;
+  handleChange(
+    event: React.ChangeEvent<{ value: unknown; name?: string | undefined }>
+  ): void;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -26,38 +23,40 @@ const useStyles = makeStyles((theme) => ({
       width: "inherit",
       marginRight: "1.5rem",
     },
+    "&:hover fieldset.MuiOutlinedInput-notchedOutline": {
+      borderColor: "#028a8a",
+    },
   },
 }));
 
-function isCity(input: City | Cusine): input is City {
-  return (input as City).coordinates !== undefined;
-}
-
-const Options = ({ option, init }: IOProps) => {
+const Options = ({ init, options, handleChange, option }: IOProps) => {
   const classes = useStyles();
-  const [city, setCity] = useState("");
-  const handleChange = (
-    event: React.ChangeEvent<{ value: string | unknown }>
-  ) => setCity(event.target.value as typeof city);
+
+  console.log(option);
   return (
     <FormControl variant="outlined" className={classes.formControl}>
       <InputLabel htmlFor={init}>{init}</InputLabel>
-      <Select id={init} onChange={handleChange} value={city} label={init}>
-        <option disabled value="">
-          {init}
-        </option>
-        {option.map((item) => {
+      <Select
+        id={init}
+        onChange={handleChange}
+        value={option}
+        native
+        label={init}
+        inputProps={{ name: init }}
+      >
+        <option aria-label="None" value="" />
+        {options.map((item) => {
           if (isCity(item)) {
             return (
-              <MenuItem key={item.name} value={item.name}>
+              <option key={item.name} value={item.name}>
                 {item.name}
-              </MenuItem>
+              </option>
             );
           } else {
             return (
-              <MenuItem key={item.cuisine_id} value={item.cuisine_name}>
+              <option key={item.cuisine_id} value={item.cuisine_name}>
                 {item.cuisine_name}
-              </MenuItem>
+              </option>
             );
           }
         })}

@@ -37,6 +37,9 @@ export const zomatoCollectionsUrl = (geo: string) =>
 export const zomatoDetailsUrl = (cityId: number, colId: string) =>
   `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&collection_id=${colId}`;
 
+export const zomatoCuisineUrl = (cusineId: number, lat: number, lon: number) =>
+  `https://developers.zomato.com/api/v2.1/search?lat=${lat}&lon=${lon}&cuisines=${cusineId}`;
+
 export const triposoPois = (geo: string, tagLabel: string[]) => {
   let temp = "";
   for (let i = 0; i < tagLabel.length; i++) {

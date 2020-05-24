@@ -1,4 +1,10 @@
-import { IGooglePlaceDetail, ITriposoPoi, IZomatoDetail } from "./type";
+import {
+  IGooglePlaceDetail,
+  ITriposoPoi,
+  IZomatoDetail,
+  City,
+  Cuisine,
+} from "./type";
 
 export const dataFormat = (date: Date) => {
   return date.toLocaleString("en-AU", {
@@ -142,3 +148,7 @@ export const sortDetailsData = (item: ITriposoPoi | IZomatoDetail) => {
   }
   return ret;
 };
+
+export function isCity(input: City | Cuisine): input is City {
+  return (input as City).coordinates !== undefined;
+}

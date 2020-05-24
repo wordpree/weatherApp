@@ -160,6 +160,31 @@ export const resZomatoDetailFailed = (
 export const deleteZomatoDetailAction = (): TYPE.TravelActionType => ({
   type: TYPE.DELETE_ZOMATO_DETAIL,
 });
+
+export const reqZomatoCuisineAction = (
+  cuisineId: number,
+  lat: number,
+  lon: number
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_ZOMATO_CUISINE,
+  cuisineId,
+  lat,
+  lon,
+});
+
+export const resZomatoCuisineSuccess = (
+  cuisines: IZomatoDetailRes
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_ZOMATO_CUISINE_SUCCEEDED,
+  cuisines,
+});
+
+export const resZomatoCuisineFailed = (
+  error: string
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_ZOMATO_CUISINE_FAILED,
+});
+
 /*********Triposo Api*********/
 export const reqTriposoPoiAction = (
   geo: string,

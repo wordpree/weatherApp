@@ -42,3 +42,15 @@ export const zomatoDetailReducer = (
       return state;
   }
 };
+
+export const zomatoCuisineDetReducer = (
+  state = initDetState,
+  actions: TYPE.IZomatoCuisinesResSuccess
+) => {
+  switch (actions.type) {
+    case TYPE.REQUEST_ZOMATO_CUISINE_SUCCEEDED:
+      return actions.cuisines;
+    default:
+      return state;
+  }
+};

@@ -8,12 +8,15 @@ import {
   resZomatoCollectionSuccess,
   resZomatoCityFailed,
   resZomatoDetailSuccess,
-  resZomatoDetailFailed
+  resZomatoDetailFailed,
+  resZomatoCuisineFailed,
+  resZomatoCuisineSuccess,
 } from "../actions";
 import {
   IZomatoCityReq,
   IZomatoCollectionReq,
-  IZomatoDetailReq
+  IZomatoDetailReq,
+  IZomatoCuisinesReq,
 } from "../actionType";
 
 function* getZomatoCity({ geo }: IZomatoCityReq) {
@@ -43,6 +46,18 @@ function* getZomatoDetail({ cityId, colId }: IZomatoDetailReq) {
   }
 }
 
+function* getCuisineDetail({ cuisineId, lat, lon }: IZomatoCuisinesReq) {
+  try {
+    const res = yield call(
+      fetchZomato,
+      urls.zomatoCuisineUrl(cuisineId, lat, lon)
+    );
+    yield put(resZomatoCuisineSuccess(res.restaurants));
+  } catch (error) {
+    yield put(resZomatoCuisineFailed(error));
+  }
+}
+
 export function* zCitySaga() {
   yield takeLatest(TYPE.REQUEST_ZOMATO_CITY, getZomatoCity);
 }
@@ -53,4 +68,8 @@ export function* zCollectionSaga() {
 
 export function* zDetailSaga() {
   yield takeLatest(TYPE.REQUEST_ZOMATO_DETAIL, getZomatoDetail);
+}
+
+export function* zCuisineSaga() {
+  yield takeLatest(TYPE.REQUEST_ZOMATO_CUISINE, getCuisineDetail);
 }
