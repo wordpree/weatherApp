@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Titles } from "../";
 import Options from "./Options";
 import { Container, makeStyles, Button } from "@material-ui/core";
-import cuisines from "../../util/cusines";
-import { City, Cuisine } from "../../util/type";
+import cusineTypes from "../../util/cusines";
+import { City, IZomatoDetailRes } from "../../util/type";
 import useOption from "./useOption";
 import getIdsByOpt from "./getIdsByOpt";
-
+import CuisineCard from "./CuisineCard";
+import { Loading } from "../";
 interface IFCProps {
   cities: City[];
+  cuisines: IZomatoDetailRes;
   reqZomatoCusinesAction(cuisineId: number, lat: number, lon: number): void;
+  reqZomatoCusinesDelete(): void;
 }
 
 export type CityGeo = {
   latitude: number;
   longitude: number;
 };
-export type Action =
-  | React.Dispatch<React.SetStateAction<number>>
-  | React.Dispatch<React.SetStateAction<CityGeo>>;
 
 const useStyles = makeStyles((theme) => ({
   optionWrapper: {
@@ -37,14 +37,22 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "auto",
     },
   },
+  cuisinesEntry: {
+    marginTop: "1.75rem",
+  },
 }));
 
 export const cityInit = { latitude: -27.4709989, longitude: 153.0252 };
 
-const FoodCourt = ({ cities, reqZomatoCusinesAction }: IFCProps) => {
+const FoodCourt = ({
+  cities,
+  reqZomatoCusinesAction,
+  cuisines,
+  reqZomatoCusinesDelete,
+}: IFCProps) => {
   const classes = useStyles();
   const { option, handleOptionChange } = useOption();
-  const cuisineId = (getIdsByOpt(cuisines, option.cuisine) as number) || 177;
+  const cuisineId = (getIdsByOpt(cusineTypes, option.cuisine) as number) || 177;
   const cityId = (getIdsByOpt(cities, option.city) as CityGeo) || cityInit;
 
   useEffect(() => {
@@ -65,7 +73,7 @@ const FoodCourt = ({ cities, reqZomatoCusinesAction }: IFCProps) => {
           option={option.city}
         />
         <Options
-          options={cuisines}
+          options={cusineTypes}
           init="cuisine"
           handleChange={handleOptionChange}
           option={option.cuisine}
@@ -75,12 +83,28 @@ const FoodCourt = ({ cities, reqZomatoCusinesAction }: IFCProps) => {
           size="large"
           color="primary"
           className={classes.btn}
-          onClick={() =>
-            reqZomatoCusinesAction(cuisineId, cityId.latitude, cityId.longitude)
-          }
+          onClick={() => {
+            reqZomatoCusinesDelete();
+            reqZomatoCusinesAction(
+              cuisineId,
+              cityId.latitude,
+              cityId.longitude
+            );
+          }}
         >
           Explore desired meal
         </Button>
+      </div>
+      <div className={classes.cuisinesEntry}>
+        {cuisines.length ? (
+          cuisines
+            .slice(0, 5)
+            .map((item) => (
+              <CuisineCard cuisine={item} key={item.restaurant.id} />
+            ))
+        ) : (
+          <Loading value={100} />
+        )}
       </div>
     </Container>
   );

@@ -31,8 +31,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Options = ({ init, options, handleChange, option }: IOProps) => {
   const classes = useStyles();
-
-  console.log(option);
   return (
     <FormControl variant="outlined" className={classes.formControl}>
       <InputLabel htmlFor={init}>{init}</InputLabel>
