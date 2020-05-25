@@ -9,7 +9,7 @@ import {
   makeStyles,
   Button,
 } from "@material-ui/core";
-import Title from "../Title";
+
 import { ITriposoPoi, IZomatoDetail } from "../../util/type";
 import { sortDetailsData } from "../../util/utils";
 
@@ -102,7 +102,6 @@ const DetList3 = ({ detail }: ISCLProps) => {
   let data: (IZomatoDetail | ITriposoPoi)[] = detail;
   return (
     <>
-      <Title text="Keep going on your new finding" />
       <div className={classes.entry}>
         {data.map((item) => {
           const ret = sortDetailsData(item);

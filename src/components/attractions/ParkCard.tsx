@@ -85,13 +85,12 @@ const useStyles = makeStyles((theme) => ({
 const ParkCard = ({ data }: IPCProps) => {
   const classes = useStyles();
   const snippet = data.snippet;
+  const image = data.images[0].sizes.medium.url.replace("http", "https");
+
   return (
     <Fade in={Boolean(data)}>
       <Card className={classes.card}>
-        <CardMedia
-          image={data.images[0].sizes.medium.url}
-          className={classes.media}
-        />
+        <CardMedia image={image} className={classes.media} />
         <div className={classes.contenWrapper}>
           <CardContent className={classes.content}>
             <Typography variant="h5">{data.name}</Typography>

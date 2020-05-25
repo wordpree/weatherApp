@@ -4,7 +4,6 @@ import {
   IGooglePlaceDetail,
   IWData,
   INData,
-  IZomatoCollectionRes,
   IZomatoDetailRes,
   ITriposoPoi,
   IGoogleTextsearch,
@@ -101,64 +100,9 @@ export const getNewsFailed = (error: string): TYPE.TravelActionType => ({
 });
 
 /***********************Zomato restaurant*****************/
-export const reqZomatoCityAction = (geo: string): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_ZOMATO_CITY,
-  geo,
-});
 
-export const resZomatoCitySuccess = (id: number): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_ZOMATO_CITY_SUCCEEDED,
-  id,
-});
-
-export const resZomatoCityFailed = (error: string): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_ZOMATO_CITY_FAILED,
-});
-
-export const reqZomatoCollectionAction = (
-  geo: string
-): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_ZOMATO_COLLECTION,
-  geo,
-});
-
-export const resZomatoCollectionSuccess = (
-  collections: IZomatoCollectionRes
-): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_ZOMATO_COLLECTION_SUCCEEDED,
-  collections,
-});
-
-export const resZomatoCollectionFailed = (
-  error: string
-): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_ZOMATO_COLLECTION_FAILED,
-});
-
-export const reqZomatoDetailAction = (
-  cityId: number,
-  colId: string
-): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_ZOMATO_DETAIL,
-  cityId,
-  colId,
-});
-
-export const resZomatoDetailSuccess = (
-  detail: IZomatoDetailRes
-): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_ZOMATO_DETAIL_SUCCEEDED,
-  detail,
-});
-
-export const resZomatoDetailFailed = (
-  error: string
-): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_ZOMATO_DETAIL_FAILED,
-});
-
-export const deleteZomatoDetailAction = (): TYPE.TravelActionType => ({
-  type: TYPE.DELETE_ZOMATO_DETAIL,
+export const reqZomatoCusinesDelete = (): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_DELETE_ZOMATO_CUISINES,
 });
 
 export const reqZomatoCuisineAction = (
@@ -186,27 +130,6 @@ export const resZomatoCuisineFailed = (
 });
 
 /*********Triposo Api*********/
-export const reqTriposoPoiAction = (
-  geo: string,
-  tagLabel: string[]
-): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_TRIPOSO_POI,
-  geo,
-  tagLabel,
-});
-
-export const reqTriposoPoiSuccess = (
-  poiPlaces: ITriposoPoi[]
-): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_TRIPOSO_POI_SUCCEEDED,
-  poiPlaces,
-});
-export const reqTriposoPoiFailed = (error: string): TYPE.TravelActionType => ({
-  type: TYPE.REQUEST_TRIPOSO_POI_FAILED,
-});
-export const deleteTriposoPois = (): TYPE.TravelActionType => ({
-  type: TYPE.DELETE_TRIPOSO_POI,
-});
 
 export const reqTriposoPopularPoiAction = () => ({
   type: TYPE.REQUEST_TRIPOSO_POPULAR_POI,

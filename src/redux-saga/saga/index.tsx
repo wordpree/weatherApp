@@ -7,17 +7,11 @@ import {
 import openWeatherSaga from "./weatherSaga";
 import newsorgSaga from "./newsorgSaga";
 import {
-  triposoPoiSaga,
   triposoPopularSaga,
   triposoLocationSaga,
-  triposoCitiesSaga,
+  triposoTopCitiesSaga,
 } from "./triposoSaga";
-import {
-  zCollectionSaga,
-  zCitySaga,
-  zDetailSaga,
-  zCuisineSaga,
-} from "./zomatoSaga";
+import { zCuisineSaga } from "./zomatoSaga";
 
 export default function* saga() {
   yield all([
@@ -26,13 +20,9 @@ export default function* saga() {
     fork(textsearchSaga),
     fork(openWeatherSaga),
     fork(newsorgSaga),
-    fork(zCollectionSaga),
-    fork(zCitySaga),
-    fork(zDetailSaga),
-    fork(triposoPoiSaga),
     fork(triposoPopularSaga),
     fork(triposoLocationSaga),
-    fork(triposoCitiesSaga),
+    fork(triposoTopCitiesSaga),
     fork(zCuisineSaga),
   ]);
 }

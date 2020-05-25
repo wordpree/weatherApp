@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 function App() {
   const theme = createMuiTheme({
     typography: {
-      fontFamily: ["sans-serify", "Roboto", '"Helvetica Neue"', "Arial"].join(
+      fontFamily: ["Roboto", "sans-serify", '"Helvetica Neue"', "Arial"].join(
         ","
       ),
     },

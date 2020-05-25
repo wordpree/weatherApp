@@ -13,7 +13,6 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { Magnify } from "mdi-material-ui";
 import { IGoogleAutoData } from "../../util/type";
-import Title from "../Title";
 
 interface ISProps {
   submitAction(address: string): void;
@@ -74,8 +73,6 @@ const Search = ({
 
   return (
     <Container>
-      <Title text="Search & Fun" />
-
       <div className={classes.div}>
         <form
           onSubmit={(e) => {

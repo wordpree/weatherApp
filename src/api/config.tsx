@@ -26,28 +26,10 @@ export const weatherApi = (geo: string) =>
   `https://api.openweathermap.org/data/2.5/weather?${geo}&units=metric&appid=${W_API_KEY}`;
 
 export const newsorgApi = (location: string) =>
-  `https://newsapi.org/v2/everything?q=${location}&pageSize=25&page=1&apikey=${N_API_KEY}`;
-
-export const zomatoCityUrl = (geo: string) =>
-  `https://developers.zomato.com/api/v2.1/cities?${geo}`;
-
-export const zomatoCollectionsUrl = (geo: string) =>
-  `https://developers.zomato.com/api/v2.1/collections?${geo}`;
-
-export const zomatoDetailsUrl = (cityId: number, colId: string) =>
-  `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&collection_id=${colId}`;
+  `${CORS}https://newsapi.org/v2/everything?q=${location}&pageSize=25&page=1&apikey=${N_API_KEY}`;
 
 export const zomatoCuisineUrl = (cusineId: number, lat: number, lon: number) =>
   `https://developers.zomato.com/api/v2.1/search?lat=${lat}&lon=${lon}&cuisines=${cusineId}`;
-
-export const triposoPois = (geo: string, tagLabel: string[]) => {
-  let temp = "";
-  for (let i = 0; i < tagLabel.length; i++) {
-    let dep = temp ? "&" : "";
-    temp = temp + dep + `tag_labels=${tagLabel[i]}`;
-  }
-  return `https://www.triposo.com/api/20190906/poi.json?token=${T_API_KEY}&account=EERNPMK9&annotate=distance:${geo}&${temp}&distance=<30000&fields=all&order_by=-score&count=25&exclude_fields=structured_content_language_info,structured_content,tags`;
-};
 
 export const triposePopular = () =>
   `https://www.triposo.com/api/20200405/poi.json?token=${T_API_KEY}&location_id=Australia&tag_labels=exploringnature&fields=all&exclude_fields=structured_content_language_info,structured_content,tags&account=EERNPMK9&order_by=-score`;
@@ -55,5 +37,5 @@ export const triposePopular = () =>
 export const triposoLocation = (tagLabels: string) =>
   `https://www.triposo.com/api/20200405/location.json?token=${T_API_KEY}&part_of=Australia&tag_labels=${tagLabels}&fields=all&exclude_fields=structured_content_language_info,structured_content,tags&account=EERNPMK9&order_by=-score`;
 
-export const triposeCities = () =>
+export const triposoCities = () =>
   `https://www.triposo.com/api/20200405/location.json?token=${T_API_KEY}&account=EERNPMK9&fields=name,coordinates&tag_labels=city&part_of=Australia&order_by=-score&count=25`;

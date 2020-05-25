@@ -8,7 +8,7 @@ import {
   CardActionArea,
   makeStyles,
 } from "@material-ui/core";
-import Title from "../Title";
+
 import { ITriposoPoi, IZomatoDetail } from "../../util/type";
 import { sortDetailsData } from "../../util/utils";
 
@@ -99,7 +99,6 @@ const DetList4 = ({ detail }: ISCLProps) => {
   );
   return (
     <>
-      <Title text="Change everything to your recent memory" />
       <div className={classes.entry}>
         {data.map((item) => {
           const ret = sortDetailsData(item);

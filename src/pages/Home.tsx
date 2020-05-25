@@ -5,13 +5,11 @@ import {
   Attractions,
   LocalNews,
   LocalWeather,
-  Title,
-  ZCollections,
   Banner,
   FoodCourt,
-  TCollections,
   Photos,
   Footer,
+  Titles,
 } from "../components";
 
 import { Grid, Container } from "@material-ui/core";
@@ -24,10 +22,12 @@ const Home = () => {
       <Attractions />
       <FoodCourt />
       <Search />
-      <TCollections />
-      <ZCollections />
       <Container>
-        <Title text="News & Weather" css={{ borderBottom: "2px solid" }} />
+        <Titles
+          title="News & Weather"
+          style={{ borderBottom: "2px solid" }}
+          subTitle=""
+        />
         <Grid container spacing={5}>
           <LocalNews />
           <LocalWeather />

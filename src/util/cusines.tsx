@@ -1,4 +1,4 @@
-const cusines = [
+const cusineTypes = [
   {
     cuisine_id: 131,
     cuisine_name: "Australian",
@@ -124,4 +124,4 @@ const cusines = [
   },
 ];
 
-export default cusines;
+export default cusineTypes;

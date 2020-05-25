@@ -3,7 +3,6 @@ import {
   IGooglePlaceDetail,
   IWData,
   INData,
-  IZomatoCollectionRes,
   IZomatoDetailRes,
   ITriposoPoi,
   IGoogleTextsearch,
@@ -45,31 +44,11 @@ export const REQUEST_TRIPOSO_CITIES_SUCCEEDED =
 export const REQUEST_TRIPOSO_CITIES = "REQUEST_TRIPOSO_CITIES";
 export const REQUEST_TRIPOSO_CITIES_FAILED = "REQUEST_TRIPOSO_CITIES_FAILED";
 
-export const REQUEST_ZOMATO_CITY = "REQUEST_ZOMATO_CITY";
-export const REQUEST_ZOMATO_CITY_SUCCEEDED = "REQUEST_ZOMATO_CITY_SUCCEEDED ";
-export const REQUEST_ZOMATO_CITY_FAILED = "REQUEST_ZOMATO_CITY_FAILED";
-
-export const REQUEST_ZOMATO_COLLECTION = "REQUEST_ZOMATO_COLLECTION";
-export const REQUEST_ZOMATO_COLLECTION_SUCCEEDED =
-  "REQUEST_ZOMATO_COLLECTION_SUCCEEDED ";
-export const REQUEST_ZOMATO_COLLECTION_FAILED =
-  "REQUEST_ZOMATO_COLLECTION_FAILED";
-
-export const REQUEST_ZOMATO_DETAIL = "REQUEST_ZOMATO_DETAIL";
-export const REQUEST_ZOMATO_DETAIL_SUCCEEDED =
-  "REQUEST_ZOMATO_DETAIL_SUCCEEDED";
-export const REQUEST_ZOMATO_DETAIL_FAILED = "REQUEST_ZOMATO_DETAIL_FAILED";
-export const DELETE_ZOMATO_DETAIL = "DELETE_ZOMATO_DETAIL";
-
+export const REQUEST_DELETE_ZOMATO_CUISINES = "REQUEST_DELETE_ZOMATO_CUISINES";
 export const REQUEST_ZOMATO_CUISINE = "REQUEST_ZOMATO_CUISINE";
 export const REQUEST_ZOMATO_CUISINE_SUCCEEDED =
   "REQUEST_ZOMATO_CUISINE_SUCCEEDED";
 export const REQUEST_ZOMATO_CUISINE_FAILED = "REQUEST_ZOMATO_CUISINE_FAILED";
-
-export const REQUEST_TRIPOSO_POI = "REQUEST_TRIPOSO_POI";
-export const REQUEST_TRIPOSO_POI_SUCCEEDED = "REQUEST_TRIPOSO_POI_SUCCEEDED ";
-export const REQUEST_TRIPOSO_POI_FAILED = "REQUEST_TRIPOSO_POI_FAILED";
-export const DELETE_TRIPOSO_POI = "DELETE_TRIPOSO_POI";
 
 export const REQUEST_G_PLACE_POI_SUCCEEDED = "REQUEST_G_PLACE_POI_SUCCEEDED";
 export const REQUEST_G_PLACE_POI = "REQUEST_G_PLACE_POI";
@@ -113,74 +92,6 @@ export interface ITriposoCitiesResSuccess {
 export interface ITriposoCitiesResErr {
   type: typeof REQUEST_TRIPOSO_CITIES_FAILED;
 }
-/******* triposo pois based on geo coordinate*****/
-export interface ITriposoPoiReq {
-  type: typeof REQUEST_TRIPOSO_POI;
-  geo: string;
-  tagLabel: string[];
-}
-
-export interface ITriposoPoiResSuccess {
-  type: typeof REQUEST_TRIPOSO_POI_SUCCEEDED;
-  poiPlaces: ITriposoPoi[];
-}
-
-export interface ITriposoPoiResErr {
-  type: typeof REQUEST_TRIPOSO_POI_FAILED;
-}
-
-export interface ITriposoPoiDelete {
-  type: typeof DELETE_TRIPOSO_POI;
-}
-/******* zomato city*****/
-export interface IZomatoCityReq {
-  type: typeof REQUEST_ZOMATO_CITY;
-  geo: string;
-}
-
-export interface IZomatoCityResSuccess {
-  type: typeof REQUEST_ZOMATO_CITY_SUCCEEDED;
-  id: number;
-}
-
-export interface IZomatoCityResErr {
-  type: typeof REQUEST_ZOMATO_CITY_FAILED;
-}
-
-/******* zomato collection basted on city id*****/
-export interface IZomatoCollectionReq {
-  type: typeof REQUEST_ZOMATO_COLLECTION;
-  geo: string;
-}
-
-export interface IZomatoCollectionResSuccess {
-  type: typeof REQUEST_ZOMATO_COLLECTION_SUCCEEDED;
-  collections: IZomatoCollectionRes;
-}
-
-export interface IZomatoCollectionResErr {
-  type: typeof REQUEST_ZOMATO_COLLECTION_FAILED;
-}
-
-/******* zomato collection details basted on city id and collection id*****/
-export interface IZomatoDetailReq {
-  type: typeof REQUEST_ZOMATO_DETAIL;
-  cityId: number;
-  colId: string;
-}
-
-export interface IZomatoDetailResSuccess {
-  type: typeof REQUEST_ZOMATO_DETAIL_SUCCEEDED;
-  detail: IZomatoDetailRes;
-}
-
-export interface IZomatoDetailResErr {
-  type: typeof REQUEST_ZOMATO_DETAIL_FAILED;
-}
-
-export interface IZomatoDeleteDetail {
-  type: typeof DELETE_ZOMATO_DETAIL;
-}
 
 /******* zomato cusines details basted on cuisine id and coordinate****/
 export interface IZomatoCuisinesReq {
@@ -199,6 +110,9 @@ export interface IZomatoCuisinesResErr {
   type: typeof REQUEST_ZOMATO_CUISINE_FAILED;
 }
 
+export interface IZomatoCuisinesDelete {
+  type: typeof REQUEST_DELETE_ZOMATO_CUISINES;
+}
 /******* newsorg news action *****/
 export interface INewsReq {
   type: typeof REQUEST_NEWSORG;
@@ -298,20 +212,7 @@ export type TravelActionType =
   | ITriposoLocationReq
   | ITriposoLocationResSuccess
   | ITriposoLocationResErr
-  | IZomatoCityReq
-  | IZomatoCityResSuccess
-  | IZomatoCityResErr
-  | IZomatoCollectionReq
-  | IZomatoCollectionResSuccess
-  | IZomatoCollectionResErr
-  | IZomatoDetailReq
-  | IZomatoDetailResSuccess
-  | IZomatoDetailResErr
-  | IZomatoDeleteDetail
+  | IZomatoCuisinesDelete
   | IZomatoCuisinesReq
   | IZomatoCuisinesResSuccess
-  | IZomatoCuisinesResErr
-  | ITriposoPoiReq
-  | ITriposoPoiResSuccess
-  | ITriposoPoiResErr
-  | ITriposoPoiDelete;
+  | IZomatoCuisinesResErr;

@@ -4,8 +4,7 @@ import { TravelStore } from "../redux-saga/reducer";
 import { connect } from "react-redux";
 import { IZomatoCollection } from "../util/type";
 import { Grid, Container, makeStyles } from "@material-ui/core";
-import { Title, ScrollToTop } from "../components";
-import { ZCollection } from "../components";
+import { Titles, ScrollToTop } from "../components";
 
 interface IRProps {
   collections: IZomatoCollection[];
@@ -29,16 +28,11 @@ function Restaurant({ collections }: IRProps) {
       <ScrollToTop />
       <Header />;
       <Container className={classes.container}>
-        <Title text="We have the selective restaurant for you" />
+        <Titles title="We have the selective restaurant for you" subTitle="" />
         <div className={classes.gridWrapper}>
           <Grid container spacing={2}>
             {collections.map((col, index) => (
-              <ZCollection
-                zCol={col}
-                key={index}
-                bpNumber={6}
-                image={col.collection.image_url}
-              />
+              <div key={index} />
             ))}
           </Grid>
         </div>
@@ -49,7 +43,6 @@ function Restaurant({ collections }: IRProps) {
 
 const mapStateToProps = (state: TravelStore) => ({
   detail: state.detail,
-  collections: state.zCollections,
 });
 
 export default connect(mapStateToProps)(Restaurant);

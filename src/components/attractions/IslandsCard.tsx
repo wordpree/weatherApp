@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
 const IslandsCard = ({ data }: IIProps) => {
   const classes = useStyles();
   const md = useMediaQuery("(min-width:768px)");
+  const image = data.images[0].sizes.medium.url.replace("http", "https");
   return (
     <Fade in={Boolean(data)}>
       <Card className={classes.card}>
@@ -71,10 +72,7 @@ const IslandsCard = ({ data }: IIProps) => {
             </Avatar>
           }
         />
-        <CardMedia
-          image={data.images[0].sizes.medium.url}
-          className={classes.media}
-        />
+        <CardMedia image={image} className={classes.media} />
         <CardContent className={classes.content}>
           {md ? data.intro : data.intro.substring(0, 120) + "..."}
         </CardContent>

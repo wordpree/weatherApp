@@ -10,7 +10,6 @@ import {
 } from "@material-ui/core";
 import { ITriposoPoi, IZomatoDetail } from "../../util/type";
 import { sortDetailsData } from "../../util/utils";
-import Title from "../Title";
 
 interface ISCLProps {
   detail: IZomatoDetail[] | ITriposoPoi[];
@@ -84,7 +83,6 @@ const DetList2 = ({ detail }: ISCLProps) => {
   let data: (IZomatoDetail | ITriposoPoi)[] = detail;
   return (
     <>
-      <Title text="Enjoy where you are starting" />
       <div className={classes.entry}>
         {data.map((item) => {
           const ret = sortDetailsData(item);

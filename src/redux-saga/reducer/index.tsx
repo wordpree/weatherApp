@@ -7,32 +7,22 @@ import {
 import weatherReducer from "./openWeatherReducer";
 import newsReducer from "./newsorgReducer";
 import {
-  triposoPlacesPoiReducer,
   triposoLocationReducer,
   triposoPopularReducer,
   triposoCitiesReducer,
-} from "./tPlacesReducer";
-import {
-  zomatoCityReducer,
-  zomatoCollectionReducer,
-  zomatoDetailReducer,
-  zomatoCuisineDetReducer,
-} from "./zRestaurantReducer";
+} from "./triposoReducer";
+import { zomatoCuisineDetailReducer } from "./zomatoReducer";
 
 const rootReducer = combineReducers({
   detail: detailReducer,
   predictions: completeReducer,
   weather: weatherReducer,
   news: newsReducer,
-  zId: zomatoCityReducer,
-  zCollections: zomatoCollectionReducer,
-  zColDetail: zomatoDetailReducer,
-  tPoisDetail: triposoPlacesPoiReducer,
   tLocation: triposoLocationReducer,
   tPopular: triposoPopularReducer,
   gPois: textsearchReducer,
-  zCities: triposoCitiesReducer,
-  zCuisines: zomatoCuisineDetReducer,
+  tCities: triposoCitiesReducer,
+  zCuisines: zomatoCuisineDetailReducer,
 });
 export type TravelStore = ReturnType<typeof rootReducer>;
 export default rootReducer;

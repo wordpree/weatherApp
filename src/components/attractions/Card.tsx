@@ -90,14 +90,12 @@ const PopularCard = ({ data }: IACProps) => {
   const snippet = data.snippet;
   const brief =
     snippet.length > 140 ? snippet.substring(0, 140) + "..." : snippet;
+  const image = data.images[0].sizes.medium.url.replace("http", "https");
   return (
     <Grow in={Boolean(data)}>
       <Card className={classes.card}>
         <CardActionArea className={classes.action}>
-          <CardMedia
-            image={data.images[0].sizes.medium.url}
-            className={classes.media}
-          />
+          <CardMedia image={image} className={classes.media} />
           <div className={classes.gradient} />
           <Typography variant="h6" className={classes.title}>
             {data.name}

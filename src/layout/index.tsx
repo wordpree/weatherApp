@@ -6,8 +6,6 @@ import { TravelActionType } from "../redux-saga/actionType";
 import {
   reqNewsAction,
   reqWeatherAction,
-  reqZomatoCityAction,
-  reqZomatoCollectionAction,
   reqGoogleSearchText,
   reqTriposoPopularPoiAction,
   reqTriposoLocationAction,
@@ -23,8 +21,6 @@ const mapDispatchToPorps = (dispatch: Dispatch<TravelActionType>) =>
     {
       reqWeatherAction,
       reqNewsAction,
-      reqZomatoCityAction,
-      reqZomatoCollectionAction,
       reqGoogleSearchText,
       reqTriposoPopularPoiAction,
       reqTriposoLocationAction,

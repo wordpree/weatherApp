@@ -23,7 +23,7 @@ import {
 } from "@material-ui/core";
 import { AlarmPlus, Account } from "mdi-material-ui";
 import Loading from "./Loading";
-import Title from "./Title";
+import Titles from "./Titles";
 import imgFromUnsplash from "../assets/en-unsplash.jpg";
 
 const useStyles = makeStyles((theme) => ({
@@ -471,7 +471,7 @@ const NewsLists = ({ news }: INewsProps) => {
   ) : (
     <>
       <ScrollToTop />
-      <Title text="Headline news from locals" />
+      <Titles title="Headline news from locals" subTitle="" />
       <Container>
         {sectionOne(news.slice(0, 2))}
         {sectionTwo(news.slice(2, 6))}

@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
       lineHeight: 1.9,
       fontWeight: 400,
       borderBottom: "2.5px solid #FABE0E",
+      display: "inline-block",
     },
     "&>p": {
       lineHeight: 1.6,
@@ -69,15 +70,15 @@ const useStyles = makeStyles((theme) => ({
 
 const IslandsMedium = ({ data }: IIMProps) => {
   const classes = useStyles();
+  const image = data.images[0].sizes.medium.url.replace("http", "https");
+  const image1 = data.images[1].sizes.medium.url.replace("http", "https");
+  const image2 = data.images[2].sizes.medium.url.replace("http", "https");
 
   return (
     <Grid container className={classes.container}>
       <Grid item xs={6}>
         <Card className={classes.cardLeft} raised>
-          <CardMedia
-            image={data.images[0].sizes.medium.url}
-            className={classes.mediaLeft}
-          />
+          <CardMedia image={image} className={classes.mediaLeft} />
         </Card>
       </Grid>
       <Grid item xs={6}>
@@ -89,14 +90,8 @@ const IslandsMedium = ({ data }: IIMProps) => {
             </Typography>
           </CardContent>
           <div className={classes.medias}>
-            <CardMedia
-              className={classes.media}
-              image={data.images[1].sizes.medium.url}
-            ></CardMedia>
-            <CardMedia
-              className={classes.media}
-              image={data.images[2].sizes.medium.url}
-            ></CardMedia>
+            <CardMedia className={classes.media} image={image1}></CardMedia>
+            <CardMedia className={classes.media} image={image2}></CardMedia>
           </div>
           <CardActions className={classes.actions}>
             <Button variant="contained" color="primary">

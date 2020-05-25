@@ -41,15 +41,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 const ParksMedium = ({ data, more }: IMProps) => {
   const classes = useStyles();
+  const image = data[0].images[0].sizes.medium.url.replace("http", "https");
+
   return (
     <div>
       <div className={classes.wrapper}>
         <div className={classes.left}>
           <Card className={classes.card}>
-            <CardMedia
-              image={data[0].images[0].sizes.medium.url}
-              className={classes.media}
-            />
+            <CardMedia image={image} className={classes.media} />
             <CardContent>
               <Typography variant="h5" color="primary">
                 {data[0].name}

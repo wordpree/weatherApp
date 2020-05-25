@@ -13,7 +13,6 @@ import {
   Grow,
   CardContent,
 } from "@material-ui/core";
-import Title from "../Title";
 
 interface ICProps {
   detail: IZomatoDetail[] | ITriposoPoi[];
@@ -69,7 +68,6 @@ const DetListLeft = ({ detail }: ICProps) => {
   });
   return (
     <>
-      <Title text="More here" />
       <Grid container spacing={1}>
         {data.map((item) => {
           const ret = sortDetailsData(item);
