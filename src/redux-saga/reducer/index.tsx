@@ -10,6 +10,7 @@ import {
   triposoLocationReducer,
   triposoPopularReducer,
   triposoCitiesReducer,
+  triposoToursReducer,
 } from "./triposoReducer";
 import { zomatoCuisineDetailReducer } from "./zomatoReducer";
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   gPois: textsearchReducer,
   tCities: triposoCitiesReducer,
   zCuisines: zomatoCuisineDetailReducer,
+  tTours: triposoToursReducer,
 });
 export type TravelStore = ReturnType<typeof rootReducer>;
 export default rootReducer;

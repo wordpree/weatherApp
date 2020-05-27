@@ -1,5 +1,5 @@
 import React from "react";
-import { IZomatoCollection, ITriposoCol } from "../util/type";
+import { IZomatoCollection } from "../util/type";
 import { Link, LinkProps } from "react-router-dom";
 import { Omit } from "@material-ui/types";
 import {
@@ -16,7 +16,6 @@ import {
 
 interface ICProps {
   zCol?: IZomatoCollection;
-  tCol?: ITriposoCol;
   image: string;
   bpNumber: any;
   classes?: any;
@@ -52,30 +51,17 @@ const collectionStyles = () =>
     typoB2: { letterSpacing: 1 },
   });
 
-const Collection = ({
-  zCol,
-  tCol,
-  image,
-  bpNumber,
-  classes,
-  path,
-}: ICProps) => {
-  const id = (zCol && zCol.collection.collection_id) || (tCol && tCol.id);
-  const title = (zCol && zCol.collection.title) || (tCol && tCol.title);
-  const description =
-    (zCol && zCol.collection.description) || (tCol && tCol.description);
+const Collection = ({ zCol, image, bpNumber, classes, path }: ICProps) => {
+  const id = zCol && zCol.collection.collection_id;
+  const title = zCol && zCol.collection.title;
+  const description = zCol && zCol.collection.description;
 
   const LinkRef = React.forwardRef<any, Omit<LinkProps, "to">>((props, ref) => {
     return <Link ref={ref} {...props} to={`/${path}/${id}`} />;
   });
   return (
     <Grid item xs={12} sm={bpNumber} key={id}>
-      <Grow
-        in={
-          (tCol && tCol.hasOwnProperty("id")) ||
-          (zCol && zCol.hasOwnProperty("collection"))
-        }
-      >
+      <Grow>
         <Card className={classes.card}>
           <CardActionArea className={classes.action} component={LinkRef}>
             <CardMedia

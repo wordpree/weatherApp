@@ -1,6 +1,7 @@
 import React from "react";
 import {
   // Header,
+  CityAndTour,
   Search,
   Attractions,
   LocalNews,
@@ -19,9 +20,10 @@ const Home = () => {
     <>
       {/* <Header /> */}
       <Banner />
+      <CityAndTour />
       <Attractions />
       <FoodCourt />
-      <Search />
+      {/* <Search /> */}
       <Container>
         <Titles
           title="News & Weather"
@@ -33,7 +35,7 @@ const Home = () => {
           <LocalWeather />
         </Grid>
       </Container>
-      <Photos />
+      {/* <Photos /> */}
       <Footer />
     </>
   );

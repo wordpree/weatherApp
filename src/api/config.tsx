@@ -38,4 +38,7 @@ export const triposoLocation = (tagLabels: string) =>
   `https://www.triposo.com/api/20200405/location.json?token=${T_API_KEY}&part_of=Australia&tag_labels=${tagLabels}&fields=all&exclude_fields=structured_content_language_info,structured_content,tags&account=EERNPMK9&order_by=-score`;
 
 export const triposoCities = () =>
-  `https://www.triposo.com/api/20200405/location.json?token=${T_API_KEY}&account=EERNPMK9&fields=name,coordinates&tag_labels=city&part_of=Australia&order_by=-score&count=25`;
+  `https://www.triposo.com/api/20200405/location.json?token=${T_API_KEY}&account=EERNPMK9&fields=id,coordinates,score,intro,content,images,name,musement_locations&tag_labels=city&part_of=Australia&order_by=-score&count=25`;
+
+export const triposoTours = (city: string) =>
+  `https://www.triposo.com/api/20200405/tour.json?token=${T_API_KEY}&account=EERNPMK9&fields=all&order_by=-score&location_ids=${city}&annotate=converted_price:Aud&countrycode=AU&count=10&exclude_fields=structured_content,tags`;

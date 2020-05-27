@@ -84,8 +84,10 @@ const useStyles = makeStyles((theme) => ({
 
 const ParkCard = ({ data }: IPCProps) => {
   const classes = useStyles();
-  const snippet = data.snippet;
-  const image = data.images[0].sizes.medium.url.replace("http", "https");
+  const snippet = data.intro;
+  const image = data.images.length
+    ? data.images[0].sizes.medium.url.replace("http", "https")
+    : data.imgTour;
 
   return (
     <Fade in={Boolean(data)}>

@@ -99,13 +99,16 @@ export interface IGoogleTextsearch {
 
 /* google place end*************/
 /*** triposo pois api start*******/
-export type ITriposoCol = { title: string; description: string; id: string };
 type Img = {
   medium: {
     url: string;
+    width: number;
+    height: number;
   };
   original: {
     url: string;
+    width: number;
+    height: number;
   };
   thumbnail: {
     url: string;
@@ -134,7 +137,16 @@ type Content = {
 export interface ITriposoPoi {
   id: string;
   name: string;
+  imgTour?: string;
   coordinates: { latitude: number; longitude: number };
+  musement_locations:
+    | [
+        {
+          musement_id: string;
+          location_id: string;
+        }
+      ]
+    | [];
   score: number;
   intro: string;
   images: ImgData[];

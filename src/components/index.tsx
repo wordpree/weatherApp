@@ -14,6 +14,7 @@ import Footer from "./footer";
 import ScrollToTop from "./ScrollToTop";
 import SliderNav from "./SliderNav";
 import FoodCourt from "./food/";
+import CityAndTour from "./city/";
 
 export {
   SliderNav,
@@ -23,6 +24,7 @@ export {
   Attractions,
   Collection,
   Search,
+  CityAndTour,
   LocalNews,
   LocalWeather,
   FoodCourt,

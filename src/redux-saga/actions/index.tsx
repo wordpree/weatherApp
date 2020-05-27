@@ -172,3 +172,23 @@ export const reqTriposoCitiesSuccess = (
 export const reqTriposoCitiesFailed = (error: string) => ({
   type: TYPE.REQUEST_TRIPOSO_CITIES_FAILED,
 });
+
+export const reqTriposoTourAction = (city: string): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_TRIPOSO_TOURS,
+  city,
+});
+export const reqTriposoTourSuccess = (
+  tours: ITriposoPoi[],
+  city: string
+): TYPE.TravelActionType => ({
+  type: TYPE.REQUEST_TRIPOSO_TOURS_SUCCEEDED,
+  tours,
+  city,
+});
+export const reqTriposoTourFailed = (error: string) => ({
+  type: TYPE.REQUEST_TRIPOSO_TOURS_FAILED,
+});
+
+export const reqTriposoTourDelete = () => ({
+  type: TYPE.REQUEST_DELETE_TRIPOSO_TOURS,
+});

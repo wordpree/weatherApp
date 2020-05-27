@@ -43,12 +43,18 @@ export const REQUEST_TRIPOSO_CITIES_SUCCEEDED =
   "REQUEST_TRIPOSO_CITIES_SUCCEEDED";
 export const REQUEST_TRIPOSO_CITIES = "REQUEST_TRIPOSO_CITIES";
 export const REQUEST_TRIPOSO_CITIES_FAILED = "REQUEST_TRIPOSO_CITIES_FAILED";
+export const REQUEST_DELETE_TRIPOSO_TOURS = "REQUEST_DELETE_TRIPOSO_TOURS";
 
 export const REQUEST_DELETE_ZOMATO_CUISINES = "REQUEST_DELETE_ZOMATO_CUISINES";
 export const REQUEST_ZOMATO_CUISINE = "REQUEST_ZOMATO_CUISINE";
 export const REQUEST_ZOMATO_CUISINE_SUCCEEDED =
   "REQUEST_ZOMATO_CUISINE_SUCCEEDED";
 export const REQUEST_ZOMATO_CUISINE_FAILED = "REQUEST_ZOMATO_CUISINE_FAILED";
+
+export const REQUEST_TRIPOSO_TOURS = "REQUEST_TRIPOSO_TOURS";
+export const REQUEST_TRIPOSO_TOURS_SUCCEEDED =
+  "REQUEST_TRIPOSO_TOURS_SUCCEEDED";
+export const REQUEST_TRIPOSO_TOURS_FAILED = "REQUEST_TRIPOSO_TOURS_FAILED";
 
 export const REQUEST_G_PLACE_POI_SUCCEEDED = "REQUEST_G_PLACE_POI_SUCCEEDED";
 export const REQUEST_G_PLACE_POI = "REQUEST_G_PLACE_POI";
@@ -87,12 +93,27 @@ export interface ITriposoCitiesReq {
 }
 export interface ITriposoCitiesResSuccess {
   type: typeof REQUEST_TRIPOSO_CITIES_SUCCEEDED;
-  cities: Pick<ITriposoPoi, "coordinates" | "name">[];
+  cities: ITriposoPoi[];
 }
 export interface ITriposoCitiesResErr {
   type: typeof REQUEST_TRIPOSO_CITIES_FAILED;
 }
 
+export interface ITriposoToursReq {
+  type: typeof REQUEST_TRIPOSO_TOURS;
+  city: string;
+}
+export interface ITriposoToursResSuccess {
+  type: typeof REQUEST_TRIPOSO_TOURS_SUCCEEDED;
+  tours: ITriposoPoi[];
+  city: string;
+}
+export interface ITriposoToursResErr {
+  type: typeof REQUEST_TRIPOSO_TOURS_FAILED;
+}
+export interface ITriposoToursDelete {
+  type: typeof REQUEST_DELETE_TRIPOSO_TOURS;
+}
 /******* zomato cusines details basted on cuisine id and coordinate****/
 export interface IZomatoCuisinesReq {
   type: typeof REQUEST_ZOMATO_CUISINE;
@@ -212,6 +233,10 @@ export type TravelActionType =
   | ITriposoLocationReq
   | ITriposoLocationResSuccess
   | ITriposoLocationResErr
+  | ITriposoToursReq
+  | ITriposoToursResSuccess
+  | ITriposoToursResErr
+  | ITriposoToursDelete
   | IZomatoCuisinesDelete
   | IZomatoCuisinesReq
   | IZomatoCuisinesResSuccess
