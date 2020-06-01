@@ -27,7 +27,7 @@ const Tour = ({ data }: ITProps) => {
   ];
   //insert images for tours <-- api doesn't provide them now
   const toursWithImg =
-    data && data.tours.length
+    data.hasOwnProperty("tours") && data.tours.length
       ? data.tours.slice(0, 3).map((tour, index) => {
           const image = imgArr.find((item) => item.name === data.city);
           return {

@@ -137,7 +137,11 @@ type Content = {
 export interface ITriposoPoi {
   id: string;
   name: string;
-  imgTour?: string;
+  imgTour?: string; //temp img for tour agent
+  price_is_per_person: boolean; //tour
+  highlights: string[]; //tour
+  vendor_tour_url: string; //tour
+  converted_price: { amount: string; currency: string }; //tour
   coordinates: { latitude: number; longitude: number };
   musement_locations:
     | [
@@ -153,7 +157,6 @@ export interface ITriposoPoi {
   content: Content;
   snippet: string;
 }
-
 /*** triposo pois api end*******/
 /* zomato collection api start*/
 export type IZomatoCollectionRes = Array<IZomatoCollection>;

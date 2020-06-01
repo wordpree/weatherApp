@@ -17,7 +17,10 @@ const initStateLocation = {} as {
   islands: ITriposoPoi[];
   parks: ITriposoPoi[];
 };
-
+const inintStateTour = {} as {
+  tour: [];
+  city: string;
+};
 export const triposoPopularReducer = (
   state = initState,
   actions: ITriposoPopularPoiResSuccess
@@ -57,7 +60,7 @@ export const triposoCitiesReducer = (
 };
 
 export const triposoToursReducer = (
-  state = initState,
+  state = inintStateTour,
   actions: ITriposoToursResSuccess | ITriposoToursDelete
 ) => {
   switch (actions.type) {
