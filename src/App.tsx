@@ -14,7 +14,7 @@ function App() {
     },
     palette: {
       primary: { main: "#028a8a" },
-      secondary: { main: "#fff" },
+      secondary: { main: "rgb(234,175,4)" },
     },
   });
   return (

@@ -18,17 +18,32 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  fab1: {
+    backgroundColor: "#fff",
+    "&:hover $icon1 ": {
+      color: "#fff",
+    },
+    "&:hover": {
+      backgroundColor: "#028a8a",
+    },
+  },
+  icon1: {
+    color: "#028a8a",
+  },
+  icon2: {
+    color: "#fff",
+  },
 }));
 
 const SliderNav = ({ prevClick, nextClick }: ISProps) => {
   const classes = useStyles();
   return (
     <div className={classes.nav}>
-      <Fab onClick={prevClick} color="secondary" size="small">
-        <ChevronLeft color="primary" fontSize="large" />
+      <Fab onClick={prevClick} size="small" className={classes.fab1}>
+        <ChevronLeft fontSize="large" className={classes.icon1} />
       </Fab>
       <Fab onClick={nextClick} color="primary" size="small">
-        <ChevronRight color="secondary" fontSize="large" />
+        <ChevronRight className={classes.icon2} fontSize="large" />
       </Fab>
     </div>
   );

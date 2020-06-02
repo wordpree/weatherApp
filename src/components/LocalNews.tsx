@@ -33,15 +33,9 @@ const useStyles = makeStyles({
   moreBtn: {
     margin: "0 auto",
     transition: "all 0.4s ease-in-out",
-    background: "#01B3A7",
-    color: "#ddd",
+    color: "#fff",
     letterSpacing: 1.2,
     fontWeight: "bold",
-    "&:hover": {
-      background: "#01857C",
-      color: "#ccc",
-      borderColor: "01857C",
-    },
   },
   tooltip: {
     textDecoration: "none",
@@ -126,6 +120,7 @@ const LocalNews = ({ news }: LNProps) => {
           <Button
             className={classes.moreBtn}
             variant="contained"
+            color="primary"
             component={link}
           >
             Learn More

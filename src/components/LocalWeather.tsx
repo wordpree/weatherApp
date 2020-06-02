@@ -14,14 +14,14 @@ import {
   List,
   ListItemIcon,
   Divider,
-  Paper
+  Paper,
 } from "@material-ui/core";
 import {
   TemperatureCelsius,
   WeatherSunsetDown,
   WeatherSunsetUp,
   WaterPercent,
-  WeatherWindy
+  WeatherWindy,
 } from "mdi-material-ui";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { IWData } from "../util/type";
@@ -33,7 +33,7 @@ import {
   rainy,
   snow,
   cloudy,
-  sunny
+  sunny,
 } from "../assets/weather";
 
 interface IWProps {
@@ -50,8 +50,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up("md")]: {
       display: "flex",
       justifyContent: "center",
-      flexDirection: "column"
-    }
+      flexDirection: "column",
+    },
   },
   weatherWrapper: {
     width: "100%",
@@ -62,27 +62,27 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: "85%",
       padding: "1rem",
       backdropFilter: "blur(6px)",
-      borderRadius: 15
+      borderRadius: 15,
     },
     backgroundColor: "rgba(0,0,0,0.1)",
     margin: "0 auto",
-    textAlign: "center"
+    textAlign: "center",
   },
   weatherList1: {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   primaryItemText1: {
     fontSize: "1.5rem",
-    color: "#fff"
+    color: "#fff",
   },
   secondaryItemText1: {
-    fontWeight: 300
+    fontWeight: 300,
   },
   typoSpan: {
     display: "block",
     whiteSpace: "nowrap",
-    color: "rgba(255,255,255,0.7)"
+    color: "rgba(255,255,255,0.7)",
   },
   divTime: {
     textAlign: "center",
@@ -90,29 +90,29 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: "#fff",
     fontWeight: 400,
     marginBottom: "1rem",
-    letterSpacing: 1.3
+    letterSpacing: 1.3,
   },
   item2: {
-    justifyContent: "center"
+    justifyContent: "center",
   },
   listText2: {
     flex: "0 0 auto",
-    color: "#fff"
+    color: "#fff",
   },
   primary: {
-    flex: "0 0 auto"
+    flex: "0 0 auto",
   },
   primaryItemText2: {
-    fontSize: "1.5rem"
+    fontSize: "1.5rem",
   },
   icon: {
-    minWidth: 30
+    minWidth: 30,
   },
   primaryItemText3: {
     color: "#fff",
     letterSpacing: 1.1,
     fontWeight: 300,
-    textAlign: "center"
+    textAlign: "center",
   },
   listItem: { padding: 6, letterSpacing: 1.1 },
   listPrimary: { fontSize: "0.8rem", color: "#fff" },
@@ -120,9 +120,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   timePrimary: { fontSize: "1.25rem", color: "#fff" },
   listSecondary: { color: "rgba(250,250,250,0.54)" },
   weatherList3: {
-    display: "flex"
+    display: "flex",
   },
-  avatar: { backgroundColor: "inherit" }
+  avatar: { backgroundColor: "inherit" },
 }));
 
 const LocalWeather = ({ weather: weatherData }: IWProps) => {
@@ -139,13 +139,13 @@ const LocalWeather = ({ weather: weatherData }: IWProps) => {
     wind,
     timezone,
     visibility,
-    clouds
+    clouds,
   } = weatherData;
   const icons = [
     WaterPercent,
     WeatherWindy,
     WeatherSunsetUp,
-    WeatherSunsetDown
+    WeatherSunsetDown,
   ];
   const localHour = localTime(new Date(), timezone).getHours();
   const weatherImg = (weatherId: any): string => {
@@ -176,7 +176,7 @@ const LocalWeather = ({ weather: weatherData }: IWProps) => {
     `${main.humidity}%`,
     wind.speed + " " + degreeToDir(wind.deg),
     dataFormat(localTime(new Date(sys.sunrise * 1000), timezone)),
-    dataFormat(localTime(new Date(sys.sunset * 1000), timezone))
+    dataFormat(localTime(new Date(sys.sunset * 1000), timezone)),
   ];
 
   const weatherDescription = (
@@ -192,12 +192,12 @@ const LocalWeather = ({ weather: weatherData }: IWProps) => {
     icons.map((Icon: any, index: number) => (
       <ListItem key={index} classes={{ root: classes.listItem }}>
         <ListItemIcon className={classes.icon}>
-          <Icon style={{ color: "#8A8349" }} />
+          <Icon style={{ color: "#EAAF04" }} />
         </ListItemIcon>
         <ListItemText
           classes={{
             primary: classes.listPrimary,
-            secondary: classes.listSecondary
+            secondary: classes.listSecondary,
           }}
           primary={title[index]}
         />
@@ -210,7 +210,7 @@ const LocalWeather = ({ weather: weatherData }: IWProps) => {
         elevation={4}
         className={classes.paper}
         style={{
-          backgroundImage: `url(${weatherImg(weather[0].id)})`
+          backgroundImage: `url(${weatherImg(weather[0].id)})`,
         }}
       >
         <div className={classes.weatherWrapper}>
@@ -222,14 +222,14 @@ const LocalWeather = ({ weather: weatherData }: IWProps) => {
                   alt={`${weather[0].description}`}
                   style={{
                     width: 146,
-                    height: 146
+                    height: 146,
                   }}
                 />
               </ListItemAvatar>
               <ListItemText
                 classes={{
                   primary: classes.primaryItemText1,
-                  secondary: classes.secondaryItemText1
+                  secondary: classes.secondaryItemText1,
                 }}
                 primary={name}
                 secondary={
@@ -247,7 +247,7 @@ const LocalWeather = ({ weather: weatherData }: IWProps) => {
             <ListItem className={classes.item2}>
               <ListItemText
                 classes={{
-                  primary: classes.primaryItemText2
+                  primary: classes.primaryItemText2,
                 }}
                 primary={Math.floor(main.temp + 0.5)}
                 className={classes.listText2}
@@ -280,6 +280,6 @@ const LocalWeather = ({ weather: weatherData }: IWProps) => {
 };
 
 const mapStateToProps = (state: TravelStore) => ({
-  weather: state.weather
+  weather: state.weather,
 });
 export default connect(mapStateToProps)(LocalWeather);

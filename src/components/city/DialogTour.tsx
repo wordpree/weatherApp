@@ -24,6 +24,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     paddingRight: "1rem",
+    color: "#404040",
   },
 });
 
@@ -44,17 +45,18 @@ const DialogTour = ({
       maxWidth="md"
     >
       <DialogTitle>{title}</DialogTitle>
-      {highlight && (
-        <ul className={classes.highlight}>
-          {highlight.map((item) => (
-            <li key={item}>
-              <Typography variant="body2">{item}</Typography>
-            </li>
-          ))}
-        </ul>
-      )}
-
       <DialogContent>
+        {highlight && (
+          <DialogContentText>
+            <ul className={classes.highlight}>
+              {highlight.map((item) => (
+                <li key={item}>
+                  <Typography variant="body2">{item}</Typography>
+                </li>
+              ))}
+            </ul>
+          </DialogContentText>
+        )}
         <DialogContentText dangerouslySetInnerHTML={{ __html: content }} />
       </DialogContent>
       <DialogActions>
