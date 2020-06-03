@@ -14,14 +14,21 @@ interface IELProps {
   info: {
     label: string;
     icon?: Icon | null;
+    link?: string;
   }[];
 }
 
-const Lists = (Icon: Icon | null) => ({ name }: { name: string }) => (
-  <ListItem component="a" href="#">
+const Lists = (Icon: Icon | null) => ({
+  name,
+  link,
+}: {
+  name: string;
+  link: string;
+}) => (
+  <ListItem component="a" href={link} target="_blank">
     {Icon && (
       <ListItemIcon>
-        <Icon color="secondary" />
+        <Icon style={{ color: "#fff" }} />
       </ListItemIcon>
     )}
     <ListItemText
@@ -34,7 +41,13 @@ const Lists = (Icon: Icon | null) => ({ name }: { name: string }) => (
 const ExpandList = ({ info }: IELProps) => {
   const expandList = info.map((item) => {
     const ListWithIcon = item.icon ? Lists(item.icon) : Lists(null);
-    return <ListWithIcon name={item.label} key={item.label} />;
+    return (
+      <ListWithIcon
+        name={item.label}
+        key={item.label}
+        link={item.link ? item.link : ""}
+      />
+    );
   });
   return <List disablePadding>{expandList}</List>;
 };

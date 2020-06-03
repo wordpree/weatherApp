@@ -12,15 +12,18 @@ import {
   REQUEST_DELETE_TRIPOSO_TOURS,
 } from "../actionType";
 
+interface ITourState {
+  city: string;
+  tours: ITriposoPoi[];
+}
+
 const initState = [] as ITriposoPoi[];
 const initStateLocation = {} as {
   islands: ITriposoPoi[];
   parks: ITriposoPoi[];
 };
-const inintStateTour = {} as {
-  tour: [];
-  city: string;
-};
+const inintStateTour: ITourState = { city: "", tours: [] };
+
 export const triposoPopularReducer = (
   state = initState,
   actions: ITriposoPopularPoiResSuccess
@@ -65,7 +68,8 @@ export const triposoToursReducer = (
 ) => {
   switch (actions.type) {
     case REQUEST_TRIPOSO_TOURS_SUCCEEDED:
-      return { tours: actions.tours, city: actions.city };
+      const temp: ITourState = { tours: actions.tours, city: actions.city };
+      return temp;
     case REQUEST_DELETE_TRIPOSO_TOURS:
       return { tours: [], city: "" };
     default:

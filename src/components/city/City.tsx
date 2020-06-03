@@ -9,6 +9,7 @@ interface ICProps {
   data: ITriposoPoi[];
   reqTourOnClick(city: string): void;
   reqTourDelete(): void;
+  handleWeather(id: string): void;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -55,7 +56,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const City = ({ data, reqTourOnClick, reqTourDelete }: ICProps) => {
+const City = ({
+  data,
+  reqTourOnClick,
+  reqTourDelete,
+  handleWeather,
+}: ICProps) => {
   const classes = useStyles();
   const dataWithTour = data.filter(
     (item) => item.musement_locations.length !== 0
@@ -63,7 +69,8 @@ const City = ({ data, reqTourOnClick, reqTourDelete }: ICProps) => {
   const { select, handleClick } = useButtonClick(
     dataWithTour,
     reqTourOnClick,
-    reqTourDelete
+    reqTourDelete,
+    handleWeather
   );
   const city = dataWithTour.find((item) => select[item.name]) as ITriposoPoi;
   return (

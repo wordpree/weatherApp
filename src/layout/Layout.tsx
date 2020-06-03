@@ -26,15 +26,13 @@ function Layout({
 }: ILProps) {
   useEffect(() => {
     setStorageSearchPara(detail);
-    const [location, geoLocation] = getStorageSearchPara();
+    const [location] = getStorageSearchPara();
     /* triposo */
     reqTriposoPopularPoiAction();
     reqTriposoLocationAction();
     reqTriposoCitiesAction();
     /**newsorg */
     reqNewsAction(location);
-    /**openweathermap */
-    reqWeatherAction(geoLocation);
     /*pexels photos*/
     reqGoogleSearchText(location.split("OR")[1]);
   }, [

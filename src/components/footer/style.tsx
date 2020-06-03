@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Fab } from "@material-ui/core";
+import { Fab, Container } from "@material-ui/core";
 
 export const StyledDivWrapper = styled.div`
   padding: 1rem;
@@ -37,4 +37,15 @@ export const StyledRights = styled.div`
   text-align: center;
   color: #efefef;
   font-size: 0.75rem;
+`;
+
+export const StyledListWrapper = styled(Container)`
+  display: flex;
+  justify-content: space-around;
+  & ul > a {
+    color: #fff;
+  }
+  & ul > a:hover {
+    text-decoration: underline;
+  }
 `;

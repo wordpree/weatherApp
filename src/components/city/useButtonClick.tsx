@@ -8,7 +8,8 @@ interface ISelect {
 export const useButtonClick = (
   data: ITriposoPoi[],
   reqTourOnClick: (city: string) => void,
-  reqTourDelete: () => void
+  reqTourDelete: () => void,
+  handleWeather: (id: string) => void
 ) => {
   let options = {};
   data.forEach((item) => {
@@ -21,6 +22,7 @@ export const useButtonClick = (
       setSelect({ ...options, Sydney: false, [e.currentTarget.name]: true });
       reqTourDelete();
       reqTourOnClick(e.currentTarget.value);
+      handleWeather(e.currentTarget.value);
     }
   };
   return { select, handleClick };

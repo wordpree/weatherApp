@@ -50,7 +50,6 @@ const Expand = ({ label, children }: IEProps) => {
         unmountOnExit
         className={classes.expand}
       >
-        {" "}
         <List>{children}</List>
       </Collapse>
     </>

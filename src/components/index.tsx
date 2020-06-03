@@ -5,7 +5,6 @@ import Attractions from "./attractions/Attractions";
 import Search from "./search";
 import LocalNews from "./LocalNews";
 import LocalWeather from "./LocalWeather";
-import Collection from "./Collection";
 import Titles from "./Titles";
 import Banner from "./banner";
 import Photos from "./Photos";
@@ -22,7 +21,6 @@ export {
   NavList,
   NavLists,
   Attractions,
-  Collection,
   Search,
   CityAndTour,
   LocalNews,

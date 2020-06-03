@@ -1,10 +1,4 @@
-import {
-  IGooglePlaceDetail,
-  ITriposoPoi,
-  IZomatoDetail,
-  City,
-  Cuisine,
-} from "./type";
+import { IGooglePlaceDetail, City, Cuisine } from "./type";
 
 export const dataFormat = (date: Date) => {
   return date.toLocaleString("en-AU", {
@@ -114,40 +108,6 @@ export const getStorageSearchPara = () => {
 };
 
 /******type guard*********/
-function detailIsZ(
-  detail: ITriposoPoi | IZomatoDetail
-): detail is IZomatoDetail {
-  return (detail as IZomatoDetail).restaurant !== undefined;
-}
-
-export const sortDetailsData = (item: ITriposoPoi | IZomatoDetail) => {
-  let ret;
-  if (!item) {
-    return null;
-  }
-  if (detailIsZ(item)) {
-    ret = {
-      address: item.restaurant.location.address,
-      addressLocal: item.restaurant.location.locality_verbose,
-      cuisines: item.restaurant.cuisines,
-      establishment: item.restaurant.establishment,
-      rating: item.restaurant.user_rating,
-      id: item.restaurant.id,
-      img: item.restaurant.featured_image,
-      imgOrigin: item.restaurant.featured_image, //fixed triposo large sized image for first detail
-      name: item.restaurant.name,
-    };
-  } else {
-    ret = {
-      imgMedium: item.images[0].sizes.medium.url.replace("http", "https"),
-      img: item.images[0].sizes.original.url, //apllied first detail cardmedia
-      name: item.name,
-      snippet: item.snippet,
-      id: item.id,
-    };
-  }
-  return ret;
-};
 
 export function isCity(input: City | Cuisine): input is City {
   return (input as City).coordinates !== undefined;
