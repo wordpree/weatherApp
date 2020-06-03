@@ -60,13 +60,14 @@ const CityIntroCard = ({ data }: ICICProps) => {
     (item) => item.sizes.medium.width > 550 && item.sizes.medium.height > 400
   );
   const image = ret ? ret.sizes.medium.url : data.images[0].sizes.medium.url;
+  const imageWithS = image.replace("http", "https");
 
   return (
     <div className={classes.cityWrapper}>
       <Paper
         elevation={3}
         style={{
-          background: `center/cover no-repeat #808080 url(${image})`,
+          background: `center/cover no-repeat #808080 url(${imageWithS})`,
         }}
         className={classes.paper}
       />
