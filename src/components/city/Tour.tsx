@@ -1,15 +1,16 @@
 import React from "react";
-import TourCard from "../attractions/ParkCard";
-import bri from "../../assets/brisbane/";
-import syd from "../../assets/sydney/";
-import mel from "../../assets/melbourne/";
-import per from "../../assets/perth/";
+import { Grow } from "@material-ui/core";
+
 import ade from "../../assets/ade/";
+import bri from "../../assets/brisbane/";
 import cai from "../../assets/cairns/";
 import dar from "../../assets/darwin/";
-import { Tours } from "./index";
-import { Grow } from "@material-ui/core";
 import { Loading } from "../";
+import mel from "../../assets/melbourne/";
+import per from "../../assets/perth/";
+import syd from "../../assets/sydney/";
+import TourCard from "../attractions/ParkCard";
+import { Tours } from "./index";
 
 interface ITProps {
   data: Tours;

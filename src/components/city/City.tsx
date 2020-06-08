@@ -1,9 +1,10 @@
 import React from "react";
 import { Button, makeStyles } from "@material-ui/core";
-import { ITriposoPoi } from "../../util/type";
-import Titles from "../Titles";
-import { useButtonClick } from "./useButtonClick";
+
 import CityIntroCard from "./CityIntroCard";
+import Titles from "../Titles";
+import { ITriposoPoi } from "../../util/type";
+import { useButtonClick } from "./useButtonClick";
 
 interface ICProps {
   data: ITriposoPoi[];
@@ -12,7 +13,7 @@ interface ICProps {
   handleWeather(id: string): void;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   entry: { marginTop: "2rem", marginBottom: "1.25rem" },
   btnWrapper: {
     display: "flex",
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: 0.5,
     padding: "0.5rem 0",
   },
-}));
+});
 
 const City = ({
   data,

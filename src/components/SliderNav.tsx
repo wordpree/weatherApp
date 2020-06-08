@@ -51,13 +51,16 @@ const SliderNav = ({ prevClick, nextClick }: ISProps) => {
 export default SliderNav;
 
 /**  customized react-slick arrow**/
-export const Arrow = (Component: typeof ChevronLeft) => (props: any) => {
-  const { onClick, arrowStyle } = props;
-  return (
-    <div onClick={onClick} style={{ ...arrowStyle }}>
-      <Fab color="primary" size="small">
-        <Component color="secondary" fontSize="large" />
-      </Fab>
-    </div>
-  );
+export const Arrow = (Component: typeof ChevronLeft) => {
+  const classes = useStyles();
+  return (props: any) => {
+    const { onClick, arrowStyle } = props;
+    return (
+      <div onClick={onClick} style={{ ...arrowStyle }}>
+        <Fab color="primary" size="small">
+          <Component className={classes.icon2} fontSize="large" />
+        </Fab>
+      </div>
+    );
+  };
 };

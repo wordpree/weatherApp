@@ -50,8 +50,6 @@ export const StyledMobileHd = styled.div`
   align-items: center;
   max-height: 76px;
 `;
-export const StyledMobileLogo = styled.div``;
-export const StyledMobileClose = styled.div``;
 export const StyledMobileLogoImg = styled.img`
   width: 142px;
   height: auto;

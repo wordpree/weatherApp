@@ -51,12 +51,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Subscribe = () => {
   const classes = useStyles();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
   return (
     <div className={classes.entry}>
       <Typography variant="h5" className={classes.title}>
         Subscribe to get our new featured viewpoint among Australia
       </Typography>
-      <form className={classes.form} autoComplete="off">
+      <form
+        className={classes.form}
+        autoComplete="off"
+        noValidate
+        onSubmit={handleSubmit}
+      >
         <TextField
           InputProps={{ className: classes.input }}
           className={classes.field}

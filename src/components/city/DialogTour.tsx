@@ -1,13 +1,13 @@
 import React from "react";
 import {
+  Button,
   Dialog,
   DialogActions,
-  DialogTitle,
   DialogContent,
-  Typography,
-  Button,
   DialogContentText,
+  DialogTitle,
   makeStyles,
+  Typography,
 } from "@material-ui/core";
 
 interface IDTProps {
@@ -47,15 +47,13 @@ const DialogTour = ({
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         {highlight && (
-          <DialogContentText>
-            <ul className={classes.highlight}>
-              {highlight.map((item) => (
-                <li key={item}>
-                  <Typography variant="body2">{item}</Typography>
-                </li>
-              ))}
-            </ul>
-          </DialogContentText>
+          <ul className={classes.highlight}>
+            {highlight.map((item) => (
+              <li key={item}>
+                <Typography variant="body2">{item}</Typography>
+              </li>
+            ))}
+          </ul>
         )}
         <DialogContentText dangerouslySetInnerHTML={{ __html: content }} />
       </DialogContent>

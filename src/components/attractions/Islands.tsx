@@ -1,13 +1,14 @@
 import React from "react";
+import { ChevronLeft, ChevronRight } from "mdi-material-ui";
 import { makeStyles, useMediaQuery } from "@material-ui/core";
-import { ITriposoPoi } from "../../util/type";
+
+import { Arrow } from "../SliderNav";
+import EntryDiv from "./EntryDiv";
 import IslandsCard from "./IslandsCard";
+import IslandsSmallCard from "./IslandsSmallCard";
+import { ITriposoPoi } from "../../util/type";
 import { Titles, SliderNav } from "../";
 import Slider from "react-slick";
-import { ChevronLeft, ChevronRight } from "mdi-material-ui";
-import { Arrow } from "../SliderNav";
-import IslandsMedium from "./IslandsMedium";
-import EntryDiv from "./EntryDiv";
 
 interface IIProps {
   data: ITriposoPoi[];
@@ -68,7 +69,7 @@ const Islands = ({ data }: IIProps) => {
   };
   let slider: Slider | null = null;
   const lists = (Component: React.SFC<{ data: ITriposoPoi }>) =>
-    data.map((item) => <Component key={item.id} data={item} />);
+    data.slice(0, 5).map((item) => <Component key={item.id} data={item} />);
   const handleSlider = (sliderRef: Slider | null) => (slider = sliderRef);
   const preClick = () => slider && slider.slickPrev();
   const nextClick = () => slider && slider.slickNext();
@@ -85,11 +86,11 @@ const Islands = ({ data }: IIProps) => {
         {md ? (
           <div className={classes.cardWrapper}>
             <Slider {...settingsMedium} ref={(slider) => handleSlider(slider)}>
-              {lists(IslandsMedium)}
+              {lists(IslandsCard)}
             </Slider>
           </div>
         ) : (
-          <Slider {...settings}>{lists(IslandsCard)} </Slider>
+          <Slider {...settings}>{lists(IslandsSmallCard)} </Slider>
         )}
       </div>
     </EntryDiv>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, LinkProps } from "react-router-dom";
 import {
   Card,
   CardActionArea,
@@ -8,6 +9,8 @@ import {
   CardContent,
   makeStyles,
 } from "@material-ui/core";
+import { Omit } from "@material-ui/types";
+
 import { ITriposoPoi } from "../../util/type";
 
 interface IACProps {
@@ -91,10 +94,15 @@ const PopularCard = ({ data }: IACProps) => {
   const brief =
     snippet.length > 140 ? snippet.substring(0, 140) + "..." : snippet;
   const image = data.images[0].sizes.medium.url.replace("http", "https");
+  const DetailLink = React.forwardRef<any, Omit<LinkProps, "to">>(
+    (props, ref) => (
+      <Link to={`/explore-nature/${data.id}`} ref={ref} {...props} />
+    )
+  );
   return (
     <Grow in={Boolean(data)}>
       <Card className={classes.card}>
-        <CardActionArea className={classes.action}>
+        <CardActionArea className={classes.action} component={DetailLink}>
           <CardMedia image={image} className={classes.media} />
           <div className={classes.gradient} />
           <Typography variant="h6" className={classes.title}>

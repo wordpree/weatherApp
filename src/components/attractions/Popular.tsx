@@ -1,10 +1,11 @@
 import React from "react";
 import Slider from "react-slick";
 import { makeStyles, useMediaQuery } from "@material-ui/core";
+
+import EntryDiv from "./EntryDiv";
 import { ITriposoPoi } from "../../util/type";
 import PopularCard from "./Card";
 import { SliderNav, Titles } from "../";
-import EntryDiv from "./EntryDiv";
 
 interface IPProps {
   data: ITriposoPoi[];
@@ -66,11 +67,13 @@ const Popular = ({ data }: IPProps) => {
     ],
   };
   let slider: Slider | null = null;
+  const dataFilterUluru = data
+    .filter((item) => item.name !== "Uluru")
+    .slice(0, 7);
   const md = useMediaQuery("(min-width:768px)");
-  const cardLists = data.map((item) => (
+  const cardLists = dataFilterUluru.map((item) => (
     <PopularCard data={item} key={item.id} />
   ));
-
   const handleSlider = (sliderRef: Slider | null) => (slider = sliderRef);
   const preClick = () => slider && slider.slickPrev();
   const nextClick = () => slider && slider.slickNext();

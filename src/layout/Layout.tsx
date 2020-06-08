@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { Home, News, Photos, Restaurant } from "../pages";
+import { Home, News, Photos } from "../pages";
+import { CardDetail } from "../components";
 import { Route, Switch } from "react-router-dom";
 import Error from "../components/Error";
-import { IGooglePlaceDetail } from "../util/type";
-import { setStorageSearchPara, getStorageSearchPara } from "../util/utils";
+import { ITriposoPoi } from "../util/type";
 
 interface ILProps {
-  detail: IGooglePlaceDetail;
+  populars: ITriposoPoi[];
   reqNewsAction(location: string): void;
   reqWeatherAction(geo: string): void;
   reqGoogleSearchText(country: string): void;
@@ -16,41 +16,32 @@ interface ILProps {
 }
 
 function Layout({
-  detail,
+  populars,
   reqNewsAction,
-  reqWeatherAction,
-  reqGoogleSearchText,
   reqTriposoPopularPoiAction,
   reqTriposoLocationAction,
   reqTriposoCitiesAction,
 }: ILProps) {
   useEffect(() => {
-    setStorageSearchPara(detail);
-    const [location] = getStorageSearchPara();
     /* triposo */
     reqTriposoPopularPoiAction();
     reqTriposoLocationAction();
     reqTriposoCitiesAction();
     /**newsorg */
-    reqNewsAction(location);
+    reqNewsAction("Brisbane OR Australia");
     /*pexels photos*/
-    reqGoogleSearchText(location.split("OR")[1]);
-  }, [
-    detail,
-    reqNewsAction,
-    reqWeatherAction,
-    reqGoogleSearchText,
-    reqTriposoPopularPoiAction,
-    reqTriposoLocationAction,
-    reqTriposoCitiesAction,
-  ]);
+  }, []);
 
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/news" component={News} />
-      <Route path="/photos" component={Photos} />
-      <Route exact path="/restaurant" component={Restaurant} />
+      <Route path="/explore-nature/:id">
+        <CardDetail data={populars} />
+      </Route>
+      <Route path="/blog" component={News} />
+      <Route path="/explore" component={Photos} />
+      <Route exact path="/Flights" component={Photos} />
+      <Route exact path="/hotels" component={Photos} />
       <Route component={Error} />
     </Switch>
   );

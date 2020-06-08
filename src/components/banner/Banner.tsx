@@ -1,26 +1,27 @@
 import React, { useState } from "react";
-import {
-  StyledImgWrapper,
-  StyledNavTypo,
-  StyledLogo,
-  StyledNav,
-  StyledHeader,
-  StyledLogoImg,
-  StyledNavLink,
-  StyledMsgMain,
-  StyledContWrapper,
-  StyledMsgSub,
-  StyledSearchContainer,
-  StyledMainWrapper,
-  StyledMobileNav,
-  StyledMobileBtn,
-  StyledEntry,
-} from "./styled";
-import { SwipeableDrawer } from "@material-ui/core";
 import { Menu } from "mdi-material-ui";
-import SearchFlights from "../flightSearch/SearchFlights";
+import { SwipeableDrawer } from "@material-ui/core";
+
 import logo from "../../assets/hero/logo@2x.png";
 import MobileExpand from "./MobileExpand";
+import SearchFlights from "../flightSearch/SearchFlights";
+import {
+  StyledContWrapper,
+  StyledEntry,
+  StyledHeader,
+  StyledImgWrapper,
+  StyledLogo,
+  StyledLogoImg,
+  StyledMainWrapper,
+  StyledMsgMain,
+  StyledMsgSub,
+  StyledMobileBtn,
+  StyledMobileNav,
+  StyledNav,
+  StyledNavLink,
+  StyledNavTypo,
+  StyledSearchContainer,
+} from "./styled";
 
 const Banner = () => {
   const nav = [

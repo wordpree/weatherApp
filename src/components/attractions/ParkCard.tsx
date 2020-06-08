@@ -8,6 +8,7 @@ import {
   CardActions,
   Typography,
 } from "@material-ui/core";
+
 import { ITriposoPoi } from "../../util/type";
 import ButtonMore from "./ButtomMore";
 import DialogTour from "../city/DialogTour";
@@ -22,8 +23,14 @@ const useStyles = makeStyles((theme) => ({
     "&:last-child": {
       marginBottom: 0,
     },
+    [theme.breakpoints.up(960)]: {
+      transition: "all 325ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important",
+    },
     [theme.breakpoints.up(500)]: {
       display: "flex",
+      "&:hover": {
+        boxShadow: "4px 0 0px #028a8a",
+      },
     },
   },
   media: {
@@ -43,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
   contenWrapper: {
     justifyContent: "space-around",
+    cursor: "pointer",
     [theme.breakpoints.up(500)]: {
       flex: "1 0 60%",
       display: "flex",
@@ -96,12 +104,18 @@ const ParkCard = ({ data }: IPCProps) => {
     highlight: data.highlights,
     booking: data.vendor_tour_url,
   };
-  const [open, setOpen] = useState(false); //dialog
-  const handleDialogClick = (state: boolean) => setOpen(state);
+  const [open, setOpen] = useState(false); //dialog for tour
+  const isTour = data.hasOwnProperty("converted_price");
+  const handleDialogClick = (state: boolean) => {
+    if (isTour) {
+      setOpen(state);
+    }
+  };
+
   return (
     <Fade in={Boolean(data)}>
       <>
-        <Card className={classes.card}>
+        <Card className={classes.card} onClick={() => handleDialogClick(true)}>
           <CardMedia image={image} className={classes.media} />
           <div className={classes.contenWrapper}>
             <CardContent className={classes.content}>

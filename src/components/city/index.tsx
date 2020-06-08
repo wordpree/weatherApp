@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
-import City from "./City";
-import Tour from "./Tour";
-import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-import { TravelStore } from "../../redux-saga/reducer";
-import { ITriposoPoi } from "../../util/type";
 import { Container } from "@material-ui/core";
+import { connect } from "react-redux";
+
+import City from "./City";
 import {
   reqTriposoTourAction,
   reqTriposoTourDelete,
   reqWeatherAction,
 } from "../../redux-saga/actions";
+
+import Tour from "./Tour";
+import { TravelStore } from "../../redux-saga/reducer";
+import { ITriposoPoi } from "../../util/type";
 
 export type Tours = {
   tours: ITriposoPoi[];
@@ -24,6 +26,7 @@ interface IIProps {
   reqTriposoTourDelete(): void;
   reqWeatherAction(geo: string): void;
 }
+
 const Index = ({
   cities,
   reqTriposoTourAction,

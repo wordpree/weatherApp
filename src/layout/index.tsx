@@ -13,7 +13,7 @@ import {
 } from "../redux-saga/actions";
 
 const mapStateToProps = (state: TravelStore) => ({
-  detail: state.detail,
+  populars: state.tPopular,
 });
 
 const mapDispatchToPorps = (dispatch: Dispatch<TravelActionType>) =>

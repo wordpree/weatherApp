@@ -1,6 +1,4 @@
 import React from "react";
-import { ITriposoPoi } from "../../util/type";
-import ParkCard from "./ParkCard";
 import {
   CardActions,
   CardMedia,
@@ -12,6 +10,9 @@ import {
   Fade,
 } from "@material-ui/core";
 import { ChevronRight } from "mdi-material-ui";
+
+import { ITriposoPoi } from "../../util/type";
+import ParkCard from "./ParkCard";
 import { parkCardLists } from "./Parks";
 
 interface IMProps {
@@ -19,7 +20,7 @@ interface IMProps {
   more: boolean;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   wrapper: {
     display: "flex",
   },
@@ -38,7 +39,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
-}));
+});
+
 const ParksMedium = ({ data, more }: IMProps) => {
   const classes = useStyles();
   const image = data[0].images[0].sizes.medium.url.replace("http", "https");

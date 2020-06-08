@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, LinkProps as RouterLinkProps } from "react-router-dom";
-import { Omit } from "@material-ui/types";
 import { ListItem } from "@material-ui/core";
+import { Omit } from "@material-ui/types";
 import {
   Home,
   Compass,
@@ -10,15 +10,15 @@ import {
   Blogger,
   CloseThick,
 } from "mdi-material-ui";
+
 import {
-  StyledOpen,
+  StyledList,
   StyledListItemIcon,
   StyledListItemText,
-  StyledList,
-  StyledMobileHd,
-  StyledMobileLogo,
   StyledMobileBtn,
+  StyledMobileHd,
   StyledMobileLogoImg,
+  StyledOpen,
 } from "./styled";
 import logo from "../../assets/hero/logo@2x.png";
 
@@ -37,9 +37,9 @@ const MobileExpand = ({ handleClick }: IMEProps) => {
   return (
     <StyledOpen>
       <StyledMobileHd>
-        <StyledMobileLogo>
+        <div>
           <StyledMobileLogoImg src={logo} alt="logo" />
-        </StyledMobileLogo>
+        </div>
         <StyledMobileBtn onClick={() => handleClick(false)}>
           <CloseThick />
         </StyledMobileBtn>

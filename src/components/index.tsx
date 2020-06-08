@@ -14,22 +14,24 @@ import ScrollToTop from "./ScrollToTop";
 import SliderNav from "./SliderNav";
 import FoodCourt from "./food/";
 import CityAndTour from "./city/";
+import CardDetail from "./CardDetail";
 
 export {
-  SliderNav,
-  Header,
-  NavList,
-  NavLists,
   Attractions,
-  Search,
+  Banner,
+  CardDetail,
   CityAndTour,
+  FoodCourt,
+  Footer,
+  Header,
+  Loading,
   LocalNews,
   LocalWeather,
-  FoodCourt,
-  Titles,
+  NavList,
+  NavLists,
   Photos,
+  Search,
   ScrollToTop,
-  Banner,
-  Loading,
-  Footer,
+  SliderNav,
+  Titles,
 };

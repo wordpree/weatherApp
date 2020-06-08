@@ -1,13 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Container } from "@material-ui/core";
+
 import Islands from "./Islands";
+import Loading from "../Loading";
 import Parks from "./Parks";
 import Popular from "./Popular";
 import Subscribe from "./Subscribe";
-import { Container } from "@material-ui/core";
 import { TravelStore } from "../../redux-saga/reducer";
 import { ITriposoPoi } from "../../util/type";
-import Loading from "../Loading";
 
 interface IAProps {
   popular: ITriposoPoi[];

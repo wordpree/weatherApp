@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { ITriposoPoi } from "../../util/type";
 import { useMediaQuery } from "@material-ui/core";
+
 import EntryDiv from "./EntryDiv";
-import { Titles } from "../";
+import MoreButton from "./MoreButton";
+import { ITriposoPoi } from "../../util/type";
 import ParksSmall from "./ParksSmall";
 import ParksMedium from "./ParksMedium";
-import MoreButton from "./MoreButton";
+import { Titles } from "../";
 
 interface IPProps {
   data: ITriposoPoi[];

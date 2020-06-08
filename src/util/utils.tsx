@@ -1,4 +1,4 @@
-import { IGooglePlaceDetail, City, Cuisine } from "./type";
+import { City, Cuisine } from "./type";
 
 export const dataFormat = (date: Date) => {
   return date.toLocaleString("en-AU", {
@@ -56,56 +56,6 @@ export async function fetchData(
 export function findNameWithType(types: string[], query: string) {
   return types.join(",").includes(query);
 }
-
-export const setStorageSearchPara = (detail: IGooglePlaceDetail) => {
-  let location;
-  let geoLocation;
-  let coordinate;
-  let result;
-  const storageParaInit = [
-    "Brisbane OR Australia",
-    "lat=-27.4679&lon=153.0281",
-    "-27.4679, 153.0281",
-  ];
-  if (!detail.hasOwnProperty("address_components")) {
-    const localStore = localStorage.getItem("location");
-    if (localStore) {
-      return;
-    }
-    localStorage.setItem("location", JSON.stringify(storageParaInit));
-    return;
-  }
-  const geo = detail.geometry.location;
-  const cityIndex = detail.address_components.find((address) =>
-    findNameWithType(address.types, "locality")
-  );
-  const countryIndex = detail.address_components.find((address) =>
-    findNameWithType(address.types, "country")
-  );
-
-  if (cityIndex && countryIndex) {
-    location = `${cityIndex.long_name} OR ${countryIndex.long_name}`; //newsorg
-    geoLocation = `lat=${geo.lat}&lon=${geo.lng}`; //openweathermap,zomato
-    coordinate = `${geo.lat},${geo.lng}`; //triposo
-    result = [location, geoLocation, coordinate];
-    localStorage.setItem("location", JSON.stringify(result));
-  }
-};
-
-export const getStorageSearchPara = () => {
-  //local store has been set before
-  const storageParaInit = [
-    "Brisbane OR Australia",
-    "lat=-27.4679&lon=153.0281",
-    "-27.4679, 153.0281",
-  ];
-  const store = localStorage.getItem("location");
-  if (store && store !== "undefined") {
-    return JSON.parse(store);
-  } else {
-    return storageParaInit;
-  }
-};
 
 /******type guard*********/
 

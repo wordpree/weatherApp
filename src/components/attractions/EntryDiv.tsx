@@ -7,7 +7,7 @@ interface IEDProps {
 
 const useStyles = makeStyles({
   entry: {
-    margin: "4rem auto",
+    margin: "8rem auto",
   },
 });
 
