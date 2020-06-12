@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { Container } from "@material-ui/core";
 import { connect } from "react-redux";
@@ -34,11 +34,6 @@ const Index = ({
   reqTriposoTourDelete,
   reqWeatherAction,
 }: IIProps) => {
-  useEffect(() => {
-    reqTriposoTourAction("Sydney");
-    reqWeatherAction("lat=-33.869612446998374&lon=151.21067778304484");
-  }, []);
-
   const handleWeather = (id: string) => {
     let para;
     const ret = cities.find((city) => city.id === id);

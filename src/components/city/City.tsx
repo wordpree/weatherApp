@@ -4,7 +4,7 @@ import { Button, makeStyles } from "@material-ui/core";
 import CityIntroCard from "./CityIntroCard";
 import Titles from "../Titles";
 import { ITriposoPoi } from "../../util/type";
-import { useButtonClick } from "./useButtonClick";
+import useButtonClick, { ClickEvent, ISelect } from "./useButtonClick";
 
 interface ICProps {
   data: ITriposoPoi[];
@@ -67,13 +67,28 @@ const City = ({
   const dataWithTour = data.filter(
     (item) => item.musement_locations.length !== 0
   );
-  const { select, handleClick } = useButtonClick(
-    dataWithTour,
+  const tourButtonsInit = dataWithTour.map((item) => ({
+    name: item.name,
+    id: item.id,
+    select: item.name === "Sydney" ? true : false,
+  }));
+
+  const [selectOption, setSelectOption] = useButtonClick(
+    "Sydney",
+    tourButtonsInit,
     reqTourOnClick,
     reqTourDelete,
     handleWeather
   );
-  const city = dataWithTour.find((item) => select[item.name]) as ITriposoPoi;
+  const selectedCity = selectOption.find((s) => s.select) as ISelect;
+  const city = dataWithTour.find(
+    (item) => item.name === selectedCity.name
+  ) as ITriposoPoi;
+  const handleClick = (e: ClickEvent) =>
+    setSelectOption({
+      name: e.currentTarget.name,
+      value: e.currentTarget.value,
+    });
   return (
     <div className={classes.entry}>
       <Titles
@@ -82,7 +97,7 @@ const City = ({
         style={{ marginBottom: "2rem" }}
       />
       <div className={classes.btnWrapper}>
-        {dataWithTour.map(({ name, id }) => (
+        {selectOption.map(({ name, id, select }) => (
           <Button
             key={name}
             onClick={handleClick}
@@ -91,7 +106,7 @@ const City = ({
             color="primary"
             size="large"
             variant="outlined"
-            className={`${classes.btn} ${select[name] ? "active" : null}`}
+            className={`${classes.btn} ${select ? "active" : null}`}
           >
             {name}
           </Button>

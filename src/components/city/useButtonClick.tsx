@@ -1,29 +1,37 @@
-import { useState } from "react";
-import { ITriposoPoi } from "../../util/type";
+import { useState, useEffect } from "react";
 
-interface ISelect {
-  [key: string]: boolean;
+export type ClickEvent = React.MouseEvent<HTMLButtonElement, MouseEvent>;
+// export type SetSelect = (object) => void;
+type Ele = { name: string; value: string };
+export interface ISelect {
+  select: boolean;
+  name: string;
+  id: string;
 }
 
-export const useButtonClick = (
-  data: ITriposoPoi[],
+const useButtonClick = (
+  defaultCity: string,
+  tourButtonsInit: ISelect[],
   reqTourOnClick: (city: string) => void,
   reqTourDelete: () => void,
   handleWeather: (id: string) => void
-) => {
-  let options = {};
-  data.forEach((item) => {
-    options = { ...options, [item.name]: false };
+): [ISelect[], (arg: Ele) => void] => {
+  const [clickedButton, setClickedButton] = useState({
+    name: defaultCity,
+    value: defaultCity,
   });
-  const [select, setSelect] = useState<ISelect>({ ...options, Sydney: true });
-
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (!select[e.currentTarget.name]) {
-      setSelect({ ...options, Sydney: false, [e.currentTarget.name]: true });
-      reqTourDelete();
-      reqTourOnClick(e.currentTarget.value);
-      handleWeather(e.currentTarget.value);
-    }
-  };
-  return { select, handleClick };
+  const selectOption = [...tourButtonsInit].map((b) => ({
+    name: b.name,
+    select: b.name === clickedButton.name ? true : false,
+    id: b.id,
+  }));
+  useEffect(() => {
+    const { value } = clickedButton;
+    reqTourDelete();
+    reqTourOnClick(value);
+    handleWeather(value);
+  }, [clickedButton]);
+  return [selectOption, setClickedButton];
 };
+
+export default useButtonClick;
