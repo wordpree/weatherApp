@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Menu } from "mdi-material-ui";
-import { SwipeableDrawer } from "@material-ui/core";
-
 import logo from "../../assets/hero/logo@2x.png";
-import MobileExpand from "./MobileExpand";
 import SearchFlights from "../flightSearch/SearchFlights";
+import { MobileDrawer } from "../";
+import useMobileNavClick from "../header/useMobileNavClick";
 import {
   StyledContWrapper,
   StyledEntry,
@@ -31,9 +30,7 @@ const Banner = () => {
     { name: "Flights", to: "/flight" },
     { name: "Blog", to: "/blog" },
   ];
-  const [open, setOpen] = useState(false);
-  const handleClick = () => setOpen((prev) => !prev);
-  const handleDrawer = (state: boolean) => setOpen(state);
+  const [open, toggleDrawer] = useMobileNavClick();
 
   return (
     <StyledEntry>
@@ -51,7 +48,7 @@ const Banner = () => {
             ))}
           </StyledNav>
           <StyledMobileNav>
-            <StyledMobileBtn onClick={handleClick}>
+            <StyledMobileBtn onClick={() => toggleDrawer(true)}>
               <Menu />
             </StyledMobileBtn>
           </StyledMobileNav>
@@ -66,15 +63,7 @@ const Banner = () => {
           </StyledSearchContainer>
         </StyledMainWrapper>
       </div>
-      <SwipeableDrawer
-        transitionDuration={{ enter: 550, exit: 350 }}
-        anchor="left"
-        open={open}
-        onClose={() => handleDrawer(false)}
-        onOpen={() => handleDrawer(true)}
-      >
-        <MobileExpand handleClick={handleDrawer} />
-      </SwipeableDrawer>
+      <MobileDrawer open={open} handleDrawer={toggleDrawer} />
     </StyledEntry>
   );
 };

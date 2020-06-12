@@ -1,19 +1,11 @@
 import React from "react";
 import { NavLink, LinkProps } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  Divider,
-  Theme
-} from "@material-ui/core";
+import { ListItem, ListItemText, Theme } from "@material-ui/core";
 
 interface INavProps {
-  icon: React.ReactElement;
   label?: string;
   to?: string;
-  mobile?: boolean | undefined;
 }
 
 const useStyle = makeStyles((theme: Theme) => ({
@@ -22,40 +14,29 @@ const useStyle = makeStyles((theme: Theme) => ({
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "inline-block",
-      padding: "0.1rem 0.75rem"
-    }
+      padding: "0.1rem 0.75rem",
+    },
   },
   li: {
     transition: "all 0.3s ease-in-out",
+    borderRadius: 4,
     "&:hover": {
-      color: "#ccc",
-      backgroundColor: "rgb(1, 179, 167)"
-    }
-  }
+      color: "#fff",
+      backgroundColor: "#028a8a",
+    },
+  },
 }));
 
-const NavList = ({ to, mobile, ...props }: INavProps) => {
+const NavList = ({ to, ...props }: INavProps) => {
   const classes = useStyle();
   const routeLink = React.forwardRef<LinkProps, any>((props, ref) => (
-    <NavLink
-      strict
-      exact
-      to={to}
-      {...props}
-      ref={ref}
-      activeStyle={{
-        backgroundColor: "rgb(1, 179, 167)",
-        color: "#ccc"
-      }}
-    />
+    <NavLink strict exact to={to} {...props} ref={ref} />
   ));
   return (
     <li className={classes.li}>
       <ListItem button component={routeLink} to={to} className={classes.item}>
-        {mobile && <ListItemIcon>{props.icon}</ListItemIcon>}
         <ListItemText primary={props.label} className={classes.listText} />
       </ListItem>
-      {mobile && <Divider style={{ backgroundColor: "#fff" }} />}
     </li>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Home, News, Photos } from "../pages";
-import { CardDetail } from "../components";
+import { PopularDetail } from "../components";
 import { Route, Switch } from "react-router-dom";
 import Error from "../components/Error";
 import { ITriposoPoi } from "../util/type";
@@ -36,7 +36,7 @@ function Layout({
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/explore-nature/:id">
-        <CardDetail data={populars} />
+        <PopularDetail data={populars} />
       </Route>
       <Route path="/blog" component={News} />
       <Route path="/explore" component={Photos} />

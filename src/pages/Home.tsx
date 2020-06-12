@@ -1,14 +1,11 @@
 import React from "react";
 import {
-  // Header,
   CityAndTour,
-  Search,
   Attractions,
   LocalNews,
   LocalWeather,
   Banner,
   FoodCourt,
-  Photos,
   Footer,
   Titles,
 } from "../components";
@@ -18,12 +15,10 @@ import { Grid, Container } from "@material-ui/core";
 const Home = () => {
   return (
     <>
-      {/* <Header /> */}
       <Banner />
       <CityAndTour />
       <Attractions />
       <FoodCourt />
-      {/* <Search /> */}
       <Container style={{ margin: "6rem auto" }}>
         <Titles
           title="News & Weather"
@@ -39,7 +34,6 @@ const Home = () => {
           <LocalNews />
         </Grid>
       </Container>
-      {/* <Photos /> */}
       <Footer />
     </>
   );
