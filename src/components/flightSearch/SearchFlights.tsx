@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles, Tabs, Tab, useMediaQuery } from "@material-ui/core";
+import { motion } from "framer-motion";
+
 import { RoundTrip, OneWay, MultiCity } from "./options";
 import TabPanel from "./TabPanel";
 
@@ -42,10 +44,24 @@ const SearchFlights = () => {
   const sm = useMediaQuery("(min-width:600px)");
   const classes = useStyles();
   const [value, setValue] = useState(0);
+  const searchVariant = {
+    hidden: { opacity: 0, y: "-100vh" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 80,
+        delay: 0.5,
+        duration: 1.5,
+        mass: 0.7,
+      },
+    },
+  };
   const handleChange = (e: React.ChangeEvent<{}>, value: number) =>
     setValue(value);
   return (
-    <>
+    <motion.div initial="hidden" animate="visible" variants={searchVariant}>
       <div>
         <Tabs
           variant={sm ? "standard" : "fullWidth"}
@@ -56,15 +72,15 @@ const SearchFlights = () => {
           <Tab
             label="One Way"
             classes={{ selected: classes.selected, root: classes.root }}
-          ></Tab>
+          />
           <Tab
             label="Round Trip"
             classes={{ selected: classes.selected, root: classes.root }}
-          ></Tab>
+          />
           <Tab
             label="Multi-city"
             classes={{ selected: classes.selected, root: classes.root }}
-          ></Tab>
+          />
         </Tabs>
       </div>
       <TabPanel value={value} index={0}>
@@ -76,7 +92,7 @@ const SearchFlights = () => {
       <TabPanel value={value} index={2}>
         <MultiCity disableUnderline={md} />
       </TabPanel>
-    </>
+    </motion.div>
   );
 };
 

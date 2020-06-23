@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import {
   Typography,
@@ -8,19 +8,8 @@ import {
   ListItemText,
   ListItemIcon,
 } from "@material-ui/core";
+import { motion } from "framer-motion";
 import hero from "../../assets/hero/luca-bravo-unsplash.jpg";
-
-const scale = keyframes`
-     0% {
-       transform:scale(1);
-     }
-     60% {
-       transform:scale(1.04);
-     }
-     100% {
-       transform:scale(1);
-     }
-`;
 
 export const StyledMobileNav = styled.div`
   display: flex;
@@ -99,7 +88,7 @@ export const StyledEntry = styled.div`
   }
   position: relative;
 `;
-export const StyledImgWrapper = styled.div`
+export const StyledImgWrapper = styled(motion.div)`
   top: 0;
   left: 0;
   right: 0;
@@ -117,7 +106,6 @@ export const StyledImgWrapper = styled.div`
       transparent 100%
     ),
     url(${hero});
-  animation: ${scale} 4s ease-in;
   z-index: -999;
 `;
 export const StyledNav = styled.div`
@@ -188,7 +176,7 @@ export const StyledMainWrapper = styled(Container)`
   justify-content: space-around;
 `;
 
-export const StyledContWrapper = styled.div`
+export const StyledContWrapper = styled(motion.div)`
   max-width: 90%;
   margin: 0 auto;
   @media only screen and (min-width: 768px) {
@@ -212,7 +200,7 @@ export const StyledMsgMain = styled.div`
   }
 `;
 
-export const StyledMsgSub = styled.div`
+export const StyledMsgSub = styled(motion.div)`
   margin-top: 1.75rem;
   letter-spacing: 2.16px;
   font-size: 1.5rem;
