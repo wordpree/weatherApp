@@ -38,9 +38,9 @@ const Banner = () => {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.5,
         ease: "easeOut",
-        delay: 1.5,
+        delay: 2.5,
         type: "spring",
         stiffness: 60,
         mass: 0.6,

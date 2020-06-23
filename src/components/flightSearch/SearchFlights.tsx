@@ -51,9 +51,9 @@ const SearchFlights = () => {
       y: 0,
       transition: {
         type: "spring",
-        stiffness: 80,
-        delay: 0.5,
-        duration: 1.5,
+        stiffness: 90,
+        delay: 1.5,
+        duration: 2,
         mass: 0.7,
       },
     },
