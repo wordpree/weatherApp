@@ -16,6 +16,7 @@ import Search from "./search";
 import ScrollToTop from "./ScrollToTop";
 import SliderNav from "./SliderNav";
 import Titles from "./Titles";
+import FrMotionButton from "./FrMotionButton";
 
 export {
   Attractions,
@@ -24,6 +25,7 @@ export {
   CityAndTour,
   FoodCourt,
   Footer,
+  FrMotionButton,
   Header,
   Loading,
   LocalNews,

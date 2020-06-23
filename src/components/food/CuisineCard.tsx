@@ -1,5 +1,4 @@
 import React from "react";
-import { IZomatoDetail } from "../../util/type";
 import {
   Card,
   CardActionArea,
@@ -11,6 +10,8 @@ import {
   List,
   Button,
 } from "@material-ui/core";
+import { motion } from "framer-motion";
+import { IZomatoDetail } from "../../util/type";
 import ListInfo from "./ListInfo";
 import extraImg from "../../assets/Dmitry-Zvolskiy-Pexels.jpg"; //Photo by Dmitry Zvolskiy from Pexels
 
@@ -34,17 +35,15 @@ const useStyles = makeStyles((theme) => ({
       flex: "1 0 30%",
     },
   },
-  action: {
-    position: "relative",
-    transition: "all 0.4s ease-in-out 0.1s",
-    "&:hover": {
-      transform: "scale(1.05)",
-    },
+  actionWrapper: {
     [theme.breakpoints.up(768)]: {
       height: "100%",
-      "&:hover": {
-        transform: "scale(1.015)",
-      },
+    },
+  },
+  action: {
+    position: "relative",
+    [theme.breakpoints.up(768)]: {
+      height: "100%",
     },
   },
   gradient: {
@@ -157,10 +156,16 @@ const CuisineCard = ({ cuisine }: ICCProps) => {
     <Grow in={Boolean(cuisine)}>
       <Card className={classes.card}>
         <div className={classes.cardWrapper}>
-          <CardActionArea className={classes.action}>
-            <CardMedia image={image} className={classes.media} />
-            <div className={classes.gradient} />
-          </CardActionArea>
+          <motion.div
+            whileHover={{ scale: 1.01 }}
+            transition={{ type: "spring", stiffness: 250 }}
+            className={classes.actionWrapper}
+          >
+            <CardActionArea className={classes.action}>
+              <CardMedia image={image} className={classes.media} />
+              <div className={classes.gradient} />
+            </CardActionArea>
+          </motion.div>
           <Typography variant="h6" className={classes.title}>
             {restaurant.name}
           </Typography>

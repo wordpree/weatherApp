@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { Titles } from "../";
 import Options from "./Options";
-import { Container, makeStyles, Button } from "@material-ui/core";
+import { Container, makeStyles } from "@material-ui/core";
+import { FrMotionButton } from "../";
 import cusineTypes from "../../util/cusines";
 import { City, IZomatoDetailRes } from "../../util/type";
 import useOption from "./useOption";
@@ -78,7 +79,7 @@ const FoodCourt = ({
           handleChange={handleOptionChange}
           option={option.cuisine}
         />
-        <Button
+        <FrMotionButton
           variant="contained"
           size="large"
           color="primary"
@@ -93,7 +94,7 @@ const FoodCourt = ({
           }}
         >
           Explore desired meal
-        </Button>
+        </FrMotionButton>
       </div>
       <div className={classes.cuisinesEntry}>
         {cuisines.length ? (

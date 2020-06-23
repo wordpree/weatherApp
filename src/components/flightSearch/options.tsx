@@ -1,7 +1,8 @@
 import React from "react";
 import { AirplaneLanding, AirplaneTakeoff } from "mdi-material-ui";
+import { makeStyles } from "@material-ui/core";
+import { FrMotionButton } from "../";
 import { FormDate, FormInput } from "./type";
-import { makeStyles, Button } from "@material-ui/core";
 
 interface IOProps {
   disableUnderline: boolean;
@@ -86,9 +87,13 @@ export const RoundTrip = ({ disableUnderline }: IOProps) => {
           disableUnderline={disableUnderline}
         />
       </div>
-      <Button type="submit" className={classes.button} variant="contained">
+      <FrMotionButton
+        type="submit"
+        className={classes.button}
+        variant="contained"
+      >
         Search
-      </Button>
+      </FrMotionButton>
     </form>
   );
 };
@@ -119,9 +124,13 @@ export const OneWay = ({ disableUnderline }: IOProps) => {
         />
       </div>
       <div style={{ flexGrow: 1 }} />
-      <Button type="submit" className={classes.button} variant="contained">
+      <FrMotionButton
+        type="submit"
+        className={classes.button}
+        variant="contained"
+      >
         Search
-      </Button>
+      </FrMotionButton>
     </form>
   );
 };
@@ -152,9 +161,13 @@ export const MultiCity = ({ disableUnderline }: IOProps) => {
         />
       </div>
       <div style={{ flexGrow: 1 }} />
-      <Button type="submit" className={classes.button} variant="contained">
+      <FrMotionButton
+        type="submit"
+        className={classes.button}
+        variant="contained"
+      >
         Search
-      </Button>
+      </FrMotionButton>
     </form>
   );
 };

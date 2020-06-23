@@ -7,8 +7,8 @@ import {
   Typography,
   CardContent,
   CardActions,
-  Button,
 } from "@material-ui/core";
+import { FrMotionButton } from "../";
 import { ITriposoPoi } from "../../util/type";
 
 interface IIMProps {
@@ -94,9 +94,9 @@ const IslandsMedium = ({ data }: IIMProps) => {
             <CardMedia className={classes.media} image={image2}></CardMedia>
           </div>
           <CardActions className={classes.actions}>
-            <Button variant="contained" color="primary">
+            <FrMotionButton variant="contained" color="primary">
               Learn More
-            </Button>
+            </FrMotionButton>
           </CardActions>
         </Card>
       </Grid>

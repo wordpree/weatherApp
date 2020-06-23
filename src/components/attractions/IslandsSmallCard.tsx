@@ -7,11 +7,10 @@ import {
   makeStyles,
   CardHeader,
   CardActions,
-  Button,
   Avatar,
   useMediaQuery,
 } from "@material-ui/core";
-
+import { FrMotionButton } from "../";
 import { ITriposoPoi } from "../../util/type";
 
 interface IIProps {
@@ -78,9 +77,9 @@ const IslandsCard = ({ data }: IIProps) => {
           {md ? data.intro : data.intro.substring(0, 120) + "..."}
         </CardContent>
         <CardActions className={classes.actions}>
-          <Button color="primary" size="small">
+          <FrMotionButton color="primary" size="small">
             Explore More
-          </Button>
+          </FrMotionButton>
         </CardActions>
       </Card>
     </Fade>

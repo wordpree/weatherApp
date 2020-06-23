@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 export type ClickEvent = React.MouseEvent<HTMLButtonElement, MouseEvent>;
-// export type SetSelect = (object) => void;
 type Ele = { name: string; value: string };
 export interface ISelect {
   select: boolean;

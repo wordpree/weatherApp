@@ -10,12 +10,10 @@ import {
   Avatar,
   ListItemText,
   Divider,
-  Button,
-  Tooltip,
 } from "@material-ui/core";
-import { Link, LinkProps } from "react-router-dom";
-import { Omit } from "@material-ui/types";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import { FrMotionButton } from "./";
 import Loading from "./Loading";
 
 const useStyles = makeStyles({
@@ -56,10 +54,6 @@ interface LNProps {
 
 const LocalNews = ({ news }: LNProps) => {
   const classes = useStyles();
-
-  const link = React.forwardRef<any, Omit<LinkProps, "to">>((props, ref) => (
-    <Link ref={ref} {...props} to="/news" />
-  ));
   if (news.length === 0) return <Loading value={100} />;
   return (
     <Grid item xs={12} md={5}>
@@ -104,28 +98,15 @@ const LocalNews = ({ news }: LNProps) => {
         </a>
       </div>
       <div className={classes.divBtn}>
-        <Tooltip
-          title={
-            <a
-              className={classes.tooltip}
-              href="https://newsapi.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Powed by newsapi
-            </a>
-          }
-          interactive
-        >
-          <Button
+        <Link to="/blog">
+          <FrMotionButton
             className={classes.moreBtn}
             variant="contained"
             color="primary"
-            component={link}
           >
             Learn More
-          </Button>
-        </Tooltip>
+          </FrMotionButton>
+        </Link>
       </div>
     </Grid>
   );

@@ -1,5 +1,6 @@
 import React from "react";
-import { makeStyles, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
+import { FrMotionButton } from "../";
 
 interface IMBProps {
   handleClick(): void;
@@ -24,14 +25,14 @@ const MoreButton = ({ handleClick, more }: IMBProps) => {
   const classes = useStyles();
   return (
     <div className={classes.btnWrapper}>
-      <Button
+      <FrMotionButton
         onClick={handleClick}
         size="large"
         variant="contained"
         className={classes.btn}
       >
         {more ? "View Less" : "View More"}
-      </Button>
+      </FrMotionButton>
     </div>
   );
 };

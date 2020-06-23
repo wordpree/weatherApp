@@ -1,10 +1,10 @@
 import React from "react";
-import { Button, makeStyles } from "@material-ui/core";
-
+import { makeStyles } from "@material-ui/core";
+import { FrMotionButton } from "../";
 import CityIntroCard from "./CityIntroCard";
 import Titles from "../Titles";
 import { ITriposoPoi } from "../../util/type";
-import useButtonClick, { ClickEvent, ISelect } from "./useButtonClick";
+import useButtonClick, { ISelect } from "./useButtonClick";
 
 interface ICProps {
   data: ITriposoPoi[];
@@ -22,17 +22,16 @@ const useStyles = makeStyles({
     marginBottom: "1.25rem",
   },
   btn: {
-    marginRight: "0.5rem",
-    marginBottom: "0.5rem",
+    marginRight: "0.75rem",
+    marginBottom: "0.75rem",
     "&:last-child": {
       marginRight: 0,
     },
-    "&:hover": {
+    "&.active": {
       color: "#fff",
       backgroundColor: "#028a8a",
     },
-    "&.active": {
-      color: "#fff",
+    "&:hover": {
       backgroundColor: "#028a8a",
     },
   },
@@ -84,10 +83,12 @@ const City = ({
   const city = dataWithTour.find(
     (item) => item.name === selectedCity.name
   ) as ITriposoPoi;
-  const handleClick = (e: ClickEvent) =>
+  const handleClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) =>
     setSelectOption({
-      name: e.currentTarget.name,
-      value: e.currentTarget.value,
+      name: event.currentTarget.name,
+      value: event.currentTarget.value,
     });
   return (
     <div className={classes.entry}>
@@ -98,7 +99,7 @@ const City = ({
       />
       <div className={classes.btnWrapper}>
         {selectOption.map(({ name, id, select }) => (
-          <Button
+          <FrMotionButton
             key={name}
             onClick={handleClick}
             name={name}
@@ -109,7 +110,7 @@ const City = ({
             className={`${classes.btn} ${select ? "active" : null}`}
           >
             {name}
-          </Button>
+          </FrMotionButton>
         ))}
       </div>
       <CityIntroCard data={city} />

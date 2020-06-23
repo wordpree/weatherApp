@@ -7,8 +7,9 @@ import {
   makeStyles,
   CardActions,
   Typography,
+  useMediaQuery,
 } from "@material-ui/core";
-
+import { motion } from "framer-motion";
 import { ITriposoPoi } from "../../util/type";
 import ButtonMore from "./ButtomMore";
 import DialogTour from "../city/DialogTour";
@@ -18,19 +19,15 @@ interface IPCProps {
 }
 
 const useStyles = makeStyles((theme) => ({
-  card: {
+  cardWrapper: {
     marginBottom: "1rem",
     "&:last-child": {
       marginBottom: 0,
     },
-    [theme.breakpoints.up(960)]: {
-      transition: "all 325ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important",
-    },
+  },
+  card: {
     [theme.breakpoints.up(500)]: {
       display: "flex",
-      "&:hover": {
-        boxShadow: "4px 0 0px #028a8a",
-      },
     },
   },
   media: {
@@ -95,6 +92,8 @@ const useStyles = makeStyles((theme) => ({
 const ParkCard = ({ data }: IPCProps) => {
   const classes = useStyles();
   const snippet = data.intro;
+  const upFromSm = useMediaQuery("(min-width:500px)");
+  const boxShadowX = upFromSm ? "3px" : 0;
   const image = data.images.length
     ? data.images[0].sizes.medium.url.replace("http", "https")
     : data.imgTour; //insert pictures for tours
@@ -115,37 +114,49 @@ const ParkCard = ({ data }: IPCProps) => {
   return (
     <Fade in={Boolean(data)}>
       <>
-        <Card className={classes.card} onClick={() => handleDialogClick(true)}>
-          <CardMedia image={image} className={classes.media} />
-          <div className={classes.contenWrapper}>
-            <CardContent className={classes.content}>
-              <Typography variant="h5">{data.name}</Typography>
-              <Typography variant="body1" color="textSecondary">
-                {snippet.length > 132
-                  ? snippet.substring(0, 132) + "..."
-                  : snippet}
-              </Typography>
-              <Typography variant="caption" className={classes.rate}>
-                <span>Rating:</span> {data.score.toFixed(2)}
-              </Typography>
-              {data.price_is_per_person && (
-                <Typography variant="body2" className={classes.price}>
-                  <span>Price per person: </span>${data.converted_price.amount}{" "}
-                  {data.converted_price.currency}
+        <motion.div
+          className={classes.cardWrapper}
+          whileHover={{
+            boxShadow: `${boxShadowX}  0 0 #028a8a ,0 3px 6px rgba(0,0,0,0.15)`,
+          }}
+          transition={{ type: "spring", stiffness: 240 }}
+        >
+          <Card
+            className={classes.card}
+            onClick={() => handleDialogClick(true)}
+          >
+            <CardMedia image={image} className={classes.media} />
+            <div className={classes.contenWrapper}>
+              <CardContent className={classes.content}>
+                <Typography variant="h5">{data.name}</Typography>
+                <Typography variant="body1" color="textSecondary">
+                  {snippet.length > 132
+                    ? snippet.substring(0, 132) + "..."
+                    : snippet}
                 </Typography>
-              )}
-            </CardContent>
-            <CardActions className={classes.actions}>
-              {data.hasOwnProperty("converted_price") ? (
-                <ButtonMore click={handleDialogClick}>
-                  Explore tour details
-                </ButtonMore>
-              ) : (
-                <ButtonMore>Explore more information</ButtonMore>
-              )}
-            </CardActions>
-          </div>
-        </Card>
+                <Typography variant="caption" className={classes.rate}>
+                  <span>Rating:</span> {data.score.toFixed(2)}
+                </Typography>
+                {data.price_is_per_person && (
+                  <Typography variant="body2" className={classes.price}>
+                    <span>Price per person: </span>$
+                    {data.converted_price.amount}{" "}
+                    {data.converted_price.currency}
+                  </Typography>
+                )}
+              </CardContent>
+              <CardActions className={classes.actions}>
+                {data.hasOwnProperty("converted_price") ? (
+                  <ButtonMore click={handleDialogClick}>
+                    Explore tour details
+                  </ButtonMore>
+                ) : (
+                  <ButtonMore>Explore more information</ButtonMore>
+                )}
+              </CardActions>
+            </div>
+          </Card>
+        </motion.div>
         <DialogTour {...tourInfo} open={open} click={handleDialogClick} />
       </>
     </Fade>
