@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { Container } from "@material-ui/core";
 import { connect } from "react-redux";
@@ -44,15 +44,24 @@ const Index = ({
     }
     reqWeatherAction(para);
   };
+  const reqWeatherOnClick = useCallback((id: string) => {
+    handleWeather(id);
+  }, []); //eslint-disable-line react-hooks/exhaustive-deps
+  const reqTourOnClick = useCallback((city: string) => {
+    reqTriposoTourAction(city);
+  }, []); //eslint-disable-line react-hooks/exhaustive-deps
+  const reqTourDelete = useCallback(() => {
+    reqTriposoTourDelete();
+  }, []); //eslint-disable-line react-hooks/exhaustive-deps
   return (
     <Container style={{ marginTop: "4rem", marginBottom: "6rem" }}>
       {cities.length !== 0 && (
         <>
           <City
             data={cities}
-            reqTourOnClick={reqTriposoTourAction}
-            reqTourDelete={reqTriposoTourDelete}
-            handleWeather={handleWeather}
+            reqTourOnClick={reqTourOnClick}
+            reqTourDelete={reqTourDelete}
+            reqWeatherOnClick={reqWeatherOnClick}
           />
           <Tour data={tours} />
         </>

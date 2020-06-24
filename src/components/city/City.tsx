@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core";
 import { FrMotionButton } from "../";
 import CityIntroCard from "./CityIntroCard";
@@ -10,7 +10,7 @@ interface ICProps {
   data: ITriposoPoi[];
   reqTourOnClick(city: string): void;
   reqTourDelete(): void;
-  handleWeather(id: string): void;
+  reqWeatherOnClick(id: string): void;
 }
 
 const useStyles = makeStyles({
@@ -60,7 +60,7 @@ const City = ({
   data,
   reqTourOnClick,
   reqTourDelete,
-  handleWeather,
+  reqWeatherOnClick,
 }: ICProps) => {
   const classes = useStyles();
   const dataWithTour = data.filter(
@@ -74,22 +74,28 @@ const City = ({
 
   const [selectOption, setSelectOption] = useButtonClick(
     "Sydney",
-    tourButtonsInit,
-    reqTourOnClick,
-    reqTourDelete,
-    handleWeather
+    tourButtonsInit
   );
   const selectedCity = selectOption.find((s) => s.select) as ISelect;
+
+  useEffect(() => {
+    function handleRequest(id: string) {
+      reqTourDelete();
+      reqTourOnClick(id);
+      reqWeatherOnClick(id);
+    }
+    handleRequest(selectedCity.id);
+  }, [selectedCity.id, reqTourDelete, reqTourOnClick, reqWeatherOnClick]);
+
   const city = dataWithTour.find(
     (item) => item.name === selectedCity.name
   ) as ITriposoPoi;
   const handleClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) =>
-    setSelectOption({
-      name: event.currentTarget.name,
-      value: event.currentTarget.value,
-    });
+  ) => {
+    const { name, value } = event.currentTarget;
+    setSelectOption({ name, value });
+  };
   return (
     <div className={classes.entry}>
       <Titles

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export type ClickEvent = React.MouseEvent<HTMLButtonElement, MouseEvent>;
 type Ele = { name: string; value: string };
@@ -10,10 +10,7 @@ export interface ISelect {
 
 const useButtonClick = (
   defaultCity: string,
-  tourButtonsInit: ISelect[],
-  reqTourOnClick: (city: string) => void,
-  reqTourDelete: () => void,
-  handleWeather: (id: string) => void
+  tourButtonsInit: ISelect[]
 ): [ISelect[], (arg: Ele) => void] => {
   const [clickedButton, setClickedButton] = useState({
     name: defaultCity,
@@ -24,12 +21,6 @@ const useButtonClick = (
     select: b.name === clickedButton.name ? true : false,
     id: b.id,
   }));
-  useEffect(() => {
-    const { value } = clickedButton;
-    reqTourDelete();
-    reqTourOnClick(value);
-    handleWeather(value);
-  }, [clickedButton]);
   return [selectOption, setClickedButton];
 };
 

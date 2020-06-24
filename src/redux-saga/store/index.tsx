@@ -10,7 +10,7 @@ const storeConfig = () => {
   const store = createStore(
     rootReducer,
     //composeWithDevTools(applyMiddleware(sagaMiddleware))
-    applyMiddleware(sagaMiddleware)
+    applyMiddleware(sagaMiddleware /*logger*/)
   );
   sagaMiddleware.run(saga);
   return store;
