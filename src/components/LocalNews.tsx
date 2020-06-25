@@ -28,13 +28,6 @@ const useStyles = makeStyles({
     textAlign: "center",
     padding: "0.25rem",
   },
-  moreBtn: {
-    margin: "0 auto",
-    transition: "all 0.4s ease-in-out",
-    color: "#fff",
-    letterSpacing: 1.2,
-    fontWeight: "bold",
-  },
   tooltip: {
     textDecoration: "none",
     color: "inherit",
@@ -99,11 +92,7 @@ const LocalNews = ({ news }: LNProps) => {
       </div>
       <div className={classes.divBtn}>
         <Link to="/blog">
-          <FrMotionButton
-            className={classes.moreBtn}
-            variant="contained"
-            color="primary"
-          >
+          <FrMotionButton variant="contained" color="primary">
             Learn More
           </FrMotionButton>
         </Link>

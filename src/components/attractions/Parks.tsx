@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMediaQuery } from "@material-ui/core";
 
 import EntryDiv from "./EntryDiv";
-import MoreButton from "./MoreButton";
+import MoreButton from "./MoreCardButton";
 import { ITriposoPoi } from "../../util/type";
 import ParksSmall from "./ParksSmall";
 import ParksMedium from "./ParksMedium";

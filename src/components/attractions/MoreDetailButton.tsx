@@ -7,7 +7,7 @@ interface IBMProps {
   click?: (state: boolean) => void;
 }
 
-const ButtomMore = ({ children, click }: IBMProps) => {
+const MoreDetailButton = ({ children, click }: IBMProps) => {
   const handleClick = () => {
     if (click) {
       click(true);
@@ -25,4 +25,4 @@ const ButtomMore = ({ children, click }: IBMProps) => {
   );
 };
 
-export default ButtomMore;
+export default MoreDetailButton;

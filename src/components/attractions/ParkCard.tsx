@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { motion } from "framer-motion";
 import { ITriposoPoi } from "../../util/type";
-import ButtonMore from "./ButtomMore";
+import ButtonMore from "./MoreDetailButton";
 import DialogTour from "../city/DialogTour";
 
 interface IPCProps {

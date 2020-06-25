@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, LinkProps } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import { motion } from "framer-motion";
 import { ListItem, ListItemText, Theme } from "@material-ui/core";
 
 interface INavProps {
@@ -18,12 +19,7 @@ const useStyle = makeStyles((theme: Theme) => ({
     },
   },
   li: {
-    transition: "all 0.3s ease-in-out",
     borderRadius: 4,
-    "&:hover": {
-      color: "#fff",
-      backgroundColor: "#028a8a",
-    },
   },
 }));
 
@@ -33,11 +29,20 @@ const NavList = ({ to, ...props }: INavProps) => {
     <NavLink strict exact to={to} {...props} ref={ref} />
   ));
   return (
-    <li className={classes.li}>
+    <motion.li
+      className={classes.li}
+      whileHover={{
+        color: "#fff",
+        backgroundColor: "#028a8a",
+        scale: 1.05,
+        textShadow: "0 0 4px #fff",
+      }}
+      transition={{ type: "spring", stiffness: 120 }}
+    >
       <ListItem button component={routeLink} to={to} className={classes.item}>
         <ListItemText primary={props.label} className={classes.listText} />
       </ListItem>
-    </li>
+    </motion.li>
   );
 };
 

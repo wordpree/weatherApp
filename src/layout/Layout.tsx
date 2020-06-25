@@ -29,7 +29,6 @@ function Layout({
     reqTriposoCitiesAction();
     /**newsorg */
     reqNewsAction("Brisbane OR Australia");
-    /*pexels photos*/
   }, []);
 
   return (
