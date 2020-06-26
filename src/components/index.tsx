@@ -11,7 +11,7 @@ import { MobileDrawer } from "./mobile";
 import NavLists from "./header/NavLists";
 import NavList from "./header/NavList";
 import Photos from "./Photos";
-import PopularDetail from "./popularDetail";
+import AttractionDetail from "./popularDetail";
 import Search from "./search";
 import ScrollToTop from "./ScrollToTop";
 import SliderNav from "./SliderNav";
@@ -21,7 +21,7 @@ import FrMotionButton from "./FrMotionButton";
 export {
   Attractions,
   Banner,
-  PopularDetail,
+  AttractionDetail,
   CityAndTour,
   FoodCourt,
   Footer,

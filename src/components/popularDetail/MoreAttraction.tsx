@@ -14,6 +14,7 @@ import { ITriposoPoi } from "../../util/type";
 
 interface IMAProps {
   more: ITriposoPoi[];
+  path: string;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -32,11 +33,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MoreAttraction = ({ more }: IMAProps) => {
+const MoreAttraction = ({ more, path }: IMAProps) => {
   const classes = useStyles();
   const ListLink = (id: string) =>
     React.forwardRef<any, Omit<LinkProps, "to">>((props, ref) => (
-      <Link to={`/explore-nature/${id}`} ref={ref} {...props} />
+      <Link to={`/${path}/${id}`} ref={ref} {...props} />
     ));
   return (
     <>

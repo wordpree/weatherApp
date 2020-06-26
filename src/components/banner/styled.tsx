@@ -88,7 +88,7 @@ export const StyledEntry = styled.div`
   }
   position: relative;
 `;
-export const StyledImgWrapper = styled(motion.div)`
+export const StyledImgWrapper = styled.div`
   top: 0;
   left: 0;
   right: 0;

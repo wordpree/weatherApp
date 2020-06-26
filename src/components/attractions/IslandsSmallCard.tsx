@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardMedia,
@@ -77,9 +78,11 @@ const IslandsCard = ({ data }: IIProps) => {
           {md ? data.intro : data.intro.substring(0, 120) + "..."}
         </CardContent>
         <CardActions className={classes.actions}>
-          <FrMotionButton color="primary" size="small">
-            Explore More
-          </FrMotionButton>
+          <Link to={`/attractive-islands/${data.id}`}>
+            <FrMotionButton color="primary" size="small">
+              Explore More
+            </FrMotionButton>
+          </Link>
         </CardActions>
       </Card>
     </Fade>

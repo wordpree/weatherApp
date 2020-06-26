@@ -4,7 +4,7 @@ import { makeStyles, Typography } from "@material-ui/core";
 import { ITriposoPoi } from "../util/type";
 
 interface ICDProps {
-  detail: ITriposoPoi;
+  detail: Pick<ITriposoPoi, "structured_content">;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -32,17 +32,8 @@ const CardDetail = ({ detail }: ICDProps) => {
 
   return (
     <>
-      {detail.content.sections.map((item) => (
+      {detail.structured_content.sections.map((item) => (
         <div className={classes.content} key={item.title}>
-          <div className={classes.imgWrapper}>
-            {item.image && (
-              <img
-                src={item.image.sizes.medium.url}
-                alt={item.title}
-                className={classes.img}
-              />
-            )}
-          </div>
           <Typography variant="h5" className={classes.subTitle}>
             {item.title}
           </Typography>

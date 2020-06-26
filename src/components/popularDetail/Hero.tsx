@@ -5,10 +5,12 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import { ITriposoPoi } from "../../util/type";
+import { ImgData } from "../../util/type";
+import externalImg from "../../assets/hero.jpg";
 
 interface IHProps {
-  detail: ITriposoPoi;
+  imgData: ImgData;
+  title: string;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -43,12 +45,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const Hero = ({ detail }: IHProps) => {
+const Hero = ({ imgData, title }: IHProps) => {
   const classes = useStyles();
   const md = useMediaQuery("(min-width:960px)");
-  const img = md
-    ? detail.images[0].sizes.original.url
-    : detail.images[0].sizes.medium.url;
+  const imgDataIsFound = (data: ImgData) => {
+    if (data) {
+      return md ? imgData.sizes.original.url : imgData.sizes.medium.url;
+    }
+    return externalImg;
+  };
+  const img = imgDataIsFound(imgData);
   return (
     <Paper
       style={{
@@ -58,7 +64,7 @@ const Hero = ({ detail }: IHProps) => {
     >
       <div className={classes.dropback} />
       <Typography variant="h5" className={classes.title}>
-        {detail.name}
+        {title}
       </Typography>
     </Paper>
   );

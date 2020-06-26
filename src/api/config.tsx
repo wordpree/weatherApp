@@ -32,10 +32,10 @@ export const zomatoCuisineUrl = (cusineId: number, lat: number, lon: number) =>
   `https://developers.zomato.com/api/v2.1/search?lat=${lat}&lon=${lon}&cuisines=${cusineId}`;
 
 export const triposePopular = () =>
-  `https://www.triposo.com/api/20200405/poi.json?token=${T_API_KEY}&location_id=Australia&tag_labels=exploringnature&fields=all&exclude_fields=structured_content_language_info,structured_content,tags&account=EERNPMK9&order_by=-score`;
+  `https://www.triposo.com/api/20200405/poi.json?token=${T_API_KEY}&location_id=Australia&tag_labels=exploringnature&fields=all&exclude_fields=structured_content_language_info,attribution,tags&account=EERNPMK9&order_by=-score`;
 
 export const triposoLocation = (tagLabels: string) =>
-  `https://www.triposo.com/api/20200405/location.json?token=${T_API_KEY}&part_of=Australia&tag_labels=${tagLabels}&fields=all&exclude_fields=structured_content_language_info,structured_content,tags&account=EERNPMK9&order_by=-score`;
+  `https://www.triposo.com/api/20200405/location.json?token=${T_API_KEY}&part_of=Australia&tag_labels=${tagLabels}&fields=all&exclude_fields=structured_content_language_info,attribution,tags&account=EERNPMK9&order_by=-score`;
 
 export const triposoCities = () =>
   `https://www.triposo.com/api/20200405/location.json?token=${T_API_KEY}&account=EERNPMK9&fields=id,coordinates,score,intro,content,images,name,musement_locations&tag_labels=city&part_of=Australia&order_by=-score&count=10`;

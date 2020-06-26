@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { Home, News, Photos } from "../pages";
-import { PopularDetail } from "../components";
+import { AttractionDetail } from "../components";
 import { Route, Switch } from "react-router-dom";
 import Error from "../components/Error";
 import { ITriposoPoi } from "../util/type";
 
 interface ILProps {
+  islands: ITriposoPoi[];
   populars: ITriposoPoi[];
   reqNewsAction(location: string): void;
   reqWeatherAction(geo: string): void;
@@ -16,6 +17,7 @@ interface ILProps {
 }
 
 function Layout({
+  islands,
   populars,
   reqNewsAction,
   reqTriposoPopularPoiAction,
@@ -35,7 +37,10 @@ function Layout({
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/explore-nature/:id">
-        <PopularDetail data={populars} />
+        <AttractionDetail data={populars} />
+      </Route>
+      <Route path="/attractive-islands/:id">
+        <AttractionDetail data={islands} />
       </Route>
       <Route path="/blog" component={News} />
       <Route path="/explore" component={Photos} />

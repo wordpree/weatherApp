@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Grid,
   makeStyles,
@@ -94,9 +95,11 @@ const IslandsMedium = ({ data }: IIMProps) => {
             <CardMedia className={classes.media} image={image2}></CardMedia>
           </div>
           <CardActions className={classes.actions}>
-            <FrMotionButton variant="contained" color="primary">
-              Learn More
-            </FrMotionButton>
+            <Link to={`/attractive-islands/${data.id}`}>
+              <FrMotionButton variant="contained" color="primary">
+                Learn More
+              </FrMotionButton>
+            </Link>
           </CardActions>
         </Card>
       </Grid>

@@ -1,37 +1,5 @@
 import { ReactNode } from "react";
 
-/*props interface start *******************/
-export interface Flag {
-  num: number;
-  id: number;
-}
-
-export interface IHmAddress {
-  city: IHmAddressBase;
-  country: IHmAddressBase;
-}
-export interface IHmAddressBase {
-  long_name: string;
-  short_name: string;
-}
-export interface IHmGeo {
-  geo: {
-    lat: number;
-    lng: number;
-  };
-}
-export interface ISygicCol {
-  address: IHmAddressBase[];
-  children: ReactNode;
-}
-
-export interface ISygicColDet {
-  place_ids: string[];
-  children: ReactNode;
-}
-
-export type IHmLocation = IHmAddress & IHmGeo;
-
 export interface IApiProps {
   children: ReactNode;
   location: string;
@@ -115,11 +83,9 @@ type Img = {
   };
 };
 
-type ImgData = {
-  attribution: {
-    attribution_link: string;
-    attribution_text: string;
-  };
+export type ImgData = {
+  source_id: string;
+  owner_url: string;
   caption: string;
   sizes: Img;
   owner: string;
@@ -133,7 +99,11 @@ type Content = {
   title: string;
   sections: { body: string; image: ImgData; title: string }[];
 };
-
+type SectionData = {
+  title: string;
+  body: string;
+  topics: { title: string; body: string }[];
+};
 export interface ITriposoPoi {
   id: string;
   name: string;
@@ -155,6 +125,10 @@ export interface ITriposoPoi {
   intro: string;
   images: ImgData[];
   content: Content;
+  structured_content: {
+    images: ImgData[];
+    sections: SectionData[];
+  };
   snippet: string;
 }
 /*** triposo pois api end*******/

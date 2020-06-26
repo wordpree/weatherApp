@@ -55,10 +55,10 @@ const Banner = () => {
   };
   const transition = {
     type: "spring",
-    stiffness: 230,
-    ease: "anticipate",
+    stiffness: 250,
+    ease: "easeIn",
     delay: 0,
-    duration: 0.4,
+    duration: 0.2,
   };
   return (
     <StyledEntry>

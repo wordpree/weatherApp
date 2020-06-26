@@ -14,6 +14,7 @@ import {
 
 const mapStateToProps = (state: TravelStore) => ({
   populars: state.tPopular,
+  islands: state.tLocation.islands,
 });
 
 const mapDispatchToPorps = (dispatch: Dispatch<TravelActionType>) =>
