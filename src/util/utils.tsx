@@ -62,3 +62,7 @@ export function findNameWithType(types: string[], query: string) {
 export function isCity(input: City | Cuisine): input is City {
   return (input as City).coordinates !== undefined;
 }
+
+export function secureProtocol(url: string) {
+  return url.replace(/http/, "https");
+}

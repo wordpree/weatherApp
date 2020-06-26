@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { ImgData } from "../../util/type";
+import { secureProtocol } from "../../util/utils";
 import externalImg from "../../assets/hero.jpg";
 
 interface IHProps {
@@ -50,7 +51,9 @@ const Hero = ({ imgData, title }: IHProps) => {
   const md = useMediaQuery("(min-width:960px)");
   const imgDataIsFound = (data: ImgData) => {
     if (data) {
-      return md ? imgData.sizes.original.url : imgData.sizes.medium.url;
+      return md
+        ? secureProtocol(imgData.sizes.original.url)
+        : secureProtocol(imgData.sizes.medium.url);
     }
     return externalImg;
   };

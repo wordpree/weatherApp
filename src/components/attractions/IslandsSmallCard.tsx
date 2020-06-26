@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, LinkProps } from "react-router-dom";
 import {
   Card,
   CardMedia,
@@ -9,10 +9,12 @@ import {
   CardHeader,
   CardActions,
   Avatar,
+  Button,
   useMediaQuery,
 } from "@material-ui/core";
-import { FrMotionButton } from "../";
+import { Omit } from "@material-ui/types";
 import { ITriposoPoi } from "../../util/type";
+import { secureProtocol } from "../../util/utils";
 
 interface IIProps {
   data: ITriposoPoi;
@@ -60,7 +62,10 @@ const useStyles = makeStyles((theme) => ({
 const IslandsCard = ({ data }: IIProps) => {
   const classes = useStyles();
   const md = useMediaQuery("(min-width:768px)");
-  const image = data.images[0].sizes.medium.url.replace("http", "https");
+  const image = secureProtocol(data.images[0].sizes.medium.url);
+  const linkRef = React.forwardRef<any, Omit<LinkProps, "to">>((props, ref) => (
+    <Link {...props} ref={ref} to={`/attractive-islands/${data.id}`} />
+  ));
   return (
     <Fade in={Boolean(data)}>
       <Card className={classes.card}>
@@ -78,11 +83,9 @@ const IslandsCard = ({ data }: IIProps) => {
           {md ? data.intro : data.intro.substring(0, 120) + "..."}
         </CardContent>
         <CardActions className={classes.actions}>
-          <Link to={`/attractive-islands/${data.id}`}>
-            <FrMotionButton color="primary" size="small">
-              Explore More
-            </FrMotionButton>
-          </Link>
+          <Button color="primary" size="small" component={linkRef}>
+            Explore More
+          </Button>
         </CardActions>
       </Card>
     </Fade>
