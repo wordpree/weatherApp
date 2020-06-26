@@ -35,9 +35,10 @@ const useStyles = makeStyles((theme) => ({
 
 const MoreAttraction = ({ more, path }: IMAProps) => {
   const classes = useStyles();
+  const relativePath = path.split("/")[1];
   const ListLink = (id: string) =>
     React.forwardRef<any, Omit<LinkProps, "to">>((props, ref) => (
-      <Link to={`/${path}/${id}`} ref={ref} {...props} />
+      <Link to={`/${relativePath}/${id}`} ref={ref} {...props} />
     ));
   return (
     <>

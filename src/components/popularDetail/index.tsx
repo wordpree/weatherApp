@@ -29,7 +29,6 @@ const AttractionDetail = ({ data }: IPDProps) => {
   if (!data || data.length === 0 || !id) {
     return null;
   }
-
   const getHeroImg = (data: Pick<ITriposoPoi, "structured_content">) => {
     const { images } = data.structured_content;
     const lookup = images.find((img) => {

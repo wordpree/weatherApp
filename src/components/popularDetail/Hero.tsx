@@ -15,7 +15,7 @@ interface IHProps {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    height: 320,
+    height: 420,
     position: "relative",
   },
   dropback: {

@@ -32,17 +32,20 @@ const CardDetail = ({ detail }: ICDProps) => {
 
   return (
     <>
-      {detail.structured_content.sections.map((item) => (
-        <div className={classes.content} key={item.title}>
-          <Typography variant="h5" className={classes.subTitle}>
-            {item.title}
-          </Typography>
-          <Typography
-            dangerouslySetInnerHTML={{ __html: item.body }}
-            color="textSecondary"
-          />
-        </div>
-      ))}
+      {detail.structured_content.sections.map(
+        (item) =>
+          item.body && (
+            <div className={classes.content} key={item.title}>
+              <Typography variant="h5" className={classes.subTitle}>
+                {item.title}
+              </Typography>
+              <Typography
+                dangerouslySetInnerHTML={{ __html: item.body }}
+                color="textSecondary"
+              />
+            </div>
+          )
+      )}
     </>
   );
 };
