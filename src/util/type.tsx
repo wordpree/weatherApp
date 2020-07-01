@@ -99,7 +99,7 @@ type Content = {
   title: string;
   sections: { body: string; image: ImgData; title: string }[];
 };
-type SectionData = {
+export type SectionData = {
   title: string;
   body: string;
   topics: { title: string; body: string }[];

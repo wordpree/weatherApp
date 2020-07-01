@@ -64,5 +64,5 @@ export function isCity(input: City | Cuisine): input is City {
 }
 
 export function secureProtocol(url: string) {
-  return url.replace(/http/, "https");
+  return url.includes("https") ? url : url.replace(/http/, "https");
 }

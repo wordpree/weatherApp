@@ -1,34 +1,28 @@
 import React from "react";
-import { Container, Grid, makeStyles } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { useParams, useRouteMatch } from "react-router-dom";
 import CardDetail from "../CardDetail";
 import { Footer, Header, ScrollToTop } from "../";
 import Hero from "./Hero";
 import { ITriposoPoi } from "../../util/type";
-import MoreAttraction from "./MoreAttraction";
 
 interface IPDProps {
   data: ITriposoPoi[];
 }
 
-const useStyles = makeStyles({
-  container: {
-    marginTop: "2rem",
-    "&::after": {
-      content: "''",
-      display: "table",
-      clear: "both",
-    },
-  },
-});
-
 const AttractionDetail = ({ data }: IPDProps) => {
-  const classes = useStyles();
   const { id } = useParams();
   let { url } = useRouteMatch();
   if (!data || data.length === 0 || !id) {
     return null;
   }
+
+  const dataFilter = (data: ITriposoPoi[]) =>
+    data.filter(
+      (item) =>
+        item.name !== "Uluru" && item.structured_content.images.length !== 0
+    );
+
   const getHeroImg = (data: Pick<ITriposoPoi, "structured_content">) => {
     const { images } = data.structured_content;
     const lookup = images.find((img) => {
@@ -37,34 +31,35 @@ const AttractionDetail = ({ data }: IPDProps) => {
     });
     return lookup ? lookup : images[0];
   };
+
   const getSelectedItem = (data: ITriposoPoi[]) =>
     data.find((item) => item.id === id) as ITriposoPoi;
-  const getMoreAttraction = (data: ITriposoPoi[]) => {
-    const moreAttr = data
-      .filter((item) => item.id !== id && item.name !== "Uluru")
-      .slice(0, 7);
-    return moreAttr;
-  };
 
-  const selectedItem = getSelectedItem(data);
+  const getNextAttraction = (data: ITriposoPoi[]) => {
+    const relativePath = url.split("/")[1];
+    const current = data.findIndex((item) => item.id === id);
+    let index = 0;
+    if (current !== data.length - 1) {
+      index = current + 1;
+    }
+    return {
+      path: `/${relativePath}/${data[index].id}`,
+      info: data[index].intro,
+    };
+  };
+  const filteredData = dataFilter(data); // excludes invalide media count and remove duplicated Uluru park
+  const selectedItem = getSelectedItem(filteredData);
   const { name, structured_content } = selectedItem;
-  const more = getMoreAttraction(data);
+  const nextAttraction = getNextAttraction(filteredData);
   const heroImgData = getHeroImg({ structured_content });
 
   return (
     <>
       <ScrollToTop />
       <Header />
-      <Hero imgData={heroImgData} title={name} />
-      <Container className={classes.container}>
-        <Grid container spacing={3}>
-          <Grid item md={9} xs={12}>
-            <CardDetail detail={{ structured_content }} />
-          </Grid>
-          <Grid item md={3} xs={12}>
-            <MoreAttraction more={more} path={url} />
-          </Grid>
-        </Grid>
+      <Hero imgData={heroImgData} title={name} next={nextAttraction} />
+      <Container>
+        <CardDetail detail={{ structured_content }} />
       </Container>
       <Footer />
     </>

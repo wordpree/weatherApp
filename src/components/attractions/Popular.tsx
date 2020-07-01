@@ -67,11 +67,12 @@ const Popular = ({ data }: IPProps) => {
     ],
   };
   let slider: Slider | null = null;
-  const dataFilterUluru = data
-    .filter((item) => item.name !== "Uluru")
-    .slice(0, 7);
+  const dataFilter = data.filter(
+    (item) =>
+      item.name !== "Uluru" && item.structured_content.images.length !== 0
+  );
   const md = useMediaQuery("(min-width:768px)");
-  const cardLists = dataFilterUluru.map((item) => (
+  const cardLists = dataFilter.map((item) => (
     <PopularCard data={item} key={item.id} />
   ));
   const handleSlider = (sliderRef: Slider | null) => (slider = sliderRef);
