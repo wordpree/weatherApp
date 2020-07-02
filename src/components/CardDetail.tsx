@@ -6,10 +6,10 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import { ITriposoPoi, SectionData, ImgData } from "../util/type";
-import externalImg from "../assets/hero.jpg";
-
+import defaultImg from "../assets/hero.jpg";
 interface ICDProps {
   detail: Pick<ITriposoPoi, "structured_content">;
+  imgData: ImgData[];
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -70,20 +70,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CardDetail = ({ detail }: ICDProps) => {
+const CardDetail = ({ detail, imgData }: ICDProps) => {
   const classes = useStyles();
   const {
-    structured_content: { sections, images },
+    structured_content: { sections },
   } = detail;
-  const mediaQuery = useMediaQuery("(min-width:1024px)");
+  const mediaQuery = useMediaQuery("(min-width:1248px)");
   const getImg = (size: boolean) => (imageData: ImgData[]) => {
-    let retImg = externalImg;
-    if (imageData.length > 2) {
-      retImg = size
+    let retImage = defaultImg;
+    if (imageData.length > 1) {
+      retImage = size
         ? imageData[1].sizes.original.url
         : imageData[1].sizes.medium.url;
     }
-    return retImg;
+    return retImage;
   };
 
   const renderContent = (data: SectionData[]) =>
@@ -109,7 +109,7 @@ const CardDetail = ({ detail }: ICDProps) => {
         className={classes.paper}
         style={{
           background: `top left / cover no-repeat url(${getImg(mediaQuery)(
-            images
+            imgData
           )}) #cecece`,
         }}
       />

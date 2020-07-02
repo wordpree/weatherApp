@@ -1,4 +1,6 @@
-import { City, Cuisine } from "./type";
+import React from "react";
+import { City, Cuisine, ITriposoPoi } from "./type";
+import { Link, LinkProps } from "react-router-dom";
 
 export const dataFormat = (date: Date) => {
   return date.toLocaleString("en-AU", {
@@ -65,4 +67,31 @@ export function isCity(input: City | Cuisine): input is City {
 
 export function secureProtocol(url: string) {
   return url.includes("https") ? url : url.replace(/http/, "https");
+}
+
+export function forwardRefToLink(path: string) {
+  return React.forwardRef<any, Omit<LinkProps, "to">>((props, ref) => (
+    <Link {...props} ref={ref} to={path} />
+  ));
+}
+
+export function DataWithImg(data: ITriposoPoi[], removedName?: string) {
+  return data && data.length
+    ? data.filter((item) => item.images.length > 1 && item.name !== removedName)
+    : [];
+}
+
+export function getImgWithSize(data: ITriposoPoi) {
+  const { images } = data;
+  const lookup = images.find((img) => {
+    const { width, height } = img.sizes.medium;
+    return width > 600 && height > 400;
+  });
+  return lookup ? lookup : images[0];
+}
+
+export function getItemById(data: ITriposoPoi[], id: string) {
+  return data && data.length
+    ? (data.find((item) => item.id === id) as ITriposoPoi)
+    : ({} as ITriposoPoi);
 }

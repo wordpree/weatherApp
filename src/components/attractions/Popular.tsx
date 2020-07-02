@@ -1,7 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
 import { makeStyles, useMediaQuery } from "@material-ui/core";
-
 import EntryDiv from "./EntryDiv";
 import { ITriposoPoi } from "../../util/type";
 import PopularCard from "./Card";
@@ -67,10 +66,7 @@ const Popular = ({ data }: IPProps) => {
     ],
   };
   let slider: Slider | null = null;
-  const dataFilter = data.filter(
-    (item) =>
-      item.name !== "Uluru" && item.structured_content.images.length !== 0
-  );
+  const dataFilter = data.filter((item) => item.name !== "Uluru");
   const md = useMediaQuery("(min-width:768px)");
   const cardLists = dataFilter.map((item) => (
     <PopularCard data={item} key={item.id} />

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { forwardRefToLink } from "../../util/utils";
 import {
   Card,
   CardMedia,
@@ -47,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
   },
   contenWrapper: {
     justifyContent: "space-around",
-    cursor: "pointer",
     [theme.breakpoints.up(500)]: {
       flex: "1 0 60%",
       display: "flex",
@@ -94,18 +94,29 @@ const ParkCard = ({ data }: IPCProps) => {
   const snippet = data.intro;
   const upFromSm = useMediaQuery("(min-width:500px)");
   const boxShadowX = upFromSm ? "3px" : 0;
-  const image = data.images.length
-    ? data.images[0].sizes.medium.url.replace("http", "https")
-    : data.imgTour; //insert pictures for tours
-  const tourInfo = {
-    title: data.name,
-    content: data.content.sections[0].body,
-    highlight: data.highlights,
-    booking: data.vendor_tour_url,
+  const getId = (data: ITriposoPoi) => data.id;
+  const LinkMoreInfo = forwardRefToLink(`/national-park/${getId(data)}`);
+
+  const getImg = (data: ITriposoPoi) =>
+    data.images.length
+      ? data.images[0].sizes.medium.url.replace("http", "https")
+      : data.imgTour; //insert pictures for tours
+  const getTourInfo = (data: ITriposoPoi) => {
+    const { name, content, highlights, vendor_tour_url } = data;
+    return {
+      title: name,
+      content: content.sections[0].body,
+      highlight: highlights,
+      booking: vendor_tour_url,
+    };
   };
+  const getTourStatus = (data: ITriposoPoi) =>
+    data.hasOwnProperty("converted_price");
+  const image = getImg(data);
+  const tourInfo = getTourInfo(data);
   const [open, setOpen] = useState(false); //dialog for tour
-  const isTour = data.hasOwnProperty("converted_price");
-  const handleDialogClick = (state: boolean) => {
+  const tour = getTourStatus(data);
+  const handleDialogClick = (isTour: boolean) => (state: boolean) => {
     if (isTour) {
       setOpen(state);
     }
@@ -121,10 +132,7 @@ const ParkCard = ({ data }: IPCProps) => {
           }}
           transition={{ type: "spring", stiffness: 240 }}
         >
-          <Card
-            className={classes.card}
-            onClick={() => handleDialogClick(true)}
-          >
+          <Card className={classes.card}>
             <CardMedia image={image} className={classes.media} />
             <div className={classes.contenWrapper}>
               <CardContent className={classes.content}>
@@ -147,17 +155,19 @@ const ParkCard = ({ data }: IPCProps) => {
               </CardContent>
               <CardActions className={classes.actions}>
                 {data.hasOwnProperty("converted_price") ? (
-                  <ButtonMore click={handleDialogClick}>
+                  <ButtonMore click={handleDialogClick(tour)}>
                     Explore tour details
                   </ButtonMore>
                 ) : (
-                  <ButtonMore>Explore more information</ButtonMore>
+                  <ButtonMore link={LinkMoreInfo}>
+                    Explore more information
+                  </ButtonMore>
                 )}
               </CardActions>
             </div>
           </Card>
         </motion.div>
-        <DialogTour {...tourInfo} open={open} click={handleDialogClick} />
+        <DialogTour {...tourInfo} open={open} click={handleDialogClick(tour)} />
       </>
     </Fade>
   );

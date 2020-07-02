@@ -6,14 +6,14 @@ import {
   Typography,
   Card,
   makeStyles,
-  Button,
   Fade,
 } from "@material-ui/core";
-import { ChevronRight } from "mdi-material-ui";
-
+import { motion } from "framer-motion";
+import { forwardRefToLink } from "../../util/utils";
 import { ITriposoPoi } from "../../util/type";
 import ParkCard from "./ParkCard";
 import { parkCardLists } from "./Parks";
+import ButtonMore from "./MoreDetailButton";
 
 interface IMProps {
   data: ITriposoPoi[];
@@ -43,12 +43,19 @@ const useStyles = makeStyles({
 
 const ParksMedium = ({ data, more }: IMProps) => {
   const classes = useStyles();
-  const image = data[0].images[0].sizes.medium.url.replace("http", "https");
+  const getImg = (data: ITriposoPoi[]) =>
+    data[0].images[0].sizes.medium.url.replace("http", "https");
+  const getId = (data: ITriposoPoi) => data.id;
+  const LinkMoreInfo = forwardRefToLink(`/national-park/${getId(data[0])}`);
+  const image = getImg(data);
 
   return (
     <div>
       <div className={classes.wrapper}>
-        <div className={classes.left}>
+        <motion.div
+          className={classes.left}
+          whileHover={{ boxShadow: "0 4px 4px rgba(0,0,0,0.25)" }}
+        >
           <Card className={classes.card}>
             <CardMedia image={image} className={classes.media} />
             <CardContent>
@@ -60,12 +67,12 @@ const ParksMedium = ({ data, more }: IMProps) => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button color="primary" endIcon={<ChevronRight />}>
+              <ButtonMore link={LinkMoreInfo}>
                 Explore more infomation
-              </Button>
+              </ButtonMore>
             </CardActions>
           </Card>
-        </div>
+        </motion.div>
         <div className={classes.right}>
           {parkCardLists(ParkCard)(data.slice(1, 4))}
         </div>

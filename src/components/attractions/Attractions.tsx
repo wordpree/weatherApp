@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Container } from "@material-ui/core";
-
+import { DataWithImg } from "../../util/utils";
 import Islands from "./Islands";
 import Loading from "../Loading";
 import Parks from "./Parks";
@@ -20,12 +20,12 @@ const Attractions = ({ popular, islands, parks }: IAProps) => {
   return popular && islands && popular.length !== 0 && islands.length !== 0 ? (
     <>
       <Container>
-        <Popular data={popular} />
-        <Islands data={islands} />
+        <Popular data={DataWithImg(popular, "Uluru")} />
+        <Islands data={DataWithImg(islands)} />
       </Container>
       <Subscribe />
       <Container>
-        <Parks data={parks} />
+        <Parks data={DataWithImg(parks)} />
       </Container>
     </>
   ) : (
