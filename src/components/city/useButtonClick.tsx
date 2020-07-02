@@ -16,7 +16,7 @@ const useButtonClick = (
     name: defaultCity,
     value: defaultCity,
   });
-  const selectOption = [...tourButtonsInit].map((b) => ({
+  const selectOption = tourButtonsInit.map((b) => ({
     name: b.name,
     select: b.name === clickedButton.name ? true : false,
     id: b.id,

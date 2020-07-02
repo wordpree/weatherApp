@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
-import { Titles } from "../";
-import Options from "./Options";
+import React from "react";
 import { Container, makeStyles } from "@material-ui/core";
+import { Titles } from "../";
 import { FrMotionButton } from "../";
-import cusineTypes from "../../util/cusines";
 import { City, IZomatoDetailRes } from "../../util/type";
-import useOption from "./useOption";
-import getIdsByOpt from "./getIdsByOpt";
-import CuisineCard from "./CuisineCard";
 import { Loading } from "../";
+import cusineTypes from "../../util/cusines";
+import Options from "./Options";
+import useOption from "./useOption";
+import { getIdsByOpt } from "../../util/utils";
+import CuisineCard from "./CuisineCard";
+
 interface IFCProps {
   cities: City[];
   cuisines: IZomatoDetailRes;
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const cityInit = { latitude: -27.4709989, longitude: 153.0252 };
+const cityInit = { latitude: -27.4709989, longitude: 153.0252 };
 
 const FoodCourt = ({
   cities,
@@ -53,12 +54,14 @@ const FoodCourt = ({
 }: IFCProps) => {
   const classes = useStyles();
   const { option, handleOptionChange } = useOption();
+
   const cuisineId = (getIdsByOpt(cusineTypes, option.cuisine) as number) || 177;
   const cityId = (getIdsByOpt(cities, option.city) as CityGeo) || cityInit;
-
-  useEffect(() => {
+  const handleRequetOnClick = () => {
+    reqZomatoCusinesDelete();
     reqZomatoCusinesAction(cuisineId, cityId.latitude, cityId.longitude);
-  }, []);
+  };
+
   return (
     <Container>
       <Titles
@@ -69,13 +72,15 @@ const FoodCourt = ({
       <div className={classes.optionWrapper}>
         <Options
           options={cities}
-          init="city"
+          initLabel="city"
+          defaultValue="Brisbane"
           handleChange={handleOptionChange}
           option={option.city}
         />
         <Options
           options={cusineTypes}
-          init="cuisine"
+          initLabel="cuisine"
+          defaultValue="Sushi"
           handleChange={handleOptionChange}
           option={option.cuisine}
         />
@@ -84,14 +89,7 @@ const FoodCourt = ({
           size="large"
           color="primary"
           className={classes.btn}
-          onClick={() => {
-            reqZomatoCusinesDelete();
-            reqZomatoCusinesAction(
-              cuisineId,
-              cityId.latitude,
-              cityId.longitude
-            );
-          }}
+          onClick={handleRequetOnClick}
         >
           Explore desired meal
         </FrMotionButton>

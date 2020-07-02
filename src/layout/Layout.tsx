@@ -16,13 +16,18 @@ interface ILProps {
   reqTriposoPopularPoiAction(): void;
   reqTriposoLocationAction(): void;
   reqTriposoCitiesAction(): void;
+  reqZomatoCuisineAction(cuisineId: number, lat: number, lon: number): void;
 }
+
+const cuisineId = 177;
+const cityInitBrisbane = { latitude: -27.4709989, longitude: 153.0252 };
 
 function Layout({
   islands,
   populars,
   parks,
   reqNewsAction,
+  reqZomatoCuisineAction,
   reqTriposoPopularPoiAction,
   reqTriposoLocationAction,
   reqTriposoCitiesAction,
@@ -32,6 +37,12 @@ function Layout({
     reqTriposoPopularPoiAction();
     reqTriposoLocationAction();
     reqTriposoCitiesAction();
+    /*zomato*/
+    reqZomatoCuisineAction(
+      cuisineId,
+      cityInitBrisbane.latitude,
+      cityInitBrisbane.longitude
+    );
     /**newsorg */
     reqNewsAction("Brisbane OR Australia");
   }, []);

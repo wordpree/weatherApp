@@ -6,7 +6,8 @@ import { isCity } from "../../util/utils";
 interface IOProps {
   options: Option;
   option: string;
-  init: string;
+  initLabel: string;
+  defaultValue: string;
   handleChange(
     event: React.ChangeEvent<{ value: unknown; name?: string | undefined }>
   ): void;
@@ -29,35 +30,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Options = ({ init, options, handleChange, option }: IOProps) => {
+const Options = ({
+  defaultValue,
+  initLabel,
+  options,
+  handleChange,
+  option,
+}: IOProps) => {
   const classes = useStyles();
   return (
     <FormControl variant="outlined" className={classes.formControl}>
-      <InputLabel htmlFor={init}>{init}</InputLabel>
+      <InputLabel htmlFor={initLabel}>{initLabel}</InputLabel>
       <Select
-        id={init}
+        id={initLabel}
         onChange={handleChange}
         value={option}
         native
-        label={init}
-        inputProps={{ name: init }}
+        label={initLabel}
+        inputProps={{ name: initLabel }}
       >
-        <option aria-label="None" value="" />
-        {options.map((item) => {
-          if (isCity(item)) {
-            return (
-              <option key={item.name} value={item.name}>
-                {item.name}
-              </option>
-            );
-          } else {
-            return (
-              <option key={item.cuisine_id} value={item.cuisine_name}>
-                {item.cuisine_name}
-              </option>
-            );
-          }
-        })}
+        <option value={defaultValue}>{defaultValue}</option>
+        {options
+          .filter((o) => {
+            return isCity(o)
+              ? o.name !== defaultValue
+              : o.cuisine_name !== defaultValue;
+          })
+          .map((item) => {
+            if (isCity(item)) {
+              return (
+                <option key={item.name} value={item.name}>
+                  {item.name}
+                </option>
+              );
+            } else {
+              return (
+                <option key={item.cuisine_id} value={item.cuisine_name}>
+                  {item.cuisine_name}
+                </option>
+              );
+            }
+          })}
       </Select>
     </FormControl>
   );
