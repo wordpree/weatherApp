@@ -27,6 +27,9 @@ const useStyles = makeStyles({
   divBtn: {
     textAlign: "center",
     padding: "0.25rem",
+    "&>a": {
+      textDecoration: "none",
+    },
   },
   tooltip: {
     textDecoration: "none",

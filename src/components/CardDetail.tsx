@@ -6,7 +6,9 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import { ITriposoPoi, SectionData, ImgData } from "../util/type";
+import { secureProtocol } from "../util/utils";
 import defaultImg from "../assets/hero.jpg";
+
 interface ICDProps {
   detail: Pick<ITriposoPoi, "structured_content">;
   imgData: ImgData[];
@@ -80,8 +82,8 @@ const CardDetail = ({ detail, imgData }: ICDProps) => {
     let retImage = defaultImg;
     if (imageData.length > 1) {
       retImage = size
-        ? imageData[1].sizes.original.url
-        : imageData[1].sizes.medium.url;
+        ? secureProtocol(imageData[1].sizes.original.url)
+        : secureProtocol(imageData[1].sizes.medium.url);
     }
     return retImage;
   };
