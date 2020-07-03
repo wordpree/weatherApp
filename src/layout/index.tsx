@@ -10,7 +10,6 @@ import {
   reqTriposoPopularPoiAction,
   reqTriposoLocationAction,
   reqTriposoCitiesAction,
-  reqZomatoCuisineAction,
 } from "../redux-saga/actions";
 
 const mapStateToProps = (state: TravelStore) => ({
@@ -28,7 +27,6 @@ const mapDispatchToPorps = (dispatch: Dispatch<TravelActionType>) =>
       reqTriposoPopularPoiAction,
       reqTriposoLocationAction,
       reqTriposoCitiesAction,
-      reqZomatoCuisineAction,
     },
     dispatch
   );

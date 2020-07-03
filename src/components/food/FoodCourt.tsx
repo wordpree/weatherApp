@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, makeStyles } from "@material-ui/core";
 import { Titles } from "../";
 import { FrMotionButton } from "../";
@@ -17,7 +17,7 @@ interface IFCProps {
   reqZomatoCusinesDelete(): void;
 }
 
-export type CityGeo = {
+type CityGeo = {
   latitude: number;
   longitude: number;
 };
@@ -44,8 +44,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cityInit = { latitude: -27.4709989, longitude: 153.0252 };
-
 const FoodCourt = ({
   cities,
   reqZomatoCusinesAction,
@@ -53,14 +51,29 @@ const FoodCourt = ({
   reqZomatoCusinesDelete,
 }: IFCProps) => {
   const classes = useStyles();
+  const cityInit = { latitude: -27.4709989, longitude: 153.0252 };
+  const defaultCuisineId = 177;
   const { option, handleOptionChange } = useOption();
-
+  const [updatedOpt, setUpdatedOpt] = useState({
+    cuisineId: defaultCuisineId,
+    lat: cityInit.latitude,
+    lon: cityInit.longitude,
+  });
   const cuisineId = (getIdsByOpt(cusineTypes, option.cuisine) as number) || 177;
   const cityId = (getIdsByOpt(cities, option.city) as CityGeo) || cityInit;
-  const handleRequetOnClick = () => {
-    reqZomatoCusinesDelete();
-    reqZomatoCusinesAction(cuisineId, cityId.latitude, cityId.longitude);
-  };
+  const handleClick = () =>
+    setUpdatedOpt({ cuisineId, lat: cityId.latitude, lon: cityId.longitude });
+  useEffect(() => {
+    function reqData() {
+      reqZomatoCusinesDelete();
+      reqZomatoCusinesAction(
+        updatedOpt.cuisineId,
+        updatedOpt.lat,
+        updatedOpt.lon
+      );
+    }
+    reqData();
+  }, [updatedOpt.cuisineId, updatedOpt.lat, updatedOpt.lon]);
 
   return (
     <Container>
@@ -89,7 +102,7 @@ const FoodCourt = ({
           size="large"
           color="primary"
           className={classes.btn}
-          onClick={handleRequetOnClick}
+          onClick={handleClick}
         >
           Explore desired meal
         </FrMotionButton>
