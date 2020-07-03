@@ -63,19 +63,17 @@ const City = ({
   reqWeatherOnClick,
 }: ICProps) => {
   const classes = useStyles();
-  const dataWithTour = data.filter(
-    (item) => item.musement_locations.length !== 0
-  );
-  const tourButtonsInit = dataWithTour.map((item) => ({
-    name: item.name,
-    id: item.id,
-    select: item.name === "Sydney" ? true : false,
-  }));
-
-  const [selectOption, setSelectOption] = useButtonClick(
-    "Sydney",
-    tourButtonsInit
-  );
+  const getTourByData = (data: ITriposoPoi[]) =>
+    data.filter((item) => item.musement_locations.length !== 0);
+  const cityButtonInit = (tour: ITriposoPoi[]) =>
+    tour.map((item) => ({
+      name: item.name,
+      id: item.id,
+      select: item.name === "Sydney" ? true : false,
+    }));
+  const tour = getTourByData(data);
+  const cityButton = cityButtonInit(tour);
+  const [selectOption, setSelectOption] = useButtonClick("Sydney", cityButton);
   const selectedCity = selectOption.find((s) => s.select) as ISelect;
 
   useEffect(() => {
@@ -87,7 +85,7 @@ const City = ({
     handleRequest(selectedCity.id);
   }, [selectedCity.id, reqTourDelete, reqTourOnClick, reqWeatherOnClick]);
 
-  const city = dataWithTour.find(
+  const city = tour.find(
     (item) => item.name === selectedCity.name
   ) as ITriposoPoi;
   const handleClick = (

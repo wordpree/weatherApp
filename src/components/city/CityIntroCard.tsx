@@ -1,6 +1,11 @@
 import React from "react";
 import { makeStyles, Paper, Typography } from "@material-ui/core";
 import { ITriposoPoi } from "../../util/type";
+import {
+  htmlSanitizer,
+  getImgWithSize,
+  secureProtocol,
+} from "../../util/utils";
 
 interface ICICProps {
   data: ITriposoPoi;
@@ -47,27 +52,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CityIntroCard = ({ data }: ICICProps) => {
-  const classes = useStyles();
-  let max = data.content.sections[0].body.replace(/<.*?>/gi, "");
-  max = max.length > 550 ? max.substring(0, 550) + "..." : max;
-  let min = data.intro;
-  min = min.length > 160 ? min.substring(0, 160) + "..." : min;
+  const getMaxContentByData = (data: ITriposoPoi) => {
+    const MAX_LENGTH = 550;
+    const MIN_LENGTH = 160;
+    let max = htmlSanitizer(data.content.sections[0].body);
+    let min = data.intro;
+    max = max.length > MAX_LENGTH ? max.substring(0, MAX_LENGTH) + "..." : max;
+    min = min.length > MIN_LENGTH ? min.substring(0, MIN_LENGTH) + "..." : min;
+    if (min.length > max.length) {
+      [max, min] = [min, max];
+    }
+    return [max, min];
+  };
 
-  if (min.length > max.length) {
-    [max, min] = [min, max];
-  }
-  const ret = data.images.find(
-    (item) => item.sizes.medium.width > 550 && item.sizes.medium.height > 400
-  );
-  const image = ret ? ret.sizes.medium.url : data.images[0].sizes.medium.url;
-  const imageWithS = image.replace("http", "https");
+  const classes = useStyles();
+  const [max, min] = getMaxContentByData(data);
+  const imageData = getImgWithSize(data);
+  const image = secureProtocol(imageData.sizes.medium.url);
 
   return (
     <div className={classes.cityWrapper}>
       <Paper
         elevation={3}
         style={{
-          background: `center/cover no-repeat #808080 url(${imageWithS})`,
+          background: `center/cover no-repeat #808080 url(${image})`,
         }}
         className={classes.paper}
       />

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, LinkProps } from "react-router-dom";
 import {
   Card,
   CardMedia,
@@ -12,9 +11,8 @@ import {
   Button,
   useMediaQuery,
 } from "@material-ui/core";
-import { Omit } from "@material-ui/types";
 import { ITriposoPoi } from "../../util/type";
-import { secureProtocol } from "../../util/utils";
+import { secureProtocol, forwardRefToLink } from "../../util/utils";
 
 interface IIProps {
   data: ITriposoPoi;
@@ -63,9 +61,7 @@ const IslandsCard = ({ data }: IIProps) => {
   const classes = useStyles();
   const md = useMediaQuery("(min-width:768px)");
   const image = secureProtocol(data.images[0].sizes.medium.url);
-  const linkRef = React.forwardRef<any, Omit<LinkProps, "to">>((props, ref) => (
-    <Link {...props} ref={ref} to={`/attractive-islands/${data.id}`} />
-  ));
+  const linkRef = forwardRefToLink(`/attractive-islands/${data.id}`);
   return (
     <Fade in={Boolean(data)}>
       <Card className={classes.card}>

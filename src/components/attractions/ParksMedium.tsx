@@ -9,7 +9,7 @@ import {
   Fade,
 } from "@material-ui/core";
 import { motion } from "framer-motion";
-import { forwardRefToLink } from "../../util/utils";
+import { forwardRefToLink, secureProtocol } from "../../util/utils";
 import { ITriposoPoi } from "../../util/type";
 import ParkCard from "./ParkCard";
 import { parkCardLists } from "./Parks";
@@ -44,7 +44,7 @@ const useStyles = makeStyles({
 const ParksMedium = ({ data, more }: IMProps) => {
   const classes = useStyles();
   const getImg = (data: ITriposoPoi[]) =>
-    data[0].images[0].sizes.medium.url.replace("http", "https");
+    secureProtocol(data[0].images[0].sizes.medium.url);
   const getId = (data: ITriposoPoi) => data.id;
   const LinkMoreInfo = forwardRefToLink(`/national-park/${getId(data[0])}`);
   const image = getImg(data);

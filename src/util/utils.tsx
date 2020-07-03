@@ -114,3 +114,7 @@ export function getIdsByOpt(options: Option, value: string) {
   }
   return result;
 }
+
+export function htmlSanitizer(content: string) {
+  return content.replace(/<.*?>/gi, "");
+}

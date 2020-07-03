@@ -9,6 +9,7 @@ import {
   CardContent,
   CardActions,
 } from "@material-ui/core";
+import { secureProtocol } from "../../util/utils";
 import { FrMotionButton } from "../";
 import { ITriposoPoi } from "../../util/type";
 
@@ -71,10 +72,10 @@ const useStyles = makeStyles({
 
 const IslandsMedium = ({ data }: IIMProps) => {
   const classes = useStyles();
-  const image = data.images[0].sizes.medium.url.replace("http", "https");
-  const image1 = data.images[1].sizes.medium.url.replace("http", "https");
-  const image2 = data.images[2].sizes.medium.url.replace("http", "https");
 
+  const getImages = (data: ITriposoPoi) =>
+    data.images.slice(0, 3).map((img) => secureProtocol(img.sizes.medium.url));
+  const [image, image1, image2] = getImages(data);
   return (
     <Grid container className={classes.container}>
       <Grid item xs={6}>
