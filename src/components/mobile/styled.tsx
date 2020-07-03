@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Button, List, ListItemText, ListItemIcon } from "@material-ui/core";
-
+import React from "react";
 export const StyledOpen = styled.div`
-  background: #068080;
+  background: rgba(2, 138, 138, 0.88);
   width: 100vw;
   height: 100vh;
 `;
@@ -26,16 +26,19 @@ export const StyledMobileLogoImg = styled.img`
   width: 142px;
   height: auto;
 `;
-export const StyledList = styled(List)`
+export const StyledList = styled(({ component, ...others }) => (
+  <List component={component} {...others} />
+))`
   width: 90%;
   padding: 2rem;
   margin: 0 auto;
   margin-top: 6rem;
-  background: #0a9d9d;
+  background: rgb(2, 138, 138);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  width: 90%;
-  & > a {
+  & > div > a {
     border-bottom: 1px solid #eee;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 `;
 
@@ -43,8 +46,8 @@ export const StyledListItemText = styled(ListItemText)`
   color: #fff;
   letter-spacing: 1.6px;
   & > span {
-    font-size: 1.5rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: bold;
   }
 `;
 

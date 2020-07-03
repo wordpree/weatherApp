@@ -16,7 +16,7 @@ const MobileDrawer = ({ handleDrawer, open }: IMDProps) => {
       onClose={() => handleDrawer(false)}
       onOpen={() => handleDrawer(true)}
     >
-      <MobileExpand handleClick={handleDrawer} />
+      <MobileExpand handleClick={handleDrawer} open={open} />
     </SwipeableDrawer>
   );
 };
