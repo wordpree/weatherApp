@@ -1,8 +1,7 @@
 import React from "react";
 import { List, Theme, Button } from "@material-ui/core";
-import { Link, LinkProps } from "react-router-dom";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Omit } from "@material-ui/types";
+import { forwardRefToLink } from "../../util/utils";
 
 import logo from "../../assets/logo/logo@2x.png";
 import NavList from "./NavList";
@@ -53,9 +52,7 @@ const NavLists = () => {
     { label: "Flights", to: "/flights" },
     { label: "Blog", to: "/blog" },
   ];
-  const routeLink = React.forwardRef<any, Omit<LinkProps, "to">>(
-    (props, ref) => <Link to="/" {...props} ref={ref} />
-  );
+  const routeLink = forwardRefToLink("/");
   return (
     <>
       <li className={classes.li}>

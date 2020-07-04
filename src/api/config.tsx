@@ -25,8 +25,8 @@ export const googlePlacePhoto = (reference: string, maxWidth: number) =>
 export const weatherApi = (geo: string) =>
   `https://api.openweathermap.org/data/2.5/weather?${geo}&units=metric&appid=${W_API_KEY}`;
 
-export const newsorgApi = (location: string) =>
-  `${CORS}https://newsapi.org/v2/everything?q=${location}&pageSize=25&page=1&apikey=${N_API_KEY}`;
+export const newsorgApi = () =>
+  `${CORS}https://newsapi.org/v2/top-headlines?country=au&category=general&pageSize=25&page=1&apikey=${N_API_KEY}`;
 
 export const zomatoCuisineUrl = (cusineId: number, lat: number, lon: number) =>
   `https://developers.zomato.com/api/v2.1/search?lat=${lat}&lon=${lon}&cuisines=${cusineId}`;

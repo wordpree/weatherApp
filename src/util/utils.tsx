@@ -1,6 +1,7 @@
 import React from "react";
 import { City, Cuisine, ITriposoPoi, Option } from "./type";
 import { Link, LinkProps } from "react-router-dom";
+import imgFromUnsplash from "../assets/en-unsplash.jpg";
 
 export const dataFormat = (date: Date) => {
   return date.toLocaleString("en-AU", {
@@ -117,4 +118,49 @@ export function getIdsByOpt(options: Option, value: string) {
 
 export function htmlSanitizer(content: string) {
   return content.replace(/<.*?>/gi, "");
+}
+
+export function titleLmt(
+  text: string | undefined | null,
+  magicNum: number,
+  media: boolean
+) {
+  if (!text) {
+    return 'Header line\'s going missing';
+  }
+  if (media) {
+    return text;
+  }
+  if (text.length > magicNum) {
+    return text.substring(0, magicNum) + "...";
+  }
+  return text;
+}
+
+export function imgUrl(url: string | undefined | null) {
+  if (!url) {
+    return imgFromUnsplash;
+  }
+  return secureProtocol(url);
+}
+
+export function authorConfirm(author: string | undefined | null) {
+  if (!author) {
+    return "Author Unkown";
+  }
+  return author;
+}
+
+export function contentLmt(
+  content: string | null | undefined,
+  query: boolean,
+  magicNumSmall: number,
+  magicNumLarge: number
+) {
+  if (content) {
+    return query
+      ? content.substring(0, magicNumSmall) + "..."
+      : content.substring(0, magicNumLarge) + "...";
+  }
+  return "no content displayed";
 }

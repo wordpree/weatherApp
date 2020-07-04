@@ -137,7 +137,6 @@ export interface IZomatoCuisinesDelete {
 /******* newsorg news action *****/
 export interface INewsReq {
   type: typeof REQUEST_NEWSORG;
-  location: string;
 }
 
 export interface INewsResSuccess {

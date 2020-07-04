@@ -10,7 +10,7 @@ interface ILProps {
   islands: ITriposoPoi[];
   populars: ITriposoPoi[];
   parks: ITriposoPoi[];
-  reqNewsAction(location: string): void;
+  reqNewsAction(): void;
   reqWeatherAction(geo: string): void;
   reqGoogleSearchText(country: string): void;
   reqTriposoPopularPoiAction(): void;
@@ -33,7 +33,7 @@ function Layout({
     reqTriposoLocationAction();
     reqTriposoCitiesAction();
     /**newsorg */
-    reqNewsAction("Brisbane OR Australia");
+    reqNewsAction();
   }, []);
   const popularsWithImg = DataWithImg(populars, "Uluru");
   const islandsWithImg = DataWithImg(islands);

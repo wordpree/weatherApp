@@ -85,9 +85,8 @@ export const getWeatherFailed = (error: string): TYPE.TravelActionType => ({
 });
 
 /******* newsorg  api *****/
-export const reqNewsAction = (location: string): TYPE.TravelActionType => ({
+export const reqNewsAction = (): TYPE.TravelActionType => ({
   type: TYPE.REQUEST_NEWSORG,
-  location,
 });
 
 export const getNewsSuccess = (articles: INData[]): TYPE.TravelActionType => ({
