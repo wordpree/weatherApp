@@ -60,11 +60,6 @@ export const REQUEST_G_PLACE_POI_SUCCEEDED = "REQUEST_G_PLACE_POI_SUCCEEDED";
 export const REQUEST_G_PLACE_POI = "REQUEST_G_PLACE_POI";
 export const REQUEST_G_PLACE_POI_FAILED = "REQUEST_G_PLACE_POI_FAILED";
 
-export const REQUEST_G_PLACE_PHOTO_SUCCEEDED =
-  "REQUEST_G_PLACE_PHOTO_SUCCEEDED";
-export const REQUEST_G_PLACE_PHOTO = "REQUEST_G_PLACE_PHOTO";
-export const REQUEST_G_PLACE_PHOTO_FAILED = "REQUEST_G_PLACE_PHOTO_FAILED";
-
 /******* Triposo --> popular |islands|national parks |cities*****/
 export interface ITriposoPopularPoiReq {
   type: typeof REQUEST_TRIPOSO_POPULAR_POI;
