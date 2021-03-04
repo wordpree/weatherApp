@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Container, makeStyles } from "@material-ui/core";
 import { Titles } from "../";
 import { FrMotionButton } from "../";
@@ -63,17 +63,21 @@ const FoodCourt = ({
   const cityId = (getIdsByOpt(cities, option.city) as CityGeo) || cityInit;
   const handleClick = () =>
     setUpdatedOpt({ cuisineId, lat: cityId.latitude, lon: cityId.longitude });
+  const reqZomatoCusines = useCallback(reqZomatoCusinesAction, []);
+  const reqZomatoCusinesDel = useCallback(reqZomatoCusinesDelete, []);
   useEffect(() => {
     function reqData() {
-      reqZomatoCusinesDelete();
-      reqZomatoCusinesAction(
-        updatedOpt.cuisineId,
-        updatedOpt.lat,
-        updatedOpt.lon
-      );
+      reqZomatoCusinesDel();
+      reqZomatoCusines(updatedOpt.cuisineId, updatedOpt.lat, updatedOpt.lon);
     }
     reqData();
-  }, [updatedOpt.cuisineId, updatedOpt.lat, updatedOpt.lon]);
+  }, [
+    updatedOpt.cuisineId,
+    updatedOpt.lat,
+    updatedOpt.lon,
+    reqZomatoCusines,
+    reqZomatoCusinesDel,
+  ]);
 
   return (
     <Container>

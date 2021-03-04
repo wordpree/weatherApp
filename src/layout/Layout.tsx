@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { Home, News, Photos } from "../pages";
 import { AttractionDetail } from "../components";
 import { Route, Switch } from "react-router-dom";
@@ -27,14 +27,22 @@ function Layout({
   reqTriposoLocationAction,
   reqTriposoCitiesAction,
 }: ILProps) {
+  const reqTriposoPopularPoi = useCallback(reqTriposoPopularPoiAction, []);
+  const reqTriposoLocation = useCallback(reqTriposoLocationAction, []);
+  const reqTriposoCities = useCallback(reqTriposoCitiesAction, []);
   useEffect(() => {
     /* triposo */
-    reqTriposoPopularPoiAction();
-    reqTriposoLocationAction();
-    reqTriposoCitiesAction();
+    reqTriposoPopularPoi();
+    reqTriposoLocation();
+    reqTriposoCities();
     /**newsorg */
     reqNewsAction();
-  }, []);
+  }, [
+    reqNewsAction,
+    reqTriposoCities,
+    reqTriposoLocation,
+    reqTriposoPopularPoi,
+  ]);
   const popularsWithImg = DataWithImg(populars, "Uluru");
   const islandsWithImg = DataWithImg(islands);
   const parksWithImg = DataWithImg(parks);

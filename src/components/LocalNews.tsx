@@ -54,7 +54,7 @@ const LocalNews = ({ news }: LNProps) => {
   return (
     <Grid item xs={12} md={5}>
       <List>
-        {news.slice(0, 5).map((item, key) => (
+        {news.slice(0, 4).map((item, key) => (
           <React.Fragment key={key}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
