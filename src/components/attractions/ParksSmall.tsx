@@ -9,7 +9,7 @@ interface IPSProps {
 }
 
 const ParksSmall = ({ data, more }: IPSProps) => {
-  const lists = (Component: React.SFC<{ data: ITriposoPoi }>) => (
+  const lists = (Component: React.FC<{ data: ITriposoPoi }>) => (
     data: ITriposoPoi[]
   ) => data.map((item) => <Component key={item.id} data={item} />);
   return (
